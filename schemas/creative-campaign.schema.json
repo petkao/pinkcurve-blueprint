@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pinkcurve.com/schemas/creative-campaign.schema.json",
+  "title": "Creative Campaign",
+  "description": "A container entity that groups related creative artifacts for a product.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the campaign"
+    },
+    "seller_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the seller who owns this campaign"
+    },
+    "product_id": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "Optional link to a product entity"
+    },
+    "knowledge_id": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "Link to the product knowledge used for this campaign"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Campaign title"
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Campaign description and purpose"
+    },
+    "video_duration": {
+      "type": "integer",
+      "enum": [15, 30, 60],
+      "default": 15,
+      "description": "Target video duration in seconds"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "completed", "archived"],
+      "default": "draft",
+      "description": "Campaign status"
+    },
+    "artifacts": {
+      "type": "object",
+      "properties": {
+        "briefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/creative_brief"
+          },
+          "default": [],
+          "description": "Creative briefs in this campaign"
+        },
+        "scripts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/creative_script"
+          },
+          "default": [],
+          "description": "Scripts in this campaign"
+        },
+        "storyboards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/creative_storyboard"
+          },
+          "default": [],
+          "description": "Storyboards in this campaign"
+        }
+      },
+      "description": "Creative artifacts within this campaign"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the campaign was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the campaign was last updated"
+    }
+  },
+  "required": ["id", "seller_id", "title"],
+  "additionalProperties": false,
+  "$defs": {
+    "creative_brief": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "brief_data": {
+          "type": "object",
+          "properties": {
+            "objective": { "type": "string" },
+            "target_audience": { "type": "string" },
+            "key_messages": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "tone": { "type": "string" },
+            "call_to_action": { "type": "string" }
+          },
+          "description": "Brief content"
+        },
+        "product_analysis": {
+          "type": ["object", "null"],
+          "description": "AI analysis of the product"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "approved", "rejected"]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id"]
+    },
+    "creative_script": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "brief_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ID of the brief this script was generated from"
+        },
+        "script_data": {
+          "type": "object",
+          "properties": {
+            "scenes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "scene_number": { "type": "integer" },
+                  "duration_seconds": { "type": "number" },
+                  "narration": { "type": "string" },
+                  "visual_description": { "type": "string" },
+                  "on_screen_text": { "type": ["string", "null"] }
+                }
+              }
+            },
+            "total_duration_seconds": { "type": "number" }
+          },
+          "description": "Script content"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "approved", "rejected"]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id"]
+    },
+    "creative_storyboard": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "script_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ID of the script this storyboard was generated from"
+        },
+        "storyboard_data": {
+          "type": "object",
+          "properties": {
+            "frames": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "frame_number": { "type": "integer" },
+                  "timestamp_start": { "type": "number" },
+                  "timestamp_end": { "type": "number" },
+                  "visual_description": { "type": "string" },
+                  "camera_direction": { "type": ["string", "null"] },
+                  "transition": { "type": ["string", "null"] },
+                  "narration": { "type": ["string", "null"] },
+                  "on_screen_text": { "type": ["string", "null"] }
+                }
+              }
+            }
+          },
+          "description": "Storyboard content"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "approved", "rejected"]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}

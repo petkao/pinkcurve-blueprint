@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pinkcurve.com/schemas/discovery-score.schema.json",
+  "title": "Discovery Score",
+  "description": "An experimental composite metric measuring discovery effectiveness. Note: This is an experimental metric, not yet validated as an industry standard.",
+  "type": "object",
+  "properties": {
+    "entity_type": {
+      "type": "string",
+      "enum": ["product", "seller", "campaign"],
+      "description": "Type of entity this score applies to"
+    },
+    "entity_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the entity"
+    },
+    "period": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of the measurement period"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of the measurement period"
+        },
+        "granularity": {
+          "type": "string",
+          "enum": ["hourly", "daily", "weekly", "monthly"],
+          "description": "Time granularity of this score"
+        }
+      },
+      "required": ["start", "end", "granularity"],
+      "description": "Time period for this score"
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Overall discovery score (0-100)"
+    },
+    "components": {
+      "type": "object",
+      "properties": {
+        "view_rate": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Impression to view rate (0-1)"
+            },
+            "weight": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.20,
+              "description": "Weight in overall score"
+            },
+            "weighted_contribution": {
+              "type": "number",
+              "description": "Contribution to overall score"
+            }
+          },
+          "description": "View rate component"
+        },
+        "engagement_rate": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "View to engagement rate (0-1)"
+            },
+            "weight": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.25,
+              "description": "Weight in overall score"
+            },
+            "weighted_contribution": {
+              "type": "number",
+              "description": "Contribution to overall score"
+            }
+          },
+          "description": "Engagement rate component"
+        },
+        "click_through_rate": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "View to click-through rate (0-1)"
+            },
+            "weight": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.30,
+              "description": "Weight in overall score"
+            },
+            "weighted_contribution": {
+              "type": "number",
+              "description": "Contribution to overall score"
+            }
+          },
+          "description": "Click-through rate component"
+        },
+        "qpv_rate": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Click-through to QPV rate (0-1)"
+            },
+            "weight": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.25,
+              "description": "Weight in overall score"
+            },
+            "weighted_contribution": {
+              "type": "number",
+              "description": "Contribution to overall score"
+            }
+          },
+          "description": "Qualified Product Visit rate component"
+        }
+      },
+      "description": "Component scores"
+    },
+    "volume": {
+      "type": "object",
+      "properties": {
+        "impressions": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total impressions in period"
+        },
+        "views": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total views in period"
+        },
+        "engagements": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total engagements in period"
+        },
+        "click_throughs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total click-throughs in period"
+        },
+        "qpv": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total qualified product visits in period"
+        }
+      },
+      "description": "Volume metrics"
+    },
+    "benchmarks": {
+      "type": "object",
+      "properties": {
+        "category_avg": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Category average score"
+        },
+        "category_percentile": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentile within category"
+        },
+        "platform_avg": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Platform average score"
+        }
+      },
+      "description": "Benchmark comparisons"
+    },
+    "confidence": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "Confidence level based on data volume"
+        },
+        "sample_size": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of events used in calculation"
+        },
+        "minimum_threshold": {
+          "type": "integer",
+          "description": "Minimum events for high confidence"
+        }
+      },
+      "description": "Score confidence indicators"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "calculated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this score was calculated"
+        },
+        "algorithm_version": {
+          "type": "string",
+          "description": "Version of the scoring algorithm"
+        },
+        "is_experimental": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether this uses experimental scoring"
+        }
+      },
+      "description": "Calculation metadata"
+    }
+  },
+  "required": ["entity_type", "entity_id", "period", "score", "components"],
+  "additionalProperties": false
+}

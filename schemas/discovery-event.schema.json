@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pinkcurve.com/schemas/discovery-event.schema.json",
+  "title": "Discovery Event",
+  "description": "A structured record of a buyer interaction with product discovery.",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this event"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "impression",
+        "view",
+        "engage",
+        "click_through",
+        "save",
+        "share",
+        "hide",
+        "search",
+        "filter"
+      ],
+      "description": "Type of discovery event"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the event occurred (server time)"
+    },
+    "client_timestamp": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When the event occurred (client time)"
+    },
+    "product_id": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "ID of the product involved (if applicable)"
+    },
+    "seller_id": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "ID of the seller whose product was involved"
+    },
+    "buyer_id": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "ID of the buyer (if identified and consented)"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Session identifier for grouping events"
+    },
+    "surface": {
+      "type": "string",
+      "enum": ["feed", "search", "browse", "recommendation", "detail", "external"],
+      "description": "Where the discovery occurred"
+    },
+    "position": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Position in results (0-indexed)"
+    },
+    "query": {
+      "type": ["string", "null"],
+      "description": "Search query (for search events)"
+    },
+    "filters": {
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "description": "Applied filters (for filter events)"
+    },
+    "engagement_duration_ms": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Duration of engagement in milliseconds"
+    },
+    "scroll_depth": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Scroll depth as percentage (0-1)"
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "device_type": {
+          "type": "string",
+          "enum": ["desktop", "mobile", "tablet"],
+          "description": "Device type"
+        },
+        "browser": {
+          "type": ["string", "null"],
+          "description": "Browser identifier"
+        },
+        "os": {
+          "type": ["string", "null"],
+          "description": "Operating system"
+        },
+        "country": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Z]{2}$",
+          "description": "ISO 3166-1 alpha-2 country code"
+        },
+        "region": {
+          "type": ["string", "null"],
+          "description": "Region/state"
+        },
+        "referrer": {
+          "type": ["string", "null"],
+          "description": "Referrer URL (domain only)"
+        },
+        "experiment_ids": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "Active A/B test experiment IDs"
+        }
+      },
+      "description": "Event context"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "sdk_version": {
+          "type": ["string", "null"],
+          "description": "SDK version that sent this event"
+        },
+        "is_bot": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this event is flagged as bot traffic"
+        },
+        "bot_reason": {
+          "type": ["string", "null"],
+          "description": "Reason for bot flagging"
+        },
+        "is_qualified": {
+          "type": ["boolean", "null"],
+          "description": "Whether this is a qualified event (for click_through)"
+        }
+      },
+      "description": "Event metadata"
+    }
+  },
+  "required": ["event_id", "event_type", "timestamp", "session_id", "surface"],
+  "additionalProperties": false
+}

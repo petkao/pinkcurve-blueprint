@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pinkcurve.com/schemas/product-knowledge.schema.json",
+  "title": "Product Knowledge",
+  "description": "Rich, structured data about a product that enables intelligent discovery and compelling content generation.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the product knowledge entity"
+    },
+    "seller_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the seller who owns this product knowledge"
+    },
+    "product_id": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "Optional link to a product entity"
+    },
+    "product_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Display name of the product"
+    },
+    "product_description": {
+      "type": ["string", "null"],
+      "description": "Full description of the product"
+    },
+    "product_url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "URL to the product on seller's website"
+    },
+    "price_amount": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Numeric price value"
+    },
+    "currency_code": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "default": "USD",
+      "description": "ISO 4217 currency code"
+    },
+    "price_description": {
+      "type": ["string", "null"],
+      "description": "Contextual price information (e.g., 'per month', 'starting at')"
+    },
+    "key_features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Primary product features"
+    },
+    "key_benefits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Key benefits to the buyer"
+    },
+    "target_audiences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Audience segment name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of this audience"
+          },
+          "pain_points": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Pain points this audience has"
+          }
+        },
+        "required": ["name"]
+      },
+      "default": [],
+      "description": "Target audience segments"
+    },
+    "unique_selling_points": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "What makes this product unique"
+    },
+    "differentiators": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "How this product differs from competitors"
+    },
+    "brand_voice": {
+      "type": "object",
+      "properties": {
+        "tone": {
+          "type": "string",
+          "description": "Overall tone (e.g., professional, casual, energetic)"
+        },
+        "personality": {
+          "type": "string",
+          "description": "Brand personality traits"
+        },
+        "avoid": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Words or phrases to avoid"
+        }
+      },
+      "default": {},
+      "description": "Brand voice guidelines"
+    },
+    "competitive_landscape": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Product category"
+        },
+        "position": {
+          "type": "string",
+          "description": "Market position description"
+        },
+        "competitors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Known competitors"
+        }
+      },
+      "default": {},
+      "description": "Competitive context"
+    },
+    "faqs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          }
+        },
+        "required": ["question", "answer"]
+      },
+      "default": [],
+      "description": "Frequently asked questions"
+    },
+    "specifications": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "description": "Technical specifications (key-value pairs)"
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Discovery keywords"
+    },
+    "source": {
+      "type": "string",
+      "enum": ["manual", "ai-extracted", "imported"],
+      "default": "manual",
+      "description": "How this knowledge was captured"
+    },
+    "completeness_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 0,
+      "description": "Score indicating knowledge completeness (0-100)"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1,
+      "description": "Knowledge version number"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "archived"],
+      "default": "draft",
+      "description": "Knowledge entity status"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the knowledge was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the knowledge was last updated"
+    }
+  },
+  "required": ["id", "seller_id", "product_name"],
+  "additionalProperties": false
+}
