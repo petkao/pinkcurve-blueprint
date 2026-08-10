@@ -20,19 +20,35 @@ This glossary defines key terms used throughout PinkCurve documentation. Consist
 
 ## Core Platform Concepts
 
-### Product Knowledge
+### Offering
+
+**Definition:** The fundamental discovery object within PinkCurve. An offering is anything PinkCurve can present to a buyer for discovery. Offerings include commercial products, commercial services, promotions, events, community services, public services, and other future discoverable resources.
+
+**Purpose:** abstraction
+
+**Related:** [Offfering Knowledge](04-offering-knowledge.md)
+
+### Product
+
+**Definition:** A commercial product. Products are one category of offering.
+
+**Purpose:** abstraction
+
+**Related:** [Offfering Knowledge](04-offering-knowledge.md)
+
+### Offering Knowledge
 
 **Definition:** Rich, structured data about a product that goes beyond basic listings. Includes features, benefits, target audiences, unique selling points, brand voice, and competitive positioning.
 
 **Purpose:** Enables intelligent discovery matching and compelling content generation.
 
-**Related:** [Product Knowledge](04-product-knowledge.md)
+**Related:** [Offfering Knowledge](04-offering-knowledge.md)
 
 ---
 
 ### Creative Studio
 
-**Definition:** PinkCurve's AI-powered content generation system that transforms Product Knowledge into creative assets—briefs, scripts, storyboards, and (planned) video content.
+**Definition:** PinkCurve's AI-powered content generation system that transforms Offering Knowledge into creative assets—briefs, scripts, storyboards, and (planned) video content.
 
 **Purpose:** Lower the barrier to compelling product storytelling.
 
@@ -144,9 +160,9 @@ This glossary defines key terms used throughout PinkCurve documentation. Consist
 
 ### Completeness Score
 
-**Definition:** A 0-100 score indicating how much Product Knowledge has been captured for a product. Higher scores enable better discovery.
+**Definition:** A 0-100 score indicating how much Offering Knowledge has been captured for a product. Higher scores enable better discovery.
 
-**Related:** [Product Knowledge](04-product-knowledge.md)
+**Related:** [Offering Knowledge](04-offering-knowledge.md)
 
 ---
 

@@ -8,13 +8,13 @@
 | **Version** | 0.1 |
 | **Owner** | PinkCurve Product Team |
 | **Last Reviewed** | 2026-07-23 |
-| **Related Components** | Product Knowledge, Discovery Engine, AI Platform |
+| **Related Components** | Offering Knowledge, Discovery Engine, AI Platform |
 
 ---
 
 ## Overview
 
-Creative Studio is PinkCurve's AI-powered content generation system. It transforms Product Knowledge into compelling creative assets—briefs, scripts, storyboards, and video content—that communicate product value to buyers.
+Creative Studio is PinkCurve's AI-powered content generation system. It transforms Offering Knowledge into compelling creative assets—briefs, scripts, storyboards, and video content—that communicate product value to buyers.
 
 ---
 
@@ -31,7 +31,7 @@ Many sellers struggle to create compelling product content because:
 Creative Studio addresses these challenges by:
 - Lowering the barrier to quality content creation
 - Enabling rapid iteration and testing
-- Maintaining consistency with product knowledge and brand voice
+- Maintaining consistency with offering knowledge and brand voice
 - Scaling content production without proportional cost increase
 
 ---
@@ -40,7 +40,7 @@ Creative Studio addresses these challenges by:
 
 ```mermaid
 flowchart LR
-    PK[Product Knowledge] --> Brief
+    OK[Offering Knowledge] --> Brief
     Brief --> Script
     Script --> Storyboard
     Storyboard --> Video
@@ -51,7 +51,7 @@ flowchart LR
 
 ### 1. Brief Generation
 
-**Input:** Product Knowledge
+**Input:** Offering Knowledge
 **Output:** Creative Brief
 
 The brief establishes:
@@ -115,7 +115,7 @@ erDiagram
 | `description` | Campaign purpose |
 | `video_duration` | Target duration (15, 30, or 60 seconds) |
 | `status` | draft, active, completed, archived |
-| `knowledge_id` | Link to Product Knowledge |
+| `offering_id` | Link to Offering Knowledge |
 
 ### Artifact Entities
 
@@ -142,7 +142,7 @@ Each artifact (brief, script, storyboard) includes:
 - (Additional tones can be derived from brand voice)
 
 ### Audience Focus
-Different creative for different target segments based on Product Knowledge audience definitions.
+Different creative for different target segments based on Offering Knowledge audience definitions.
 
 ---
 
@@ -171,7 +171,7 @@ Different creative for different target segments based on Product Knowledge audi
 ## Generation Quality
 
 ### Approach
-Creative generation uses Product Knowledge to ensure:
+Creative generation uses Offering Knowledge to ensure:
 - Accurate product information
 - Consistent brand voice
 - Relevant audience targeting
@@ -194,7 +194,7 @@ This hypothesis needs validation through:
 
 ## Integration Points
 
-### Product Knowledge → Creative Studio
+### Offering Knowledge → Creative Studio
 - Features and benefits inform messaging
 - Brand voice guides tone
 - Target audiences shape focus
@@ -217,7 +217,7 @@ This hypothesis needs validation through:
 sequenceDiagram
     participant S as Seller
     participant CS as Creative Studio
-    participant PK as Product Knowledge
+    participant OK as Offering Knowledge
     participant AI as AI Platform
 
     S->>CS: Create Campaign
@@ -238,7 +238,7 @@ sequenceDiagram
 
 ## Related Documents
 
-- [Product Knowledge](04-product-knowledge.md)
+- [Offering Knowledge](04-product-knowledge.md)
 - [AI Platform](10-ai-platform.md)
 - [Creative Studio Flow Diagram](../diagrams/creative-studio-flow.md)
 - [Creative Campaign Schema](../schemas/creative-campaign.schema.json)

@@ -50,7 +50,7 @@ Major features start as hypotheses to be validated, not assumptions.
 
 | Component | Capabilities |
 |-----------|-------------|
-| Product Knowledge | Table schema, entity model |
+| Offering Knowledge | Table schema, entity model |
 | Creative Campaigns | Campaign container, linking |
 
 ---
@@ -66,13 +66,13 @@ Major features start as hypotheses to be validated, not assumptions.
 - Workspace organization
 
 ### 1B: Knowledge & Campaign Structure ✓
-- Product Knowledge table
+- Offering Knowledge table
 - Creative Campaign entity
 - Campaign-to-artifact linking
 - Knowledge-to-campaign linking
 
 ### 1C: Knowledge Capture UI (Planned)
-- Product Knowledge input forms
+- Offering Knowledge input forms
 - Completeness scoring display
 - Knowledge management workflow
 - Integration with Creative Studio
@@ -210,7 +210,7 @@ gantt
 
 | Dependency | Blocks |
 |------------|--------|
-| Product Knowledge UI | Campaign workflows |
+| Offering Knowledge UI | Campaign workflows |
 | Event infrastructure | Analytics, Learning |
 | Vector search | Advanced Discovery |
 | Consent framework | Personalization |

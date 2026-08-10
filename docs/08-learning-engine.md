@@ -129,7 +129,7 @@ Learn which creative content performs better:
 - Visual style impact
 - Messaging resonance
 
-### 3. Enrich Product Knowledge
+### 3. Enrich Offering Knowledge
 
 Infer knowledge from engagement patterns:
 - Which features matter most
@@ -158,7 +158,7 @@ Predicts buyer engagement probability:
 ### Embedding Model (Planned)
 
 Learns semantic representations:
-- Input: Product knowledge, descriptions
+- Input: Offering knowledge, descriptions
 - Output: Dense vector embeddings
 - Training: Co-engagement patterns
 - Application: Similarity search
@@ -225,7 +225,7 @@ Models evaluated on:
 ## Cold Start Handling
 
 ### New Products
-- Rely on Product Knowledge features
+- Rely on Offering Knowledge features
 - Explore-exploit balancing
 - Category-based priors
 

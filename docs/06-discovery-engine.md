@@ -8,7 +8,7 @@
 | **Version** | 0.1 |
 | **Owner** | PinkCurve Product Team |
 | **Last Reviewed** | 2026-07-23 |
-| **Related Components** | Product Knowledge, Discovery Analytics, Learning Engine |
+| **Related Components** | Offering Knowledge, Discovery Analytics, Learning Engine |
 
 ---
 
@@ -167,7 +167,7 @@ Discovery ranking is based on relevance, not seller spend:
 ### Quality Signals
 
 Products must meet quality thresholds:
-- Complete Product Knowledge
+- Complete Offering Knowledge
 - Seller verification status
 - Historical performance
 - No policy violations
@@ -187,7 +187,7 @@ Results should include variety:
 flowchart TB
     subgraph Input["Input Signals"]
         BS[Buyer Signals]
-        PK[Product Knowledge]
+        OK[Offering Knowledge]
         Context[Context]
     end
 
@@ -231,7 +231,7 @@ flowchart TB
 
 ## Dependencies
 
-- **Product Knowledge:** Rich knowledge enables better matching
+- **Offering Knowledge:** Rich knowledge enables better matching
 - **AI Platform:** Embedding generation, model serving
 - **Discovery Analytics:** Event tracking, performance measurement
 - **Learning Engine:** Ranking improvement from feedback
@@ -250,7 +250,7 @@ See [Open Decisions](19-open-decisions.md) for:
 
 ## Related Documents
 
-- [Product Knowledge](04-product-knowledge.md)
+- [Offering Knowledge](04-offering-knowledge.md)
 - [Discovery Analytics](07-discovery-analytics.md)
 - [Learning Engine](08-learning-engine.md)
 - [AI Platform](10-ai-platform.md)

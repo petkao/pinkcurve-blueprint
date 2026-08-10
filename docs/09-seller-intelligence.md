@@ -8,7 +8,7 @@
 | **Version** | 0.1 |
 | **Owner** | PinkCurve Product Team |
 | **Last Reviewed** | 2026-07-23 |
-| **Related Components** | Learning Engine, Discovery Analytics, Product Knowledge |
+| **Related Components** | Learning Engine, Discovery Analytics, Offering Knowledge |
 
 ---
 

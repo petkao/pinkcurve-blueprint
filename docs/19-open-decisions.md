@@ -267,7 +267,7 @@ This document tracks open decisions, unresolved questions, and hypotheses that n
 
 ---
 
-### H-004: Product Knowledge Correlation
+### H-004: Offering Knowledge Correlation
 
 **Hypothesis:** Higher completeness scores correlate with better discovery performance.
 

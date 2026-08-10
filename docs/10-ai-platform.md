@@ -45,7 +45,7 @@ The AI Platform provides shared AI/ML infrastructure for PinkCurve. It enables c
 ```mermaid
 flowchart LR
     subgraph Input["Input"]
-        PK[Product Knowledge]
+        OK[Offering Knowledge]
         Template[Prompt Templates]
         Context[Generation Context]
     end
@@ -74,7 +74,7 @@ flowchart LR
 
 Prompts are constructed from:
 - **System context:** Platform-specific instructions
-- **Product knowledge:** Structured product data
+- **Offering knowledge:** Structured offering data
 - **Generation parameters:** Duration, tone, focus
 - **Output format:** Expected structure
 
@@ -101,7 +101,7 @@ Embeddings enable semantic understanding:
 
 | Entity | Embedding Source | Dimension |
 |--------|-----------------|-----------|
-| Products | Product Knowledge text | TBD |
+| Products | Offering Knowledge text | TBD |
 | Queries | Search queries | TBD |
 | Content | Creative content | TBD |
 | Buyers | Interaction patterns | TBD |

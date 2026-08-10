@@ -54,7 +54,7 @@ Create a discovery platform that:
 |--------|---------------|---------------------|
 | Model | Sell impressions/clicks | Sell qualified engagement |
 | Ranking | Bid-based | Relevance-based |
-| Intent | Inferred from behavior | Built from product knowledge |
+| Intent | Inferred from behavior | Built from offering knowledge |
 | Value | Reach | Discovery quality |
 
 **Our positioning:** We complement, not replace, ad platforms. For sellers seeking quality over quantity.
@@ -92,7 +92,7 @@ Create a discovery platform that:
 | Aspect | Their Approach | PinkCurve Difference |
 |--------|---------------|---------------------|
 | Curation | Human editorial | AI-powered matching |
-| Scale | Limited by curation | Scales with product knowledge |
+| Scale | Limited by curation | Scales with offering knowledge |
 | Personalization | Limited | Based on buyer intent |
 | Seller value | Exposure | Qualified engagement + insights |
 
@@ -108,7 +108,7 @@ Create a discovery platform that:
 |----------------|-------------|
 | **Discovery-first model** | We focus on discovery, not transactions or impressions |
 | **Relevance over ad spend** | Ranking based on fit, not budget |
-| **Product Knowledge depth** | Rich understanding enables better matching |
+| **Offering Knowledge depth** | Rich understanding enables better matching |
 | **Learning loop** | Platform improves from every interaction |
 | **Seller Intelligence** | Insights flow back to sellers |
 
@@ -122,7 +122,7 @@ Create a discovery platform that:
 
 ## Positioning Statement
 
-> PinkCurve is an AI-powered product discovery platform that helps sellers connect with qualified buyers through rich product knowledge, compelling storytelling, and continuous learning—without processing transactions or selling ad impressions.
+> PinkCurve is an AI-powered product discovery platform that helps sellers connect with qualified buyers through rich offerig knowledge, compelling storytelling, and continuous learning—without processing transactions or selling ad impressions.
 
 ### For [Target]
 Sellers with quality products who want to reach qualified buyers efficiently.

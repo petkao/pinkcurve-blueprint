@@ -5,16 +5,16 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Engineering Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-09 |
 | **Related Components** | All platform components |
 
 ---
 
 ## Overview
 
-This document describes the high-level architecture of the PinkCurve platform. It covers the main system components, their responsibilities, and how they interact.
+The fundamental discovery object within PinkCurve is an Offering. An offering may represent a commercial product, commercial service, public service, community resource, event, promotion, or other discoverable item.
 
 ---
 
@@ -23,30 +23,40 @@ This document describes the high-level architecture of the PinkCurve platform. I
 The core value creation loop:
 
 ```
-Seller
-  → Product Knowledge (capture and enrich product data)
-    → Creative Studio (generate compelling content)
-      → Discovery Engine (match buyers with products)
-        → Buyer Interaction (engagement on platform)
-          → Discovery Analytics (measure effectiveness)
-            → Learning Engine (improve from signals)
-              → Seller Intelligence (actionable insights)
-                → improved Product Knowledge, creative, and discovery
+Organization / Seller
+        ↓
+Offering Knowledge
+        ↓
+Creative Studio
+        ↓
+Discovery Engine
+        ↓
+Buyer Experience
+        ↓
+Discovery Analytics
+        ↓
+Learning Engine
+        ↓
+Participant Intelligence
+        ↓
+Improved Offering Knowledge
 ```
 
-This is a continuous loop. Learnings from buyer interactions flow back to improve product knowledge, creative content, and discovery matching.
+This is a continuous loop. Learnings from buyer interactions flow back to improve offering knowledge, creative content, and discovery matching.
 
 ---
 
 ## System Components
 
-### 1. Seller Platform
+### 1. Participant Platform
+
+Commercial participants are sellers. Future participants may include organizations that provide public or community services.
 
 **Responsibility:** Seller onboarding, authentication, product management, and dashboard.
 
 **Current Capabilities:**
 - Seller registration and authentication
-- Basic product CRUD operations
+- Basic offering management operations
 - Workspace management
 
 **Planned Capabilities:**
@@ -54,20 +64,36 @@ This is a continuous loop. Learnings from buyer interactions flow back to improv
 - Multi-product management
 - Team collaboration
 
-### 2. Product Knowledge System
+### 2. Offering Knowledge System
 
-**Responsibility:** Capture, store, and enrich rich product knowledge.
+**Responsibility:** Capture, organize, enrich, and manage knowledge describing any offering that PinkCurve can present.
+
+The fundamental discovery object within PinkCurve is an **Offering**.
+
+An Offering is anything PinkCurve can present to a buyer for discovery.
+
+An Offering may represent:
+
+- A Product
+- A Commercial Service
+- A Promotion
+- An Event
+- A Community Service
+- A Public Service
+- Other future discoverable offerings
+
+Products are one important type of offering, but they are not the only type. By centering the platform on Offerings rather than Products, PinkCurve can support both commercial discovery and future public or community discovery while using the same architecture, metadata, discovery engine, learning systems, and buyer experience.
 
 **Current Capabilities:**
-- Basic product data storage
-- Product-brief relationship
+- Basic offering data storage
+- Offering-brief relationship
 
 **Planned Capabilities:**
 - Knowledge entity management
 - AI-assisted knowledge extraction
 - Knowledge completeness scoring
 
-See: [Product Knowledge](04-product-knowledge.md)
+See: [Offering Knowledge](04-product-knowledge.md)
 
 ### 3. Creative Studio
 
@@ -164,7 +190,7 @@ flowchart LR
     end
 
     subgraph Knowledge["Knowledge System"]
-        PK[Product Knowledge]
+        OK[Offering Knowledge]
     end
 
     subgraph Creative["Creative Studio"]
@@ -183,7 +209,7 @@ flowchart LR
 
     SP --> PM
     PM --> PK
-    PK --> CS
+    OK --> CS
     CS --> DE
     DE --> DA
     DA --> LE

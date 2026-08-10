@@ -5,20 +5,20 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-09 |
 | **Related Components** | Creative Studio, Discovery Engine, Learning Engine |
 
 ---
 
 ## Overview
 
-Product Knowledge is the foundation of effective discovery. It represents rich, structured information about products that goes beyond basic listings—capturing not just what a product is, but why it matters, who it's for, and how it's different.
+Offering Knowledge is the foundation of effective discovery. It represents rich, structured information about products that goes beyond basic listings—capturing not just what a product is, but why it matters, who it's for, and how it's different.
 
 ---
 
-## Why Product Knowledge Matters
+## Why Offering Knowledge Matters
 
 Traditional product listings contain:
 - Name, description, price
@@ -32,7 +32,7 @@ This is insufficient for intelligent discovery. To match buyers with products ef
 - How the product should be positioned
 - What emotional triggers resonate
 
-**Product Knowledge captures this richer understanding.**
+**Offering Knowledge captures this richer understanding.**
 
 ---
 
@@ -78,7 +78,7 @@ This is insufficient for intelligent discovery. To match buyers with products ef
 ## Knowledge Capture
 
 ### Manual Entry
-Sellers directly input product knowledge through structured forms. The UI guides sellers through each knowledge component.
+Sellers directly input offering knowledge through structured forms. The UI guides sellers through each knowledge component.
 
 ### AI-Assisted Extraction (Planned)
 AI analyzes existing product pages, descriptions, and materials to suggest knowledge components. Sellers review and approve extracted knowledge.
@@ -140,7 +140,7 @@ erDiagram
     PRODUCT_KNOWLEDGE ||--o{ DISCOVERY_MATCH : enables
 ```
 
-- A seller owns multiple product knowledge entities
+- A seller owns multiple offering knowledge entities
 - A product may have one active knowledge entity
 - Knowledge informs creative campaigns
 - Knowledge enables discovery matching
@@ -150,13 +150,13 @@ erDiagram
 ## Integration with Other Components
 
 ### Creative Studio
-Product Knowledge is the input for creative generation:
+Offering Knowledge is the input for creative generation:
 - Briefs draw from key features, benefits, and audiences
 - Scripts incorporate unique selling points and brand voice
 - Storyboards reflect visual style preferences
 
 ### Discovery Engine
-Product Knowledge enables matching:
+Offering Knowledge enables matching:
 - Keywords drive search relevance
 - Target audiences enable segment matching
 - Differentiators inform competitive positioning
@@ -215,4 +215,4 @@ See [Open Decisions](19-open-decisions.md) for:
 - [Creative Studio](05-creative-studio.md)
 - [Discovery Engine](06-discovery-engine.md)
 - [Data Architecture](11-data-architecture.md)
-- [Product Knowledge Flow Diagram](../diagrams/product-knowledge-flow.md)
+- [Offering Knowledge Flow Diagram](../diagrams/product-knowledge-flow.md)

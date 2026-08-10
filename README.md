@@ -1,6 +1,6 @@
 # PinkCurve Blueprint
 
-**Version:** 0.1 Draft
+**Version:** 0.2
 **Status:** Living Architecture Document
 **Last Updated:** 2026-07-23
 
@@ -8,7 +8,7 @@
 
 ## Overview
 
-PinkCurve is an AI-powered product discovery platform that helps sellers connect with qualified buyers through rich product knowledge, AI-generated product storytelling, personalized discovery, continuous learning, and seller intelligence.
+PinkCurve is a visual discovery platform that helps people discover worthwhile offerings through a simple, visual, and trustworthy experience.
 
 **PinkCurve does not process transactions.** Buyers discover products on PinkCurve and click through to the seller's own website to complete their purchase.
 
@@ -29,21 +29,21 @@ This repository serves as the living product vision, product architecture, AI st
 
 PinkCurve is **not** primarily:
 
-- **A transaction marketplace.** We do not process payments or handle fulfillment. Buyers click through to sellers' websites to purchase.
+- **A transaction marketplace.** We do not process payments or handle fulfillment. Buyers discover offerings on PinkCurve and click through to the sellers' own website to complete their purchase.
 - **A traditional advertising network.** We do not sell impressions or run banner ads. Value comes from qualified discovery, not ad placement.
 - **Only a video-generation tool.** Creative Studio is one component; the platform's value is in the complete discovery loop.
 - **A replacement for sellers' websites.** We augment seller reach and discovery; sellers maintain their own storefronts and customer relationships.
-
+- **Not a text-heavy product catalog** Only visual presentations available.
 ---
 
 ## Platform Flow
 
 ```
 Seller
-  → Product Knowledge
+  → Offering Knowledge
     → Creative Studio
       → Discovery Engine
-        → Buyer Interaction
+        → Buyer Experience
           → Discovery Analytics
             → Learning Engine
               → Seller Intelligence
@@ -64,7 +64,7 @@ This continuous loop creates compounding value: better product knowledge leads t
 | [01](docs/01-vision-and-mission.md) | Vision and Mission | Why PinkCurve exists |
 | [02](docs/02-design-principles.md) | Design Principles | Guiding principles for decisions |
 | [03](docs/03-product-architecture.md) | Product Architecture | System components and interactions |
-| [04](docs/04-product-knowledge.md) | Product Knowledge | The foundation: rich product data |
+| [04](docs/04-offering-knowledge.md) | Offering Knowledge | The foundation: rich product data |
 | [05](docs/05-creative-studio.md) | Creative Studio | AI-powered content generation |
 | [06](docs/06-discovery-engine.md) | Discovery Engine | Matching buyers with products |
 | [07](docs/07-discovery-analytics.md) | Discovery Analytics | Measuring discovery effectiveness |
@@ -80,6 +80,7 @@ This continuous loop creates compounding value: better product knowledge leads t
 | [17](docs/17-long-term-vision.md) | Long-Term Vision | Where we're heading |
 | [18](docs/18-glossary.md) | Glossary | Key terms and definitions |
 | [19](docs/19-open-decisions.md) | Open Decisions | Unresolved questions and hypotheses |
+| [20](docs/20-buyer-experience.md) | Buyer Experience | Buyer experience design |
 
 ### Architecture Diagrams
 
@@ -87,7 +88,7 @@ This continuous loop creates compounding value: better product knowledge leads t
 |---------|-------------|
 | [Platform Architecture](diagrams/platform-architecture.md) | High-level system architecture |
 | [Discovery Flywheel](diagrams/discovery-flywheel.md) | The learning loop that creates compounding value |
-| [Product Knowledge Flow](diagrams/product-knowledge-flow.md) | How product knowledge is captured and enriched |
+| [Offering Knowledge Flow](diagrams/offering-knowledge-flow.md) | How product knowledge is captured and enriched |
 | [Creative Studio Flow](diagrams/creative-studio-flow.md) | Content generation pipeline |
 | [Discovery Event Flow](diagrams/discovery-event-flow.md) | How discovery events are captured and processed |
 | [Learning Engine Flow](diagrams/learning-engine-flow.md) | How the system learns and improves |
@@ -97,7 +98,7 @@ This continuous loop creates compounding value: better product knowledge leads t
 
 | Schema | Description |
 |--------|-------------|
-| [Product Knowledge](schemas/product-knowledge.schema.json) | Product knowledge entity structure |
+| [Offering Knowledge](schemas/offering-knowledge.schema.json) | Offering knowledge entity structure |
 | [Discovery Event](schemas/discovery-event.schema.json) | Discovery interaction events |
 | [Creative Campaign](schemas/creative-campaign.schema.json) | Creative campaign and artifact structure |
 | [Discovery Score](schemas/discovery-score.schema.json) | Discovery effectiveness scoring |
@@ -171,4 +172,4 @@ See [LICENSE](LICENSE) for license information.
 
 ---
 
-*PinkCurve Blueprint v0.1 Draft — A living architecture document*
+*PinkCurve Blueprint v0.2 — A living architecture document*

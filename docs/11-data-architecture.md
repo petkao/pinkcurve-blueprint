@@ -86,7 +86,7 @@ products (
     updated_at TIMESTAMPTZ
 )
 
--- Product Knowledge (Stage 1B)
+-- Offering Knowledge (Stage 1B)
 product_knowledge (
     id UUID PRIMARY KEY,
     seller_id UUID REFERENCES sellers ON DELETE CASCADE,
@@ -209,7 +209,7 @@ For similarity search (planned):
 | Domain | Owner | Steward |
 |--------|-------|---------|
 | Seller data | Product Team | Engineering |
-| Product data | Product Team | Engineering |
+| Offering data | Product Team | Engineering |
 | Event data | Analytics Team | Engineering |
 
 ### Access Control
@@ -301,4 +301,4 @@ For new columns with historical data:
 
 - [Product Architecture](03-product-architecture.md)
 - [Security, Privacy, and Trust](12-security-privacy-and-trust.md)
-- [Product Knowledge Schema](../schemas/product-knowledge.schema.json)
+- [Offering Knowledge Schema](../schemas/offering-knowledge.schema.json)

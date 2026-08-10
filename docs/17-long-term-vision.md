@@ -36,7 +36,7 @@ Realize the full vision of AI-powered product discovery.
 **Goal:** Prove that AI-powered discovery creates genuine value for sellers and buyers.
 
 ### Milestones
-- Product Knowledge system operational
+- Offering Knowledge system operational
 - Creative Studio generating useful content
 - Discovery Engine delivering qualified visits
 - Learning Engine showing measurable improvement
@@ -58,7 +58,7 @@ Realize the full vision of AI-powered product discovery.
 
 | Capability | Evolution |
 |------------|-----------|
-| Product Knowledge | Deep, multi-modal knowledge |
+| Offering Knowledge | Deep, multi-modal knowledge |
 | Creative Studio | Full video production |
 | Discovery Engine | Highly personalized matching |
 | Learning Engine | Real-time optimization |
