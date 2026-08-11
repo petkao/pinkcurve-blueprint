@@ -5,9 +5,9 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-10 |
 | **Related Components** | All documentation |
 
 ---
@@ -26,7 +26,7 @@ This glossary defines key terms used throughout PinkCurve documentation. Consist
 
 **Purpose:** abstraction
 
-**Related:** [Offfering Knowledge](04-offering-knowledge.md)
+**Related:** [Offering Knowledge](04-offering-knowledge.md)
 
 ### Product
 
@@ -34,7 +34,31 @@ This glossary defines key terms used throughout PinkCurve documentation. Consist
 
 **Purpose:** abstraction
 
-**Related:** [Offfering Knowledge](04-offering-knowledge.md)
+**Related:** [Offering Knowledge](04-offering-knowledge.md)
+
+### Seller
+
+**Definition:** A verified organization or entity that publishes and manages Offerings on PinkCurve. Sellers may include commercial businesses and, in the future, public, nonprofit, or community organizations.
+
+**Purpose:** abstraction
+
+**Related:** [Seller Intelligence](09-seller-intelligence.md)
+
+### Buyer
+
+**Definition:** A user or entity that engages in product discovery on the PinkCurve platform.
+
+**Purpose:** abstraction
+
+**Related:** [Discovery Engine](06-discovery-engine.md)
+
+### Offering
+
+**Definition:** The fundamental discovery object within PinkCurve. An offering is anything PinkCurve can present to a buyer for discovery. Offerings include commercial products, commercial services, promotions, events, community services, public services, and other future discoverable resources.
+
+**Purpose:** abstraction
+
+**Related:** [Offering Knowledge](04-offering-knowledge.md)
 
 ### Offering Knowledge
 
@@ -42,7 +66,7 @@ This glossary defines key terms used throughout PinkCurve documentation. Consist
 
 **Purpose:** Enables intelligent discovery matching and compelling content generation.
 
-**Related:** [Offfering Knowledge](04-offering-knowledge.md)
+**Related:** [Offering Knowledge](04-offering-knowledge.md)
 
 ---
 
@@ -63,6 +87,16 @@ This glossary defines key terms used throughout PinkCurve documentation. Consist
 **Purpose:** Enable proactive, personalized product discovery.
 
 **Related:** [Discovery Engine](06-discovery-engine.md)
+
+---
+
+### Discovery Signal
+
+**Definition:** A concise, buyer-facing interpretation of metadata, context, trust information, or discovery intelligence that helps a buyer quickly understand why an offering may be relevant or worth exploring.
+
+**Purpose:** To help buyers quickly understand why an offering may be relevant or worth exploring.
+
+**Related:** [Discovery Engine](06-discovery-engine.md), [Discovery Analytics](07-discovery-analytics.md)
 
 ---
 

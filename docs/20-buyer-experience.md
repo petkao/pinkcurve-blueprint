@@ -42,6 +42,10 @@ Examples of discovery paths may include:
 
 The objective is not to show buyers everything. The objective is to help each buyer quickly reach offerings worth seeing.
 
+### Discovery Signals
+
+Discovery Signals are the small buyer-facing indicators derived from PinkCurve metadata and intelligence, such as Nearby, Verified, Trending, Deal, and Matches Your Interests. Only the most useful signals should appear directly with an offering; additional information should remain progressively disclosed.
+
 ### Metadata Without Clutter
 
 Rich metadata is essential to PinkCurve.

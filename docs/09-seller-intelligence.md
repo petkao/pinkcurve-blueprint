@@ -5,16 +5,22 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-10 |
 | **Related Components** | Learning Engine, Discovery Analytics, Offering Knowledge |
 
 ---
 
 ## Overview
 
-Seller Intelligence transforms platform learnings into actionable insights for sellers. It answers the question: "What should I do to improve my product's discovery and sales?"
+Seller Intelligence transforms platform learning into actionable recommendations that help sellers continuously improve how buyers discover their offerings.
+
+Rather than simply reporting historical metrics, Seller Intelligence identifies opportunities, explains performance, and recommends practical actions that improve discovery, creative effectiveness, Offering Knowledge, and overall business outcomes.
+
+Seller Intelligence is the primary interface through which sellers benefit from PinkCurve's continuous learning.
+
+While initially focused on commercial sellers, the architecture is designed to evolve so that future organizations and other participants can receive similar discovery intelligence appropriate to their roles.
 
 ---
 
@@ -22,9 +28,9 @@ Seller Intelligence transforms platform learnings into actionable insights for s
 
 Seller Intelligence helps sellers:
 
-1. **Understand performance:** How are my products being discovered?
+1. **Understand performance:** How are my offerings being discovered?
 2. **Identify opportunities:** Where can I improve?
-3. **Learn from patterns:** What works for similar products?
+3. **Learn from patterns:** What works for similar offerings?
 4. **Take action:** What specific changes should I make?
 
 This creates value alignment: sellers succeed → platform succeeds.
@@ -50,7 +56,7 @@ Understanding who engages:
 
 | Insight | Description |
 |---------|-------------|
-| Audience composition | Who discovers your products |
+| Audience composition | Who discovers your offerings |
 | Segment performance | Which audiences engage most |
 | Geographic patterns | Where discovery happens |
 | Intent patterns | Why buyers are looking |
@@ -72,7 +78,7 @@ Actionable recommendations:
 
 | Insight | Description |
 |---------|-------------|
-| Knowledge gaps | Missing product information |
+| Knowledge gaps | Missing offering information |
 | Content suggestions | Creative improvements |
 | Pricing signals | Price sensitivity indicators |
 | Audience expansion | Untapped audience segments |
@@ -105,7 +111,7 @@ Real-time and historical views:
 │                                                              │
 │  ┌─────────────────────────────────────────────────────────┐│
 │  │  Recommendations                                        ││
-│  │  • Add 3 more product features to improve matching      ││
+│  │  • Add additional offering details to improve matching  ││
 │  │  • Consider targeting "small business" segment          ││
 │  │  • Your click-through rate is below category average    ││
 │  └─────────────────────────────────────────────────────────┘│
@@ -209,7 +215,7 @@ Seller Intelligence must balance insight with privacy:
 ## Current Status
 
 ### Implemented
-- Basic product performance metrics
+- Basic offering performance metrics
 
 ### Planned
 - Full seller dashboard
@@ -219,6 +225,23 @@ Seller Intelligence must balance insight with privacy:
 - ROD calculator
 
 ---
+
+## Actionable Intelligence
+
+Seller Intelligence does more than report historical performance.
+
+Its objective is to recommend concrete actions that improve future discovery.
+
+Examples include:
+
+- Improve Offering Knowledge completeness
+- Refresh creative assets
+- Expand target audiences
+- Improve trust verification
+- Add additional images or video
+- Update availability
+- Highlight seasonal relevance
+- Improve discovery signals
 
 ## Success Metrics
 

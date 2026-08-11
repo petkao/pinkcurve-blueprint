@@ -5,27 +5,89 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Engineering Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-10 |
 | **Related Components** | Creative Studio, Discovery Engine, Learning Engine |
 
 ---
 
 ## Overview
 
-The AI Platform provides shared AI/ML infrastructure for PinkCurve. It enables content generation, semantic understanding, matching, and continuous learning through standardized interfaces and managed infrastructure.
+The AI Platform provides the intelligence that enables PinkCurve to fulfill its mission of helping people discover what matters.
+
+Rather than existing as a standalone capability, the AI Platform supports every stage of the discovery lifecycle—from understanding offerings and generating visual stories to matching buyers with relevant offerings, learning from discovery, and continuously improving the platform.
+
+The AI Platform provides shared services, models, evaluation, and infrastructure that allow PinkCurve's components to evolve independently while benefiting from common AI capabilities.
 
 ---
 
-## AI Capabilities
+## AI in the Discovery Lifecycle
+
+The AI Platform provides shared intelligence that supports every stage of PinkCurve's discovery lifecycle.
+
+```
+Offering Knowledge
+        ↓
+Understanding
+        ↓
+Creative
+        ↓
+Discovery
+        ↓
+Learning
+```
+
+### Offering Knowledge
+
+AI helps organize, enrich, and understand Offering Knowledge by extracting structured information, identifying relationships, improving completeness, and generating semantic representations.
+
+### Understanding
+
+AI interprets buyer intent, context, preferences, and offering semantics to better understand which offerings may be relevant.
+
+### Creative
+
+AI transforms Offering Knowledge into compelling visual stories, creative briefs, scripts, storyboards, and future multimedia content that communicate the value of an offering.
+
+### Discovery
+
+AI retrieves, ranks, personalizes, and explains offerings so buyers can efficiently discover what matters while maintaining trust and transparency.
+
+### Learning
+
+AI continuously learns from discovery signals, buyer interactions, and seller outcomes to improve Offering Knowledge, Creative Studio, Discovery Engine, and Seller Intelligence over time.
+
+
+## AI Philosophy
+
+Artificial intelligence exists to improve discovery, not to replace human judgment.
+
+PinkCurve uses AI to help people discover relevant offerings more efficiently while maintaining trust, transparency, and privacy.
+
+AI should:
+
+* Improve discovery quality
+* Simplify buyer experiences
+* Assist sellers in communicating their offerings
+* Continuously learn from meaningful discovery
+* Respect participant privacy
+* Provide explainable recommendations whenever practical
+
+The success of the AI Platform is measured by whether it helps buyers discover worthwhile offerings—not by model complexity or the amount of AI used.
+
+**Artificial intelligence is an enabling capability, not the product itself.**
+
+---
+
+## Shared AI Services
 
 ### Current Capabilities
 
 | Capability | Technology | Use Case |
 |------------|-----------|----------|
-| Content Generation | Claude API (Anthropic) | Creative briefs, scripts, storyboards |
-| Basic Embeddings | Claude API | Initial product embeddings |
+| Visual Story Generation | Claude API (Anthropic) | Visual story scripts |
+| Basic Embeddings | Claude API | Initial offering embeddings |
 
 ### Planned Capabilities
 
@@ -87,13 +149,13 @@ Prompts are constructed from:
 
 ---
 
-## Embedding System
+## Semantic Understanding
 
 ### Purpose
 
 Embeddings enable semantic understanding:
-- Product similarity search
-- Intent-to-product matching
+- Offering similarity search
+- Intent-to-offering matching
 - Content clustering
 - Semantic search
 
@@ -101,7 +163,7 @@ Embeddings enable semantic understanding:
 
 | Entity | Embedding Source | Dimension |
 |--------|-----------------|-----------|
-| Products | Offering Knowledge text | TBD |
+| Offerings | Offering Knowledge text | TBD |
 | Queries | Search queries | TBD |
 | Content | Creative content | TBD |
 | Buyers | Interaction patterns | TBD |
@@ -154,7 +216,7 @@ Production models monitored for:
 
 ### Internal AI API
 
-Standardized interface for AI capabilities:
+Standardized interface for Shared AI Services:
 
 ```
 POST /ai/generate
@@ -166,7 +228,7 @@ POST /ai/generate
 
 POST /ai/embed
 {
-  "type": "product" | "query" | "content",
+  "type": "offering" | "query" | "content",
   "text": "...",
   "model": "default" | "v2"
 }
@@ -267,7 +329,7 @@ For content quality:
 
 ### In Progress
 - Embedding generation
-- Product embedding storage
+- Offering embedding storage
 
 ### Planned
 - Vector similarity search

@@ -5,16 +5,16 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-09 |
 | **Related Components** | Offering Knowledge, Discovery Analytics, Learning Engine |
 
 ---
 
 ## Overview
 
-The Discovery Engine is PinkCurve's intelligent matching system that connects buyers with relevant products. Unlike traditional advertising that prioritizes ad spend, the Discovery Engine prioritizes relevance—matching buyers with products they're genuinely likely to want.
+The Discovery Engine is PinkCurve's intelligent matching system that connects buyers with relevant offerings. Unlike traditional advertising that prioritizes ad spend, the Discovery Engine prioritizes relevance—matching buyers with offerings that are genuinely useful, interesting, or valuable to them.
 
 ---
 
@@ -24,14 +24,35 @@ The Discovery Engine is PinkCurve's intelligent matching system that connects bu
 
 | Approach | Primary Driver | Buyer Experience |
 |----------|---------------|------------------|
-| **Traditional Ads** | Seller ad spend | Often irrelevant, interruptive |
+| **Traditional Ads** | Participant ad spend | Often irrelevant, interruptive |
 | **Search** | Buyer keywords | Requires buyer to know what to search |
-| **Discovery** | Relevance matching | Surfaces relevant products proactively |
+| **Discovery** | Relevance matching | Surfaces relevant offerings proactively |
 
 The Discovery Engine enables:
-- **Proactive discovery:** Products find buyers, not just buyers finding products
+- **Proactive discovery:** Offerings find buyers, not just buyers finding products
 - **Intent-based matching:** Understanding what buyers want, not just what they typed
 - **Continuous improvement:** Learning from every interaction
+
+---
+
+## Discovery Philosophy
+
+The Discovery Engine exists to help buyers discover offerings that matter to them.
+
+Rather than optimizing primarily for clicks, advertising spend, or engagement, PinkCurve optimizes for meaningful discovery.
+
+Discovery should be:
+
+- Relevant
+- Visual
+- Trustworthy
+- Respectful of buyer attention
+- Privacy-conscious
+- Continuously improving
+
+The Discovery Engine supports PinkCurve's guiding principle:
+
+**Discover what matters.**
 
 ---
 
@@ -49,13 +70,15 @@ Intent is inferred from:
 - Implicit signals (browse behavior, engagement patterns, timing)
 - Context (device, location, time)
 
-### Product Fit
+### Offering Fit
 
-How well a product matches buyer intent:
+How well an offering matches buyer intent:
 - Problem-solution alignment
 - Audience match
 - Preference compatibility
-- Price appropriateness
+- Context relevance
+- Price appropriateness (when applicable)
+- Trust signals
 
 ### Discovery Score
 
@@ -65,22 +88,61 @@ A composite metric measuring discovery effectiveness. See [Discovery Analytics](
 
 ---
 
+## Discovery Signals
+
+PinkCurve transforms complex metadata and discovery intelligence into simple, meaningful signals that help buyers quickly understand why an offering may be worth exploring.
+
+Discovery Signals are different from raw metadata.
+
+**Metadata** describes an offering or its context.
+
+**Discovery Signals** translate that information into buyer-facing meaning.
+
+Examples:
+
+| Underlying Metadata or Intelligence | Buyer-Facing Discovery Signal |
+| ----------------------------------- | ----------------------------- |
+| Geographic distance                 | 📍 Nearby — 0.8 miles         |
+| Participant verification status     | ⭐ Verified Business           |
+| Trending score                      | 🔥 Popular This Week          |
+| Promotion information               | 💰 Limited-Time Discount      |
+| Relevance score                     | ❤️ Matches Your Interests     |
+
+Discovery Signals should help answer questions such as:
+
+* Why am I seeing this?
+* Is this relevant to me?
+* Is it nearby?
+* Can I understand the trust status?
+* Is there something timely or important about this offering?
+
+Discovery Signals should remain concise, visual, and easy to understand on small screens.
+
+They should not expose unnecessary internal model scores or technical complexity.
+
+PinkCurve follows the principle:
+
+**Complex intelligence underneath. Simple, meaningful signals on the surface.**
+
+The Buyer Experience should generally display only a small number of high-value Discovery Signals at one time so that metadata and controls do not obscure the visual offering.
+
+
 ## Matching Approach
 
 ### Phase 1: Retrieval (Planned)
 
-Narrow down from all products to relevant candidates:
+Narrow down from all offerings to relevant candidates:
 
 ```mermaid
 flowchart LR
-    All[All Products] --> Filter[Filter Criteria]
+    All[All Offerings] --> Filter[Filter Criteria]
     Filter --> Embed[Embedding Similarity]
     Embed --> Candidates[Candidate Set]
 ```
 
 - **Filter criteria:** Category, price range, availability
 - **Embedding similarity:** Semantic matching using vector embeddings
-- **Candidate set:** ~100-1000 products for ranking
+- **Candidate set:** ~100-1000 offerings for ranking
 
 ### Phase 2: Ranking (Planned)
 
@@ -93,7 +155,7 @@ flowchart LR
     Model --> Ranked[Ranked Results]
 ```
 
-- **Feature extraction:** Buyer signals, product attributes, context
+- **Feature extraction:** Buyer signals, offering attributes, context
 - **Ranking model:** ML model predicting engagement probability
 - **Ranked results:** Ordered by predicted relevance
 
@@ -110,7 +172,7 @@ Present discoveries through various surfaces:
 ## Discovery Surfaces
 
 ### Discovery Feed (Planned)
-Personalized feed of relevant products based on inferred preferences and browsing history.
+Personalized feed of relevant offerings based on inferred preferences and browsing history.
 
 ### Search (Planned)
 Keyword-based search enhanced with:
@@ -122,12 +184,12 @@ Keyword-based search enhanced with:
 Category-based exploration with:
 - Smart filtering
 - Relevance ordering within categories
-- Related product suggestions
+- Related offering suggestions
 
 ### Recommendations (Planned)
 Context-specific suggestions:
-- Similar products
-- Complementary products
+- Similar offerings
+- Complementary offerings
 - "Others also viewed"
 
 ---
@@ -159,23 +221,34 @@ See [Security, Privacy, and Trust](12-security-privacy-and-trust.md).
 
 ### Avoiding Pay-to-Win
 
-Discovery ranking is based on relevance, not seller spend:
+Discovery ranking is based on relevance, not particpant spend:
 - Ad spend does not directly boost ranking
-- Quality products surface regardless of marketing budget
+- High-quality offferings surface regardless of marketing budget
 - Sponsored placements are clearly labeled
+
+Quality signals may include:
+
+- Complete Offering Knowledge
+- Participant verification status
+- Offering verification
+- Trust signals
+- Historical performance
+- Policy compliance
 
 ### Quality Signals
 
-Products must meet quality thresholds:
+Offerings must meet quality thresholds:
 - Complete Offering Knowledge
-- Seller verification status
+- Participant verification status
+- Offering verification
+- Trust signals
 - Historical performance
-- No policy violations
+- Policy compliance
 
 ### Diversity
 
 Results should include variety:
-- Multiple sellers represented
+- Multiple participants represented
 - Different price points shown
 - Avoid over-concentration
 
@@ -203,7 +276,7 @@ flowchart TB
     end
 
     BS --> Retrieval
-    PK --> Retrieval
+    OK --> Retrieval
     Context --> Ranking
     Retrieval --> Ranking
     Ranking --> Filters
@@ -219,7 +292,7 @@ flowchart TB
 - None (Discovery Engine is planned)
 
 ### In Development
-- Product embedding generation (via AI Platform)
+- Offering embedding generation (via AI Platform)
 
 ### Planned
 - Vector similarity search infrastructure

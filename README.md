@@ -6,6 +6,14 @@
 
 ---
 
+## Guiding Principle
+
+**Discover what matters.**
+
+PinkCurve exists to help people discover worthwhile offerings through a simple, visual, and trustworthy experience.
+
+---
+
 ## Overview
 
 PinkCurve is a visual discovery platform that helps people discover worthwhile offerings through a simple, visual, and trustworthy experience.
@@ -80,7 +88,9 @@ This continuous loop creates compounding value: better product knowledge leads t
 | [17](docs/17-long-term-vision.md) | Long-Term Vision | Where we're heading |
 | [18](docs/18-glossary.md) | Glossary | Key terms and definitions |
 | [19](docs/19-open-decisions.md) | Open Decisions | Unresolved questions and hypotheses |
-| [20](docs/20-buyer-experience.md) | Buyer Experience | Buyer experience design |
+| [20](docs/20-buyer-experience.md) | Buyer Experience | Visual discovery and metadata navigation |
+| [21](docs/21-pinkcurve-philosophy.md) | PinkCurve Philosophy | Enduring principles and company philosophy |
+
 
 ### Architecture Diagrams
 

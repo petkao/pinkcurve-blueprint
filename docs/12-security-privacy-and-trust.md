@@ -14,7 +14,19 @@
 
 ## Overview
 
-Trust is foundational to PinkCurve's value proposition. Buyers must trust that products are authentic and recommendations are genuine. Sellers must trust that their data is protected and the platform is fair. This document outlines our approach to security, privacy, and trust.
+Trust is one of PinkCurve's core product capabilities.
+
+Security protects the platform.
+
+Privacy protects participants.
+
+Trust protects discovery.
+
+PinkCurve helps buyers discover worthwhile offerings while reducing exposure to scams, fraudulent sellers, misleading content, fake promotions, and other harmful activities.
+
+Rather than treating trust as a separate feature, PinkCurve integrates trust into every stage of the discovery experience through verification, security, privacy, transparency, fraud detection, and continuous learning.
+
+**PinkCurve does not assume trust. PinkCurve continuously earns trust.**
 
 ---
 
@@ -43,8 +55,23 @@ Build trust by being honest:
 - Explainable systems
 - Honest communication
 - Accountable operations
+- Trust by Design
+
+Trust is built through consistent actions rather than claims.
+
+**PinkCurve does not assume trust. PinkCurve continuously earns trust.**
 
 ---
+
+## Learning Engine
+
+Fraud
+      ↓
+Detection
+      ↓
+Learning Engine
+      ↓
+Better Detection
 
 ## Privacy Framework
 
@@ -90,18 +117,63 @@ Support for:
 
 ## Buyer Trust
 
+### Negative Feedback
+
+Hide
+
+Not Interested
+
+Report
+
+Block Seller
+
+Suspicious
+
+Misleading
+
+Spam
+
 ### Discovery Integrity
 
 Buyers must trust that discovery is genuine:
 - Ranking based on relevance, not payment
+    PinkCurve does not manipulate discovery solely based on advertising spend.
+    Discovery ranking considers
+        relevance
+        trust
+        quality
+        buyer intent
 - Sponsored content clearly labeled
 - No fake reviews or engagement
-- Authentic product information
+
+### Trust Signals
+
+PinkCurve communicates trust visually whenever practical.
+
+Examples include:
+
+⭐ Verified Seller
+
+📍 Nearby
+
+🛡 Identity Verified
+
+🏢 Business Verified
+
+🔥 Trending
+
+💰 Limited-time Deal
+
+⚠ Newly Registered Seller
+
+⚠ Limited Verification
+
+Community Verified
 
 ### Anti-Manipulation
 
 Protect buyers from:
-- Fake products
+- Fake offerings
 - Misleading descriptions
 - Inflated ratings
 - Deceptive practices
@@ -109,9 +181,27 @@ Protect buyers from:
 ### Explainability
 
 Buyers can understand:
-- Why they see certain products (simplified)
+- Why they see certain offerings (simplified)
 - What data influences recommendations
 - How to adjust preferences
+
+---
+
+## Trust Lifecycle
+
+Seller Registers
+        ↓
+Verification
+        ↓
+Publishing
+        ↓
+Buyer Discovery
+        ↓
+Buyer Feedback
+        ↓
+Learning
+        ↓
+Trust Score Updated
 
 ---
 
@@ -137,13 +227,69 @@ Seller data protection:
 
 Verify seller legitimacy:
 - Business verification process
-- Product authenticity checks
+    - email
+    - phone
+    - OTP
+    - organization
+    - domain
+    - government registration
+website ownership
+future methods
+- Offering authenticity checks
 - Policy compliance monitoring
 - Fraud detection
+
+## Buyer Protection
+
+PinkCurve is designed to reduce buyer risk during discovery.
+
+Examples include:
+
+- Seller verification
+
+- Trust signals
+
+- Scam detection
+
+- Fraud detection
+
+- Identity verification
+
+- Discovery warnings
+
+- Suspicious activity detection
+
+- Easy reporting
+
+- Human review when appropriate
+
+PinkCurve cannot guarantee every offering is legitimate.
+
+Instead, PinkCurve helps buyers make more informed decisions through layered trust mechanisms.
 
 ---
 
 ## Security Architecture
+
+### Identity Verification
+
+PinkCurve verifies identities when appropriate.
+
+Examples include:
+
+• Email verification
+
+• Mobile verification
+
+• One-Time Password (OTP)
+
+• Multi-Factor Authentication (MFA)
+
+• Organization verification
+
+• Business verification
+
+Verification requirements vary according to account type and platform risk.
 
 ### Authentication & Authorization
 
@@ -174,23 +320,48 @@ Verify seller legitimacy:
 
 ---
 
-## Fraud Prevention
+## Seller Fraud
 
-### Seller Fraud
+PinkCurve implements several layers of fraud prevention to protect buyers and maintain platform integrity.
+
+### Seller Fraud Prevention
 
 Detect and prevent:
-- Fake business registrations
-- Counterfeit products
+- Fake organizations
+- Fake offerings
+- Misleading information
+- Identity fraud
 - Policy violations
-- Payment fraud
 
-### Buyer Fraud
+### Buyer Abuse Prevention
 
-Detect and prevent:
-- Bot traffic
-- Click fraud
-- Fake engagement
-- Account abuse
+PinkCurve protects Sellers, Buyers, and the platform from abusive or malicious buyer behavior.
+
+Examples include:
+
+- Automated bot traffic
+- Click fraud and artificial engagement
+- Fake account creation
+- Account takeover attempts
+- Identity impersonation
+- Spam submissions
+- Malicious reviews or comments
+- Abuse of promotional offers
+- Excessive automated scraping
+- Repeated policy violations
+
+PinkCurve uses multiple layers of protection, including:
+
+- Rate limiting
+- One-Time Password (OTP) verification
+- Multi-Factor Authentication (MFA) where appropriate
+- Bot detection
+- Behavioral anomaly detection
+- Device and session analysis
+- AI-assisted fraud detection
+- Human review for high-risk cases
+
+Buyer protection mechanisms continuously improve through the Learning Engine as new abuse patterns are identified.
 
 ### Detection Signals
 

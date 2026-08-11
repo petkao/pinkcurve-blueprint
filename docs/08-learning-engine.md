@@ -5,16 +5,16 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Engineering Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-09 |
 | **Related Components** | Discovery Analytics, Discovery Engine, Seller Intelligence |
 
 ---
 
 ## Overview
 
-The Learning Engine processes discovery signals to continuously improve the platform. It transforms raw buyer interactions into actionable improvements for discovery matching, content optimization, and seller insights.
+The Learning Engine processes discovery signals to continuously improve PinkCurve. It transforms buyer interactions into actionable improvements for discovery quality, Offering Knowledge, creative effectiveness, participant insights, and trust.
 
 ---
 
@@ -31,6 +31,28 @@ Without continuous learning:
 - Matching doesn't improve from experience
 - Insights don't reach sellers
 - Platform value doesn't compound
+
+---
+
+## Learning Philosophy
+
+PinkCurve learns from discovery rather than simply recording activity.
+
+The objective is not to maximize clicks or engagement alone.
+
+The objective is to continuously improve the buyer's ability to discover offerings that matter while respecting privacy, trust, and participant intent.
+
+Learning should improve:
+
+- Discovery relevance
+- Offering Knowledge
+- Creative quality
+- Discovery Signals
+- Trust signals
+- Seller and participant insights
+- Overall buyer experience
+
+Every meaningful interaction becomes an opportunity to improve the platform.
 
 ---
 
@@ -117,14 +139,14 @@ Indicators of poor matching:
 
 ### 1. Improve Discovery Matching
 
-Learn which products match which buyer intents:
+Learn which offerings best match buyer intent, context, and preferences:
 - Feature importance for matching
 - Segment-specific preferences
 - Context-dependent relevance
 
 ### 2. Optimize Content Performance
 
-Learn which creative content performs better:
+Learn which creative assets performs better:
 - Headline effectiveness
 - Visual style impact
 - Messaging resonance
@@ -135,13 +157,21 @@ Infer knowledge from engagement patterns:
 - Which features matter most
 - Which audiences engage
 - Effective positioning language
+- Trust signals
+- Discovery signals
+- Seasonality
+- Location relevance
 
 ### 4. Generate Seller Insights
 
 Synthesize learnings into actionable recommendations:
-- Product improvement suggestions
+- Offering improvement suggestions
 - Audience insights
 - Competitive positioning
+
+Initially the Learning Engine generates insights primarily for sellers.
+
+The architecture is intentionally extensible so that future community organizations and other participants may also receive relevant insights.
 
 ---
 
@@ -150,7 +180,7 @@ Synthesize learnings into actionable recommendations:
 ### Ranking Model (Planned)
 
 Predicts buyer engagement probability:
-- Input: Buyer signals, product features, context
+- Input: Buyer signals, offering features, context
 - Output: Engagement probability score
 - Training: Historical engagement data
 - Application: Discovery Engine ranking
@@ -224,13 +254,13 @@ Models evaluated on:
 
 ## Cold Start Handling
 
-### New Products
+### New Offerings
 - Rely on Offering Knowledge features
 - Explore-exploit balancing
 - Category-based priors
 
 ### New Buyers
-- Start with popular products
+- Start with high-quality or popular offerings
 - Quick preference inference
 - Gradual personalization
 
@@ -263,7 +293,7 @@ Models evaluated on:
 
 3. **Insight actionability:** Will learning-derived insights actually help sellers improve?
 
-4. **Cross-product learning:** Can learnings from one product transfer to similar products?
+4. **Cross-offering learning:** Can learnings from one offering transfer to similar products?
 
 ---
 

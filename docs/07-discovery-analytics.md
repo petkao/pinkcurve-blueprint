@@ -5,16 +5,16 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-10 |
 | **Related Components** | Discovery Engine, Learning Engine, Seller Intelligence |
 
 ---
 
 ## Overview
 
-Discovery Analytics measures the effectiveness of product discovery on PinkCurve. It tracks buyer interactions, calculates discovery metrics, and provides the data foundation for the Learning Engine and Seller Intelligence.
+Discovery Analytics measures the effectiveness of discovery across the PinkCurve platform. It captures buyer interactions with offerings, evaluates discovery quality, and provides the learning signals that continuously improve the Discovery Engine, Buyer Experience, and Participant Intelligence.
 
 ---
 
@@ -24,11 +24,11 @@ Discovery Analytics answers key questions:
 
 **For the Platform:**
 - How effective is discovery matching?
-- Which products are being discovered?
+- Which offerings are being discovered?
 - Where are discovery failures occurring?
 
 **For Sellers:**
-- How are my products performing?
+- How are my offerings performing?
 - Who is discovering my products?
 - What actions are buyers taking?
 
@@ -45,12 +45,12 @@ Discovery Analytics answers key questions:
 
 | Event | Description | Signal Strength |
 |-------|-------------|-----------------|
-| `impression` | Product shown to buyer | Weak |
-| `view` | Buyer clicked to view details | Moderate |
-| `engage` | Extended engagement (scroll, read) | Moderate-Strong |
-| `click_through` | Click to seller's website | Strong |
-| `save` | Buyer saved product | Strong |
-| `share` | Buyer shared product | Strong |
+| `Offering shown` | Offering shown to buyer | Weak |
+| `View offering details` | Buyer clicked to view details | Moderate |
+| `Engage with offering` | Extended engagement (scroll, read) | Moderate-Strong |
+| `Click through to seller` | Click to seller's website | Strong |
+| `Buyer saved offering` | Buyer saved offering | Strong |
+| `Share offering` | Buyer shared offering | Strong |
 
 ### Event Structure
 
@@ -61,7 +61,7 @@ Each discovery event captures:
 | `event_id` | Unique event identifier |
 | `event_type` | Type of interaction |
 | `timestamp` | When it occurred |
-| `product_id` | Product involved |
+| `offering_id` | Offering involved |
 | `buyer_id` | Buyer (if identified) |
 | `session_id` | Session identifier |
 | `surface` | Where discovery occurred (feed, search, browse) |
@@ -128,14 +128,14 @@ Qualified Product Visits
 - Time-of-day patterns
 - Day-of-week patterns
 
-### Product
-- Per-product performance
+### Offering
+- Per-offering performance
 - Category performance
 - Price range performance
 
 ### Seller
 - Aggregate seller performance
-- Cross-product insights
+- Cross-offering insights
 
 ### Surface
 - Feed vs. search vs. browse performance
@@ -153,7 +153,7 @@ Qualified Product Visits
 
 Real-time and historical views:
 - Discovery funnel visualization
-- Product performance rankings
+- Offering performance rankings
 - Trend analysis
 - Comparative benchmarks
 
@@ -237,13 +237,41 @@ See [Security, Privacy, and Trust](12-security-privacy-and-trust.md).
 ## Current Status
 
 ### Implemented
-- Basic product view tracking (limited)
+- Basic offering view tracking (limited)
 
 ### Planned
 - Full discovery event schema
 - Event processing pipeline
 - Metrics calculation
 - Seller dashboards
+
+---
+
+## Meaningful Discovery
+
+PinkCurve measures more than clicks.
+
+The objective is to understand whether an offering helped a buyer discover something worthwhile.
+
+Examples of meaningful discovery actions include:
+
+- Viewing an offering
+- Watching a video
+- Saving an offering
+- Sharing an offering
+- Requesting directions
+- Contacting the organization
+- Visiting an external website
+- Returning later
+- Explicitly indicating "Not Interested"
+
+Different offering types may have different success metrics.
+
+Commercial offerings may emphasize Qualified Product Visits.
+
+Community offerings may emphasize contacts, directions, or resource engagement.
+
+Discovery Analytics provides the signals that allow PinkCurve to continuously improve discovery while respecting user privacy.
 
 ---
 

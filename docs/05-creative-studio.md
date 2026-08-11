@@ -5,7 +5,7 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
 | **Last Reviewed** | 2026-07-23 |
 | **Related Components** | Offering Knowledge, Discovery Engine, AI Platform |
@@ -14,7 +14,24 @@
 
 ## Overview
 
-Creative Studio is PinkCurve's AI-powered content generation system. It transforms Offering Knowledge into compelling creative assets—briefs, scripts, storyboards, and video content—that communicate product value to buyers.
+Creative Studio is PinkCurve's AI-powered content generation system. It transforms Offering Knowledge into compelling creative assets—briefs, scripts, storyboards, and video content—that communicate the value of an offering through compelling visual storytelling.
+
+---
+
+## Creative Philosophy
+
+Creative Studio helps organizations communicate the value of their offerings through visual storytelling.
+
+The objective is not simply to generate advertisements. The objective is to help buyers quickly understand why an offering may be relevant, useful, or interesting.
+
+Creative should remain:
+
+- Authentic
+- Visually engaging
+- Consistent with Offering Knowledge
+- Appropriate for the target audience
+- Trustworthy
+- Easy to understand on mobile devices
 
 ---
 
@@ -22,7 +39,7 @@ Creative Studio is PinkCurve's AI-powered content generation system. It transfor
 
 ### Why AI-Generated Creative?
 
-Many sellers struggle to create compelling product content because:
+Many organizations struggle to create compelling content for their offerings because:
 - Professional video production is expensive
 - Writing effective scripts requires specialized skills
 - Creating consistent, on-brand content at scale is difficult
@@ -45,7 +62,7 @@ flowchart LR
     Script --> Storyboard
     Storyboard --> Video
 
-    style PK fill:#e1f5fe
+    style OK fill:#e1f5fe
     style Video fill:#c8e6c9
 ```
 
@@ -103,7 +120,7 @@ erDiagram
     CREATIVE_CAMPAIGN ||--o{ CREATIVE_BRIEF : contains
     CREATIVE_CAMPAIGN ||--o{ CREATIVE_SCRIPT : contains
     CREATIVE_CAMPAIGN ||--o{ CREATIVE_STORYBOARD : contains
-    PRODUCT_KNOWLEDGE ||--o{ CREATIVE_CAMPAIGN : informs
+    OFFERING_KNOWLEDGE ||--o{ CREATIVE_CAMPAIGN : informs
     SELLER ||--o{ CREATIVE_CAMPAIGN : owns
 ```
 
@@ -172,13 +189,13 @@ Different creative for different target segments based on Offering Knowledge aud
 
 ### Approach
 Creative generation uses Offering Knowledge to ensure:
-- Accurate product information
+- Accurate offering information
 - Consistent brand voice
 - Relevant audience targeting
 - Compelling value propositions
 
 ### Hypothesis
-*AI-generated creative can perform comparably to professionally-produced content for product discovery purposes.*
+*AI-generated creative can perform comparably to professionally-produced content for offering discovery purposes.*
 
 This hypothesis needs validation through:
 - A/B testing AI vs. professional creative
@@ -221,8 +238,8 @@ sequenceDiagram
     participant AI as AI Platform
 
     S->>CS: Create Campaign
-    CS->>PK: Fetch Knowledge
-    PK-->>CS: Knowledge Data
+    CS->>OK: Fetch Knowledge
+    OK-->>CS: Knowledge Data
     S->>CS: Request Brief
     CS->>AI: Generate Brief
     AI-->>CS: Brief Content
@@ -238,7 +255,7 @@ sequenceDiagram
 
 ## Related Documents
 
-- [Offering Knowledge](04-product-knowledge.md)
+- [Offering Knowledge](04-offering-knowledge.md)
 - [AI Platform](10-ai-platform.md)
 - [Creative Studio Flow Diagram](../diagrams/creative-studio-flow.md)
 - [Creative Campaign Schema](../schemas/creative-campaign.schema.json)

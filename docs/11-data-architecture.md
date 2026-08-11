@@ -5,16 +5,22 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Engineering Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-10 |
 | **Related Components** | All platform components |
 
 ---
 
 ## Overview
 
-This document describes PinkCurve's data architecture: how data is modeled, stored, processed, and governed. Good data architecture enables good features; poor data architecture creates compounding problems.
+This document describes PinkCurve's data architecture: how data is modeled, stored, processed, and governed.
+
+PinkCurve's logical data model is centered on the concept of an **Offering**. An Offering represents anything a Seller wants buyers to discover, including products, commercial services, promotions, events, community services, public services, and future offering types.
+
+The data architecture is designed to support the complete discovery lifecycle while remaining extensible as new Offering types and AI capabilities are introduced.
+
+Good data architecture enables good discovery. Poor data architecture creates compounding technical and business problems.
 
 ---
 
@@ -28,6 +34,54 @@ This document describes PinkCurve's data architecture: how data is modeled, stor
 
 ---
 
+## Logical Domain Model
+
+PinkCurve is centered around five primary business entities.
+
+Seller
+    │
+    ▼
+Offering
+    │
+    ▼
+Offering Knowledge
+    │
+    ▼
+Creative Campaign
+    │
+    ▼
+Discovery Events
+
+Each entity has a single authoritative source and participates in PinkCurve's continuous discovery lifecycle.
+
+The logical domain model remains stable even as the underlying database implementation evolves.
+
+---
+
+## Offering Model
+
+###  Offering Types
+
+The logical data model is intentionally centered on Offerings rather than Products.
+
+Every Offering belongs to an Offering Type.
+
+Current and planned Offering Types include:
+
+| Offering Type | Examples |
+|---------------|----------|
+| Product | Consumer goods, electronics, clothing |
+| Commercial Service | Home repair, consulting, healthcare |
+| Promotion | Limited-time discounts, seasonal campaigns |
+| Event | Conferences, concerts, workshops |
+| Community Service | Volunteer opportunities, local programs |
+| Public Service | Government resources, public information |
+| Future Types | Extensible without changing the data model |
+
+Using Offering as the core entity allows PinkCurve to evolve without redesigning its architecture whenever new discovery experiences are introduced.
+
+---
+
 ## Data Domains
 
 ### Core Entities
@@ -35,27 +89,30 @@ This document describes PinkCurve's data architecture: how data is modeled, stor
 | Domain | Primary Entities | Database |
 |--------|-----------------|----------|
 | Sellers | sellers, users, subscriptions | PostgreSQL |
-| Products | products, product_knowledge | PostgreSQL |
-| Creative | campaigns, briefs, scripts, storyboards | PostgreSQL |
+| Offerings | offerings, offering_knowledge | PostgreSQL |
+| Creative | creative_campaigns, creative_ briefs, creative_scripts, creative_storyboards | PostgreSQL |
 | Discovery | discovery_events, impressions | PostgreSQL + Events |
 | Analytics | metrics, aggregates | PostgreSQL + Analytics |
 
 ### Entity Relationships
 
-```mermaid
+
 erDiagram
-    SELLER ||--o{ PRODUCT : owns
-    SELLER ||--o{ PRODUCT_KNOWLEDGE : owns
+    SELLER ||--o{ OFFERING : owns
+    SELLER ||--o{ OFFERING_KNOWLEDGE : owns
     SELLER ||--o{ CREATIVE_CAMPAIGN : owns
-    PRODUCT ||--o| PRODUCT_KNOWLEDGE : has
-    PRODUCT_KNOWLEDGE ||--o{ CREATIVE_CAMPAIGN : informs
+
+    OFFERING ||--o| OFFERING_KNOWLEDGE : has
+
+    OFFERING_KNOWLEDGE ||--o{ CREATIVE_CAMPAIGN : informs
+
     CREATIVE_CAMPAIGN ||--o{ CREATIVE_BRIEF : contains
     CREATIVE_CAMPAIGN ||--o{ CREATIVE_SCRIPT : contains
     CREATIVE_CAMPAIGN ||--o{ CREATIVE_STORYBOARD : contains
-    PRODUCT ||--o{ DISCOVERY_EVENT : generates
-    DISCOVERY_EVENT }o--|| BUYER : involves
-```
 
+    OFFERING ||--o{ DISCOVERY_EVENT : generates
+
+    DISCOVERY_EVENT }o--|| BUYER : involves
 ---
 
 ## Database Schema
@@ -74,8 +131,8 @@ sellers (
     updated_at TIMESTAMPTZ
 )
 
--- Products (existing)
-products (
+-- Offerings (plannig)
+offerings (
     id UUID PRIMARY KEY,
     seller_id UUID REFERENCES sellers,
     name VARCHAR(255),
@@ -87,11 +144,11 @@ products (
 )
 
 -- Offering Knowledge (Stage 1B)
-product_knowledge (
+offering_knowledge (
     id UUID PRIMARY KEY,
     seller_id UUID REFERENCES sellers ON DELETE CASCADE,
-    product_id UUID REFERENCES products ON DELETE SET NULL,
-    product_name VARCHAR(200),
+    offering_id UUID REFERENCES offerings ON DELETE SET NULL,
+    offering_name VARCHAR(200),
     key_features JSONB DEFAULT '[]',
     key_benefits JSONB DEFAULT '[]',
     target_audiences JSONB DEFAULT '[]',
@@ -106,8 +163,8 @@ product_knowledge (
 creative_campaigns (
     id UUID PRIMARY KEY,
     seller_id UUID REFERENCES sellers ON DELETE CASCADE,
-    product_id UUID REFERENCES products ON DELETE SET NULL,
-    knowledge_id UUID REFERENCES product_knowledge ON DELETE SET NULL,
+    offering_id UUID REFERENCES offerings ON DELETE SET NULL,
+    knowledge_id UUID REFERENCES offering_knowledge ON DELETE SET NULL,
     title VARCHAR(200),
     video_duration INTEGER CHECK (15/30/60),
     status VARCHAR(30) CHECK (draft/active/completed/archived),
@@ -168,15 +225,15 @@ flowchart LR
 
 | Table | Index | Purpose |
 |-------|-------|---------|
-| product_knowledge | seller_id | Seller's products |
-| product_knowledge | status | Active products |
+| offering_knowledge | seller_id | Seller's offerings |
+| offering_knowledge | status | Active offerings |
 | creative_campaigns | seller_id | Seller's campaigns |
 | creative_campaigns | knowledge_id | Campaign-knowledge link |
 
 ### Future: Vector Indexes
 
 For similarity search (planned):
-- Product embeddings
+- Offering embeddings
 - Query embeddings
 - Content embeddings
 
@@ -223,7 +280,7 @@ For similarity search (planned):
 | Data Type | Retention | Rationale |
 |-----------|-----------|-----------|
 | Seller accounts | Duration + 30 days | Legal/support |
-| Products | Duration + 30 days | Reference |
+| Offerings | Duration + 30 days | Reference |
 | Events | 2 years | Analytics |
 | Aggregates | Indefinite | Reporting |
 
