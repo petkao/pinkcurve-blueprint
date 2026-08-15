@@ -7,7 +7,7 @@
 | **Status** | Draft |
 | **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-08-10 |
+| **Last Reviewed** | 2026-08-13 |
 | **Related Components** | Discovery Engine, Learning Engine, Seller Intelligence |
 
 ---
@@ -29,7 +29,7 @@ Discovery Analytics answers key questions:
 
 **For Sellers:**
 - How are my offerings performing?
-- Who is discovering my products?
+- Who is discovering my offerings?
 - What actions are buyers taking?
 
 **For the Learning Engine:**
@@ -74,15 +74,15 @@ See schema: [discovery-event.schema.json](../schemas/discovery-event.schema.json
 
 ## Key Metrics
 
-### Qualified Product Visit (QPV)
+### Qualified Offering Visit (QOV)
 
-A **Qualified Product Visit** is a click-through to the seller's website that meets quality criteria:
+A **Qualified Offering Visit** is a click-through to the seller's website that meets quality criteria:
 
 - Minimum time on seller site (if measurable)
 - Not flagged as bot traffic
 - From a verified session
 
-**QPV is the primary unit of value** that PinkCurve delivers to sellers.
+**QOV is the primary unit of value** that PinkCurve delivers to sellers.
 
 ### Discovery Score
 
@@ -93,14 +93,14 @@ A **Qualified Product Visit** is a click-through to the seller's website that me
 | View Rate | 20% | Impressions → Views |
 | Engagement Rate | 25% | Views → Engagement |
 | Click-Through Rate | 30% | Views → Click-throughs |
-| QPV Rate | 25% | Click-throughs → Qualified Visits |
+| QOV Rate | 25% | Click-throughs → Qualified Visits |
 
 *Note: Discovery Score is experimental. Weightings are hypotheses to be validated.*
 
 Formula (draft):
 ```
 Discovery Score = (0.20 × ViewRate) + (0.25 × EngagementRate)
-                + (0.30 × CTR) + (0.25 × QPVRate)
+                + (0.30 × CTR) + (0.25 × QOVRate)
 ```
 
 Normalized to 0-100 scale.
@@ -115,8 +115,8 @@ Views
 Engagements
     ↓ (Click-Through Rate)
 Click-Throughs
-    ↓ (QPV Rate)
-Qualified Product Visits
+    ↓ (QOV Rate)
+Qualified Offering Visits
 ```
 
 ---
@@ -267,7 +267,7 @@ Examples of meaningful discovery actions include:
 
 Different offering types may have different success metrics.
 
-Commercial offerings may emphasize Qualified Product Visits.
+Commercial offerings may emphasize Qualified Offering Visits.
 
 Community offerings may emphasize contacts, directions, or resource engagement.
 

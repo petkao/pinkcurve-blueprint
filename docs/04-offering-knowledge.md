@@ -1,4 +1,4 @@
-# Product Knowledge
+# Offering Knowledge
 
 ## Document Status
 
@@ -7,29 +7,29 @@
 | **Status** | Draft |
 | **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-08-09 |
+| **Last Reviewed** | 2026-08-13 |
 | **Related Components** | Creative Studio, Discovery Engine, Learning Engine |
 
 ---
 
 ## Overview
 
-Offering Knowledge is the foundation of effective discovery. It represents rich, structured information about products that goes beyond basic listings—capturing not just what a product is, but why it matters, who it's for, and how it's different.
+Offering Knowledge is the foundation of effective discovery. It represents rich, structured information about offerings that goes beyond basic listings—capturing not just what a offering is, but why it matters, who it's for, and how it's different.
 
 ---
 
 ## Why Offering Knowledge Matters
 
-Traditional product listings contain:
+Traditional offering listings contain:
 - Name, description, price
 - Basic specifications
 - A few images
 
-This is insufficient for intelligent discovery. To match buyers with products effectively, we need to understand:
-- What problems the product solves
+This is insufficient for intelligent discovery. To match buyers with offerings effectively, we need to understand:
+- What problems the offering solves
 - Who the ideal buyer is
-- What makes the product different
-- How the product should be positioned
+- What makes the offering different
+- How the offering should be positioned
 - What emotional triggers resonate
 
 **Offering Knowledge captures this richer understanding.**
@@ -42,9 +42,9 @@ This is insufficient for intelligent discovery. To match buyers with products ef
 
 | Field | Description |
 |-------|-------------|
-| `product_name` | Display name |
-| `product_description` | Full description |
-| `product_url` | Link to seller's product page |
+| `offering_name` | Display name |
+| `offering_description` | Full description |
+| `offering_url` | Link to seller's offering page |
 | `price_amount` | Numeric price |
 | `currency_code` | Currency (e.g., USD) |
 | `price_description` | Contextual price info (e.g., "per month") |
@@ -53,7 +53,7 @@ This is insufficient for intelligent discovery. To match buyers with products ef
 
 | Field | Description | Type |
 |-------|-------------|------|
-| `key_features` | Primary product features | Array |
+| `key_features` | Primary offering features | Array |
 | `key_benefits` | Benefits to the buyer | Array |
 | `target_audiences` | Ideal buyer segments | Array |
 | `unique_selling_points` | Differentiators | Array |
@@ -81,16 +81,16 @@ This is insufficient for intelligent discovery. To match buyers with products ef
 Sellers directly input offering knowledge through structured forms. The UI guides sellers through each knowledge component.
 
 ### AI-Assisted Extraction (Planned)
-AI analyzes existing product pages, descriptions, and materials to suggest knowledge components. Sellers review and approve extracted knowledge.
+AI analyzes existing offering pages, descriptions, and materials to suggest knowledge components. Sellers review and approve extracted knowledge.
 
 ### Import (Planned)
-Bulk import from product feeds, e-commerce platforms, or structured data sources.
+Bulk import from offering feeds, e-commerce platforms, or structured data sources.
 
 ---
 
 ## Completeness Scoring
 
-Products are scored 0-100 based on knowledge completeness:
+Offerings are scored 0-100 based on knowledge completeness:
 
 | Score Range | Level | Discovery Impact |
 |-------------|-------|------------------|
@@ -134,14 +134,14 @@ stateDiagram-v2
 
 ```mermaid
 erDiagram
-    SELLER ||--o{ PRODUCT_KNOWLEDGE : owns
-    PRODUCT ||--o| PRODUCT_KNOWLEDGE : describes
-    PRODUCT_KNOWLEDGE ||--o{ CREATIVE_CAMPAIGN : informs
-    PRODUCT_KNOWLEDGE ||--o{ DISCOVERY_MATCH : enables
+    SELLER ||--o{ OFFERING_KNOWLEDGE : owns
+    OFFERING ||--o| OFFERIN_KNOWLEDGE : describes
+    OFFERING_KNOWLEDGE ||--o{ CREATIVE_CAMPAIGN : informs
+    OFFERIN_KNOWLEDGE ||--o{ DISCOVERY_MATCH : enables
 ```
 
 - A seller owns multiple offering knowledge entities
-- A product may have one active knowledge entity
+- A offering may have one active knowledge entity
 - Knowledge informs creative campaigns
 - Knowledge enables discovery matching
 
@@ -171,13 +171,13 @@ Discovery signals improve knowledge:
 
 ## Data Model
 
-See schema: [product-knowledge.schema.json](../schemas/product-knowledge.schema.json)
+See schema: [offering-knowledge.schema.json](../schemas/offering-knowledge.schema.json)
 
-Database table: `product_knowledge`
+Database table: `offering_knowledge`
 
 Key constraints:
 - `seller_id` required (foreign key to sellers)
-- `product_id` optional (foreign key to products, SET NULL on delete)
+- `offering_id` optional (foreign key to offerings, SET NULL on delete)
 - `completeness_score` 0-100
 - `status` IN ('draft', 'active', 'archived')
 
@@ -186,9 +186,9 @@ Key constraints:
 ## Current Implementation Status
 
 ### Implemented
-- Database table schema (`product_knowledge`)
+- Database table schema (`offering_knowledge`)
 - Basic CRUD operations
-- Relationship with sellers and products
+- Relationship with sellers and offerings
 
 ### In Progress
 - Knowledge capture UI
@@ -205,7 +205,7 @@ Key constraints:
 
 See [Open Decisions](19-open-decisions.md) for:
 - How to weight completeness scoring factors
-- Whether to support multiple active knowledge versions per product
+- Whether to support multiple active knowledge versions per offfering
 - How to handle conflicting AI-extracted vs. manual knowledge
 
 ---
@@ -215,4 +215,4 @@ See [Open Decisions](19-open-decisions.md) for:
 - [Creative Studio](05-creative-studio.md)
 - [Discovery Engine](06-discovery-engine.md)
 - [Data Architecture](11-data-architecture.md)
-- [Offering Knowledge Flow Diagram](../diagrams/product-knowledge-flow.md)
+- [Offering Knowledge Flow Diagram](../diagrams/offering-knowledge-flow.md)

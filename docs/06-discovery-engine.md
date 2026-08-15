@@ -7,7 +7,7 @@
 | **Status** | Draft |
 | **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-08-09 |
+| **Last Reviewed** | 2026-08-13 |
 | **Related Components** | Offering Knowledge, Discovery Analytics, Learning Engine |
 
 ---
@@ -29,11 +29,27 @@ The Discovery Engine is PinkCurve's intelligent matching system that connects bu
 | **Discovery** | Relevance matching | Surfaces relevant offerings proactively |
 
 The Discovery Engine enables:
-- **Proactive discovery:** Offerings find buyers, not just buyers finding products
+- **Proactive discovery:** Offerings find buyers, not just buyers finding offerings
 - **Intent-based matching:** Understanding what buyers want, not just what they typed
 - **Continuous improvement:** Learning from every interaction
 
 ---
+
+### Daily Discovery Feed
+
+The Daily Discovery Feed is PinkCurve's primary Buyer experience.
+
+Rather than requiring Buyers to initiate every search, the platform continuously presents relevant Offerings based on:
+
+- Buyer interests
+- Discovery history
+- Location
+- Trending activity
+- Community events
+- Seasonal relevance
+- Trust Signals
+
+Every visit should provide meaningful opportunities for discovery while maintaining simplicity and trust.
 
 ## Discovery Philosophy
 

@@ -7,7 +7,7 @@
 | **Status** | Draft |
 | **Version** | 0.2 |
 | **Owner** | PinkCurve Engineering Team |
-| **Last Reviewed** | 2026-08-09 |
+| **Last Reviewed** | 2026-08-14 |
 | **Related Components** | Discovery Analytics, Discovery Engine, Seller Intelligence |
 
 ---
@@ -223,7 +223,7 @@ flowchart LR
 Models evaluated on:
 - Offline metrics (precision, recall, AUC)
 - Online metrics (A/B test performance)
-- Business metrics (QPV rate, Discovery Score)
+- Business metrics (QOV rate, Discovery Score)
 
 ### Deployment
 
@@ -293,7 +293,7 @@ Models evaluated on:
 
 3. **Insight actionability:** Will learning-derived insights actually help sellers improve?
 
-4. **Cross-offering learning:** Can learnings from one offering transfer to similar products?
+4. **Cross-offering learning:** Can learnings from one offering transfer to similar offerings?
 
 ---
 

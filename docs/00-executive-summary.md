@@ -234,7 +234,7 @@ PinkCurve creates value for sellers by helping them reach potentially relevant b
 
 Potential revenue mechanisms include:
 
-* **Qualified Product Visits (QPV)** — Seller value tied to meaningful buyer exploration rather than impressions alone
+* **Qualified Offering Visits (QOV)** — Seller value tied to meaningful buyer exploration rather than impressions alone
 * **Premium Seller Capabilities** — Advanced creative, analytics, intelligence, and discovery tools
 * **Enterprise Capabilities** — Integrations, support, and advanced platform services for larger sellers
 

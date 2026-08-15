@@ -7,7 +7,7 @@
 | **Status** | Draft |
 | **Version** | 0.1 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-15 |
 | **Related Components** | All platform components |
 
 ---
@@ -78,7 +78,7 @@ This document tracks open decisions, unresolved questions, and hypotheses that n
 
 **Considerations:**
 - Cost per embedding
-- Quality for product matching
+- Quality for offering matching
 - Latency requirements
 - Vendor concentration
 
@@ -146,7 +146,7 @@ This document tracks open decisions, unresolved questions, and hypotheses that n
 
 **Status:** Open
 
-**Question:** Should we support multiple active knowledge versions per product?
+**Question:** Should we support multiple active knowledge versions per offering?
 
 **Implications:**
 - A/B testing different knowledge
@@ -170,7 +170,7 @@ This document tracks open decisions, unresolved questions, and hypotheses that n
 - Competitive positioning
 
 **Options being considered:**
-- X products, Y creative generations, Z analytics views
+- X offerings, Y creative generations, Z analytics views
 
 ---
 
@@ -191,11 +191,11 @@ This document tracks open decisions, unresolved questions, and hypotheses that n
 
 ## Business Decisions
 
-### BD-001: QPV Pricing Validation
+### BD-001: QOV Pricing Validation
 
 **Status:** Open
 
-**Question:** What is the right price point for qualified product visits?
+**Question:** What is the right price point for qualified offering visits?
 
 **Approach:** Need to validate willingness-to-pay with early sellers.
 
@@ -214,7 +214,7 @@ This document tracks open decisions, unresolved questions, and hypotheses that n
 **Question:** How should enterprise plans be priced?
 
 **Options:**
-- Volume-based (more QPV, lower rate)
+- Volume-based (more QOV, lower rate)
 - Feature-based (premium features)
 - Custom (negotiated)
 - Combination
@@ -271,7 +271,7 @@ This document tracks open decisions, unresolved questions, and hypotheses that n
 
 **Hypothesis:** Higher completeness scores correlate with better discovery performance.
 
-**Validation approach:** Correlate completeness with QPV rate across products.
+**Validation approach:** Correlate completeness with QOV rate across offerings.
 
 **Status:** Not yet testable.
 

@@ -7,7 +7,7 @@
 | **Status** | Draft |
 | **Version** | 0.2 |
 | **Owner** | PinkCurve Engineering Team |
-| **Last Reviewed** | 2026-08-10 |
+| **Last Reviewed** | 2026-08-14 |
 | **Related Components** | All platform components |
 
 ---
@@ -16,7 +16,7 @@
 
 This document describes PinkCurve's data architecture: how data is modeled, stored, processed, and governed.
 
-PinkCurve's logical data model is centered on the concept of an **Offering**. An Offering represents anything a Seller wants buyers to discover, including products, commercial services, promotions, events, community services, public services, and future offering types.
+PinkCurve's logical data model is centered on the concept of an **Offering**. An Offering represents anything a Seller wants buyers to discover, including offerings, commercial services, promotions, events, community services, public services, and future offering types.
 
 The data architecture is designed to support the complete discovery lifecycle while remaining extensible as new Offering types and AI capabilities are introduced.
 

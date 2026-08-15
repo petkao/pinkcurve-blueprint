@@ -7,7 +7,7 @@
 | **Status**             | Draft                   |
 | **Version**            | 0.2                     |
 | **Owner**              | PinkCurve Product Team  |
-| **Last Reviewed**      | 2026-08-09              |
+| **Last Reviewed**      | 2026-08-12              |
 | **Related Components** | All platform components |
 
 ---
@@ -48,6 +48,18 @@ We accomplish this by:
 6. Learning from relevant, privacy-conscious interaction signals to improve future discovery
 7. Providing sellers and participating organizations with useful intelligence about how their offerings are discovered
 8. Keeping PinkCurve's underlying technology sophisticated while keeping the user experience simple
+
+---
+
+## A Living Discovery Experience
+
+PinkCurve is designed to become a destination that people enjoy visiting every day.
+
+Instead of requiring Buyers to know exactly what they are looking for, PinkCurve continuously presents meaningful opportunities for discovery.
+
+Every visit should help Buyers discover something valuable—whether it is a new Offering, a trusted local business, a community event, a nearby opportunity, or something that matches their interests.
+
+Every day brings something worth discovering.
 
 ---
 

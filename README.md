@@ -2,7 +2,7 @@
 
 **Version:** 0.2
 **Status:** Living Architecture Document
-**Last Updated:** 2026-07-23
+**Last Updated:** 2026-08-15
 
 ---
 
@@ -18,7 +18,7 @@ PinkCurve exists to help people discover worthwhile offerings through a simple, 
 
 PinkCurve is a visual discovery platform that helps people discover worthwhile offerings through a simple, visual, and trustworthy experience.
 
-**PinkCurve does not process transactions.** Buyers discover products on PinkCurve and click through to the seller's own website to complete their purchase.
+**PinkCurve does not process transactions.** Buyers discover offerings on PinkCurve and click through to the seller's own website to complete their purchase.
 
 This repository serves as the living product vision, product architecture, AI strategy, data architecture, business model, and engineering blueprint for PinkCurve.
 
@@ -26,10 +26,10 @@ This repository serves as the living product vision, product architecture, AI st
 
 ## What PinkCurve Is
 
-- An AI-powered product discovery platform
-- A rich product knowledge system that captures what makes products valuable
-- A creative studio for AI-generated product storytelling
-- A personalized discovery engine that matches buyers with relevant products
+- An AI-powered offering discovery platform
+- A rich offering knowledge system that captures what makes offerings valuable
+- A creative studio for AI-generated offering storytelling
+- A personalized discovery engine that matches buyers with relevant offerings
 - A learning system that improves over time through buyer interactions
 - A seller intelligence platform that provides actionable insights
 
@@ -41,7 +41,7 @@ PinkCurve is **not** primarily:
 - **A traditional advertising network.** We do not sell impressions or run banner ads. Value comes from qualified discovery, not ad placement.
 - **Only a video-generation tool.** Creative Studio is one component; the platform's value is in the complete discovery loop.
 - **A replacement for sellers' websites.** We augment seller reach and discovery; sellers maintain their own storefronts and customer relationships.
-- **Not a text-heavy product catalog** Only visual presentations available.
+- **Not a text-heavy offering catalog** Only visual presentations available.
 ---
 
 ## Platform Flow
@@ -55,10 +55,10 @@ Seller
           → Discovery Analytics
             → Learning Engine
               → Seller Intelligence
-                → improved Product Knowledge, creative, and discovery
+                → improved Offering Knowledge, creative, and discovery
 ```
 
-This continuous loop creates compounding value: better product knowledge leads to better creative, which leads to better discovery, which generates learning signals that improve everything upstream.
+This continuous loop creates compounding value: better offering knowledge leads to better creative, which leads to better discovery, which generates learning signals that improve everything upstream.
 
 ---
 
@@ -72,9 +72,9 @@ This continuous loop creates compounding value: better product knowledge leads t
 | [01](docs/01-vision-and-mission.md) | Vision and Mission | Why PinkCurve exists |
 | [02](docs/02-design-principles.md) | Design Principles | Guiding principles for decisions |
 | [03](docs/03-product-architecture.md) | Product Architecture | System components and interactions |
-| [04](docs/04-offering-knowledge.md) | Offering Knowledge | The foundation: rich product data |
+| [04](docs/04-offering-knowledge.md) | Offering Knowledge | The foundation: rich offering data |
 | [05](docs/05-creative-studio.md) | Creative Studio | AI-powered content generation |
-| [06](docs/06-discovery-engine.md) | Discovery Engine | Matching buyers with products |
+| [06](docs/06-discovery-engine.md) | Discovery Engine | Matching buyers with offerings |
 | [07](docs/07-discovery-analytics.md) | Discovery Analytics | Measuring discovery effectiveness |
 | [08](docs/08-learning-engine.md) | Learning Engine | Continuous improvement through signals |
 | [09](docs/09-seller-intelligence.md) | Seller Intelligence | Actionable insights for sellers |
@@ -98,7 +98,7 @@ This continuous loop creates compounding value: better product knowledge leads t
 |---------|-------------|
 | [Platform Architecture](diagrams/platform-architecture.md) | High-level system architecture |
 | [Discovery Flywheel](diagrams/discovery-flywheel.md) | The learning loop that creates compounding value |
-| [Offering Knowledge Flow](diagrams/offering-knowledge-flow.md) | How product knowledge is captured and enriched |
+| [Offering Knowledge Flow](diagrams/offering-knowledge-flow.md) | How offering knowledge is captured and enriched |
 | [Creative Studio Flow](diagrams/creative-studio-flow.md) | Content generation pipeline |
 | [Discovery Event Flow](diagrams/discovery-event-flow.md) | How discovery events are captured and processed |
 | [Learning Engine Flow](diagrams/learning-engine-flow.md) | How the system learns and improves |

@@ -120,7 +120,7 @@ This glossary defines key terms used throughout PinkCurve documentation. Consist
 
 ---
 
-### Qualified Product Visit (QPV)
+### Qualified Offering Visit (QOV)
 
 **Definition:** A click-through to the seller's website that meets quality criteria: not bot traffic, verified session, and (optionally) minimum engagement.
 
@@ -132,7 +132,7 @@ This glossary defines key terms used throughout PinkCurve documentation. Consist
 
 ### Discovery Score
 
-**Definition:** An experimental composite metric measuring overall discovery effectiveness. Combines view rate, engagement rate, click-through rate, and QPV rate.
+**Definition:** An experimental composite metric measuring overall discovery effectiveness. Combines view rate, engagement rate, click-through rate, and QOV rate.
 
 **Status:** Experimental; not yet validated as industry standard.
 
@@ -166,7 +166,7 @@ This glossary defines key terms used throughout PinkCurve documentation. Consist
 
 **Definition:** A seller-calculated metric measuring the value delivered by PinkCurve relative to cost.
 
-**Formula:** ROD = (QPV × Estimated Conversion × AOV) / Platform Cost
+**Formula:** ROD = (QOV × Estimated Conversion × AOV) / Platform Cost
 
 **Purpose:** Help sellers understand platform value.
 
@@ -210,11 +210,11 @@ This glossary defines key terms used throughout PinkCurve documentation. Consist
 
 ## Business Concepts
 
-### QPV Rate
+### QOV Rate
 
-**Definition:** The rate at which impressions convert to qualified product visits. A key efficiency metric.
+**Definition:** The rate at which impressions convert to qualified offering visits. A key efficiency metric.
 
-**Formula:** QPV Rate = QPV / Impressions
+**Formula:** QOV Rate = QOV / Impressions
 
 ---
 
@@ -281,7 +281,7 @@ This glossary defines key terms used throughout PinkCurve documentation. Consist
 | ML | Machine Learning |
 | NPS | Net Promoter Score |
 | PII | Personally Identifiable Information |
-| QPV | Qualified Product Visit |
+| QOV | Qualified Offering Visit |
 | ROD | Return on Discovery |
 | ROI | Return on Investment |
 | SDK | Software Development Kit |

@@ -5,16 +5,20 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-12 |
 | **Related Components** | All platform components |
 
 ---
 
 ## Overview
 
-This roadmap outlines the planned development of PinkCurve. It represents current thinking, not commitments. Priorities may shift based on learnings and market feedback.
+PinkCurve's roadmap is organized around the continuous discovery lifecycle rather than isolated product features.
+
+As the platform evolves, each phase strengthens one or more stages of the discovery journey:
+
+Offering Knowledge → Creative → Discovery → Trust → Learning → Continuous Improvement
 
 ---
 
@@ -42,8 +46,8 @@ Major features start as hypotheses to be validated, not assumptions.
 
 | Component | Capabilities |
 |-----------|-------------|
-| Seller Platform | Auth, basic product management |
-| Products | CRUD, workspace organization |
+| Seller Platform | Authentication, Seller onboarding, basic Offering management |
+| Offerings | CRUD, workspace organization |
 | Creative Studio | Briefs, scripts, storyboards (basic) |
 
 ### Recently Added (Stage 1B)
@@ -96,7 +100,7 @@ Major features start as hypotheses to be validated, not assumptions.
 - Seller performance view
 
 ### 2B: Embedding Infrastructure
-- Product embedding generation
+- Offering embedding generation
 - Vector storage (pgvector or alternative)
 - Similarity search API
 - Integration with Discovery
@@ -114,10 +118,11 @@ Major features start as hypotheses to be validated, not assumptions.
 **Theme:** Enable buyer-side discovery
 
 ### 3A: Discovery MVP
-- Product browse experience
-- Basic search
-- Category navigation
+- Visual Offering discovery
+- Basic search and descovery
+- Category and metadata navigation
 - Click-through tracking
+- Discovery Signals
 
 ### 3B: Discovery Ranking
 - Relevance-based ranking
@@ -132,6 +137,26 @@ Major features start as hypotheses to be validated, not assumptions.
 - Privacy-preserving design
 
 ---
+
+### Phase 3.5: Trust Foundation
+
+**Theme:** Build trustworthy discovery
+
+### 3.5A Seller Verification
+- Identity verification
+- OTP verification
+- Business verification
+
+### 3.5B Buyer Protection
+- Trust Signals
+- Fraud detection
+- Abuse prevention
+- Reporting workflow
+
+### 3.5C Discovery Trust
+- Trust Score
+- Discovery warnings
+- Learning feedback
 
 ## Phase 4: Learning Loop
 
@@ -173,11 +198,19 @@ Major features start as hypotheses to be validated, not assumptions.
 - Custom integrations
 - Advanced security
 
-### 5C: Video Generation
-- Storyboard-to-video
-- Video optimization
+### 5C: AI Visual Storytelling
+- AI Visual Storytelling Generation
+- Multi-formats Visual Storytelling
 - Format variations
 - Video analytics
+
+
+### Community Discovery
+
+- Community organizations
+- Public services
+- Non-commercial Offerings
+- Local resources
 
 ---
 
@@ -225,6 +258,7 @@ gantt
 | Technical complexity | Delays | Prototype first |
 | Resource constraints | Reduced scope | Prioritize ruthlessly |
 | Market feedback | Direction change | Stay adaptable |
+| Lost of Buyer Trust | Reduce discovry adoption | Verification, Trust Signals, Learning |
 
 ---
 

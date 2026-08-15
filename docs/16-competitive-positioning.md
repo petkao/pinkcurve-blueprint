@@ -5,9 +5,9 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.1 |
+| **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-07-23 |
+| **Last Reviewed** | 2026-08-12 |
 | **Related Components** | Business Model, Discovery Engine |
 
 ---
@@ -20,27 +20,32 @@ This document analyzes PinkCurve's competitive landscape and positioning. Unders
 
 ## Market Context
 
-### The Product Discovery Problem
+### The Offering Discovery Problem
 
-Buyers struggle to discover products they want:
+Buyers struggle to discover offerings that matter to them:
 - Information overload makes discovery exhausting
 - Advertising-driven results feel irrelevant
-- Trust in product claims is low
+- Trust in online offering is declining
 - Personalization often feels invasive
 
 Sellers struggle to reach qualified buyers:
 - Customer acquisition costs are rising
 - Ad platforms optimize for engagement, not fit
-- Quality products can get lost in noise
+- Quality offerings can get lost in noise
 - Limited insight into buyer preferences
 
-### The Opportunity
+## The Opportunity
 
-Create a discovery platform that:
-- Prioritizes relevance over ad spend
-- Builds trust through authenticity
-- Learns and improves continuously
-- Delivers measurable value to sellers
+Today's internet excels at searching for things people already know.
+
+PinkCurve focuses on helping people discover valuable Offerings they may not have known existed.
+
+Our opportunity is to build a trusted visual discovery platform that:
+
+- Helps Buyers discover what matters.
+- Helps Sellers reach qualified Buyers.
+- Learns continuously from discovery.
+- Builds long-term trust instead of short-term engagement.
 
 ---
 
@@ -48,7 +53,15 @@ Create a discovery platform that:
 
 ### Category: Advertising Platforms
 
-**Examples:** Google Ads, Meta Ads, TikTok Ads
+| Category           | Examples                     |
+| ------------------ | ---------------------------- |
+| Advertising        | Google, Meta, TikTok         |
+| Marketplaces       | Amazon, Etsy, eBay           |
+| Discovery          | Pinterest, Product Hunt      |
+| Social Commerce    | Instagram Shopping           |
+| AI Shopping        | Perplexity, ChatGPT Shopping |
+| Local Discovery    | Yelp                         |
+| Public Information | Government directories       |
 
 | Aspect | Their Approach | PinkCurve Difference |
 |--------|---------------|---------------------|
@@ -85,9 +98,9 @@ Create a discovery platform that:
 
 **Our positioning:** Creative is part of our discovery loop, not standalone tooling.
 
-### Category: Product Discovery Apps
+### Discovery Platforms
 
-**Examples:** Various niche discovery apps, product hunt
+**Examples:** Various niche discovery apps, Product Hunt, Pinterest, Google Discover
 
 | Aspect | Their Approach | PinkCurve Difference |
 |--------|---------------|---------------------|
@@ -106,15 +119,23 @@ Create a discovery platform that:
 
 | Differentiator | Description |
 |----------------|-------------|
+| **Visual-first discovery** | Discovery optimized for visual browsing rather than text-heavy listings |
 | **Discovery-first model** | We focus on discovery, not transactions or impressions |
 | **Relevance over ad spend** | Ranking based on fit, not budget |
 | **Offering Knowledge depth** | Rich understanding enables better matching |
 | **Learning loop** | Platform improves from every interaction |
 | **Seller Intelligence** | Insights flow back to sellers |
+| **Trust-first platform** | Trust is earned through verification, transparency, and continuous learning |
+| **Community Discovery** | Discover offerings from community organizations and public services |
+| **Discovery destination** | A favorite discovery destination |
+| **Continuously refreshed discovery** | Continuously refreshed discovery feed |
+| **Living discovery experience** | Real-time discovery engine |
+| **The power of community** | Community-powered discovery |
+| **Real discovery, no secrets** | Transparency in matching |
 
 ### Why These Matter
 
-1. **For buyers:** Better discovery experience, more relevant products
+1. **For buyers:** Discover what matters with confidence
 2. **For sellers:** Lower CAC, better ROI, actionable insights
 3. **For the platform:** Compounding value through learning
 
@@ -122,22 +143,26 @@ Create a discovery platform that:
 
 ## Positioning Statement
 
-> PinkCurve is an AI-powered product discovery platform that helps sellers connect with qualified buyers through rich offerig knowledge, compelling storytelling, and continuous learning—without processing transactions or selling ad impressions.
+> PinkCurve is a trusted AI-powered visual discovery platform that helps Buyers discover Offerings that matter and helps Sellers connect with qualified Buyers through rich Offering Knowledge, compelling storytelling, intelligent matching, and continuous learning.
+
+> PinkCurve does not process transactions.
+
+> PinkCurve creates meaningful discovery.
 
 ### For [Target]
-Sellers with quality products who want to reach qualified buyers efficiently.
+Sellers with quality offerings who want to reach qualified buyers efficiently.
 
 ### Who [Need]
-Need to reduce customer acquisition costs and connect with buyers who genuinely want their products.
+Need to reduce customer acquisition costs and connect with buyers who genuinely want their offerings.
 
 ### Our [Solution]
-PinkCurve provides AI-powered discovery that matches buyers with products based on genuine fit, not ad spend.
+PinkCurve provides AI-powered discovery that matches buyers with relevant offerings based on genuine fit, not ad spend.
 
 ### Unlike [Alternatives]
 Unlike advertising platforms that sell impressions, or marketplaces that take transaction fees and own customer relationships.
 
 ### We [Differentiate]
-We deliver qualified product visits and seller intelligence, while sellers maintain their customer relationships.
+We deliver qualified Offering Visits (QOV) and seller intelligence, while sellers maintain their customer relationships.
 
 ---
 
@@ -149,6 +174,7 @@ We deliver qualified product visits and seller intelligence, while sellers maint
 | **Marketplace bundling** | Shopify adds discovery | Focus on independent sellers |
 | **Ad platform innovation** | Better targeting | Emphasize discovery vs. ads |
 | **Startup competition** | Similar startups emerge | Execute well, build network |
+| **AI search engines become discovery platforms** | Focus on trust, visual discovery, and continuous learning | 
 
 ---
 
@@ -156,14 +182,19 @@ We deliver qualified product visits and seller intelligence, while sellers maint
 
 ### Messaging Pillars
 
-1. **Qualified Discovery:** "Connect with buyers who want your products"
-2. **Intelligence:** "Understand why buyers engage"
-3. **Efficiency:** "Lower acquisition costs, higher quality"
-4. **Ownership:** "Keep your customer relationships"
+- Meaningful Discovery
+
+- Trust
+
+- Visual Experience
+
+- Continuous Learning
+
+- Seller Intelligence
 
 ### Target Personas
 
-**Primary:** Small-to-medium businesses with quality products, limited marketing budget, value-focused buyers.
+**Primary:** Small-to-medium businesses with valuable Offerings, limited marketing budget, value-focused buyers.
 
 **Secondary:** Growing brands looking for new acquisition channels beyond traditional advertising.
 
@@ -201,6 +232,24 @@ We deliver qualified product visits and seller intelligence, while sellers maint
 See [Open Decisions](19-open-decisions.md) for unresolved questions.
 
 ---
+
+## Why PinkCurve Exists
+
+Search helps people find what they already know.
+
+Advertising interrupts people.
+
+Marketplaces optimize transactions.
+
+Social platforms optimize engagement.
+
+PinkCurve optimizes discovery.
+
+That distinction defines the platform.
+
+---
+
+## Future Competitors
 
 ## Related Documents
 

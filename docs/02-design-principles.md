@@ -18,6 +18,16 @@ These principles guide product, engineering, and design decisions across PinkCur
 
 ---
 
+## Living Discovery
+
+Every visit to PinkCurve should feel fresh.
+
+The platform continuously presents new, relevant, and trustworthy opportunities for discovery rather than requiring Buyers to search for everything themselves.
+
+Discovery should become part of everyday life.
+
+---
+
 ## Core Principles
 
 ### 1. Discovery First

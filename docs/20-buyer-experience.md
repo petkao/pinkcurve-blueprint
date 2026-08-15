@@ -7,12 +7,12 @@
 | **Status** | Draft |
 | **Version** | 0.2 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-08-09 |
+| **Last Reviewed** | 2026-08-12 |
 | **Related Components** | All platform components |
 
 ### Visual First
 
-PinkCurve is designed primarily for mobile and small-screen experiences. Buyers should not need to read long product descriptions, advertisements, or lists of offerings to discover something useful.
+PinkCurve is designed primarily for mobile and small-screen experiences. Buyers should not need to read long offering descriptions, advertisements, or lists of offerings to discover something useful.
 
 Offerings are presented primarily through **graphics, images, short videos, and visual stories**.
 
@@ -23,6 +23,31 @@ The intended buyer experience is simple:
 A buyer should be able to understand and navigate PinkCurve within seconds, without first learning how PinkCurve works.
 
 PinkCurve's underlying technology may be sophisticated, but the buyer experience must remain simple and intuitive.
+
+---
+
+## Daily Discovery Experience
+
+PinkCurve is designed around continuous discovery.
+
+Rather than expecting Buyers to search for everything they need, PinkCurve presents a living discovery experience that evolves throughout the day.
+
+Examples include:
+
+• 🆕 Newly Added Offerings
+• 🔥 Trending Today
+• 📍 Nearby Discoveries
+• ⭐ Verified Businesses
+• 🎉 Community Bulletins
+• 📅 Local Events
+• 💰 Limited-Time Offers
+• ❤️ Personalized Recommendations
+
+The goal is to make every visit valuable without overwhelming the Buyer.
+
+PinkCurve is not a social media platform.
+
+PinkCurve is a trusted visual discovery platform.
 
 ### Discovery, Not Searching Through Listings
 
@@ -50,7 +75,7 @@ Discovery Signals are the small buyer-facing indicators derived from PinkCurve m
 
 Rich metadata is essential to PinkCurve.
 
-Metadata helps PinkCurve understand, retrieve, rank, organize, filter, and recommend offerings. It may include product category, location, price, seller information, trust signals, availability, discounts, trends, buyer relevance, campaign information, and many other attributes.
+Metadata helps PinkCurve understand, retrieve, rank, organize, filter, and recommend offerings. It may include offering category, location, price, seller information, trust signals, availability, discounts, trends, buyer relevance, campaign information, and many other attributes.
 
 However, buyers should not be required to see all of this information.
 
@@ -133,7 +158,7 @@ A short visual message may establish context, but the offering itself should rem
 
 ## The Offering as the Primary Experience
 
-Each offering should be treated as a visual discovery object rather than a traditional product listing.
+Each offering should be treated as a visual discovery object rather than a traditional offering listing.
 
 The graphic, image, short video, or visual story occupies most of the available display area.
 
@@ -257,7 +282,7 @@ Potential trust indicators may include seller verification, location information
 
 Trust indicators must have clearly defined meanings.
 
-For example, a **Verified** indicator should communicate exactly what PinkCurve verified. It should never imply that PinkCurve guarantees the seller, product, service, transaction, or outcome unless such a guarantee actually exists.
+For example, a **Verified** indicator should communicate exactly what PinkCurve verified. It should never imply that PinkCurve guarantees the seller, offering, service, transaction, or outcome unless such a guarantee actually exists.
 
 When PinkCurve detects meaningful risk, buyer protection should take priority over uninterrupted discovery.
 
@@ -283,7 +308,7 @@ The buyer does not need to know:
 
 * Which retrieval system selected an offering
 * Which ranking model scored it
-* Which AI model analyzed the product
+* Which AI model analyzed the offering
 * Which metadata attributes were evaluated
 * Which learning pipeline improved the ranking
 
