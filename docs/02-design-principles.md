@@ -5,210 +5,563 @@
 | Field | Value |
 |-------|-------|
 | **Status** | Draft |
-| **Version** | 0.2 |
+| **Version** | 0.3 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-08-09 |
+| **Last Reviewed** | 2026-08-16 |
 | **Related Components** | All platform components |
 
 ---
 
 ## Overview
 
-These principles guide product, engineering, and design decisions across PinkCurve. When facing tradeoffs, these principles help us choose.
+These principles translate PinkCurve's philosophy into practical
+guidance for product, engineering, AI, data, trust, business, and
+experience design.
+
+When facing tradeoffs, these principles help determine how PinkCurve
+should be designed and built.
+
+The enduring philosophy is defined in
+[PinkCurve Philosophy](21-pinkcurve-philosophy.md).
 
 ---
 
 ## Living Discovery
 
-Every visit to PinkCurve should feel fresh.
+Every visit to PinkCurve should have the potential to reveal something
+new, relevant, useful, or trustworthy.
 
-The platform continuously presents new, relevant, and trustworthy opportunities for discovery rather than requiring Buyers to search for everything themselves.
+PinkCurve should not require Buyers to search for everything themselves.
 
-Discovery should become part of everyday life.
+Discovery may include new Offerings, relevant Offerings, nearby
+Offerings, trends, promotions, Brand Discovery, events, community
+bulletins, and other useful opportunities.
 
----
+Freshness alone is not enough.
 
-## Core Principles
-
-### 1. Discovery First
-
-**The platform exists to facilitate discovery, not transactions.**
-
-We focus on the moment a buyer discovers an offering worth exploring. The transaction, when applicable, happens on the seller's site—we optimize for qualified discovery, not conversion.
-
-**Implications:**
-- Success metrics focus on discovery quality, not GMV
-- Buyer experience prioritizes relevance over engagement tricks
-- Revenue models align with discovery value, not transaction volume
-
-### 2. Visual First
-
-**Buyers discover through graphics, video, and visual stories rather than text-heavy listings.**
-
-PinkCurve is designed primarily for mobile and small-screen experiences. Buyers should be able to quickly see, understand, and navigate offerings without reading lengthy descriptions or searching through traditional product catalogs.
-
-**Implications:**
-
-* Graphics, images, short videos, and visual stories are the primary discovery experience
-* Text supports visual content rather than dominating it
-* Buyer interactions should favor simple actions such as see, swipe, tap, and explore
-* Visual content should remain the primary focus of the screen
-
-### 3. Metadata Without Clutter
-
-**Rich metadata powers discovery and navigation while only essential signals appear on screen.**
-
-PinkCurve may maintain extensive metadata about products, services, sellers, offers, location, relevance, trust, and other discovery signals. Buyers should benefit from this intelligence without being overwhelmed by it.
-
-**Implications:**
-
-* Only high-value metadata is immediately visible to buyers
-* Metadata should not substantially obstruct graphics or video
-* Additional information is progressively disclosed when requested
-* Metadata such as Nearby, Deals, New, categories, and trust signals can also serve as navigation
-* Rich metadata remains available to PinkCurve's discovery and learning systems behind the experience
-
-### 4. Sophisticated Underneath, Simple on the Surface
-
-**PinkCurve's AI, ranking, trust, and learning systems remain behind an intuitive buyer experience.**
-
-Buyers should not need to understand PinkCurve's underlying technology to benefit from it. The platform can become increasingly sophisticated while the buyer experience remains simple.
-
-**Implications:**
-
-* Technical complexity should not become buyer complexity
-* AI should improve the experience without requiring buyers to understand AI
-* Discovery, personalization, ranking, and trust systems should operate primarily behind the scenes
-* New capabilities should not add unnecessary steps to the buyer journey
-* As PinkCurve grows, simplicity remains a product requirement
-
-
-### 5. Knowledge as Foundation
-
-**Rich offering knowledge enables everything else.**
-
-Better offering knowledge leads to better matching, better creative, and better insights. We invest in capturing and enriching offering knowledge as a foundational capability.
-
-**Implications:**
-- Offering Knowledge is a first-class entity, not just metadata
-- We help sellers articulate what makes their products valuable
-- Knowledge gaps are visible and addressable
-
-### 6. Learning is Continuous
-
-**Relevant interactions can generate privacy-conscious signals that improve the platform.**
-
-We design systems to capture learning signals and apply them to improve discovery. The platform should get smarter over time.
-
-**Implications:**
-- Relevant buyer interactions generate privacy-conscious structured events
-- Learning Engine processes signals to improve matching
-- Insights flow back to sellers to improve their products
-
-### 7. Trust Through Transparency
-
-**We build trust by being transparent about how discovery works.**
-
-Buyers should understand why they see certain products. Sellers should understand how their products are matched. We don't use dark patterns.
-
-**Implications:**
-- Discovery logic is explainable, even if simplified
-- Seller dashboards show why products perform as they do
-- We don't artificially boost products without disclosure
-
-### 8. Privacy by Design
-
-**We collect only what we need and protect what we collect.**
-
-Privacy isn't an afterthought. We design data collection, storage, and processing with privacy as a constraint from the start.
-
-**Implications:**
-- Data minimization in all collection
-- Clear consent for personalization
-- No selling of buyer data to third parties
-
-### 9. Seller Success = Platform Success
-
-**We succeed when sellers succeed at reaching qualified buyers.**
-
-Our incentives should align with seller outcomes. If sellers aren't getting value, we're not creating sustainable value.
-
-**Implications:**
-- Revenue tied to discovery value, not vanity metrics
-- Seller intelligence helps sellers improve, not just pay more
-- We don't create artificial scarcity to drive ad spend
-
-### 10. Simplicity Over Cleverness
-
-**Simple systems that work beat clever systems that don't.**
-
-We prefer straightforward solutions that are easy to understand, debug, and improve. Complexity should be justified by clear value.
-
-**Implications:**
-- Start simple, add complexity only when proven necessary
-- Code and architecture should be understandable
-- Avoid premature optimization and over-engineering
+**Discovery should be fresh because it remains useful, not merely
+because the content changes.**
 
 ---
 
-## Technical Principles
+# Core Principles
 
-### 11. Data as Asset
+## 1. Discovery First
 
-**Structured, well-modeled data is a platform asset.**
+**PinkCurve exists to facilitate discovery, not transactions.**
 
-We invest in data modeling, quality, and governance. Good data enables good features; bad data creates compounding problems.
+We focus on the moment a Buyer discovers an Offering worth exploring.
 
-### 12. API-First Design
+The transaction, when applicable, occurs at the Seller's destination.
+PinkCurve optimizes for meaningful and qualified discovery rather than
+owning the transaction.
 
-**Internal systems communicate through well-defined APIs.**
+### Implications
 
-This enables flexibility, testability, and future evolution. Services can be replaced or scaled independently.
-
-### 13. Observability Built In
-
-**Systems should be observable by default.**
-
-Logging, metrics, and tracing are not afterthoughts. We should be able to understand system behavior in production.
-
-### 14. Fail Gracefully
-
-**Systems should degrade gracefully under failure conditions.**
-
-Partial functionality is better than complete failure. Error handling and fallbacks are part of the design.
-
-### 15. Security as Constraint
-
-**Security is a design constraint, not a feature to add later.**
-
-Authentication, authorization, input validation, and secure defaults are part of initial design.
+- Success metrics focus on discovery quality rather than GMV.
+- Buyer Experience prioritizes relevance over engagement tricks.
+- Seller value is tied to useful discovery outcomes.
+- PinkCurve should not become a marketplace merely because transactions
+  are easier to measure.
+- Click-through should preserve the Seller's relationship with the
+  Buyer.
 
 ---
 
-## Decision Framework
+## 2. Buyer-Directed Discovery
 
-When principles conflict, use this priority order:
+**The Buyer should remain in control of discovery.**
 
-1. **Trust and Privacy** — Never compromise user trust or privacy for other goals
-2. **Discovery Quality** — Prioritize genuine discovery over metrics gaming
-3. **Simplicity** — Prefer simple solutions unless complexity is clearly justified
-4. **Learning** — Design for continuous improvement
-5. **Revenue** — Revenue enables sustainability but doesn't override other principles
+PinkCurve may learn, recommend, rank, organize, and anticipate, but the
+Buyer must be able to influence where discovery goes.
+
+### Implications
+
+Buyers should be able to:
+
+- Express intent.
+- Navigate through meaningful choices.
+- Change direction.
+- Reject irrelevant Offerings.
+- Provide positive and negative feedback.
+- Explore outside learned preferences.
+- Reset appropriate personalization or learned preferences.
+
+AI should assist Buyer decisions rather than silently replace them.
 
 ---
 
-## Anti-Patterns
+## 3. Visual First
 
-Things we explicitly avoid:
+**Buyers should be able to discover through graphics, video, and visual
+stories rather than text-heavy listings.**
 
-- **Dark patterns** — Manipulative UI/UX that tricks users
-- **Information overload** — Allowing metadata, controls, or text to obscure the visual discovery experience
-- **Pay-to-win** — Discovery quality determined solely by ad spend
-- **Data hoarding** — Collecting data we don't need
-- **Feature creep** — Adding features without clear value
-- **Premature optimization** — Optimizing before understanding the problem
-- **Not-invented-here** — Rebuilding what we could use or buy
-- **Hero culture** — Depending on individuals rather than systems
+PinkCurve is designed primarily for mobile and small-screen
+experiences.
+
+Buyers should be able to quickly see, understand, and navigate
+Offerings without reading lengthy descriptions or searching through
+traditional catalogs.
+
+### Implications
+
+- Graphics, images, short videos, and visual stories are primary
+  discovery surfaces.
+- Text supports visual content rather than dominating it.
+- Buyer interactions favor simple actions such as see, swipe, tap,
+  navigate, and explore.
+- Visual content remains the primary focus of the screen.
+- Important trust or decision information must still remain accessible.
+
+---
+
+## 4. Metadata Should Illuminate Choices
+
+**Metadata should help Buyers navigate rather than simply provide more
+information.**
+
+PinkCurve may maintain extensive metadata about Offerings, Sellers,
+location, relevance, trust, availability, categories, and other
+discovery signals.
+
+The Buyer should benefit from that structure without needing to
+understand PinkCurve's underlying data model.
+
+### Implications
+
+- Metadata should reveal meaningful directions for discovery.
+- Navigation choices should reflect the current discovery context.
+- Only high-value metadata should be immediately visible.
+- Additional information should be progressively disclosed.
+- Metadata should not substantially obstruct graphics or video.
+- Metadata such as Nearby, Deals, New, category, characteristics, and
+  trust signals may become discovery/navigation dimensions.
+- Rich metadata remains available to discovery, analytics, learning,
+  and intelligence systems behind the experience.
+
+Adaptive Metadata Navigation is the primary architecture for applying
+this principle and is defined in
+[Adaptive Metadata Navigation](23-adaptive-metadata-navigation.md).
+
+---
+
+## 5. Progressive Disclosure
+
+**Show Buyers what is useful now and reveal additional complexity when
+it becomes useful.**
+
+PinkCurve may possess far more information than should appear on a
+single screen.
+
+### Implications
+
+- Do not display every available metadata dimension simultaneously.
+- Reveal navigation choices according to discovery context.
+- Keep secondary information available without making it dominant.
+- Avoid forcing Buyers through unnecessary configuration before they
+  can begin discovery.
+- Advanced capabilities should not make basic discovery difficult.
+
+---
+
+## 6. Sophisticated Underneath, Simple on the Surface
+
+**PinkCurve's AI, ranking, trust, learning, and data systems should
+remain behind an understandable experience.**
+
+Buyers and Sellers should not need to understand PinkCurve's underlying
+technology to benefit from it.
+
+### Implications
+
+- Technical complexity should not become user complexity.
+- AI should improve the experience without requiring users to understand
+  AI.
+- Ranking, personalization, trust, and learning systems should normally
+  operate behind simple interfaces.
+- New capabilities should not automatically add new steps.
+- Simplicity remains a product requirement as PinkCurve becomes more
+  sophisticated.
+
+---
+
+## 7. Knowledge as Foundation
+
+**Rich Offering Knowledge enables better discovery, creative,
+intelligence, and trust.**
+
+PinkCurve should invest in capturing, validating, enriching, and
+maintaining useful Offering Knowledge.
+
+### Implications
+
+- Offering Knowledge is a first-class domain capability.
+- Sellers should be helped to describe what makes their Offerings
+  valuable.
+- Knowledge gaps should be visible and addressable.
+- Metadata should be structured enough to support discovery and AMN.
+- Knowledge provenance and confidence should be available where
+  important.
+- More knowledge is useful only when its quality is sufficient.
+
+---
+
+## 8. Relevance Over Seller Spending
+
+**Seller spending must not override Buyer relevance.**
+
+Sellers may pay PinkCurve for legitimate services, campaign scope,
+Brand Discovery, creative capabilities, analytics, or other defined
+value.
+
+Payment should not purchase the right to make irrelevant Offerings
+important to Buyers.
+
+### Implications
+
+- Ranking should not become simple pay-to-win placement.
+- Brand Discovery must still respect relevance and trust.
+- Campaign eligibility and discovery relevance are separate concepts.
+- Seller budgets may affect legitimate service scope without overriding
+  Buyer intent.
+- Monetization decisions must be tested against discovery quality.
+
+---
+
+## 9. Learning Is Continuous — and Signal Quality Matters
+
+**Relevant interactions can generate privacy-conscious signals that
+improve PinkCurve.**
+
+The platform should become more useful as it learns.
+
+But PinkCurve should not learn indiscriminately from every event.
+
+### Implications
+
+- Relevant Buyer and Seller interactions generate structured events.
+- Explicit and implicit signals should remain distinguishable.
+- Valid and invalid traffic should remain distinguishable.
+- Bots, fraud, manipulation, and suspicious traffic should not silently
+  train discovery systems.
+- Learning should improve measurable outcomes.
+- Learning should support Buyer Intelligence and Seller Intelligence.
+- Learning should respect privacy, consent, and retention requirements.
+
+---
+
+## 10. Trust Is Designed In
+
+**Trust is part of the product architecture, not a feature added after
+the platform is built.**
+
+PinkCurve must protect both Buyers and Sellers.
+
+### Implications
+
+Design should account for:
+
+- Seller verification.
+- Buyer verification where appropriate.
+- Offering verification and approval.
+- Fraud and scam detection.
+- Bot and invalid-traffic detection.
+- Review/rating manipulation.
+- Abuse prevention.
+- Reporting.
+- Reverification.
+- Appeals.
+- Human review.
+- Continuous monitoring.
+
+Trust signals should influence discovery where appropriate.
+
+Seller spending must never override verification or trust requirements.
+
+---
+
+## 11. Transparency Without Unnecessary Exposure
+
+**PinkCurve should provide enough explanation for Buyers and Sellers to
+understand important outcomes without exposing systems in ways that
+enable manipulation or compromise intellectual property.**
+
+Transparency does not require publishing ranking algorithms or
+proprietary implementation details.
+
+### Implications
+
+- Buyers should receive understandable explanations where useful.
+- Sellers should understand major factors affecting performance.
+- Verification and enforcement outcomes should be appropriately
+  explainable.
+- Paid participation should be identifiable where appropriate.
+- PinkCurve should not use deceptive ranking or dark patterns.
+- Detailed algorithms, fraud controls, and proprietary mechanisms need
+  not be disclosed merely in the name of transparency.
+
+---
+
+## 12. Privacy by Design
+
+**Collect only what PinkCurve has a legitimate reason to use, and
+protect what is collected.**
+
+Privacy is a design constraint from the beginning.
+
+### Implications
+
+- Apply data minimization.
+- Distinguish session data from persistent Buyer Intelligence.
+- Use meaningful consent where required.
+- Provide appropriate personalization controls.
+- Define retention rather than storing information indefinitely by
+  default.
+- Do not sell Buyer personal data to third parties.
+- Separate data required for security from data used for
+  personalization where appropriate.
+
+---
+
+## 13. AI Assists; Humans Remain Accountable
+
+**Automation should provide speed and scale without eliminating
+appropriate human judgment.**
+
+### Implications
+
+Human escalation should be available for consequential or ambiguous
+situations such as:
+
+- Verification.
+- Fraud investigation.
+- Appeals.
+- Customer Support.
+- Billing disputes.
+- Content review.
+- Security incidents.
+- AI/model evaluation.
+
+AI should not become a barrier between PinkCurve and the people it
+serves.
+
+---
+
+## 14. Buyer Value and Seller Value Reinforce Each Other
+
+**PinkCurve succeeds when better Buyer discovery produces sustainable
+Seller value.**
+
+Seller success alone is insufficient if Buyer Experience deteriorates.
+
+Buyer engagement alone is insufficient if Sellers receive no measurable
+value.
+
+### Implications
+
+- Optimize for mutual value.
+- Seller Intelligence should help Sellers improve rather than merely
+  encourage spending.
+- Buyer Experience should not be sacrificed for short-term revenue.
+- Seller outcomes should be measured using trustworthy signals.
+- More quality Sellers and Offerings should improve Buyer discovery.
+- Better Buyer discovery should improve Seller outcomes.
+
+---
+
+## 15. Simplicity Over Cleverness
+
+**Simple systems that work beat clever systems that do not.**
+
+Complexity should be justified by measurable value.
+
+### Implications
+
+- Start simple.
+- Add complexity when evidence justifies it.
+- Code and architecture should remain understandable.
+- Avoid premature optimization.
+- Avoid unnecessary infrastructure.
+- Prefer solutions that a small team can operate reliably when they
+  satisfy requirements.
+
+---
+
+# Technical Principles
+
+## 16. Data as an Asset — With Responsibility
+
+**Structured, well-modeled, trustworthy data is a platform asset.**
+
+PinkCurve should invest in data modeling, quality, lineage, governance,
+and lifecycle management.
+
+### Implications
+
+- Important data should have identifiable ownership and purpose.
+- Raw and validated events should remain distinguishable.
+- Data lineage should support Seller and Buyer Intelligence.
+- Retention should be intentional.
+- Poor-quality data should not silently propagate through learning and
+  analytics.
+
+---
+
+## 17. API-First, Not API-Only
+
+**Platform capabilities should expose clear interfaces where separation
+creates useful architectural boundaries.**
+
+API-first design supports flexibility, testability, integration, and
+future evolution.
+
+It does not require turning every capability into an independent
+service.
+
+### Implications
+
+- Define clear contracts between major capabilities.
+- Avoid unnecessary microservices.
+- Preserve the ability to replace or scale components when needed.
+- Prefer architectural boundaries based on responsibilities rather than
+  technology fashion.
+
+---
+
+## 18. Observability Built In
+
+**PinkCurve should be able to understand what its systems are doing.**
+
+Logging, metrics, tracing, audit events, model monitoring, and
+operational signals should be designed alongside the systems they
+observe.
+
+### Implications
+
+PinkCurve should be able to investigate:
+
+- Failures.
+- Performance degradation.
+- Discovery anomalies.
+- Fraud.
+- Invalid traffic.
+- AI/model degradation.
+- Verification decisions.
+- Operational incidents.
+
+Observability should respect privacy and security boundaries.
+
+---
+
+## 19. Fail Gracefully
+
+**Failures should minimize harm and preserve useful functionality where
+possible.**
+
+### Implications
+
+- Critical workflows should define failure behavior.
+- Partial functionality may be preferable to complete failure.
+- AI failure should not automatically become platform failure.
+- Human fallback should exist where appropriate.
+- Users should receive understandable status information.
+- Recovery should be observable and testable.
+
+---
+
+## 20. Security as a Constraint
+
+**Security is a design constraint, not a capability added later.**
+
+### Implications
+
+- Authentication and authorization should be designed from the start.
+- Inputs and external content should be treated appropriately as
+  untrusted.
+- Secure defaults should be preferred.
+- Sensitive operations should be auditable.
+- Abuse and fraud should be considered during feature design.
+- Security requirements apply to AI systems as well as conventional
+  software.
+
+---
+
+# Decision Framework
+
+When principles conflict, use the following priority order as a guide:
+
+1. **Safety, Trust and Privacy**
+   Protect Buyers, Sellers, and the integrity of PinkCurve.
+
+2. **Buyer Control and Discovery Quality**
+   Preserve meaningful, relevant, understandable discovery.
+
+3. **Mutual Buyer/Seller Value**
+   Prefer decisions that create sustainable value for both sides.
+
+4. **Simplicity**
+   Avoid unnecessary product and technical complexity.
+
+5. **Learning**
+   Improve through trustworthy evidence.
+
+6. **Revenue**
+   Revenue enables PinkCurve to survive and grow, but should not
+   override the principles above.
+
+This ordering is guidance rather than a substitute for judgment.
+Material conflicts should be documented explicitly.
+
+---
+
+# Anti-Patterns
+
+PinkCurve should explicitly avoid:
+
+- **Dark patterns** — Manipulative experiences that trick users.
+- **Information overload** — Metadata, controls, text, or Offerings
+  obscuring the discovery experience.
+- **Pay-to-win discovery** — Seller spending overriding relevance.
+- **Hidden manipulation** — Steering Buyers without appropriate
+  transparency or control.
+- **AI overreach** — Automation making consequential decisions without
+  appropriate safeguards or escalation.
+- **Blind personalization** — Assuming historical behavior permanently
+  defines Buyer intent.
+- **Invalid-signal learning** — Allowing bots, fraud, or manipulation to
+  silently influence learning and intelligence.
+- **Data hoarding** — Collecting or retaining data without sufficient
+  purpose.
+- **Feature creep** — Adding features without clear value.
+- **Premature optimization** — Optimizing before understanding the
+  problem.
+- **Technology-first architecture** — Choosing technology before
+  defining the capability.
+- **Not-invented-here** — Rebuilding mature capabilities without a good
+  reason.
+- **Hero culture** — Depending on individuals instead of repeatable
+  systems and accountable processes.
+
+---
+
+# Design Review Questions
+
+Before approving a significant PinkCurve capability, ask:
+
+1. What discovery problem does this solve?
+2. Does the Buyer remain in control?
+3. Does it simplify or complicate the experience?
+4. What Offering Knowledge or metadata does it require?
+5. Could Seller spending improperly influence the outcome?
+6. What could be manipulated, abused, or automated by bots?
+7. What data does it collect and why?
+8. What does PinkCurve learn from it?
+9. How will invalid signals be excluded?
+10. What happens when AI is wrong?
+11. Is human escalation required?
+12. How will we measure whether it creates value?
+13. What happens when the capability fails?
+14. Can a simpler design accomplish the same objective?
 
 ---
 
@@ -218,3 +571,5 @@ Things we explicitly avoid:
 - [Product Architecture](03-product-architecture.md)
 - [Security, Privacy, and Trust](12-security-privacy-and-trust.md)
 - [Buyer Experience](20-buyer-experience.md)
+- [PinkCurve Philosophy](21-pinkcurve-philosophy.md)
+- [Adaptive Metadata Navigation](23-adaptive-metadata-navigation.md)

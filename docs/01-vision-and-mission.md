@@ -5,105 +5,345 @@
 | Field                  | Value                   |
 | ---------------------- | ----------------------- |
 | **Status**             | Draft                   |
-| **Version**            | 0.2                     |
+| **Version**            | 0.3                     |
 | **Owner**              | PinkCurve Product Team  |
-| **Last Reviewed**      | 2026-08-12              |
+| **Last Reviewed**      | 2026-08-16              |
 | **Related Components** | All platform components |
 
 ---
 
 ## Vision
 
-**A world where people can quickly discover worthwhile products, services, opportunities, and useful resources through a simple, visual, and trustworthy experience.**
+**A world where people can quickly discover worthwhile Offerings
+through a simple, visual, intelligent, and trustworthy experience.**
 
-PinkCurve envisions discovery that feels natural rather than exhausting.
+PinkCurve envisions discovery that feels natural rather than
+exhausting.
 
-People should not have to search through endless listings, read large amounts of promotional text, or navigate intrusive advertising to find something useful.
+People should not have to search through endless listings, understand
+hidden catalog structures, read large amounts of promotional text, or
+navigate intrusive advertising simply to find something useful.
 
-Instead, they should be able to **see, discover, and explore** offerings that may benefit them.
+They should be able to open PinkCurve, see what is worth discovering,
+navigate toward what matters to them, and explore with confidence.
 
-For commercial discovery, this means helping buyers find worthwhile offerings while helping sellers reach people who may genuinely value what they provide.
+PinkCurve aspires to become:
 
-Over time, the same discovery experience can extend beyond commerce to useful public and community services.
+> **The Discovery Destination.**
+
+A place people naturally think of when they want to discover products,
+services, promotions, brands, events, opportunities, community
+resources, and other useful Offerings.
 
 The long-term vision is simple:
 
-**Help people discover things worth knowing about.**
+> **Discover what matters.**
 
 ---
 
 ## Mission
 
-**To build a visual-first discovery platform that helps people quickly find relevant and trustworthy offerings while enabling organizations to reach the people who may benefit from them.**
+**To build a trusted, visual-first discovery platform that helps Buyers
+discover Offerings that matter while helping Sellers reach people who
+may genuinely value what they provide.**
 
-PinkCurve combines rich offering knowledge, visual storytelling, metadata, discovery intelligence, trust signals, and continuous learning behind an experience that remains simple for the user.
+PinkCurve combines Offering Knowledge, visual storytelling, meaningful
+metadata, Buyer-directed navigation, discovery intelligence, trust,
+and continuous learning behind an experience that remains simple.
 
-We accomplish this by:
+PinkCurve's mission is not to maximize advertising exposure.
 
-1. Presenting offerings primarily through graphics, images, short videos, and visual stories
-2. Helping people navigate large numbers of offerings quickly through simple interactions and meaningful metadata
-3. Building rich knowledge about products, services, and other offerings to improve discovery
-4. Matching and ranking offerings based on relevance, context, and genuine usefulness rather than advertising spend alone
-5. Integrating trust, verification, privacy, and protection into the discovery experience
-6. Learning from relevant, privacy-conscious interaction signals to improve future discovery
-7. Providing sellers and participating organizations with useful intelligence about how their offerings are discovered
-8. Keeping PinkCurve's underlying technology sophisticated while keeping the user experience simple
+It is not to keep Buyers on the platform for as long as possible.
+
+It is not to own the transaction.
+
+The mission is to make discovery work better for both Buyers and
+Sellers.
+
+---
+
+## The Discovery Destination
+
+Search is powerful when people already know what they are looking for.
+
+Discovery addresses a different problem:
+
+> **What is worth knowing about that I may not have known to search
+> for?**
+
+PinkCurve should help answer that question.
+
+A Buyer may arrive with:
+
+- A clear intent
+- A general interest
+- A problem to solve
+- A category in mind
+- Curiosity
+- Or no specific purchase intention at all
+
+PinkCurve should help the Buyer quickly understand the available
+discovery space and navigate toward what becomes meaningful.
+
+The Buyer should not have to understand PinkCurve's underlying
+metadata, AI, ranking systems, or data architecture.
+
+The experience should remain:
+
+> **Sophisticated underneath. Simple on the surface.**
+
+---
+
+## Buyer-Directed Discovery
+
+PinkCurve believes Buyers should drive discovery.
+
+Artificial intelligence can help understand context, organize
+Offerings, identify useful metadata, suggest directions, and learn from
+relevant interactions.
+
+But the Buyer remains in control.
+
+Buyers should be able to:
+
+- Express what they want
+- Navigate through meaningful metadata
+- Explore alternatives
+- Change direction
+- Indicate interest
+- Reject irrelevant discovery
+- Discover outside previous behavior
+- Start again when their intent changes
+
+PinkCurve should not force Buyers to blindly navigate fixed filters or
+accept whatever an algorithm decides to show them.
+
+The platform should make the discovery space easier to understand and
+navigate.
+
+Adaptive Metadata Navigation is a core capability supporting this
+mission and is defined separately.
 
 ---
 
 ## A Living Discovery Experience
 
-PinkCurve is designed to become a destination that people enjoy visiting every day.
+PinkCurve should not feel like a static catalog.
 
-Instead of requiring Buyers to know exactly what they are looking for, PinkCurve continuously presents meaningful opportunities for discovery.
+Every visit should have the potential to reveal something meaningful.
 
-Every visit should help Buyers discover something valuable—whether it is a new Offering, a trusted local business, a community event, a nearby opportunity, or something that matches their interests.
+Discovery may include:
 
-Every day brings something worth discovering.
+- New Offerings
+- Relevant Offerings
+- Trending Offerings
+- Nearby Offerings
+- Promotions and opportunities
+- Brand Discovery
+- Seasonal Offerings
+- Events
+- Community bulletins
+- Community resources
+
+PinkCurve aspires to become a destination Buyers naturally return to
+because discovery remains useful.
+
+> **Every day worth opening.**
+
+This does not mean maximizing screen time.
+
+PinkCurve must earn every return visit by continuing to create value.
 
 ---
 
-## Core Beliefs
+## Value for Buyers
 
-### About People and Discovery
+PinkCurve exists to make discovery easier and more worthwhile for
+Buyers.
 
-* **Discovery is valuable.** Helping someone find something worthwhile creates value even before any transaction occurs.
-* **Attention should be respected.** People's time and attention should not be wasted simply to increase engagement metrics.
-* **Relevance beats reach.** Showing a useful offering to the right person is more valuable than showing it indiscriminately to thousands.
-* **Discovery should be effortless.** People should be able to see, swipe, navigate, and explore without learning complicated systems.
-* **People remain in control.** PinkCurve can help guide discovery, but users should always be able to redirect what they want to explore.
-* **Discovery extends beyond commerce.** Useful public and community resources can also deserve people's attention.
+Buyers should be able to:
 
-### About Visual Experience
+- Discover Offerings they may not have known existed
+- Navigate large discovery spaces efficiently
+- Understand Offerings visually
+- See meaningful information without screen clutter
+- Control the direction of discovery
+- Receive relevant rather than simply highly funded Offerings
+- Discover with greater confidence
+- Protect their privacy
+- Receive appropriate protection from scams, fraud, fake Offerings,
+  bots, and manipulation
 
-* **Visual first.** Graphics, images, short videos, and visual stories communicate offerings more naturally on mobile devices than text-heavy listings.
-* **The offering is the focus.** Interface controls, advertising mechanisms, and metadata should not compete with the content being discovered.
-* **Metadata should help, not overwhelm.** Rich metadata can power discovery and navigation while remaining largely behind the experience.
-* **Simple on the surface.** Users should benefit from PinkCurve's intelligence without needing to understand the technology underneath it.
+A successful Buyer experience should eventually create a simple
+reaction:
 
-### About Offerings and Knowledge
+> **"I open PinkCurve because I usually discover something worth
+> knowing about."**
 
-* **Offerings have stories.** Products and services are more than features and prices; they solve problems, create experiences, and provide benefits.
-* **Knowledge is foundational.** Rich, structured knowledge enables better discovery, creative content, navigation, and matching.
-* **Authenticity matters.** Accurate information builds trust; exaggeration and misleading claims destroy it.
-* **Not every offering is commercial.** PinkCurve's discovery model should be capable of supporting useful resources even when no transaction is involved.
+---
 
-### About Learning
+## Value for Sellers
 
-* **Relevant interactions can teach.** Buyer actions can provide useful signals when collected and used responsibly.
-* **Explicit and implicit signals are different.** Actions such as Save, Explore, or Not Interested provide different information from passive viewing or swiping.
-* **Improvement is continuous.** Discovery should become more useful as PinkCurve learns.
-* **Learning must respect privacy.** PinkCurve should not collect information merely because it can.
-* **Insights should create value.** Learning should improve discovery and, where appropriate, help participating sellers and organizations improve their offerings.
+PinkCurve exists to help quality Offerings find the Buyers they matter
+to.
 
-### About Trust
+Sellers should be able to:
 
-* **Buyer trust is paramount.** PinkCurve should not compromise buyer protection or experience for seller revenue.
-* **Trust is part of discovery.** Verification, warnings, contextual information, and risk signals should help people make better-informed decisions.
-* **Verification must mean something specific.** PinkCurve should never imply guarantees that it cannot provide.
-* **Seller authenticity matters.** Commercial participants should be accountable for the offerings they present.
-* **Privacy is foundational.** PinkCurve collects only what it needs and protects what it collects.
-* **Trust takes priority over uninterrupted discovery.** When meaningful risk is detected, protecting the user matters more than keeping them engaged.
+- Describe their Offerings through rich Offering Knowledge
+- Communicate visually and effectively
+- Reach relevant Buyers
+- Build Brand Discovery where appropriate
+- Target legitimate campaign scope such as geography or category
+- Understand how Buyers discover and respond to their Offerings
+- Learn from Seller Intelligence
+- Improve Offerings, creative content, and discovery strategy
+- Measure whether PinkCurve is creating value
+
+Seller spending should purchase legitimate PinkCurve services.
+
+It should not purchase the right to override Buyer relevance.
+
+PinkCurve succeeds when Sellers eventually say:
+
+> **"I'm moving more of my discovery budget to PinkCurve because it
+> works."**
+
+---
+
+## Better Discovery Creates Mutual Value
+
+PinkCurve is not fundamentally Buyer-first or Seller-first.
+
+It is **discovery-first**.
+
+Better Buyer discovery should create better Seller outcomes.
+
+Better Seller participation should bring more quality Offerings into
+the discovery environment.
+
+That creates a reinforcing relationship:
+
+Buyer Value
+    ↓
+Buyer Return
+    ↓
+Better Discovery Signals
+    ↓
+Better Discovery
+    ↓
+Better Seller Value
+    ↓
+More Quality Offerings
+    ↓
+Greater Buyer Value
+    ↺
+
+PinkCurve's long-term strength depends on keeping this relationship
+healthy.
+
+If Seller monetization damages Buyer discovery, the loop weakens.
+
+If Buyers receive value but Sellers do not, the platform is not
+economically sustainable.
+
+Both sides must benefit.
+
+---
+
+## Trust as a Requirement
+
+Discovery cannot become a trusted destination without protection.
+
+PinkCurve should work continuously to reduce:
+
+- Fake Sellers
+- Fraudulent Offerings
+- Scams
+- Bots
+- Invalid traffic
+- Manipulated ratings or reviews
+- Abuse
+- Misleading information
+
+Verification, trust signals, monitoring, reporting, fraud detection,
+and appropriate human review are therefore fundamental platform
+capabilities.
+
+Trust applies to Sellers as well.
+
+Sellers should not pay for fraudulent traffic or receive intelligence
+polluted by bots and manipulation.
+
+PinkCurve should never sacrifice long-term trust for short-term
+revenue.
+
+---
+
+## Learning With Purpose
+
+Every meaningful interaction can potentially help PinkCurve improve.
+
+But the purpose of learning is not simply to accumulate data.
+
+Learning should improve:
+
+- Discovery relevance
+- Buyer navigation
+- Buyer Intelligence
+- Seller Intelligence
+- Offering quality
+- Creative effectiveness
+- Trust
+- Fraud prevention
+- Platform operations
+
+PinkCurve should distinguish trustworthy signals from suspicious or
+invalid signals and should respect privacy, consent, and appropriate
+data boundaries.
+
+---
+
+## Beyond Commercial Discovery
+
+PinkCurve begins with commercial discovery.
+
+But people need to discover more than things they can buy.
+
+Over time, the same discovery model may help people discover:
+
+- Community events
+- Public services
+- Community organizations
+- Local resources
+- Public information
+- Other useful non-commercial Offerings
+
+This expansion should remain consistent with PinkCurve's core mission.
+
+PinkCurve is not aspiring to become a general-purpose social network.
+
+It is aspiring to become a better way to discover what matters.
+
+---
+
+## What PinkCurve Does Not Aspire to Become
+
+Clarity about what PinkCurve is not is as important as describing what
+it is.
+
+PinkCurve does not aspire to become:
+
+- A traditional marketplace
+- A transaction processor
+- A pay-to-win advertising network
+- A text-heavy product catalog
+- A social-media engagement platform
+- A platform that maximizes screen time
+- A platform that sells Buyer attention to the highest bidder
+- A platform that collects personal information without purpose
+
+These boundaries may influence individual product decisions, but they
+protect the larger mission.
 
 ---
 
@@ -111,79 +351,55 @@ Every day brings something worth discovering.
 
 ### For Buyers
 
-* "I quickly found something worth exploring."
-* "I didn't have to search through hundreds of irrelevant listings."
-* "I can understand an offering without reading a lot of promotional text."
-* "PinkCurve helps me discover things I might not have known to search for."
-* "I feel that PinkCurve respects my time, privacy, and choices."
-* "The trust information helps me make better-informed decisions."
+> **"PinkCurve helps me discover things worth knowing about."**
 
 ### For Sellers
 
-* "I'm reaching people who may genuinely value what I offer."
-* "I don't have to win simply by spending more on advertising."
-* "I understand how people respond to my offering."
-* "PinkCurve helps me communicate my offering visually and effectively."
-* "The insights help me improve my product, positioning, or creative content."
+> **"PinkCurve helps the right Buyers discover what I offer."**
 
-### For Public and Community Organizations
+### For Communities
 
-Over time, success may also mean:
-
-* "People who could benefit from our service are discovering it."
-* "We can communicate useful information visually and simply."
-* "People can find our service even when they did not know to search for it."
-* "PinkCurve helps connect our resources with the communities they are intended to serve."
+> **"PinkCurve helps people discover useful resources they might
+> otherwise miss."**
 
 ### For PinkCurve
 
-* Buyers return because discovery is genuinely useful
-* Sellers participate because qualified discovery creates measurable value
-* Trust grows rather than being sacrificed for short-term engagement
-* Discovery improves through responsible learning
-* Visual simplicity remains intact as platform intelligence grows
-* The platform can eventually support both commercial and non-commercial discovery
-* Revenue remains aligned with genuine value creation
-
----
-
-## Guiding Questions
-
-When making product, design, engineering, or business decisions, PinkCurve asks:
-
-1. **Does this improve discovery?** Does it help someone find something worthwhile?
-2. **Does this respect the user's attention?** Does it make discovery easier rather than more distracting?
-3. **Does this create genuine value?** Does it benefit buyers, participating organizations, or both?
-4. **Does this build trust?** Does it protect users and make the experience more trustworthy?
-5. **Does this respect privacy?** Are we collecting and using only the information genuinely needed?
-6. **Does this improve learning responsibly?** Can it make future discovery better without compromising user interests?
-7. **Does this preserve simplicity?** Are we exposing unnecessary complexity to the user?
-8. **Is this sustainable?** Does it create long-term value for PinkCurve and its participants?
+> **Buyers return because discovery creates value, and Sellers continue
+> participating because that discovery creates measurable results.**
 
 ---
 
 ## The PinkCurve Standard
 
-PinkCurve's technology may become increasingly sophisticated.
+PinkCurve's technology will change.
 
-Its AI may become more capable. Its offering knowledge may become richer. Its discovery and ranking systems may become more intelligent. Its learning systems may process more signals. Its trust systems may become more advanced.
+Its AI will improve.
 
-The user should not experience that complexity.
+Its Offering Knowledge will become richer.
 
-The PinkCurve standard is:
+Its discovery systems will become more intelligent.
 
-**Sophisticated underneath. Simple on the surface.**
+Its understanding of Buyers and Sellers will improve.
 
-And every improvement should ultimately serve the same purpose:
+Its community role may expand.
 
-**Help people discover something worthwhile more quickly, easily, and confidently.**
+But increasing sophistication should serve one enduring objective:
+
+> **Help people discover what matters and help quality Offerings find
+> the people they matter to.**
+
+And the experience should continue to meet the PinkCurve standard:
+
+> **Sophisticated underneath. Simple on the surface.**
 
 ---
 
 ## Related Documents
 
-* [Executive Summary](00-executive-summary.md)
-* [Design Principles](02-design-principles.md)
-* [Security, Privacy, and Trust](12-security-privacy-and-trust.md)
-* [Long-Term Vision](17-long-term-vision.md)
-* [Buyer Experience](20-buyer-experience.md)
+- [Executive Summary](00-executive-summary.md)
+- [Design Principles](02-design-principles.md)
+- [Security, Privacy, and Trust](12-security-privacy-and-trust.md)
+- [Long-Term Vision](17-long-term-vision.md)
+- [Buyer Experience](20-buyer-experience.md)
+- [PinkCurve Philosophy](21-pinkcurve-philosophy.md)
+- [Adaptive Metadata Navigation](23-adaptive-metadata-navigation.md)
