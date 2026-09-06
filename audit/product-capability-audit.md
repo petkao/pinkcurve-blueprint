@@ -7,7 +7,7 @@
 | Scope | Blueprint Chapters 00–24 |
 | Purpose | Establish the PinkCurve Product & Capability Map |
 | Status | In Progress |
-| Started | 2026-08-23 |
+| Started | 2026-09-05 |
 
 ---
 
@@ -41661,354 +41661,1108 @@ Emerging capability direction:
 
 ### Audit #4 — Identity, Authentication, Authorization, Accounts & Access Control
 
-Status: IN PROGRESS
+Status: COMPLETE — CAPABILITY-AUDIT LEVEL
 
-Audit objective:
+#### Audit Objective
 
-Establish how PinkCurve identifies human and machine actors, authenticates them, verifies important identity/organization relationships, authorizes actions, records accountability, protects privileged operations, and responds to identity compromise.
+Evaluate whether PinkCurve has sufficient identity, authentication, authorization, account-security, privileged-action, machine-identity, session-security, compromise-detection, and continuous-access requirements for MVP and future production operation.
 
-#### A4.1 — Canonical Identity Model, Relationships & Lifecycle
-Status: REVIEWED THROUGH SELLER-REGISTRATION ACTOR VERIFICATION
+#### Governing Security Principle
 
-##### A4.1-01 — Canonical Identity Service / Capability
-Status: ACCEPTED — MVP REQUIRED
+> Authentication establishes an operational identity. Authorization grants specific authority. Current risk and security state determine whether that authority may safely be exercised at this moment.
 
-PinkCurve requires a canonical Identity layer with stable `identity_id`.
+Conceptually:
 
-The Identity capability is the authoritative owner of canonical PinkCurve identities. For MVP it may be implemented as a backend/authentication module rather than a standalone microservice.
+```text
+Operational Identity
+        +
+Authentication Assurance
+        +
+Authorized Relationship / Role
+        +
+Resource + Action
+        +
+Current Risk + Security Context
+        ↓
+ACCESS DECISION
+```
 
-Domain products retain ownership of their domain identifiers:
-- Identity capability → `identity_id`;
-- Buyer capability → `buyer_id`;
-- Seller capability → `seller_id`;
-- Organization capability/domain → `organization_id`;
+PinkCurve separates operational identities by security domain. Buyer, Seller, workforce, service, AI-agent, and system identities are independently governed. Authority in one identity domain does not confer authority in another.
+
+---
+
+#### A4.1 — Operational Identity Model, Relationships & Lifecycle
+
+Status: COMPLETE
+
+##### A4.1-01 — Identity Capability and Canonical Operational Identity
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+PinkCurve requires a foundational Identity Capability. It may initially be implemented as a shared backend/security module rather than a standalone microservice.
+
+The Identity Capability establishes and governs canonical **operational identities** within distinct security domains, including:
+
+- Buyer identity;
+- Seller identity;
+- PinkCurve workforce identity;
+- service identity;
+- AI-agent identity;
+- system identity.
+
+`identity_id` identifies a canonical operational security identity. It does **not** require a universal real-world-person identity spanning all PinkCurve domains.
+
+The capability owning an entity owns its canonical identifier. Examples include:
+
+- Identity Capability → `identity_id`;
+- Buyer → `buyer_id`;
+- Seller → `seller_id`;
 - Offering Knowledge → `offering_id`.
 
-Credentials, email addresses, phone numbers, passwords, passkeys, OAuth identifiers, sessions, API keys, and external-provider identifiers do not replace the canonical PinkCurve identity.
+External authentication-provider identifiers may map to a PinkCurve operational identity but are not PinkCurve's canonical identifier.
 
-##### A4.1-02 — Identity Types and Domain Relationships
-Status: ACCEPTED — MVP REQUIRED
+Exact identifier format and schema are deferred to Data/System Design.
 
-Canonical identity answers:
+##### A4.1-02 — Identity Domains Are Security Boundaries
 
-> Who or what is acting?
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-Initial identity types should remain intentionally small, such as HUMAN, SERVICE, AI_AGENT, and SYSTEM. Exact taxonomy is deferred.
+Buyer, Seller, and workforce identities are separate operational security identities, not merely contexts attached to one universal human identity.
 
-Buyer and Seller should not be treated as fundamental identity types. They are domain contexts/relationships associated with identities.
+Conceptually:
 
-##### A4.1-03 — Active Domain Context
-Status: ACCEPTED — MVP REQUIRED WHERE MULTI-ROLE ACCESS EXISTS
+```text
+BUYER IDENTITY
+  → Buyer credentials
+  → Buyer sessions
+  → Buyer authority
+  → Buyer security state
 
-One identity may operate in multiple contexts.
+SELLER IDENTITY
+  → Seller credentials
+  → Seller sessions
+  → Seller membership / role
+  → Seller security state
 
-Example:
-- the same human identity may have a Buyer relationship;
-- may also be authorized for one or more Sellers;
-- may hold different roles for different Sellers.
+WORKFORCE IDENTITY
+  → Internal credentials
+  → Internal sessions
+  → Internal roles
+  → Internal security state
+```
 
-Authorization must evaluate the identity in the active domain context rather than assume that permission in one context grants permission everywhere.
+A Buyer session cannot be converted into Seller authority. A Seller session cannot confer workforce authority. Entering another PinkCurve security domain requires the authentication and authorization required by that domain.
 
-##### A4.1-04 — Identity Lifecycle
-Status: ACCEPTED — MVP REQUIRED
+PinkCurve does not require a permanent master-person record linking Buyer, Seller, and workforce identities.
 
-Identity lifecycle must support controlled states beyond exists/deleted. Candidate states include PENDING, ACTIVE, RESTRICTED, SUSPENDED, RECOVERY, DISABLED, and CLOSED.
+Cross-domain identity correlation is exceptional and may occur only for legitimate security, fraud, legal, or operational purposes under purpose-limited, access-controlled, evidence-based, and auditable processes.
 
-Exact states are deferred to Identity/System Design.
+##### A4.1-03 — Domain Entity and Operational Identity Remain Distinct
 
-Identity status must affect access decisions.
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+An operational identity is not the same thing as the domain entity it may act for.
+
+For Sellers:
+
+```text
+Seller Identity
+      ↓
+Seller Membership
+      ↓
+Seller Role
+      ↓
+Seller
+```
+
+Therefore `identity_id` and `seller_id` have different meanings. The first identifies the authenticated actor; the second identifies the PinkCurve Seller account/presence.
+
+Organization authority, Seller authority, and identity authentication must remain distinct.
+
+##### A4.1-04 — Identity Lifecycle States
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+PinkCurve operational identities require explicit lifecycle/security state. Candidate states include:
+
+- PENDING;
+- ACTIVE;
+- RESTRICTED;
+- SUSPENDED;
+- RECOVERY;
+- DISABLED;
+- CLOSED.
+
+Exact names are deferred. Identity status must affect access decisions.
 
 ##### A4.1-05 — Identity Lifecycle vs. Domain Lifecycle
-Status: ACCEPTED — MVP REQUIRED
 
-Identity state and Seller/Organization/Buyer domain state remain separate.
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-A compromised human identity may be suspended while the Seller remains valid and other authorized Seller identities continue operating.
+Operational identity state and Seller/Organization/Buyer domain state remain separate.
 
-Likewise, suspension of a Seller for fraud does not automatically mean every human identity associated with that Seller is itself malicious.
+A compromised Seller identity may be restricted or suspended while the Seller remains valid and other authorized Seller identities continue operating. Likewise, suspension of a Seller for fraud does not automatically prove that every associated identity is malicious.
 
 ##### A4.1-06 — Identity State Changes Are Auditable
-Status: ACCEPTED — MVP REQUIRED
 
-Identity status changes require traceability including the affected identity, old/new state, reason, acting identity/service, source, and time as appropriate.
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-Historical identity and security evidence should not be destroyed merely because access is disabled.
+Identity state changes require traceability including the affected identity, old/new state, reason, acting identity/service, source, and time as appropriate. Historical security evidence must not be destroyed merely because access is disabled.
 
 ##### A4.1-07 — Identity Proofing, Verification Level & Trust Evidence
-Status: REVIEWED — MVP REQUIRED
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
 PinkCurve must distinguish:
-- account/identity existence;
-- authentication;
-- verification of claims/relationships.
 
-Verification evidence and level should be available to authorization where required.
+- identity/account existence;
+- control of an authentication credential;
+- verification of a specific identity or relationship claim;
+- authorization to exercise a specific business role.
+
+Seller verification requires stronger controls than ordinary Buyer registration because Sellers can publish Offerings and direct Buyers to external destinations.
 
 ##### A4.1-08 — Verification Attaches to the Correct Claim
-Status: REVIEWED — MVP REQUIRED
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
 Verification of one claim does not verify unrelated claims.
 
 Examples:
-- verified phone does not prove organization ownership;
-- verified email does not prove business authority;
-- verified organization does not prove that every associated employee has administrative authority.
 
-##### A4.1-09 — Verified Attributes Are Not Freely Mutable
-Status: REVIEWED — MVP REQUIRED
+- verified phone = control of that phone, not business ownership;
+- verified email ≠ verified Organization;
+- verified Organization ≠ verified authority to represent it;
+- approved Seller ≠ every Seller actor is an administrator.
 
-Changes to verified email, phone, recovery methods, business authority, privileged membership, and similar trusted claims require appropriate re-verification, risk controls, audit, and notification.
+##### A4.1-09 — Verification Evidence Is Not Freely Mutable
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Changes to verified email, phone, recovery methods, business authority, Seller ownership, privileged membership, payment identity, and similar trusted claims require appropriate step-up, verification, risk controls, audit, and notification.
+
+A replacement trusted value should normally be established before the prior trusted value is retired.
 
 ##### A4.1-10 — Verification Can Become Stale or Revoked
-Status: REVIEWED — BASIC MVP CAPABILITY REQUIRED
 
-PinkCurve must be able to require re-verification when important circumstances change.
+Status: ACCEPTED — HIGH / CRITICAL WHERE PRIVILEGED — BASIC MVP REQUIRED
+
+PinkCurve must be able to mark important verification evidence stale, revoked, or requiring reverification when circumstances change.
 
 ##### A4.1-11 — Sensitive Authorization Requires Sufficient Verification
-Status: REVIEWED — MVP REQUIRED
 
-Sensitive actions may require the correct role, active identity, required verification level, sufficient authentication strength, and acceptable current risk.
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Sensitive actions may require the correct role, active operational identity, required verification level, sufficient/recent authentication assurance, and acceptable current risk.
 
 ##### A4.1-12 — Seller Registration Must Establish and Verify the Registering Actor
-Status: ACCEPTED — MVP REQUIRED
 
-PinkCurve must establish a canonical `identity_id` for the human initiating Seller registration and record that identity as the registration actor.
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-Seller approval must not rely solely on verifying that an Organization or Seller exists.
+Seller registration must establish a Seller operational identity for the registering actor and preserve attribution to that identity.
 
-PinkCurve must verify, to the level required by policy:
-1. who the registering actor is;
-2. the Organization/Seller being represented;
-3. the actor's authority to represent that Organization/Seller.
+Seller approval must independently evaluate, to the level required by policy:
 
-Candidate `seller_registration_id` and `initiated_by_identity_id` concepts should be evaluated during Data/System Design.
+1. the registering Seller identity;
+2. the Organization being represented;
+3. the actor's authority to represent the Organization;
+4. Seller security/risk requirements.
+
+Candidate registration identifiers remain Data/System Design decisions.
 
 ##### A4.1-13 — Identity, Organization, Authority, and Seller Approval Are Distinct
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+> Verified Person/Actor ≠ Verified Organization ≠ Verified Authority to Represent Organization ≠ Approved Seller.
+
+These trust relationships must not be collapsed into a single boolean such as `verified=true`.
+
+##### Actor Identity Attribution
+
 Status: ACCEPTED — MVP REQUIRED
 
-The following must not be treated as interchangeable:
+`actor_identity_id` is a contextual reference to the operational `identity_id` that performed an action. It is not a second permanent identity type.
 
-> Verified Person ≠ Verified Organization ≠ Verified Authority to Represent Organization ≠ Approved Seller.
-
-A conceptual relationship is:
-
-```text
-HUMAN IDENTITY
-identity_id = ID-1001
-        |
-        | authorized representative / Seller membership
-        v
-SELLER
-seller_id = SELLER-200
-        |
-        | operated by / associated with
-        v
-ORGANIZATION
-organization_id = ORG-100
-        |
-        +--> OFFERING-501
-        +--> OFFERING-502
-```
-
-The exact Organization-to-Seller cardinality and Seller-membership
-schema remain design decisions.
-
-##### Actor Identity
-
-Status: ACCEPTED CONCEPT
-
-`actor_identity_id` is not a separate identity entity. It references the
-canonical `identity_id` when recording who or what performed an action.
-
-The actor must not self-declare the trusted `actor_identity_id`.
-PinkCurve derives it from the authenticated execution context.
+PinkCurve derives trusted actor identity from authenticated execution context; callers cannot self-declare a trusted `actor_identity_id`.
 
 Example:
 
-``` text
-actor_identity_id = ID-1002
-seller_id          = SELLER-200
-organization_id    = ORG-100
+```text
+actor_identity_id = SELL-ID-200
+seller_id          = SELLER-500
 resource_type      = OFFERING
 resource_id        = OFFERING-501
 action             = UPDATE_OFFERING
 ```
 
-This answers: - WHO acted? - on behalf of WHICH Seller/context? -
-affecting WHICH Organization/resource? - WHAT action occurred?
+For delegated execution, PinkCurve may additionally preserve concepts such as `initiating_identity_id` and `executing_identity_id`. Exact schema is deferred.
 
-Human support staff, AI agents, internal services, and authorized
-machine integrations should use the same canonical accountability
-principle.
+---
 
-Candidate `seller_membership_id` may be useful to identify the explicit
-relationship between an identity and a Seller. Exact schema is deferred.
+#### A4.2 — Registration, Authentication & Account Recovery
 
-#### A4.2 --- Registration, Authentication & Account Security
+Status: COMPLETE
 
-Status: REVIEWED THROUGH A4.2-14
+##### A4.2-01 — Registration Is a Controlled Security Workflow
 
-##### A4.2-01 --- Registration Is a Controlled Security Workflow
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-Status: REVIEWED --- MVP REQUIRED
+Buyer and Seller registration must establish operational identities/account relationships through controlled workflows rather than immediately activating unrestricted authority. Seller registration requires stronger controls than ordinary Buyer registration.
 
-Buyer and Seller registration must establish trusted identity/account
-relationships through controlled workflows rather than immediately
-activating unrestricted accounts.
+##### A4.2-02 — Registration Workflows Need Identity and State
 
-Seller registration requires stronger controls than ordinary Buyer
-registration because Sellers can publish Offerings and direct Buyers to
-external destinations.
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-##### A4.2-02 --- Registration Workflows Need Identity and State
+Important registration workflows require explicit state. A registration request is not equivalent to an approved Seller or activated privileged identity.
 
-Status: REVIEWED --- MVP REQUIRED
+##### A4.2-03 — Authentication Credentials Remain Separate From Identity
 
-Important registration workflows should have stable identity/state, such
-as candidate `buyer_registration_id` and `seller_registration_id`.
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-A registration request is not equivalent to an approved Seller.
+Credentials prove control of an operational identity; they do not become the identity itself.
 
-##### A4.2-03 --- Authentication Credentials Remain Separate From Identity
+##### A4.2-04 — Strong Authentication Architecture
 
-Status: REVIEWED --- MVP REQUIRED
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-Credentials prove control of an identity; they do not become the
-identity itself.
+PinkCurve authentication architecture must support strong authentication, verified contact mechanisms, MFA/step-up authentication, and future phishing-resistant methods such as passkeys without hard-coding identity around passwords.
 
-##### A4.2-04 --- Strong Authentication Architecture
+##### A4.2-05 — Password Protection
 
-Status: REVIEWED --- MVP REQUIRED
+Status: ACCEPTED — CRITICAL — MVP REQUIRED IF PASSWORDS ARE USED
 
-PinkCurve authentication architecture must support strong
-authentication, verified contact mechanisms, MFA/step-up authentication,
-and future phishing-resistant methods such as passkeys without
-hard-coding identity around passwords.
+Passwords must use established secure password-handling mechanisms and must never appear in logs, analytics, AI prompts, support records, audit payloads, or error messages.
 
-##### A4.2-05 --- Password Protection
+##### A4.2-06 — MFA for High-Risk Identities
 
-Status: REVIEWED --- MVP REQUIRED IF PASSWORDS ARE USED
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-Passwords must use established secure password-handling mechanisms and
-must never appear in logs, analytics, AI prompts, support records, audit
-payloads, or error messages.
+Strong MFA is required for appropriate privileged/high-risk identities, including Seller Owner and privileged PinkCurve workforce identities.
 
-##### A4.2-06 --- MFA for High-Risk Identities
+##### A4.2-07 — OTP Is Verification, Not Universal Trust
 
-Status: REVIEWED --- MVP REQUIRED
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-Strong MFA is required for appropriate privileged/high-risk human
-identities, including Seller owners/admins and PinkCurve privileged
-personnel.
+OTP may prove control of an email/phone at a point in time. It does not by itself prove business ownership, Organization authority, absence of compromise, or permanent trust.
 
-##### A4.2-07 --- OTP Is Verification, Not Universal Trust
+##### A4.2-08 — Login Abuse Protection
 
-Status: REVIEWED --- MVP REQUIRED PRINCIPLE
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-OTP may prove control of an email/phone at a point in time. It does not
-by itself prove business ownership, organization authority, absence of
-compromise, or permanent trust.
+Authentication must address password guessing, credential stuffing, bots, OTP abuse, enumeration, distributed attempts, and related credential attacks using proportionate rate limiting, risk evaluation, challenges, monitoring, and restriction.
 
-##### A4.2-08 --- Login Abuse Protection
+##### A4.2-09 — Account Enumeration Resistance
 
-Status: REVIEWED --- MVP REQUIRED
+Status: ACCEPTED — HIGH — MVP REQUIRED
 
-Authentication must address password guessing, credential stuffing,
-bots, OTP abuse, enumeration, distributed attempts, and related
-credential attacks using proportionate rate limiting, risk evaluation,
-challenges, monitoring, and restriction.
+Login and recovery workflows should avoid unnecessary disclosure of whether an account exists or what privileged role it holds.
 
-##### A4.2-09 --- Account Enumeration Resistance
+##### A4.2-10 — Controlled Sessions
 
-Status: REVIEWED --- MVP REQUIRED
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-Login and recovery workflows should avoid unnecessary disclosure of
-whether an account exists or what privileged role it holds.
+Successful authentication establishes a PinkCurve-controlled session bound to one operational identity domain and carrying appropriate authentication/session security context.
 
-##### A4.2-10 --- Controlled Sessions
+##### A4.2-11 — Authentication Strength Available to Authorization
 
-Status: REVIEWED --- MVP REQUIRED
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-Successful authentication establishes a PinkCurve-controlled session
-associated with the canonical identity, authentication method/strength,
-lifecycle, and appropriate security/risk state.
+Authorization must be able to require stronger or more recent authentication for sensitive actions even when the current session is otherwise valid.
 
-##### A4.2-11 --- Authentication Strength Available to Authorization
+##### A4.2-12 — New Device / Unusual Authentication as Risk Signals
 
-Status: REVIEWED --- MVP REQUIRED
+Status: ACCEPTED — HIGH — BASIC MVP REQUIRED
 
-Authorization must be able to require stronger/recent authentication for
-sensitive actions even when the current session is otherwise valid.
+New device, unusual location/context, rapid security changes, repeated failures, and sudden administrative behavior are risk signals rather than automatic proof of fraud. They may trigger stronger authentication or restriction.
 
-##### A4.2-12 --- New Device / Unusual Authentication as Risk Signals
+##### A4.2-13 — Authentication Events Are Auditable
 
-Status: REVIEWED --- BASIC MVP CAPABILITY REQUIRED
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-New device, unusual location/context, rapid changes, repeated failures,
-and sudden administrative behavior are risk signals rather than
-automatic proof of fraud. They may trigger stronger authentication or
-restrictions.
+Login, MFA, credential, recovery, session-revocation, and suspicious-authentication events require security auditability without logging credentials themselves.
 
-##### A4.2-13 --- Authentication Events Are Auditable
+##### A4.2-14 — Authentication Security Connects to Seller Risk
 
-Status: REVIEWED --- MVP REQUIRED
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-Login, MFA, credential, recovery, session-revocation, and
-suspicious-authentication events require security auditability without
-logging credentials themselves.
+Seller authentication/security signals must be capable of affecting Seller/account risk and sensitive-action controls.
 
-##### A4.2-14 --- Authentication Security Connects to Seller Risk
+##### A4.2-15 — Account Recovery Must Not Become an Authentication Bypass
 
-Status: REVIEWED --- MVP REQUIRED
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
 
-Identity security must feed Seller/account risk and sensitive-action
-controls.
+Recovery must not be weaker than the trust it restores. Lost password, phone, MFA device, email, or other credential recovery must use controlled evidence and risk evaluation appropriate to the identity domain and authority being restored.
 
-Example:
+Recovery may place an identity into RECOVERY or RESTRICTED state rather than immediately restoring full privilege.
 
-``` text
-Suspicious Seller authentication
-        ↓
-Seller/account risk increases
-        ↓
-Destination URL change requested
-        ↓
-Step-up authentication
-        +
-URL reverification
-        +
-Seller risk evaluation
-        ↓
-New URL remains pending until approved
+Core principle:
+
+> Recovering access does not automatically restore trust.
+
+##### A4.2-16 — Support-Assisted High-Risk Recovery Requires Separation of Duties
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Customer Support may collect evidence, communicate with the user, and assist the workflow, but must not independently approve or execute high-risk Seller Owner or privileged workforce recovery where separation of duties is required.
+
+AI support cannot satisfy required human approval.
+
+##### A4.2-17 — Sensitive Credential and Recovery Changes Are Protected
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Changes to password, MFA, verified email/phone, recovery methods, trusted contacts, and comparable security state require appropriate step-up, verification, risk evaluation, notification, and audit.
+
+Control of one compromised channel must not automatically permit replacement of all other trust factors.
+
+##### A4.2-18 — Session and Token Security
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Authentication/session tokens require bounded lifetime, secure handling, revocation capability, replay resistance appropriate to the design, and protection from disclosure. Concurrent sessions/devices must be sufficiently visible and controllable for security response.
+
+---
+
+#### A4.3 — Authorization, Roles, Permissions & Least Privilege
+
+Status: COMPLETE
+
+##### A4.3-01 — Authorization Requires Explicit Identity, Relationship, Role, Resource, and Action
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+PinkCurve authorizes an authenticated operational identity to perform a specific action on a specific resource through an explicitly authorized relationship/role. Caller-supplied IDs do not grant authority.
+
+No self-promotion is permitted.
+
+##### Exactly One Active Seller Owner
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Each Seller has exactly one active Seller Owner at any given time. Seller Owner is the designated PinkCurve Seller-account owner role and is not necessarily identical to real-world corporate ownership.
+
+##### A4.3-02 — Seller Ownership Requires Strict Verification and Controlled Transfer
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Before Seller Owner authority is activated, PinkCurve must establish appropriate identity verification, verified contacts, Organization verification, authority-to-represent evidence, Seller risk/security review, and PinkCurve approval.
+
+Owner transfer is a privileged workflow. A proposed new Owner has no Owner authority merely because the current Owner nominated them.
+
+Core principle:
+
+> A Seller Owner cannot transfer PinkCurve's trust. PinkCurve must independently establish trust in the new Owner.
+
+##### A4.3-03 — Seller Membership and Role Assignment Are Controlled
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Every human Seller actor must be individually attributable. Shared privileged Seller credentials are not acceptable.
+
+Seller Owner may invite ordinary Seller actors within PinkCurve policy, but invitation is not authorization. PinkCurve controls invitation state, identity establishment, role policy, and activation requirements.
+
+##### A4.3-03A — PinkCurve-Controlled Hard Capacity Limits
+
+Status: ACCEPTED — HIGH / CRITICAL FOR ABUSE CONTROL — MVP REQUIRED
+
+PinkCurve owns and enforces conservative limits on Seller/Organization creation, Seller actors, pending invitations, creation rates, and related abuse-sensitive capacity. Seller actors cannot raise, disable, or bypass those limits.
+
+Exact numerical limits are deferred until launch/security design.
+
+##### One Active Human Actor Per Seller Role
+
+Status: ACCEPTED — MVP REQUIRED
+
+For MVP, each Seller role has at most one active human actor. PinkCurve defines fixed roles; Sellers cannot create arbitrary custom roles.
+
+##### A4.3-04 — Roles and Permissions Are Explicit, Bounded, Resource-Specific, and Least-Privilege
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Seller Owner is the highest Seller business role but is not a PinkCurve security superuser. Permissions remain constrained by PinkCurve authorization, risk, verification, approval, capacity, and Security Gate requirements.
+
+Knowing a resource identifier grants no authority. Authorization is deny-by-default.
+
+##### A4.3-05 — Privilege Escalation Is Prevented and Separation of Duties Preserved
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+No actor may grant itself additional authority or bypass a security control constraining that actor. Owner cannot create a second Owner, directly replace the Owner, disable PinkCurve security, raise protected limits, or bypass Owner-transfer controls.
+
+AI cannot expand human privilege or satisfy required human approval.
+
+##### A4.3-05A — One Human Seller Actor → At Most One Seller
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+For MVP, a human Seller operational identity may have active Seller membership with at most one Seller. Organization authority does not automatically create Seller operational authority.
+
+##### A4.3-05B — One Human Seller Actor → One Seller → One Role
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+For MVP:
+
+> Each human Seller actor may be associated with only one Seller and hold only one active Seller role.
+
+> Each Seller role may have at most one active human actor.
+
+Seller Owner may perform Seller-level business actions allowed by PinkCurve policy but cannot override PinkCurve security, risk, verification, approval, or capacity controls.
+
+##### A4.3-05C — All Seller Owner Changes Require PinkCurve Verification and Human Approval
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Creation, transfer, replacement, recovery, removal, reactivation, or material modification of the Seller Owner relationship requires independent PinkCurve verification and approval.
+
+For MVP, final approval of Seller Owner changes requires an authorized PinkCurve human reviewer. AI may assist evidence/risk review but cannot activate or change Seller Owner authority.
+
+##### A4.3-06 — Authorization Revocation Is Immediate and Complete
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+When membership/role/authority is revoked, protected access must stop promptly across web, mobile, API, internal tools, services, agents, and background execution paths. Pending sensitive actions must revalidate before execution.
+
+Core principle:
+
+> AUTHORITY REVOKED → ACCESS REVOKED.
+
+##### A4.3-07 — Delegated and Automated Authority Is Explicitly Bounded
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+PinkCurve creates/configures approved production AI agents. Sellers do not create arbitrary production agents or grant them unrestricted permissions.
+
+AI-agent authority is constrained by externally enforced maximum permissions, caller/task authority, allowed tools/actions/resources/data, and current security conditions.
+
+AI cannot independently:
+
+- approve or transfer Seller ownership;
+- approve privileged recovery;
+- raise protected limits;
+- assign itself roles;
+- disable security;
+- satisfy human approval;
+- make an unverified destination Buyer-eligible.
+
+Core principles:
+
+> LLM intelligence is separate from PinkCurve authority.
+
+> AI agents are subordinate capabilities inside PinkCurve architecture, not independent actors roaming the platform.
+
+##### A4.3-08 — Organization Authority Does Not Automatically Grant Seller Authority
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Organization Admin authority and Seller operational authority are separate relationships. An Organization Admin may request/nominates Seller creation or Owner assignment, but PinkCurve independently verifies and activates Seller Owner authority.
+
+Cross-Seller authority inheritance is denied.
+
+##### A4.3-09 — Authorization Is Current, Action-Specific, and Resource-Specific
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+At action time, PinkCurve evaluates the operational identity, current relationship/role, requested action, target resource, ownership/scope, applicable domain/resource state, authentication assurance, current risk, and security policy.
+
+Possible outcomes include ALLOW, DENY, REQUIRE_STEP_UP, and HOLD_FOR_REVIEW.
+
+##### A4.3-10 — PinkCurve Internal Roles Follow Least Privilege
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Workforce identities use explicit internal roles such as Customer Support, Trust/Safety Reviewer, Security Reviewer, Finance, Engineering, and Platform Operations rather than a routine all-powerful administrator role.
+
+One person may hold multiple internal roles where legitimately required, especially during a small-team MVP, but permissions remain explicit and auditable.
+
+Emergency access must be exceptional, strongly authenticated, narrow, time-limited where practical, audited, and reviewed.
+
+##### A4.3-11 — Authorization Denies by Default
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+If PinkCurve cannot establish explicit authorization, access is denied. New capabilities, roles, tools, agents, or integrations do not automatically expand authority.
+
+Unknown high-risk security state must not be interpreted as trusted/low-risk.
+
+##### A4.3-12 — Authorization Enforces Canonical Data Classification and Purpose-Limited Access
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Authorization must consume PinkCurve's canonical Data Classification architecture rather than inventing a separate classification system.
+
+Capability access does not imply access to all data within that capability. AI, analytics, search, logs, exports, RAG, vector retrieval, support tools, and internal services must receive only data authorized for their purpose.
+
+Security/audit/fraud/identity-verification evidence requires particularly strong protection.
+
+##### A4.3-13 — Authorization Relationships Are Reviewed and Removed When No Longer Needed
+
+Status: ACCEPTED — HIGH / CRITICAL FOR PRIVILEGED ROLES — MVP REQUIRED
+
+Role changes must not cause permission accumulation. Removed/replaced Seller actors lose membership, sessions, pending invitations, credentials/delegations as applicable. Temporary access and invitations expire. Privileged relationships require review and removal when no longer justified.
+
+AI agents and services also have permission lifecycles; retiring them revokes associated machine authority.
+
+---
+
+#### A4.4 — Privileged Actions & Step-Up Security
+
+Status: COMPLETE
+
+##### A4.4-01 — Privileged Actions Are Explicitly Identified and Governed
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+PinkCurve must explicitly identify privileged/security-sensitive actions, including important credential/recovery changes, Seller Owner changes, Organization authority changes, destination changes/activation, security-policy/configuration changes, emergency production access, fraud-control changes, and AI-agent authority changes.
+
+Authorization to request a privileged action does not imply immediate execution.
+
+##### A4.4-02 — Step-Up Authentication Is Required Where Risk/Consequence Warrants It
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+A valid session alone is insufficient for high-risk operations. Step-up authentication must occur close enough to the protected action to provide meaningful assurance and must be short-lived/action-aware.
+
+Successful step-up does not erase current risk, replace authorization, establish destination safety, or satisfy independent approval requirements.
+
+##### A4.4-03 — Destination URL Change Is a Protected Versioned Workflow
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+A Seller destination change must not become Buyer-active immediately after Seller submission.
+
+Conceptually:
+
+```text
+CURRENT APPROVED DESTINATION
+          ↓
+Seller submits change
+          ↓
+NEW DESTINATION VERSION = PENDING
+          ↓
+verification + security evaluation
+          ↓
+approval
+          ↓
+atomic activation
 ```
 
-### Audit #4 Next Item
+The currently approved destination may remain active while a replacement is pending if it remains safe. If the current destination becomes unsafe, PinkCurve blocks it immediately.
 
-**A4.2-15 --- Account Recovery Must Not Become an Authentication
-Bypass**
+PinkCurve controls destination versions. External websites do not provide a reliable version number. Approval attaches to the exact PinkCurve destination/configuration version evaluated.
 
-Next review should cover: - password reset; - lost phone/MFA device; -
-changed/lost email; - Seller-owner recovery; - compromised-account
-recovery; - support-assisted recovery; - recovery when all trusted
-credentials are unavailable; - recovery auditability and notification; -
-prevention of social-engineering bypass.
+A previously approved unchanged URL is not permanently trusted; external security state can change independently.
 
-------------------------------------------------------------------------
+##### A4.4-03A — Redirect Security Gate / Real-Time Click Check
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Immediately before sending a Buyer to an external Seller destination, PinkCurve performs a current destination-security evaluation through a Redirect Security Gate.
+
+Relevant checks may include current destination/version state, HTTPS/TLS, DNS/domain anomalies, redirect behavior, final domain, redirect count, malware/phishing intelligence, reputation/security signals, suspicious material changes, and Seller/account risk.
+
+Outcome:
+
+```text
+SAFE      → redirect
+UNCERTAIN → hold / revalidate
+UNSAFE    → block
+```
+
+PinkCurve should prefer direct destinations and a conservative redirect policy. A maximum of one redirect is the MVP direction where technically practical and compatible with legitimate commerce; exact enforcement requires later testing.
+
+Fast deterministic/security-specialist checks should lead the synchronous path. Specialized ML may assist. LLM/AI analysis may help with suspicious or ambiguous semantic cases but is not the final redirect authority.
+
+Buyer Experience requires protected external-navigation states such as checking, still checking, and unable-to-verify/block messages. PinkCurve must avoid absolute claims that a destination is completely safe.
+
+##### Security Gate Capability
+
+Status: ACCEPTED — FOUNDATIONAL — CRITICAL — MVP REQUIRED
+
+PinkCurve requires a logical Security Gate capability answering:
+
+> May this protected action proceed right now?
+
+Conceptually:
+
+```text
+Operational Identity
++ Authentication Assurance
++ Authorization
++ Trust / Risk
++ Resource State
++ Security Policy
+        ↓
+SECURITY GATE
+        ↓
+ALLOW / DENY / STEP-UP / HOLD
+```
+
+Examples include Redirect Security Gate, Privileged Action Gate, Sensitive Data Access Gate, and AI Agent Action Gate.
+
+For MVP this may be a shared backend/security module rather than a standalone service. No UI, API, domain capability, worker, internal tool, or AI agent may bypass required gate enforcement.
+
+##### A4.4-04 — Security Controls Cannot Be Freely Disabled or Weakened
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+An actor cannot bypass or weaken a security control constraining that actor. Seller Owner cannot mark its own URL safe, lower phishing controls, override risk, raise protected capacity, disable required authentication, or delete security evidence.
+
+AI cannot modify its own permissions or security policy.
+
+Protected policy changes require attribution, audit, testing, and controlled authorization. Security-gate failure must fail safely for protected operations.
+
+##### A4.4-05 — Security-Critical Identity and Recovery Changes Use Protected Transitions
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Verified email/phone, authentication methods, MFA, recovery state, trusted contacts, and Seller Owner relationships are security-critical state, not ordinary profile fields.
+
+PinkCurve should preserve the current trusted value while a replacement is pending where practical, verify the replacement, evaluate risk, activate it through a controlled transition, retire the prior value, notify appropriate trusted channels, and retain audit/history.
+
+Rapid sequences such as new device → email change → phone change → MFA change → destination change are security signals.
+
+##### A4.4-06 — Final Revalidation Occurs Before Privileged Execution
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Approval is valid only while required security conditions remain valid. Before execution PinkCurve revalidates current identity/authorization, Seller/Organization state, destination/resource version, approval state, risk/security state, and whether the request materially changed.
+
+Queued/background execution must reauthorize/recheck at execution time.
+
+##### A4.4-07 — Security Notifications and Protected Response
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+High-risk events should notify appropriate trusted parties according to policy. Notification must not delay immediate protection.
+
+A protected "I didn't do this" or equivalent response should create a PinkCurve-controlled security event/case capable of escalating risk, containment, and investigation.
+
+Notification delivery status may itself be useful security evidence.
+
+##### A4.4-08 — Compromise Containment and Controlled Recovery
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Strong compromise signals can trigger containment before investigation completes. PinkCurve should selectively restrict dangerous authority while preserving safe functionality where possible.
+
+Buyer protection takes priority: suspicious/unsafe destinations are blocked immediately.
+
+Recovery follows a controlled lifecycle such as:
+
+```text
+DETECT
+  → CONTAIN
+  → PRESERVE EVIDENCE
+  → INVESTIGATE
+  → RECOVER
+  → REVERIFY
+  → RESTORE TRUST
+  → REMOVE RESTRICTIONS
+```
+
+Previous destinations must be revalidated before restoration; PinkCurve must not blindly roll back to an old URL.
+
+A conceptual `security_case_id` may correlate incident evidence/actions. Exact schema is deferred.
+
+##### A4.4-09 — Replay, Duplicate, and Stale Privileged Authorization Are Prevented
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+A privileged request represents one specific operation. Successful execution consumes it. Retries must be idempotent where appropriate. Approval is bound to the exact request/resource/version/security state and expires or invalidates when material conditions change.
+
+Core principle:
+
+> APPROVED ONCE ≠ AUTHORIZED FOREVER; EXECUTED ONCE ≠ EXECUTABLE AGAIN.
+
+##### A4.4-10 — Security-Critical Transitions Fail Transactionally and Safely
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Security-critical transitions must not leave contradictory or unsafe partial state because of failure, retry, concurrency, or dependency problems.
+
+Use atomic transactions where possible; across distributed boundaries use controlled state transitions, idempotency, reconciliation, compensation/containment, and safe failure.
+
+Critical invariants such as exactly one active Seller Owner and consistent destination activation must be technically enforced and tested.
+
+---
+
+#### A4.5 — Machine Identity, Services, Agents & API Authorization
+
+Status: COMPLETE
+
+##### A4.5-01 — Every Security-Relevant Machine Actor Has Explicit Identity
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Services, workers, AI agents, automation, and systems that independently authenticate to protected capabilities or exercise security-relevant authority require explicit machine identity. Tiny in-process functions do not require separate identities merely for architectural purity.
+
+"Internal" is a deployment description, not authorization.
+
+##### A4.5-02 — Machine Authentication Is Strong and Managed; Shared Long-Lived Credentials Are Avoided
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Each machine actor authenticates independently using strongly managed credentials. Prefer short-lived/automatically renewable mechanisms where practical. Do not distribute one permanent shared secret across services.
+
+Secrets must not appear in source code, AI prompts/model context, logs, or ordinary telemetry. AI tools operate through controlled execution and should not receive raw infrastructure/provider credentials.
+
+##### A4.5-03 — Service-to-Service Authorization Is Least-Privilege and Explicitly Scoped
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Machine authorization is action-, capability/resource-, data-, environment-, and context-specific. Services should use controlled capability interfaces rather than unrestricted direct database access where practical.
+
+Workers receive no special trust merely because they are asynchronous/internal.
+
+AI-agent effective authority is bounded by its maximum approved permissions, caller/task authority, allowed tools/resources/data, and current security state.
+
+##### A4.5-04 — Delegation Preserves Original and Executing Actor Attribution
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+When a machine acts on behalf of a human or another machine, PinkCurve preserves the initiating actor and executing machine where relevant.
+
+Delegation cannot expand authority:
+
+```text
+Original Actor Authority
+∩ Executing Service Authority
+∩ Target Policy
+∩ Current Security
+= Effective Delegated Authority
+```
+
+Background jobs preserve causal attribution and revalidate at execution.
+
+##### A4.5-05 — Internal APIs, Events, Queues, Webhooks, and Machine Commands Are Security Boundaries
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Internal requests are not automatically authorized. Queues transport work; they do not grant authority. Events describe state/evidence; they do not authorize every consumer to act.
+
+Message fields such as `seller_id`, `actor_identity_id`, role, approval, or risk are not automatically authoritative merely because they are present in a payload.
+
+External webhooks require source/authenticity/integrity/freshness/provider-purpose validation and replay/duplicate protection.
+
+Core principle:
+
+> A message can request an action. A message cannot grant itself authority to perform that action.
+
+##### A4.5-06 — Machine Trust Is Environment-Bounded
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Development, test, staging, and production are separate trust boundaries. Identity, credentials, agent approval, tool access, provider configuration, and security decisions in one environment do not confer authority in another.
+
+Promote trusted artifacts such as code/model/agent/configuration candidates—not credentials, sessions, grants, or trust state.
+
+Production data must not be copied into lower environments for convenience; use synthetic, anonymized, sanitized, minimized, or otherwise approved data according to PinkCurve policy.
+
+##### A4.5-07 — Machine and AI-Agent Compromise Is Detectable, Containable, and Rapidly Revocable
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+PinkCurve must assume authenticated services, workers, automation, and AI agents may become compromised, manipulated, misconfigured, or unsafe.
+
+Meaningful anomalies include unexpected resource/API access, repeated authorization failures, forbidden-data attempts, unusual tool invocation, attempted privilege expansion, policy violations, abnormal volume, suspicious destination behavior, and manipulated AI behavior such as prompt injection/tool misuse/exfiltration attempts.
+
+PinkCurve must be capable of selectively restricting or disabling an affected machine identity, credential, agent, agent version, tool, permission, model/provider route, or integration.
+
+Revocation applies to new and queued/delayed/retried/delegated privileged operations.
+
+Affected prior outputs/actions must be traceable enough to identify resources/security decisions requiring re-evaluation.
+
+##### A4.5-08 — Machine-to-Machine Requests Have Integrity, Freshness, Correlation, and Replay Protection
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Security-relevant machine requests, messages, commands, callbacks, and security results must be protected against unauthorized modification, inappropriate replay, stale execution, and incorrect correlation.
+
+Authenticity alone does not establish current authority. Security evidence must remain attributable to the specific request, resource/resource version, actor, applicable evidence, and time/context for which it was produced.
+
+Freshness is state-aware, not merely timestamp-based. Material changes to identity, resource, destination, risk, credential, approval, or workflow state can invalidate otherwise authentic prior evidence.
+
+---
+
+#### A4.6 — Session Security, Compromise Detection & Continuous Access Evaluation
+
+Status: COMPLETE
+
+##### A4.6-01 — Session Validity Depends on Current Trust, Not Only Successful Login
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+PinkCurve must not treat successful authentication or possession of an unexpired session credential as permanent evidence that an actor remains authorized or sufficiently trusted.
+
+Current identity state, membership/role state, applicable Seller/Organization state, authentication assurance, security restrictions, and current risk must be capable of affecting access during an existing session.
+
+Security-critical authorization changes and sufficiently strong compromise signals must propagate promptly rather than waiting solely for normal session expiration.
+
+Successful reauthentication, new-session creation, or successful recovery does not automatically erase existing security restrictions or restore privileged trust.
+
+##### A4.6-02 — Session Creation, Renewal, Expiration & Revocation Are Explicitly Controlled
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Sessions require explicit secure creation, bounded validity, renewal, expiration, logout, and revocation.
+
+Every human session is bound to one operational identity domain. Buyer, Seller, and workforce sessions remain independently authenticated and authorized. A session established for one identity domain cannot be converted into or used as authentication authority for another.
+
+PinkCurve must support targeted revocation of an individual session and broader revocation of affected sessions within an identity domain.
+
+Session credentials are sensitive security material and must be protected from inappropriate disclosure through URLs, logs, analytics, AI systems, observability, support systems, or other data paths.
+
+##### A4.6-03 — Session Compromise Is Detectable Through Security Signals
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+PinkCurve must collect/evaluate sufficient signals to detect meaningful evidence that an authenticated Buyer, Seller, or workforce session may have become compromised, abused, automated, or unsafe.
+
+Signals may include authentication, device, network, authorization, account-change, privileged-action, destination-security, fraud, and behavioral evidence. Sequences of individually plausible actions may together create high risk.
+
+Denied and failed security-sensitive operations are also security evidence where appropriate.
+
+MVP may begin with deterministic rules, rate/sequence controls, security signals, and thresholds rather than sophisticated behavioral AI.
+
+##### A4.6-04 — Session Risk Supports Selective Restriction and Containment
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+PinkCurve must be able to block, hold, or require stronger verification for dangerous actions without necessarily terminating all safe activity.
+
+Restrictions are enforced by trusted backend/security controls across UI, API, service, worker, internal-tool, and AI-agent paths—not merely by hiding UI controls.
+
+Pending/queued/delayed sensitive actions must revalidate and respect new restrictions.
+
+A restricted actor cannot remove or weaken its own restriction. Restoration occurs through PinkCurve-controlled security/recovery processes.
+
+Containment applies to the affected operational identity domain unless evidence supports action in another domain.
+
+##### A4.6-05 — Device and Concurrent-Session Security Is Explicitly Managed
+
+Status: ACCEPTED — HIGH OVERALL / CRITICAL FOR PRIVILEGED IDENTITIES — MVP REQUIRED
+
+PinkCurve must distinguish/manage concurrent sessions sufficiently to detect suspicious session creation/use, revoke individual sessions, and revoke all affected sessions within an identity domain when necessary.
+
+Recognized-device status is security evidence, not permanent trust. Device familiarity never replaces authentication, authorization, step-up, risk, or Security Gate requirements.
+
+Device/session evidence is security-restricted data and must be purpose-limited rather than becoming generally available behavioral data.
+
+MVP does not require sophisticated proprietary device fingerprinting.
+
+##### A4.6-06 — Compromise Response Coordinates Sessions, Credentials, Authority, and Pending Actions
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+Meaningful account/session compromise is a coordinated security incident, not merely a reason to revoke one session.
+
+Containment must be capable of addressing affected sessions, credentials, MFA/recovery state, recent security changes, current authorization, pending privileged operations, destination changes, and other security-sensitive state associated with the affected operational identity.
+
+New authentication/session creation cannot bypass an existing restriction or compromise state.
+
+Restoration must establish an appropriately trusted state rather than merely restoring login ability. Privileged Seller Owner and workforce authority may require stronger reverification and controlled restoration.
+
+Containment remains scoped to the affected identity domain unless evidence justifies broader investigation/action.
+
+Core principle:
+
+> Containment stops the attacker. Recovery establishes trust again. They are not the same operation.
+
+##### A4.6-07 — Security and Trust Decisions Have Freshness and Re-Evaluation Rules
+
+Status: ACCEPTED — CRITICAL — MVP REQUIRED
+
+PinkCurve must not treat previous authentication, verification, risk, approval, destination-safety, device, AI, or other security decisions as indefinitely valid.
+
+Security evidence/decisions require freshness and applicability appropriate to their purpose. Material changes/security events must be capable of invalidating previously acceptable state before ordinary expiration.
+
+Cached security evidence must remain associated with the resource/resource version, observation context, time, and invalidation conditions for which it was produced.
+
+Destination approval establishes that a specific PinkCurve destination version passed the applicable approval process; it does not establish permanent current safety. Buyer redirects remain subject to current destination-security evaluation.
+
+---
+
+#### Audit #4 Final Consistency Review
+
+Status: COMPLETE
+
+The final review identified and resolved one major architectural inconsistency created during the audit: the earlier universal-human-identity model has been replaced by **separate operational identities by security domain**.
+
+##### Obsolete Model — REMOVE / DO NOT CARRY FORWARD
+
+The following earlier direction is superseded:
+
+- one universal human `identity_id` across Buyer, Seller, and workforce domains;
+- Buyer/Seller/workforce represented only as contexts of that universal identity;
+- active-domain-context switching as the basis for Buyer-to-Seller authority;
+- mandatory permanent person-level correlation across Buyer, Seller, and workforce identities.
+
+##### Final Identity Architecture
+
+PinkCurve uses canonical operational identities:
+
+```text
+Identity Capability
+      │
+      ├── Buyer Identity
+      ├── Seller Identity
+      ├── Workforce Identity
+      ├── Service Identity
+      ├── AI-Agent Identity
+      └── System Identity
+```
+
+Authentication, credentials, sessions, authorization, lifecycle state, and security state are independently governed for each operational identity domain.
+
+There is no requirement for a universal master-person identity linking Buyer, Seller, and workforce identities.
+
+Cross-domain correlation is exceptional, evidence-driven, purpose-limited, access-controlled, and auditable.
+
+##### Revised Authorization Formula
+
+The earlier dependency on an "Active Domain Context" is superseded. The final model is:
+
+```text
+Operational Identity
++
+Authentication
++
+Authorized Relationship / Role
++
+Resource
++
+Action
++
+Current Risk
++
+Security Context
+        ↓
+ACCESS DECISION
+```
+
+##### Identity Capability — Final Definition
+
+> PinkCurve Identity Capability establishes and governs canonical operational identities within distinct security domains, including Buyer, Seller, workforce, service, AI-agent, and system identities. It supports identity creation and resolution, lifecycle state, authentication relationships, verified identity claims where applicable, security attribution, and the identity information required by authorization and security controls.
+
+> PinkCurve does not require a universal person identity linking Buyer, Seller, and workforce identities. Cross-domain identity correlation may occur only for legitimate security, fraud, legal, or operational purposes under purpose-limited, access-controlled, evidence-based, and auditable processes.
+
+##### Security Gate — Final Relationship
+
+```text
+Operational Identity
+        +
+Authentication Assurance
+        +
+Authorization
+        +
+Current Risk
+        +
+Resource State
+        +
+Security Policy
+        ↓
+SECURITY GATE
+        ↓
+ALLOW / DENY / STEP-UP / HOLD
+```
+
+##### Seller Destination Defense-in-Depth Check
+
+Audit #4 confirms a multi-layer defense against compromised Seller accounts attempting to redirect Buyers to malicious destinations:
+
+```text
+Seller authentication
+        ↓
+Session compromise detection
+        ↓
+Current risk evaluation
+        ↓
+Sensitive-change protection
+        ↓
+Step-up authentication
+        ↓
+New destination version = PENDING
+        ↓
+URL / redirect / phishing / malware verification
+        ↓
+Seller/account risk evaluation
+        ↓
+Security Gate
+        ↓
+Final execution revalidation
+        ↓
+Destination activation
+        ↓
+Background monitoring
+        ↓
+Buyer click
+        ↓
+REAL-TIME REDIRECT SECURITY GATE
+        ↓
+SAFE → redirect
+UNCERTAIN → hold
+UNSAFE → block
+```
+
+This is a minimum MVP security requirement because Seller fraud, Seller-account compromise, malicious redirects, phishing, changed destinations, and legitimate sites later becoming malicious can directly damage Buyer trust and PinkCurve itself.
+
+---
+
+### Audit #4 Final Assessment
+
+**Overall Status: COMPLETE AT CAPABILITY-AUDIT LEVEL**
+
+Completed sections:
+
+1. A4.1 — Operational Identity Model, Relationships & Lifecycle — COMPLETE
+2. A4.2 — Registration, Authentication & Account Recovery — COMPLETE
+3. A4.3 — Authorization, Roles, Permissions & Least Privilege — COMPLETE
+4. A4.4 — Privileged Actions & Step-Up Security — COMPLETE
+5. A4.5 — Machine Identity, Services, Agents & API Authorization — COMPLETE
+6. A4.6 — Session Security, Compromise Detection & Continuous Access Evaluation — COMPLETE
+7. Final Identity/Security Consistency Review — COMPLETE
+
+Audit #4 establishes capability requirements rather than final implementation technology. Detailed choices such as OAuth/OIDC configuration, token formats, mTLS, workload identity technology, cookie/session storage, exact session durations, cryptographic message-signing mechanisms, device-fingerprinting technology, risk thresholds, and service boundaries belong to later Security/System Design.
+
+### Audit #4 Final Architectural Principles
+
+> PinkCurve separates operational identities according to security domain. Authority in one identity domain does not confer authority in another.
+
+> Authentication establishes identity; authorization grants bounded authority; current risk and security state determine whether that authority may safely be exercised now.
+
+> A valid session is temporary evidence of authentication, not permanent trust.
+
+> Recovering access does not automatically restore privileged trust.
+
+> Seller ownership is a PinkCurve-verified trust relationship, not merely Seller-managed account data.
+
+> LLM intelligence is separate from PinkCurve authority.
+
+> A message can request an action; it cannot grant itself authority.
+
+> Security evidence is time- and state-sensitive. Previous approval does not create permanent trust.
+
+> Destination approval establishes eligibility for a specific PinkCurve destination version; Buyer redirects remain subject to current safety evaluation.
+
+> Containment stops dangerous authority; recovery establishes trust again.
+
+---
 
 ### Remaining Chapter 12 / Security-Trust Audit Work
 
-1.  Continue Audit #4 from A4.2-15.
-2.  Complete authorization, privileged-action, machine/agent identity,
-    session-security, and continuous-access portions of Audit #4.
-3.  Resolve remaining Privacy architecture items not superseded by Audit
-    #3.
-4.  Finalize Trust capability ownership.
-5.  Audit Trust Case / human-review architecture.
-6.  Audit approval and discovery-eligibility gates.
-7.  Perform final Chapter 12 consistency review.
+Audit #4 is complete. Remaining Chapter 12 audit work should continue without reopening its settled identity architecture unless new evidence exposes a contradiction.
+
+1. Resolve remaining Privacy architecture items not superseded by Audit #3.
+2. Finalize Trust capability ownership.
+3. Audit Trust Case / human-review architecture.
+4. Audit approval and discovery-eligibility gates.
+5. Perform final Chapter 12 consistency review across Trust, Security, Privacy, Audit #3, and Audit #4.
+6. Produce the Chapter 12 revision plan before revising the Blueprint chapter itself.
 
 ### Chapter Revision Status
 
 NOT STARTED
 
-Do not revise Chapter 12 until the audit is complete.
+Do not revise Chapter 12 until the Chapter 12 audit is complete.
