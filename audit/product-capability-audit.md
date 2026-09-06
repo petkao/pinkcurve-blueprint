@@ -42766,3 +42766,915 @@ Audit #4 is complete. Remaining Chapter 12 audit work should continue without re
 NOT STARTED
 
 Do not revise Chapter 12 until the Chapter 12 audit is complete.
+
+---
+
+# Section 5 — Data Access and Security Implementation Consolidation
+
+## Audit Purpose
+
+The detailed Section 5 audit established a large set of requirements governing PinkCurve data access, authorization, security, Trust, AI access, external-provider use, human access, data sharing, disclosure, auditing, security-state enforcement, and data lifecycle.
+
+Those detailed requirements remain valid.
+
+However, the detailed requirements **do not represent independent implementation mechanisms**.
+
+PinkCurve should implement them through a small set of reusable architectural controls.
+
+The purpose of this consolidation is therefore to distinguish:
+
+```text
+Detailed Security Requirements
+            ↓
+Required PinkCurve Behavior
+            ↓
+Reusable Implementation Controls
+```
+
+rather than:
+
+```text
+Detailed Security Requirements
+            ↓
+One Independent System
+for Every Requirement
+```
+
+The architectural principle is:
+
+> **The detailed requirements define required PinkCurve security and data-access behavior. C1–C8 consolidate those requirements into reusable implementation controls. Consolidation does not remove, weaken, or supersede any accepted detailed requirement, and the existence of a detailed requirement does not imply that PinkCurve must implement a separate mechanism for that requirement.**
+
+This consolidation is especially important for MVP.
+
+PinkCurve should implement the simplest architecture that reliably enforces the accepted security boundaries while preserving the ability to strengthen or physically separate those controls later as scale, risk, regulation, reliability, or organizational needs justify it.
+
+---
+
+# Consolidated Control Model
+
+The detailed Section 5 requirements are consolidated into eight reusable controls:
+
+| Control | Name                              | MVP Classification  |
+| ------- | --------------------------------- | ------------------- |
+| C1      | Identity                          | MVP REQUIRED        |
+| C2      | Capability Authorization          | MVP REQUIRED        |
+| C3      | Controlled Data Access            | MVP REQUIRED        |
+| C4      | Authoritative Data Responsibility | MVP DESIGN REQUIRED |
+| C5      | Purpose and Disclosure Control    | MVP REQUIRED        |
+| C6      | Security-State Enforcement        | MVP REQUIRED        |
+| C7      | Audit and Evidence                | MVP REQUIRED        |
+| C8      | Data Lifecycle                    | MVP REQUIRED        |
+
+Conceptually:
+
+```text
+C1 Identity
+      ↓
+C2 Capability Authorization
+      ↓
+C3 Controlled Data Access
+      ↓
+C4 Authoritative Data Responsibility
+      ↓
+C5 Purpose and Disclosure Control
+      ↓
+C6 Security-State Enforcement
+      ↓
+C7 Audit and Evidence
+      ↓
+C8 Data Lifecycle
+```
+
+These controls should be reused across PinkCurve Products, shared capabilities, human operations, AI agents, automated workers, external integrations, and supporting infrastructure.
+
+---
+
+# C1 — Identity
+
+**Classification: MVP REQUIRED**
+
+## Principle
+
+> **Identity tells PinkCurve who or what is acting. It does not by itself grant authority.**
+
+PinkCurve SHALL establish trustworthy identity for actors performing protected or consequential operations.
+
+Actors may include:
+
+* Buyers;
+* Sellers;
+* authorized PinkCurve humans;
+* internal services;
+* background workers;
+* AI-agent runtimes;
+* automated processes;
+* approved external integrations.
+
+PinkCurve SHALL distinguish identity from:
+
+* authorization;
+* verification;
+* approval;
+* Trust;
+* purpose;
+* operational responsibility.
+
+Internal services, workers, automated processes, and AI-agent runtimes SHOULD use identifiable machine or service identities rather than broad shared credentials or artificial human identities.
+
+Authorized human access SHALL additionally be subject to appropriate role, purpose, scope, and operational context.
+
+External integrations SHALL authenticate at the appropriate integration boundary.
+
+Identity credentials SHALL be protected, revocable, and replaceable or rotatable where appropriate.
+
+Detailed identity providers, authentication protocols, token formats, workload-identity mechanisms, session architecture, and credential-management technologies SHALL be defined during Security and System Design.
+
+---
+
+# C2 — Capability Authorization
+
+**Classification: MVP REQUIRED**
+
+## Principle
+
+> **Capabilities only access the information and operations required for their responsibilities.**
+
+PinkCurve SHALL authorize protected data access and consequential operations according to the authenticated actor's:
+
+* capability;
+* role where applicable;
+* purpose;
+* scope;
+* operational context where applicable.
+
+Authorization SHOULD normally be defined at practical levels such as:
+
+* capability;
+* domain;
+* resource;
+* interface;
+* operation.
+
+PinkCurve SHALL NOT require field-level authorization throughout the entire platform unless the sensitivity or risk of a particular use case justifies finer-grained control.
+
+Authorization SHALL distinguish materially different operations where appropriate, including:
+
+* read;
+* create;
+* update;
+* delete;
+* approve;
+* publish;
+* restrict;
+* suspend;
+* export;
+* disclose;
+* administer.
+
+Protected operations SHALL default to denial where applicable authorization cannot be established.
+
+Public access SHALL be explicitly defined rather than inferred merely because information exists within PinkCurve.
+
+Machine identities SHALL NOT establish their own authority merely by supplying an actor, capability, Buyer, Seller, organization, or role identifier.
+
+Human authorization SHALL additionally consider applicable role, purpose, scope, and exceptional-access requirements.
+
+Authorization SHALL support revocation so that obsolete credentials, cached decisions, sessions, delegated context, or delayed automated work cannot indefinitely preserve authority after an applicable security decision changes.
+
+Detailed authorization policy representation, RBAC, ABAC, policy engines, token claims, caching, and enforcement technologies SHALL be defined during Security and System Design.
+
+---
+
+# C3 — Controlled Data Access
+
+**Classification: MVP REQUIRED**
+
+## Principle
+
+> **Protected PinkCurve data should be accessed through the responsible domain's controlled interface rather than through unrestricted access to its datastore.**
+
+PinkCurve SHALL access protected domain-responsible data through controlled interfaces provided by or on behalf of the responsible capability or domain rather than treating internal datastore schemas as unrestricted integration interfaces.
+
+Controlled interfaces MAY include:
+
+* application services;
+* repositories;
+* APIs;
+* authorized query layers;
+* events;
+* messages;
+* streams;
+* purpose-specific projections.
+
+Controlled data access SHALL enforce applicable identity and authorization requirements before protected operations are performed.
+
+Consuming capabilities SHOULD receive purpose-appropriate information through defined contracts and SHOULD NOT require unrestricted access to another capability's complete internal data representation.
+
+The following SHALL NOT become alternate paths around normal authorization:
+
+* search indexes;
+* vector stores;
+* caches;
+* analytics projections;
+* event systems;
+* queues;
+* replicas;
+* temporary stores;
+* secondary processing stores.
+
+External integrations and normal human administrative or support operations SHOULD similarly use controlled capability interfaces rather than unrestricted production datastore access.
+
+PinkCurve MAY implement multiple logical capability and domain boundaries within:
+
+* one backend application;
+* one relational database;
+* shared infrastructure;
+* shared runtime environments;
+
+where appropriate for MVP, provided the logical access boundaries remain enforceable.
+
+Physical separation into independent microservices, databases, clusters, or infrastructure SHALL NOT be required merely to establish a capability boundary.
+
+Physical separation MAY be introduced later where scalability, security, reliability, operational, regulatory, or organizational requirements justify it.
+
+The MVP principle is:
+
+> **Logical separation is required. Physical separation is not.**
+
+---
+
+# C4 — Authoritative Data Responsibility
+
+**Classification: MVP DESIGN REQUIRED**
+
+## Principle
+
+> **Every important PinkCurve state has a clearly responsible capability, without requiring responsibility to be assigned field by field.**
+
+PinkCurve SHALL identify the responsible capability or domain for material authoritative:
+
+* operational data;
+* intelligence products;
+* Trust state;
+* verification state;
+* approval state;
+* security state;
+* financial state;
+* other consequential PinkCurve information.
+
+Authoritative responsibility SHOULD be defined at a practical:
+
+* entity;
+* domain;
+* state;
+* data-product;
+
+level.
+
+PinkCurve SHALL NOT require separate authoritative responsibility for every individual database field.
+
+Multiple capabilities MAY:
+
+* consume;
+* reference;
+* derive from;
+* analyze;
+* cache;
+* index;
+* transform;
+* project;
+
+authoritative information according to their responsibilities.
+
+Those activities SHALL NOT independently establish conflicting authoritative versions of the same state.
+
+Material changes to authoritative state SHOULD occur through the responsible capability or its approved interface or workflow.
+
+AI models, AI Platform services, Learning Engine outputs, Analytics, rules, external providers, and human reviewers MAY provide:
+
+* evidence;
+* signals;
+* predictions;
+* recommendations;
+* candidate values;
+* explanations.
+
+Those outputs SHALL NOT automatically become authoritative PinkCurve state unless the responsible capability establishes that state through an authorized workflow.
+
+Secondary representations including caches, search indexes, vector stores, analytics projections, events, replicas, and temporary copies SHALL NOT override current authoritative state merely because they contain another representation.
+
+Different aspects of the same entity MAY have different authoritative responsibilities.
+
+For example:
+
+```text
+Offering Knowledge
+      ↓
+Authoritative Offering information
+
+Trust / Verification
+      ↓
+Authoritative verification,
+approval and restriction state
+```
+
+The MVP SHALL explicitly establish authoritative responsibility for critical areas including:
+
+* Buyer account state;
+* Seller account state;
+* Offering information;
+* Seller verification;
+* Offering approval;
+* URL security state;
+* Buyer Intelligence;
+* Seller Intelligence;
+* Billing and invoices;
+* security and authorization policy.
+
+Less critical or future mappings MAY mature during later System Design.
+
+---
+
+# C5 — Purpose and Disclosure Control
+
+**Classification: MVP REQUIRED**
+
+## Principles
+
+> **Possession of data does not create permission for a new use.**
+
+> **Permission to access data is not permission to disclose that data.**
+
+PinkCurve SHALL distinguish authority to:
+
+* access information;
+* use information for an authorized purpose;
+* reuse information for another purpose;
+* export information;
+* externally disclose information.
+
+Data obtained by a capability SHALL be used within that capability's established responsibilities and authorized purposes.
+
+Legitimate possession or access by one capability SHALL NOT automatically authorize unrelated reuse by another capability or purpose.
+
+Purpose SHOULD be defined at a practical capability or business-function level and SHALL NOT require separate purpose classification for every field, internal variable, or processing step.
+
+Protected information disclosed to:
+
+* Buyers;
+* Sellers;
+* AI providers;
+* communication providers;
+* external integrations;
+* reports;
+* files;
+* APIs;
+* redirect destinations;
+* other external recipients;
+
+SHALL be limited to information reasonably required for the authorized recipient and purpose.
+
+Buyer information used internally for:
+
+* personalization;
+* Buyer Intelligence;
+* Discovery;
+* Analytics;
+* Learning;
+* Seller Intelligence;
+* Security;
+* Trust;
+
+SHALL NOT automatically become Seller-accessible or externally disclosable information.
+
+Seller-facing intelligence derived from protected Buyer or marketplace information SHOULD use purpose-appropriate aggregation, transformation, or summarization where individual protected information is unnecessary.
+
+External AI providers and third-party integrations SHALL receive information through controlled provider or integration boundaries and only for approved purposes.
+
+A Buyer redirect to a Seller destination SHALL NOT automatically disclose:
+
+* protected Buyer identity;
+* Buyer Intelligence;
+* private preferences;
+* behavioral history;
+* location history;
+* unrelated internal PinkCurve identifiers.
+
+PinkCurve SHOULD enforce purpose and disclosure controls primarily through:
+
+* capability contracts;
+* output boundaries;
+* provider interfaces;
+* integration interfaces;
+* consequential disclosure points;
+
+rather than requiring pervasive field-level purpose machinery throughout the entire platform.
+
+---
+
+# C6 — Security-State Enforcement
+
+**Classification: MVP REQUIRED**
+
+## Principle
+
+> **A consequential action must respect the current authoritative security state.**
+
+PinkCurve SHALL enforce current authoritative:
+
+* security state;
+* Trust state;
+* verification state;
+* approval state;
+* restriction state;
+* suspension state;
+* revocation state;
+
+at consequential operations where stale or invalid security state could create unacceptable risk.
+
+Security-critical state SHALL take precedence over stale:
+
+* caches;
+* search indexes;
+* vector stores;
+* projections;
+* queued work;
+* previously issued authorization decisions;
+* sessions;
+* secondary representations.
+
+PinkCurve SHALL provide risk-appropriate propagation of security-significant changes including:
+
+* Seller suspension;
+* Buyer suspension;
+* Offering restriction;
+* destination-URL change;
+* destination-URL restriction;
+* credential revocation;
+* authorization revocation;
+* verification invalidation;
+* other material Trust or Security changes.
+
+## Seller Redirect Boundary
+
+Consequential external Seller redirects SHALL validate applicable current:
+
+```text
+Seller status
+      ↓
+Offering eligibility
+      ↓
+Current destination URL
+      ↓
+URL verification state
+      ↓
+URL security state
+      ↓
+ALLOW / BLOCK
+```
+
+Discovery, cache, search-index, or vector-store eligibility SHALL NOT itself be sufficient authorization for the external redirect.
+
+A previously approved or verified:
+
+* Seller;
+* Buyer;
+* Offering;
+* URL;
+* account;
+* other protected resource;
+
+SHALL NOT be considered permanently trusted where material changes or later security evidence require reassessment.
+
+Account recovery or identity reverification SHALL NOT automatically restore unrelated Offering, URL, approval, or Trust state that may have been compromised or changed independently.
+
+Failure, ambiguity, stale security state, or inability to establish required safety SHALL NOT automatically be interpreted as successful validation for a security-sensitive consequential operation.
+
+PinkCurve SHOULD distinguish security-critical state from ordinary business data for which eventual consistency may be acceptable.
+
+The core rule is:
+
+> **Eventual consistency may be acceptable. Eventual security is not.**
+
+PinkCurve does not need to perform a complete expensive external URL-security scan on every Buyer click.
+
+System Design MAY maintain current security state through scheduled, continuous, event-driven, risk-triggered, or provider-assisted verification and perform an appropriate current-state check at redirect time.
+
+---
+
+# C7 — Audit and Evidence
+
+**Classification: MVP REQUIRED**
+
+## Principle
+
+> **PinkCurve needs evidence for important security and consequential actions, not a permanent security audit of every routine read.**
+
+PinkCurve SHALL retain sufficient audit evidence for:
+
+* security-significant access;
+* privileged or exceptional human access;
+* consequential Trust decisions;
+* consequential verification decisions;
+* important authorization failures;
+* security-sensitive configuration changes;
+* security-policy changes;
+* material financial changes;
+* protected external disclosures;
+* other operations requiring later accountability or investigation.
+
+PinkCurve SHALL NOT require security-audit records for every:
+
+* routine product read;
+* public-data access;
+* cache read;
+* internal computation;
+* normal low-risk operation;
+
+merely because information was accessed.
+
+Audit requirements SHOULD be defined by PinkCurve policy and enforced at applicable:
+
+* authorization boundaries;
+* controlled data-access boundaries;
+* administrative boundaries;
+* consequential-operation boundaries.
+
+Required security auditing SHOULD NOT depend solely upon a consuming capability voluntarily deciding whether to create an audit record.
+
+Audit evidence SHOULD identify applicable information such as:
+
+```text
+Who or what acted?
+What operation occurred?
+Which important resource was affected?
+When did it occur?
+Was it authorized?
+What was the result?
+Why did it occur, where applicable?
+```
+
+Typical audit information MAY include:
+
+```text
+audit_id
+occurred_at
+actor_type
+actor_id
+capability_or_role
+operation
+resource_type
+resource_id
+authorization_result
+operation_result
+reason_or_reference
+request_id
+```
+
+Consequential changes SHOULD preserve sufficient:
+
+* previous state;
+* resulting state;
+* reason;
+* provenance;
+* authorization;
+* related evidence;
+
+where necessary to explain the action.
+
+PinkCurve SHOULD conceptually distinguish:
+
+```text
+Product Events
+"What did Buyers or Sellers do?"
+
+Operational Logs
+"Is the system operating correctly?"
+
+Security Audit
+"Who or what performed a
+security-significant action?"
+
+Security Monitoring
+"Does activity appear suspicious?"
+```
+
+Audit and diagnostic systems SHALL minimize unnecessary protected payloads, credentials, secrets, complete verification evidence, AI prompts, model context, and other sensitive information.
+
+AI agents and automated systems performing consequential operations SHALL produce applicable action-level audit evidence without requiring unrestricted retention of model reasoning or complete model context.
+
+For MVP, one appropriately designed security or audit event mechanism and a defined set of auditable consequential operations are sufficient.
+
+An enterprise SIEM, universal `SELECT` auditing, blockchain audit system, or complete AI-prompt archive SHALL NOT be required merely to satisfy this control.
+
+---
+
+# C8 — Data Lifecycle
+
+**Classification: MVP REQUIRED**
+
+## Principle
+
+> **Normal PinkCurve deletion is logical deletion. Physical purge is a separate governed lifecycle operation.**
+
+PinkCurve SHALL manage operational and derived information according to its lifecycle so that:
+
+* deletion;
+* restriction;
+* retention;
+* correction;
+* supersession;
+* invalidation;
+* expiration;
+* eventual physical purge;
+
+do not bypass applicable authorization, security, Trust, historical, or evidentiary requirements.
+
+## Logical Deletion
+
+Normal PinkCurve application deletion SHALL use logical deletion unless a specifically authorized lifecycle process requires physical removal.
+
+For example:
+
+```text
+status = DELETED
+deleted_at = timestamp
+```
+
+A logically deleted record SHALL normally become:
+
+```text
+Not discoverable
+Not recommendable
+Not publicly visible
+Not externally redirectable
+Not normally modifiable
+```
+
+Logically deleted information SHALL be excluded from ordinary product use unless a capability has an explicitly authorized legitimate retained-data purpose such as:
+
+* Security;
+* Trust;
+* investigation;
+* Billing;
+* dispute resolution;
+* audit;
+* recovery;
+* required historical analysis.
+
+## Secondary Representations
+
+Logical deletion, security restriction, and other material lifecycle changes SHALL propagate to applicable:
+
+* search indexes;
+* vector stores;
+* caches;
+* projections;
+* serving representations.
+
+Secondary representations SHALL NOT continue enabling prohibited product behavior after the authoritative resource has become deleted or restricted.
+
+## Retention
+
+Logical deletion SHALL remain distinct from retention and physical destruction.
+
+```text
+Logical Deletion
+      ≠
+Retention Period
+      ≠
+Physical Purge
+```
+
+PinkCurve SHALL NOT require one universal retention period for all information.
+
+Retention SHOULD reflect the data type and legitimate purpose.
+
+Retention SHALL NOT itself grant continued normal access, reuse, or disclosure authority.
+
+## Correction and History
+
+PinkCurve SHALL NOT require complete field-level version history for all ordinary data.
+
+PinkCurve SHALL preserve sufficient history or evidence for consequential changes affecting areas such as:
+
+* security;
+* Trust;
+* verification;
+* approval;
+* Seller destination URLs;
+* authorization;
+* access policy;
+* Billing.
+
+## Derived Data
+
+Derived information such as:
+
+* Buyer Signals;
+* Seller Signals;
+* embeddings;
+* scores;
+* recommendations;
+* Analytics;
+* model outputs;
+
+SHOULD support appropriate lifecycle concepts where required, including:
+
+```text
+CURRENT
+STALE
+SUPERSEDED
+INVALIDATED
+REGENERATED
+EXPIRED
+```
+
+Not every derived entity must implement every lifecycle state.
+
+The required principle is that derived data must be capable of ceasing to be treated as current when its source, meaning, security state, validity, or usefulness changes.
+
+## Temporary Data
+
+Temporary and intermediate processing data SHALL remain within applicable capability, purpose, security, and disclosure boundaries.
+
+Temporary processing SHALL NOT automatically authorize:
+
+* permanent storage;
+* unrelated reuse;
+* model training;
+* debugging retention;
+* external disclosure.
+
+Once temporary information is intentionally persisted, shared, disclosed, or reused, the normal PinkCurve controls apply.
+
+## Physical Purge
+
+Physical purge SHALL be treated separately from normal application deletion.
+
+Conceptually:
+
+```text
+Retention requirement satisfied
+          +
+No continuing authorized need
+          +
+Applicable policy permits purge
+          ↓
+Governed Physical Purge
+```
+
+A future purge process MAY need to address:
+
+* primary databases;
+* secondary stores;
+* indexes;
+* vector stores;
+* caches;
+* archives;
+* backups;
+* approved provider-held copies.
+
+Complete automated physical purge across every storage system SHALL NOT be required as part of the initial MVP application-delete workflow.
+
+---
+
+# MVP Implementation Interpretation
+
+The eight controls should not be interpreted as eight large standalone systems.
+
+A practical MVP implementation may reuse a small number of common mechanisms.
+
+```text
+Authentication / Identity
+        ↓
+C1 Identity
+
+
+Authorization Middleware /
+Security Policy Enforcement
+        ↓
+C2 Capability Authorization
+
+
+Domain Services /
+Repositories /
+Controlled Interfaces
+        ↓
+C3 Controlled Data Access
+        +
+C4 Authoritative Data Responsibility
+
+
+Purpose-Specific Contracts /
+Outbound Interfaces
+        ↓
+C5 Purpose and Disclosure
+
+
+Trust / Security State Checks
+        ↓
+C6 Security-State Enforcement
+
+
+Security Audit Events
+        ↓
+C7 Audit and Evidence
+
+
+Status + deleted_at +
+Serving-State Invalidation
+        ↓
+C8 Data Lifecycle
+```
+
+PinkCurve MAY therefore begin with:
+
+```text
+Modular PinkCurve Backend
+        +
+Shared Primary Database
+        +
+Controlled Domain Interfaces
+        +
+Identity
+        +
+Authorization
+        +
+Trust / Security Enforcement
+        +
+Targeted Audit
+        +
+Logical Data Lifecycle
+```
+
+without requiring:
+
+* one microservice per Product;
+* one database per domain;
+* service mesh;
+* enterprise policy platform;
+* enterprise DLP platform;
+* enterprise data catalog;
+* universal event infrastructure;
+* universal row-level history;
+* universal field classification;
+* universal field-level authorization;
+* enterprise SIEM;
+* complex archival infrastructure.
+
+Those technologies MAY be introduced later when PinkCurve's scale, security posture, reliability requirements, legal requirements, external integrations, team structure, or operational needs provide sufficient justification.
+
+---
+
+# Consolidation Assessment
+
+**Overall Status: ACCEPTED**
+
+The detailed Section 5 audit identified extensive requirements because PinkCurve must protect many different kinds of actors, data flows, intelligence products, Trust decisions, external interactions, and operational processes.
+
+The implementation consequence is substantially smaller.
+
+The accepted architecture is:
+
+```text
+62 Detailed Requirements
+          ↓
+Required Security Behavior
+          ↓
+8 Reusable Controls
+          ↓
+A Small Number of
+Shared MVP Mechanisms
+```
+
+The eight controls are:
+
+1. **Identity**
+2. **Capability Authorization**
+3. **Controlled Data Access**
+4. **Authoritative Data Responsibility**
+5. **Purpose and Disclosure Control**
+6. **Security-State Enforcement**
+7. **Audit and Evidence**
+8. **Data Lifecycle**
+
+The consolidation preserves the detailed requirements while preventing PinkCurve from turning each audit observation into an independent Product, service, database, policy engine, infrastructure component, or engineering project.
+
+The architectural objective remains:
+
+> **Build the minimum set of reusable controls necessary to enforce PinkCurve's security and data boundaries correctly, then increase physical or operational sophistication only when evidence shows that additional complexity is justified.**
+
+---
+
+# Section 5 Consolidation Conclusion
+
+Section 5 should now be treated as **architecturally consolidated**.
+
+Future Product, System, Security, Data, AI, Trust, and Operations Design should trace applicable detailed requirements into C1–C8 rather than creating independent implementation mechanisms for every detailed audit item.
+
+Any future Section 5 requirement should first be evaluated against the existing eight controls.
+
+A new control should be created only when the requirement represents a genuinely different enforcement responsibility that cannot reasonably be satisfied through C1–C8.
+
+This rule should protect PinkCurve against unnecessary security-architecture proliferation while preserving the strength of the accepted audit requirements.
