@@ -7,7 +7,7 @@
 | **Status**             | Draft                      |
 | **Version**            | 0.3                        |
 | **Owner**              | PinkCurve Engineering Team |
-| **Last Reviewed**      | 2026-08-20                 |
+| **Last Reviewed**      | 2026-09-06                 |
 | **Related Components** | All platform components    |
 
 ---
@@ -18,11 +18,15 @@ Trust is one of PinkCurve's core product capabilities.
 
 Security protects the platform.
 
-Privacy protects buyers, sellers, and organizations.
+Privacy protects Buyers, Sellers, Organizations, and their information.
 
 Trust protects discovery.
 
-PinkCurve helps buyers discover worthwhile Offerings while reducing exposure to scams, fraudulent Sellers, fake Organizations, misleading Offerings, fake promotions, manipulated reviews, fraudulent engagement, malicious links, bots, and other harmful activities.
+PinkCurve helps Buyers discover worthwhile Offerings while reducing exposure to scams, fraudulent Sellers, fake Organizations, misleading Offerings, fake promotions, manipulated reviews, fraudulent engagement, malicious links, compromised accounts, bots, and other harmful activities.
+
+Security, Privacy, and Trust apply not only to user accounts and infrastructure, but also to how PinkCurve capabilities, humans, automated processes, AI agents, external providers, and integrations access, use, modify, share, and disclose information.
+
+PinkCurve therefore treats identity, authorization, data access, Trust decisions, security state, disclosure, audit evidence, and data lifecycle as platform-wide responsibilities.
 
 Trust is not a separate feature added after discovery. It is integrated throughout the PinkCurve lifecycle:
 
@@ -30,16 +34,27 @@ Trust is not a separate feature added after discovery. It is integrated througho
 * Identity verification
 * Seller and Organization verification
 * Offering verification
+* Destination URL verification
 * Creative generation
 * Discovery
 * Buyer feedback
 * Reviews and ratings
 * Analytics
 * Learning
+* Buyer Intelligence
 * Seller Intelligence
 * Billing
 * Customer support
+* AI and external-provider use
 * Platform operations
+
+PinkCurve cannot guarantee that every Seller, Organization, Offering, destination site, review, or interaction will remain legitimate or safe.
+
+Instead, PinkCurve uses layered verification, controlled access, security-state enforcement, automated detection, AI-assisted analysis, human review, transparent Trust Signals, Buyer controls, audit evidence, and continuous learning to reduce risk and help Buyers make more informed discovery decisions.
+
+Verification or approval represents PinkCurve's assessment based on applicable evidence at a point in time. It does not establish permanent trust. Material changes, new evidence, account compromise, destination changes, suspicious behavior, or later security findings may require renewed evaluation or restriction.
+
+**PinkCurve does not assume trust. PinkCurve continuously earns and re-evaluates trust.**
 
 PinkCurve cannot guarantee that every Seller, Organization, Offering, review, or interaction is legitimate.
 
@@ -198,6 +213,28 @@ Human review should remain available for high-risk, ambiguous, disputed, or high
 
 ---
 
+## 7. Capability-Bounded Access
+
+PinkCurve capabilities, humans, automated systems, AI agents, and external integrations should receive only the information and authority required for their responsibilities.
+
+Authentication does not itself establish authorization.
+
+Possession of data does not create permission for unrelated use.
+
+Permission to access data does not create permission to disclose that data.
+
+Protected information should normally be accessed through controlled PinkCurve capability or domain interfaces rather than through unrestricted access to underlying datastores.
+
+Human access should additionally consider role, purpose, scope, and operational context.
+
+AI agents and automated systems do not receive special authority merely because they can reason about, request, or process information.
+
+These principles apply throughout PinkCurve regardless of whether multiple capabilities initially share the same backend application, database, or infrastructure.
+
+> **PinkCurve defines security boundaries according to responsibility and authorized purpose, not merely according to where data is physically stored.**
+
+---
+
 # Trust Architecture
 
 PinkCurve's trust architecture operates across multiple layers.
@@ -230,27 +267,70 @@ Trust therefore operates across the platform rather than within a single service
 
 ---
 
-# Account and Identity Security
+# Identity, Authentication, Authorization, and Data Access
 
-PinkCurve accounts provide the foundation for identity, authentication, authorization, verification, and accountability.
+PinkCurve identity and access controls establish who or what is acting, how that identity is authenticated, what it is authorized to do, and what information or operations it may access.
 
-Account requirements may differ for:
+Identity, authentication, authorization, verification, Trust, and approval are related but distinct concepts.
 
-* Buyers
-* Sellers
-* Organizations
-* Administrative users
-* Internal services
+```text
+Identity
+   ↓
+Authentication
+   ↓
+Authorization
+   ↓
+Controlled Capability / Data Access
+   ↓
+Security-State Enforcement
+   ↓
+Permitted Operation
+```
 
-Authentication identity and product role should remain conceptually separate.
+Authentication does not itself grant authority.
+
+Verification does not itself grant unrestricted access.
+
+Trust does not replace authorization.
+
+Authorization does not override current security restrictions.
+
+---
+
+## Operational Identity Domains
+
+PinkCurve should maintain distinct operational identity domains rather than creating a universal identity that automatically links every role or context associated with a person or system.
+
+Conceptually:
+
+```text
+Identity Capability
+      │
+      ├── Buyer Identity
+      ├── Seller Identity
+      ├── Workforce Identity
+      ├── Service Identity
+      ├── AI-Agent Identity
+      └── System Identity
+```
+
+These identity domains serve different security and product purposes.
+
+A person may legitimately participate in more than one domain. For example, a PinkCurve worker might also use PinkCurve as a Buyer or operate a Seller account.
+
+Those relationships should not automatically cause the operational identities, activity histories, permissions, or data associated with those domains to become universally linked or accessible.
+
+Cross-domain identity correlation should occur only where a legitimate security, operational, legal, support, fraud-investigation, or other explicitly authorized purpose requires it.
+
+Such correlation should be purpose-limited and auditable where appropriate.
 
 ---
 
 ## Authentication
 
-Authentication establishes that an account is being accessed by an authorized identity.
+Authentication establishes sufficient confidence that an operational identity is being used by an authorized actor.
 
-Potential mechanisms include:
+Authentication mechanisms may include:
 
 * Email authentication
 * Password authentication
@@ -258,9 +338,22 @@ Potential mechanisms include:
 * Mobile verification
 * One-Time Password (OTP)
 * Multi-Factor Authentication (MFA)
-* Passkeys or future authentication technologies
+* Passkeys
+* Service or workload identity
+* Cryptographic credentials
+* Other appropriate authentication technologies
 
-Requirements may vary according to account type, risk, and activity.
+Requirements may vary according to:
+
+* Identity domain
+* Resource
+* Requested action
+* Current risk
+* Security context
+
+Higher-risk actions may require stronger authentication or step-up verification.
+
+Internal services, background workers, AI-agent runtimes, and other automated systems should use authenticated machine or service identities rather than broad shared credentials or fabricated human identities.
 
 ---
 
@@ -268,25 +361,222 @@ Requirements may vary according to account type, risk, and activity.
 
 Authentication answers:
 
-> Who are you?
+> **Which operational identity is acting?**
 
-Authorization answers:
+Authorization determines:
 
-> What are you allowed to do?
+> **Is this identity allowed to perform this action on this resource under the current conditions?**
 
-PinkCurve should use authorization controls for:
+Conceptually:
 
-* Buyer capabilities
-* Seller workspaces
-* Organization workspaces
-* Administrative functions
-* Billing access
-* Trust operations
-* Customer support
-* Internal services
-* Data access
+```text
+Operational Identity
+        +
+Authentication
+        +
+Authorized Relationship / Role
+        +
+Resource
+        +
+Action
+        +
+Current Risk
+        +
+Security Context
+        ↓
+ACCESS DECISION
+```
 
-The principle of least privilege should apply.
+PinkCurve should apply authorization to protected data and consequential operations according to the authenticated actor's capability, role, purpose, scope, and applicable context.
+
+Capabilities should receive only the data and operations required for their responsibilities.
+
+Authorization should normally be defined at practical capability, domain, resource, interface, and operation boundaries rather than requiring field-level authorization for every stored value.
+
+Finer-grained controls may be introduced where security, privacy, financial, Trust, or operational risk requires them.
+
+Authorization should distinguish meaningful operations such as:
+
+* Read
+* Create
+* Update
+* Delete
+* Approve
+* Reject
+* Publish
+* Restrict
+* Suspend
+* Export
+* Disclose
+* Administer
+
+Protected operations should default to denial when required identity, authorization, policy, or security context cannot be established.
+
+Public access should be explicitly defined rather than inferred from the absence of restrictions.
+
+---
+
+## Capability Authorization
+
+PinkCurve capabilities should operate within defined responsibility and data-access boundaries.
+
+Examples include:
+
+* Buyer Experience
+* Seller Experience
+* Offering Knowledge
+* Adaptive Metadata Navigation
+* Discovery Engine
+* Discovery Analytics
+* Buyer Intelligence
+* Seller Intelligence
+* Learning Engine
+* AI Platform
+* Trust and Security
+* Billing and Finance
+* Customer Support
+* Platform Operations
+
+A capability's ability to technically reach a datastore does not establish authorization to use all information within that datastore.
+
+A capability should not gain additional authority merely because another capability has provided it with data.
+
+> **Possession of data does not create permission for a new use.**
+
+---
+
+## Controlled Data Access
+
+Protected PinkCurve data should normally be accessed through the responsible domain's controlled interface rather than through unrestricted access to the underlying datastore.
+
+A controlled interface may include:
+
+* Application service
+* Domain service
+* Repository interface
+* API
+* Authorized query interface
+* Event
+* Message
+* Stream
+* Purpose-specific projection
+
+Conceptually:
+
+```text
+Capability
+     ↓
+Controlled Domain Interface
+     ↓
+Authorization
+     ↓
+Responsible Data Domain
+     ↓
+Database / Secondary Store
+```
+
+This architecture does not require PinkCurve to build independent microservices or databases for every capability.
+
+For the MVP, PinkCurve may use:
+
+```text
+Modular Backend
+      +
+Shared Relational Database
+      +
+Logical Domain Boundaries
+      +
+Controlled Domain Interfaces
+      +
+Authorization
+```
+
+Logical security boundaries are required for the MVP.
+
+Physical database separation is not.
+
+Search indexes, vector stores, caches, analytics stores, event streams, replicas, and other secondary representations must not become alternative paths around normal authorization and data-access controls.
+
+---
+
+## Human Access
+
+Authorized PinkCurve humans should be treated differently from ordinary machine capability access.
+
+Human access should consider:
+
+```text
+Human Identity
+      +
+Role
+      +
+Purpose
+      +
+Scope
+      +
+Operational Context
+      ↓
+Authorized Human Access
+```
+
+Administrative, support, engineering, security, Trust, billing, and operational roles should receive only the access needed for their responsibilities.
+
+The technical ability to connect to a production system or database does not itself establish authority to inspect or use all available information.
+
+Routine human operations should use controlled administrative or capability interfaces where practical.
+
+Exceptional or direct production access should be restricted, purpose-specific, and auditable.
+
+Emergency or break-glass access may be supported where operationally necessary and should receive stronger oversight and audit evidence.
+
+---
+
+## Machine, Automation, and AI-Agent Access
+
+Internal services, scheduled jobs, background workers, automated processes, and AI agents operate under authenticated machine identities and defined capability boundaries.
+
+Automation does not create additional authority.
+
+AI agents do not receive special access merely because they can reason about, request, or process information.
+
+AI agents should normally interact with PinkCurve through approved tools and controlled capability interfaces rather than unrestricted database or administrative access.
+
+```text
+AI Agent / Automated Process
+           ↓
+Authenticated Machine Identity
+           ↓
+Authorized Capability
+           ↓
+Approved Tool / Interface
+           ↓
+Controlled Operation
+```
+
+The model may determine what information or operation to request.
+
+PinkCurve determines what the model is allowed to receive or do.
+
+---
+
+## Authorization Freshness and Revocation
+
+Authorization decisions must respect important changes in current security state.
+
+Previously valid access should not permanently survive:
+
+* Account suspension
+* Credential revocation
+* Role removal
+* Permission changes
+* Security restrictions
+* Seller suspension
+* Compromise detection
+* Policy changes
+
+Sessions, cached permissions, delayed jobs, delegated requests, AI agents, or previously issued credentials must not prevent PinkCurve from enforcing later security restrictions.
+
+Security-critical revocations should propagate promptly.
 
 ---
 
@@ -298,10 +588,11 @@ Account security should protect against:
 * Credential stuffing
 * Brute-force attacks
 * Session theft
-* Unauthorized password recovery
+* Unauthorized account recovery
 * Impersonation
 * Suspicious login behavior
 * Automated account creation
+* Compromised credentials
 
 Potential controls include:
 
@@ -313,6 +604,12 @@ Potential controls include:
 * Device and session analysis
 * Security notifications
 * Account recovery controls
+* Credential revocation
+* Step-up authentication
+
+Account recovery should restore legitimate authority without automatically restoring Trust that may have been affected by compromise.
+
+For example, recovery of a Seller account should not automatically establish that a changed destination URL is verified or that a restricted Offering should immediately become discoverable again.
 
 ---
 
@@ -428,6 +725,152 @@ Verification state should be explainable internally and, where appropriate, unde
 
 ---
 
+## Verification and Trust Boundaries
+
+Verification, Trust, approval, eligibility, authentication, and authorization are distinct security decisions.
+
+PinkCurve SHALL NOT treat successful verification as permanent Trust or unrestricted authorization.
+
+Conceptually:
+
+```text
+Identity
+    ↓
+Authentication
+    ↓
+Verification
+    ↓
+Trust / Risk Assessment
+    ↓
+Approval / Restriction / Eligibility
+    ↓
+Authorization
+    ↓
+Permitted Operation
+```
+
+Each decision answers a different question:
+
+| Decision               | Question                                                                         |
+| ---------------------- | -------------------------------------------------------------------------------- |
+| Identity               | Who or what is this?                                                             |
+| Authentication         | Can PinkCurve establish that this identity is being used by the expected actor?  |
+| Verification           | What evidence supports the claimed identity, ownership, legitimacy, or property? |
+| Trust / Risk           | What is PinkCurve's current assessment of risk or confidence?                    |
+| Approval / Eligibility | Is the resource currently permitted for the applicable PinkCurve purpose?        |
+| Authorization          | Is this actor or capability allowed to perform this operation?                   |
+
+A successful decision at one stage SHALL NOT automatically establish success at another stage.
+
+### Verification Is Not Permanent Trust
+
+Verification represents PinkCurve's assessment based on available evidence at a point in time.
+
+Verification SHALL NOT be treated as permanent Trust.
+
+PinkCurve SHOULD reassess verification or Trust when material changes occur, including:
+
+* Seller identity or ownership changes
+* Organization changes
+* Destination URL changes
+* Significant Offering changes
+* Contact changes
+* Security alerts
+* Suspicious behavior
+* Account compromise
+* New fraud evidence
+* Material external-provider findings
+* Other changes that could affect the original verification basis
+
+The required response may include:
+
+* Continued approval
+* Additional verification
+* Security review
+* Temporary restriction
+* Suspension
+* Rejection
+* Other risk-appropriate action
+
+### Approval and Eligibility
+
+Approval and eligibility decisions for protected PinkCurve resources SHALL be established by the responsible Trust, Security, or other designated capability according to the applicable resource and workflow.
+
+Discovery, Creative Studio, Analytics, Learning Engine, Buyer Intelligence, Seller Intelligence, AI models, search indexes, vector stores, caches, and other consuming systems SHALL NOT independently establish authoritative approval or eligibility merely because a resource appears valid within their own processing context.
+
+For example:
+
+```text
+Trust / Verification
+        ↓
+Authoritative Offering eligibility
+        ↓
+Discovery
+        ↓
+Candidate retrieval / ranking
+```
+
+Discovery may determine whether an eligible Offering is relevant to a Buyer.
+
+Discovery SHALL NOT override a current Trust or Security restriction.
+
+### Verification and Trust Changes
+
+A resource that was previously verified or approved may become subject to renewed evaluation.
+
+For example:
+
+```text
+Verified Seller
+      ↓
+Seller changes destination URL
+      ↓
+Previous URL verification
+does not automatically transfer
+      ↓
+New URL verification / security assessment
+      ↓
+Current eligibility decision
+```
+
+Similarly:
+
+```text
+Approved Offering
+      ↓
+Material change
+      ↓
+Reassessment
+      ↓
+Continue / Restrict / Reverify / Reject
+```
+
+PinkCurve SHOULD maintain sufficient provenance and evidence to explain important verification, approval, restriction, and re-verification decisions.
+
+### Recovery Does Not Automatically Restore Trust
+
+Recovery of an account, credential, or authentication method SHALL NOT automatically restore Trust for resources that may have been modified, compromised, or restricted independently.
+
+For example:
+
+```text
+Seller Account Compromised
+        ↓
+Account Suspended
+        ↓
+Account Recovered
+        ↓
+Changed URL / Offering
+        ↓
+Independent reassessment
+```
+
+This prevents account recovery from unintentionally restoring compromised Offering or destination state.
+
+> **Verification establishes evidence. Trust evaluates evidence. Approval establishes eligibility. Authorization permits action.**
+
+---
+
 # Offering Verification
 
 Seller verification does not automatically establish Offering authenticity.
@@ -490,19 +933,194 @@ Some Offerings may require additional evidence before becoming discoverable.
 
 ## Offering Changes
 
-Significant changes may require renewed trust evaluation.
+Offering verification is not permanent.
+
+Material changes to an approved Offering SHALL trigger appropriate re-evaluation when the change could affect its legitimacy, safety, Trust, eligibility, or destination.
 
 Examples include:
 
-* Destination URL change
-* Seller ownership change
-* Major description change
-* Category change
-* Pricing anomaly
-* New promotional claim
-* Previously verified Offering becoming inactive and later returning
+* Destination URL changes
+* Seller ownership changes
+* Material Offering-content changes
+* Significant changes to claims or pricing
+* Changes to external resources
+* Security alerts
+* Evidence of compromise
+* Significant Buyer reports
+* Other changes that could invalidate the basis for previous approval
 
-Trust should therefore be continuously maintained rather than permanently granted.
+### Destination URL Changes
+
+A destination URL is a security-sensitive part of an Offering.
+
+When a Seller changes a destination URL:
+
+```text
+Existing Approved Offering
+        ↓
+Destination URL Changed
+        ↓
+Previous URL verification
+does not automatically transfer
+        ↓
+New URL verification / security assessment
+        ↓
+Current Offering eligibility
+```
+
+The newly specified destination SHALL NOT automatically inherit the security or verification status of the previous URL.
+
+If the required security or verification state cannot be established, PinkCurve SHOULD restrict the affected redirect until the required assessment is completed.
+
+### Account Compromise and Recovery
+
+If a Seller account is suspected or confirmed to be compromised, PinkCurve MAY suspend or restrict the affected Seller, Offerings, destination URLs, or other resources according to risk.
+
+Successful account recovery SHALL NOT automatically restore the previous Trust or approval state of resources that may have been modified during the compromise.
+
+Affected resources SHOULD be independently reassessed when appropriate.
+
+### Secondary Representations
+
+When an Offering becomes restricted, unapproved, or otherwise ineligible, applicable search indexes, vector stores, caches, and serving projections SHALL NOT continue to expose the Offering as eligible merely because those representations have not yet been updated.
+
+Security-significant restrictions SHALL propagate with appropriate urgency.
+
+> **A previously approved Offering remains eligible only while its current authoritative Trust, approval, and security state permits it.**
+
+---
+
+## Seller URL and Redirect Security
+
+A Seller destination URL is a security-sensitive part of an Offering because a Buyer may leave PinkCurve and enter an external site based on PinkCurve's presentation of that Offering.
+
+PinkCurve SHALL NOT treat a previously verified destination URL as permanently safe.
+
+A destination may become unsafe after:
+
+* Seller account compromise
+* URL modification
+* Domain or hosting compromise
+* Phishing or impersonation
+* Malicious content being introduced
+* Security reputation changes
+* Redirect behavior changes
+* Other evidence indicating increased risk
+
+### Redirect-Time Security Check
+
+Before performing a consequential external redirect, PinkCurve SHALL evaluate the current authoritative security and eligibility state applicable to the Seller, Offering, and destination URL.
+
+Conceptually:
+
+```text id="v7p8s2"
+Buyer selects Offering
+        ↓
+Retrieve current authoritative state
+        ↓
+Seller currently eligible?
+        ↓
+Offering currently eligible?
+        ↓
+Destination URL is current approved URL?
+        ↓
+URL verification/security state acceptable?
+        ↓
+      ┌──────────────┐
+      │              │
+     YES             NO
+      │              │
+      ↓              ↓
+   ALLOW            BLOCK
+      │
+      ↓
+Controlled Redirect
+```
+
+Discovery results, search indexes, vector stores, caches, or previously generated recommendations SHALL NOT by themselves authorize the external redirect.
+
+The redirect decision SHALL use current authoritative security and eligibility state.
+
+### URL Change Protection
+
+When a Seller changes an Offering's destination URL:
+
+```text id="e4y4r1"
+Current Approved URL
+        ↓
+Seller changes URL
+        ↓
+Previous URL approval
+does not transfer automatically
+        ↓
+New URL verification /
+security assessment
+        ↓
+Current eligibility
+```
+
+The new URL SHALL remain restricted from consequential external redirection until the required verification and security conditions are satisfied.
+
+A URL change SHOULD invalidate or appropriately restrict secondary representations that could otherwise continue presenting the previous or newly submitted destination as currently approved.
+
+### Redirect Chain Protection
+
+PinkCurve SHOULD minimize redirect complexity when sending Buyers to Seller destinations.
+
+For MVP, PinkCurve SHOULD permit:
+
+* A direct destination URL; or
+* A single controlled redirect where necessary.
+
+PinkCurve SHOULD NOT intentionally route Buyers through an unrestricted chain of intermediate destinations.
+
+If PinkCurve encounters an unexpected redirect, an excessive redirect chain, a change to an unapproved destination, or another security condition that prevents PinkCurve from establishing the intended destination, the redirect SHOULD be blocked or interrupted rather than automatically continuing.
+
+PinkCurve SHOULD record security-relevant redirect failures and suspicious redirect behavior for investigation and Trust evaluation.
+
+### Current Security State
+
+A destination URL that was legitimate when originally approved may later become malicious.
+
+Therefore:
+
+```text id="8k0x7m"
+Previously Verified
+        ≠
+Currently Safe
+```
+
+PinkCurve SHOULD maintain an appropriately fresh security state for active Seller destinations using scheduled, event-driven, risk-triggered, or other appropriate verification mechanisms.
+
+The exact freshness interval MAY vary according to risk.
+
+A security check that cannot establish the required current state SHALL NOT automatically be interpreted as approval for a high-risk redirect.
+
+### Seller Suspension and Offering Restriction
+
+If the Seller becomes suspended, or the Offering or destination becomes restricted:
+
+```text id="u2j7pc"
+Seller / Offering / URL Restricted
+             ↓
+Discovery eligibility removed
+             ↓
+Redirect eligibility removed
+```
+
+A stale Discovery result SHALL NOT remain sufficient to send Buyers to the restricted destination.
+
+### Buyer Protection
+
+PinkCurve SHOULD provide an appropriate indication when an external destination cannot currently be verified or is blocked.
+
+PinkCurve SHALL NOT encourage a Buyer to bypass a security restriction merely because the destination was previously available.
+
+The objective is not to guarantee that every external website is permanently safe.
+
+The objective is to ensure that PinkCurve does not knowingly or negligently continue sending Buyers to destinations that its current security state identifies as unauthorized, restricted, suspicious, or insufficiently verified.
+
+> **PinkCurve must verify the current security state before consequentially sending a Buyer outside PinkCurve.**
 
 ---
 
@@ -1097,6 +1715,104 @@ Human decisions should also be logged for accountability and future system impro
 
 ---
 
+## Human and Privileged Access
+
+PinkCurve humans may require access that is different from ordinary Buyer, Seller, service, or AI-agent access.
+
+Examples include:
+
+* Trust reviewers
+* Customer support personnel
+* Security personnel
+* Engineers
+* Administrators
+* Finance personnel
+* Operations personnel
+* Other authorized internal workers
+
+Human access SHALL remain subject to authorization.
+
+A human's employment, organizational role, or technical ability to access a system SHALL NOT by itself establish permission to access all PinkCurve information.
+
+Human access should consider:
+
+```text id="7m3v0a"
+Human Identity
+      +
+Role
+      +
+Purpose
+      +
+Scope
+      +
+Operational Context
+      ↓
+Authorized Human Access
+```
+
+### Least-Privilege Human Access
+
+Human workers SHOULD receive only the access necessary for their responsibilities.
+
+Access should be limited according to:
+
+* Role
+* Responsibility
+* Purpose
+* Data sensitivity
+* Operational need
+* Applicable security policy
+
+A support worker, for example, should not automatically receive unrestricted access to Buyer Intelligence, Seller Intelligence, security credentials, financial information, or unrelated internal data merely because the worker supports PinkCurve users.
+
+### Controlled Administrative Access
+
+Administrative and privileged operations SHOULD use controlled PinkCurve interfaces where practical.
+
+Direct production database or infrastructure access SHOULD be restricted to personnel whose responsibilities genuinely require it.
+
+Technical access to a database, server, cloud account, or administrative interface SHALL NOT be treated as unrestricted permission to inspect or modify all information available through that interface.
+
+### Exceptional and Emergency Access
+
+PinkCurve MAY provide exceptional or emergency access when necessary for:
+
+* Security incidents
+* Service failures
+* Data recovery
+* Critical operational problems
+* Fraud investigations
+* Other urgent situations
+
+Exceptional access SHOULD be:
+
+* Purpose-specific
+* Time-limited where practical
+* Appropriately authorized
+* Auditable when consequential
+
+Emergency access should not silently become permanent normal access.
+
+### Human Review of High-Impact Decisions
+
+Human review remains important for high-impact Trust and Security decisions where automated decisions may be insufficient.
+
+Human reviewers should receive enough relevant evidence and context to make an informed decision without receiving unrelated protected information.
+
+Human decisions affecting important Trust, Security, verification, approval, restriction, or financial state SHOULD produce appropriate evidence of:
+
+* Reviewer identity
+* Decision
+* Affected resource
+* Time
+* Reason or supporting evidence where appropriate
+
+PinkCurve should not require reviewers to receive complete underlying datasets when a purpose-specific view provides sufficient information for the decision.
+
+> **Human access is authorized access, not unrestricted access.**
+
+---
+
 # Appeals and Corrections
 
 Trust systems can make mistakes.
@@ -1284,6 +2000,332 @@ Specific protocols and implementations may evolve over time.
 
 ---
 
+# Audit and Evidence
+
+PinkCurve should maintain sufficient audit evidence to understand and investigate important security, Trust, privacy, operational, and financial actions.
+
+Audit evidence is different from ordinary product events and system logs.
+
+```text id="v1m4ra"
+Product Events
+"What did the Buyer or Seller do?"
+
+Operational Logs
+"Is the system operating correctly?"
+
+Security Audit
+"Who or what performed a
+security-significant action?"
+```
+
+### Auditable Actions
+
+PinkCurve SHOULD create audit evidence for security-significant or consequential actions, including:
+
+* Important authorization decisions
+* Privileged or exceptional human access
+* Seller or Organization verification decisions
+* Offering approval or restriction
+* Trust decisions with significant impact
+* Security-state changes
+* Permission or policy changes
+* Credential or identity changes
+* Protected external disclosures
+* Material financial changes
+* Consequential AI-agent actions
+* Other actions requiring later accountability or investigation
+
+PinkCurve does not need to create a security-audit record for every routine read or ordinary product operation merely because information was accessed.
+
+### Audit Evidence
+
+Where appropriate, audit evidence should identify:
+
+* Who or what acted
+* What operation occurred
+* Which resource was affected
+* When it occurred
+* Whether the operation was authorized
+* The result
+* Reason or supporting reference where appropriate
+
+Conceptually:
+
+```text id="8j6m8e"
+Actor
+  +
+Operation
+  +
+Resource
+  +
+Time
+  +
+Authorization Result
+  +
+Outcome
+  ↓
+Audit Evidence
+```
+
+Consequential state changes SHOULD preserve sufficient information to explain the transition, including applicable previous state, resulting state, authorization, reason, and supporting evidence.
+
+### Audit Boundaries
+
+Audit requirements SHOULD be enforced at appropriate:
+
+* Authorization boundaries
+* Controlled data-access boundaries
+* Administrative boundaries
+* Trust and verification boundaries
+* Consequential-operation boundaries
+
+A capability should not be solely responsible for deciding whether its own security-significant operation needs to be audited when the operation crosses a centrally defined security boundary.
+
+### Privacy and Audit
+
+Audit evidence should contain only the information necessary for accountability and investigation.
+
+PinkCurve SHOULD minimize unnecessary:
+
+* Buyer information
+* Seller information
+* Sensitive content
+* Credentials
+* Secrets
+* Complete verification evidence
+* AI prompts
+* Model context
+* Protected payloads
+
+Audit records themselves SHALL be protected by appropriate access controls and retention policies.
+
+### AI and Automated Actions
+
+AI agents and automated systems performing consequential operations SHOULD generate appropriate action-level audit evidence.
+
+PinkCurve does not need to retain unrestricted model reasoning or complete model context merely to establish accountability for an action.
+
+The audit record should establish what the system did and the applicable authorization and outcome without unnecessarily retaining sensitive internal processing data.
+
+### MVP
+
+For MVP, PinkCurve should implement one appropriately designed audit mechanism with a clearly defined set of auditable consequential operations.
+
+PinkCurve does not need:
+
+* Universal database auditing
+* Security logging for every read
+* A separate audit system for every capability
+* Complete AI reasoning archives
+* Enterprise SIEM infrastructure
+
+unless later scale, security, regulatory, or operational requirements justify them.
+
+> **PinkCurve needs evidence for important actions, not surveillance of every routine action.**
+
+---
+
+# Data Lifecycle
+
+PinkCurve SHALL manage information throughout its lifecycle from creation and use through modification, restriction, deletion, retention, and eventual disposal.
+
+Data lifecycle controls apply to:
+
+* Operational data
+* Buyer information
+* Seller information
+* Organization information
+* Trust and verification data
+* Security data
+* Buyer Intelligence
+* Seller Intelligence
+* Analytics
+* Embeddings
+* Model outputs
+* Search indexes
+* Caches
+* Other derived or secondary representations
+
+### Logical Deletion
+
+Normal PinkCurve application deletion SHOULD use logical deletion unless a specifically authorized lifecycle process requires physical removal.
+
+A logically deleted resource should no longer be:
+
+* Discoverable
+* Recommendable
+* Publicly visible
+* Externally redirectable
+* Normally modifiable
+
+For example:
+
+```text id="i8qz4k"
+Resource
+   ↓
+Logical Delete
+   ↓
+Deleted / Inactive State
+   ↓
+Excluded from Normal Product Use
+```
+
+A logically deleted resource MAY remain available to an explicitly authorized capability when there is a legitimate need such as:
+
+* Security investigation
+* Trust investigation
+* Billing
+* Dispute resolution
+* Audit
+* Recovery
+* Required historical analysis
+
+Logical deletion does not automatically mean immediate physical destruction.
+
+### Secondary Representations
+
+When authoritative information becomes deleted, restricted, invalid, or otherwise unavailable for normal product use, applicable secondary representations SHOULD be updated accordingly.
+
+This may include:
+
+* Search indexes
+* Vector stores
+* Caches
+* Analytics projections
+* Serving representations
+* Derived intelligence
+
+Secondary representations SHALL NOT continue to authorize or enable prohibited product behavior merely because they have not yet received the latest authoritative state.
+
+### Retention
+
+Retention and access are separate decisions.
+
+```text id="h19x3v"
+Retention
+    ≠
+Normal Product Access
+```
+
+PinkCurve may retain information for a legitimate purpose while restricting its normal product use.
+
+Retention periods SHOULD reflect:
+
+* Data type
+* Purpose
+* Security requirements
+* Trust requirements
+* Financial requirements
+* Operational requirements
+* Applicable legal or regulatory requirements
+
+PinkCurve SHALL NOT require one universal retention period for all information.
+
+### Correction and Supersession
+
+Information that becomes outdated, corrected, superseded, or invalid SHOULD be distinguishable from currently authoritative information where necessary.
+
+This is particularly important for:
+
+* Trust decisions
+* Verification evidence
+* Approval state
+* Security state
+* Buyer Intelligence
+* Seller Intelligence
+* Analytics
+* Learning outputs
+* Embeddings
+* Model outputs
+
+Derived information may require lifecycle states such as:
+
+```text id="q2y6m5"
+CURRENT
+STALE
+SUPERSEDED
+INVALIDATED
+EXPIRED
+REGENERATED
+```
+
+Not every data type requires every state.
+
+The responsible capability determines the appropriate lifecycle behavior.
+
+### Temporary and Derived Data
+
+Temporary processing data SHALL remain within applicable authorization, purpose, security, and disclosure boundaries.
+
+Temporary processing does not automatically authorize:
+
+* Permanent storage
+* Unrelated reuse
+* Model training
+* External disclosure
+* Long-term retention
+
+Once temporary information is intentionally persisted or disclosed, applicable PinkCurve lifecycle and access controls apply.
+
+Derived information such as embeddings, signals, scores, recommendations, and model outputs should not automatically remain authoritative after their source information or validity changes.
+
+### Physical Purge
+
+Physical purge is a separate governed lifecycle operation from normal application deletion.
+
+Conceptually:
+
+```text id="p6n0o1"
+Logical Deletion
+      ↓
+Retention / Legitimate Need
+      ↓
+Retention Requirement Satisfied
+      ↓
+Purge Eligibility
+      ↓
+Governed Physical Purge
+```
+
+A physical purge process may eventually need to address:
+
+* Primary databases
+* Secondary stores
+* Search indexes
+* Vector stores
+* Caches
+* Archives
+* Backups
+* Approved external providers
+
+PinkCurve does not need to perform complete immediate physical destruction across every storage system as part of the initial application-delete workflow.
+
+The purge process should evolve according to applicable legal, privacy, security, operational, and business requirements.
+
+### Security-State Lifecycle
+
+Security-critical state requires stronger lifecycle behavior than ordinary business information.
+
+For example:
+
+```text id="j6r7w2"
+Verified
+   ↓
+Changed
+   ↓
+Reassessment Required
+   ↓
+Verified / Restricted / Suspended
+```
+
+A stale secondary representation SHALL NOT override current authoritative security state.
+
+Security restrictions, suspensions, revocations, and invalidations should propagate with appropriate urgency.
+
+> **Normal deletion removes information from ordinary PinkCurve use; governed lifecycle processes determine retention and eventual physical disposal.**
+
+---
+
 # Infrastructure Security
 
 Potential infrastructure controls include:
@@ -1353,6 +2395,153 @@ Controls may include:
 * Restricted access to sensitive data
 
 AI-generated content should never automatically be considered trustworthy solely because it was generated by an AI system.
+
+---
+
+## AI Data Access and External Provider Boundaries
+
+AI processing does not create independent authority to access PinkCurve information.
+
+AI models, AI agents, AI Platform services, and external AI providers SHALL operate within the same identity, authorization, data-access, purpose, disclosure, security-state, audit, and lifecycle controls that apply to other PinkCurve capabilities.
+
+An AI system's ability to technically request, process, infer, or generate information SHALL NOT itself establish permission to access that information.
+
+Conceptually:
+
+```text
+AI Agent / AI Capability
+          ↓
+Authenticated Identity
+          ↓
+Authorized Capability
+          ↓
+Approved Tool / Interface
+          ↓
+Minimum Necessary Data
+          ↓
+Purpose-Specific Processing
+          ↓
+Controlled Result
+```
+
+### Minimum Necessary Disclosure
+
+When PinkCurve sends information to an external AI provider or other external service, PinkCurve SHOULD provide only the information reasonably necessary for the authorized operation.
+
+```text
+PinkCurve Internal Data
+        ↓
+Data Minimization
+        ↓
+Purpose-Specific Input
+        ↓
+Approved External Provider
+```
+
+PinkCurve SHALL NOT treat the existence of an external provider integration as permission to send unrelated Buyer, Seller, Organization, Trust, security, behavioral, or other protected information.
+
+> **Permission to access data is not permission to disclose that data.**
+
+### External Provider Boundary
+
+Sending PinkCurve information to an external provider is an external disclosure and SHALL be treated as a controlled security and privacy boundary.
+
+Before protected information is sent to an external provider, applicable controls SHOULD establish:
+
+* The provider is approved for the intended use
+* The purpose of the processing is established
+* The information provided is necessary for that purpose
+* Applicable security requirements are satisfied
+* Applicable retention and deletion requirements are understood
+* Applicable provider data-use restrictions are understood
+* Sensitive information is minimized or transformed where practical
+
+Provider-specific requirements MAY differ according to:
+
+* Data sensitivity
+* Processing purpose
+* Provider capability
+* Contractual terms
+* Applicable law
+* Security risk
+* Whether the provider retains, trains on, or otherwise reuses submitted information
+
+### AI Agents
+
+AI agents SHALL NOT receive unrestricted PinkCurve database access merely because they are capable of using tools or making decisions.
+
+AI agents SHOULD interact with PinkCurve through approved tools and capability interfaces.
+
+```text
+AI Agent
+   ↓
+Approved Tool
+   ↓
+Capability Authorization
+   ↓
+Controlled Data Interface
+   ↓
+Purpose-Limited Result
+```
+
+The AI agent may determine what information or operation it needs.
+
+PinkCurve determines whether the agent is authorized to receive or perform it.
+
+### AI Output and Authoritative State
+
+AI-generated information SHALL NOT automatically become authoritative PinkCurve state.
+
+AI output may represent:
+
+* Evidence
+* Classification
+* Prediction
+* Signal
+* Recommendation
+* Candidate value
+* Summary
+* Generated content
+
+The responsible PinkCurve capability SHALL determine whether and how AI output becomes authoritative state.
+
+```text
+AI Output
+    ↓
+Validation / Evaluation
+    ↓
+Responsible Capability
+    ↓
+Authorized Decision
+    ↓
+Authoritative PinkCurve State
+```
+
+This prevents an AI model or provider from implicitly becoming the owner of PinkCurve business, Trust, security, or financial state.
+
+### AI Agent Consequential Actions
+
+When an AI agent performs a consequential operation, the operation SHALL remain subject to the same authorization and security-state controls that would apply to the equivalent non-AI operation.
+
+Consequential AI actions SHOULD produce appropriate action-level audit evidence.
+
+PinkCurve SHALL NOT need to retain unrestricted model reasoning or complete internal model context merely to establish accountability for an action.
+
+### Provider Failure and Change
+
+An external provider becoming unavailable, changing behavior, changing its data-use terms, producing unsafe results, or becoming unsuitable for a particular purpose SHALL NOT automatically grant PinkCurve permission to bypass its normal security or disclosure controls.
+
+PinkCurve SHOULD be able to restrict, replace, or disable a provider integration when required by:
+
+* Security findings
+* Privacy concerns
+* Provider changes
+* Trust concerns
+* Reliability failures
+* Contractual changes
+* Regulatory requirements
+
+> **AI is a capability PinkCurve controls; it is not an authority that controls PinkCurve.**
 
 ---
 
