@@ -871,6 +871,59 @@ Analytics systems may initially use PostgreSQL but eventually benefit from speci
 
 ---
 
+# Qualified Offering Visit Data
+
+A Qualified Offering Visit (QOV) is an independently meaningful Discovery Analytics output representing a Buyer visit to a Seller destination that satisfies the applicable QOV qualification requirements.
+
+Discovery Analytics owns QOV qualification and is authoritative for the resulting QOV record.
+
+Each qualified visit SHALL have a stable `qov_id`.
+
+A QOV record may include:
+
+* `qov_id`
+* `discovery_event_id`
+* `discovery_session_id`
+* `buyer_id` where permitted
+* `seller_id`
+* `offering_id`
+* applicable destination reference
+* qualification status
+* qualification time
+* QOV definition or qualification-rule version
+* traffic-validation result or evidence reference
+* bot-validation result or evidence reference
+* fraud-validation result or evidence reference
+* deduplication result or evidence reference
+* applicable Trust / Security decision or evidence reference
+* qualification evidence or provenance reference
+* creation time
+* correction or invalidation status where applicable
+
+The QOV record should preserve sufficient evidence and provenance to explain and reproduce the qualification decision without unnecessarily duplicating sensitive Trust, Security, or Raw Event data.
+
+A QOV is distinct from both the originating Discovery Event and any resulting Billable Event.
+
+```text
+discovery_event_id
+        ↓
+QOV Qualification
+        ↓
+qov_id
+        ↓
+Billing Qualification
+        ↓
+billable_event_id
+```
+
+A Discovery Event may fail QOV qualification and therefore produce no QOV.
+
+A valid QOV may also fail Billing qualification and therefore produce no Billable Event.
+
+Billing consumes the authoritative QOV record but does not redefine or recreate the QOV.
+
+---
+
 # Analytics Storage Evolution
 
 An early architecture may use:
@@ -1209,23 +1262,63 @@ Billing data should support:
 
 # Billable Discovery Events
 
-If QOV or another discovery measure becomes billable, PinkCurve should distinguish:
+If QOV or another discovery measure becomes billable, PinkCurve should distinguish Discovery activity, QOV qualification, and Billing qualification.
 
-```text id="2bf8se"
+For QOV-based Billing:
+
+```text
 Discovery Event
       ↓
-Qualification
+Applicable Trust / Security Evidence
       ↓
-Bot / Fraud Validation
+Discovery Analytics
+      ↓
+QOV Qualification
+      ↓
+Qualified Offering Visit
+(qov_id)
+      ↓
+Billing
+      ↓
+Billing Qualification
       ↓
 Billable Event
+(billable_event_id)
       ↓
 Invoice Item
+(invoice_item_id)
 ```
 
-A raw click should not automatically become a billable event.
+A Raw Discovery Event should not automatically become a QOV or a Billable Event.
+
+Discovery Analytics determines whether the applicable Discovery activity satisfies the QOV qualification requirements and records the resulting Qualified Offering Visit.
+
+QOV qualification may use applicable traffic-validation, bot, fraud, deduplication, Trust, Security, and other authorized evidence produced by the responsible PinkCurve capabilities.
+
+Billing consumes the authoritative QOV record and determines whether the QOV satisfies the applicable Billing rules.
+
+A QOV that fails Billing qualification SHALL NOT produce a QOV-based Billable Event.
 
 Billing qualification should be reproducible and auditable.
+
+The relationship among the records should preserve sufficient traceability:
+
+```text
+discovery_event_id
+        ↓
+      qov_id
+        ↓
+billable_event_id
+        ↓
+invoice_item_id
+```
+
+This separation allows PinkCurve to investigate and explain independently:
+
+* what Discovery activity occurred;
+* why the activity qualified or failed to qualify as a QOV;
+* why a valid QOV qualified or failed to qualify for Billing; and
+* how the resulting Billable Event was represented on a Seller invoice.
 
 ---
 
@@ -1598,7 +1691,7 @@ A Product may consume or temporarily store another Product's data without becomi
 | Discovery metric | Authoritative Discovery Analytics result |
 | Analytical Result | Authoritative Discovery Analytics result |
 | QOV definition | Authoritative Discovery Analytics definition |
-| QOV calculated result | Authoritative Discovery Analytics result |
+| Qualified Offering Visit (QOV) | Authoritative QOV record produced by Discovery Analytics |
 | Learning Output | Authoritative Learning Output record |
 | Purpose-specific learned Model | Authoritative Learning Engine Model record / Model artifact |
 | Model Registry / Model-serving technical state | Authoritative AI Platform Model Registry / serving-state record |
@@ -1769,28 +1862,60 @@ Billing records require particularly clear authority.
 
 Conceptually:
 
-    Discovery Event
-        ↓
-    Billing Qualification
-        ↓
-    Billable Event
-        ↓
-    Invoice Item
-        ↓
-    Invoice
+```text
+Discovery Event
+    ↓
+QOV Qualification
+    ↓
+Qualified Offering Visit
+(qov_id)
+    ↓
+Billing Qualification
+    ↓
+Billable Event
+(billable_event_id)
+    ↓
+Invoice Item
+(invoice_item_id)
+    ↓
+Invoice
+(invoice_id)
+```
 
 The Discovery Event remains authoritative evidence that the Discovery activity occurred.
 
-Billing determines whether the applicable Event qualifies for Billing.
+Discovery Analytics determines whether the applicable Discovery activity satisfies the QOV qualification requirements and is authoritative for the resulting Qualified Offering Visit.
+
+Billing consumes the authoritative QOV record and determines whether that QOV satisfies the applicable Billing qualification requirements.
 
 Billing is authoritative for:
 
-- Billing Qualification;
-- Billable Event;
-- Invoice Item;
-- Invoice.
+* Billing Qualification;
+* Billable Event;
+* Invoice Item;
+* Invoice.
 
-A raw Discovery Event should not automatically become an authoritative financial record.
+A Discovery Event that does not qualify as a QOV SHALL NOT produce a QOV-based Billable Event.
+
+A valid QOV does not automatically become a Billable Event. Billing qualification may reject, exclude, adjust, or otherwise determine that a QOV is not billable according to the applicable Billing rules.
+
+The billing lineage should preserve the applicable relationship:
+
+```text
+discovery_event_id
+        ↓
+      qov_id
+        ↓
+billable_event_id
+        ↓
+invoice_item_id
+        ↓
+    invoice_id
+```
+
+This lineage should remain sufficiently traceable to support reconciliation, Seller explanation, dispute handling, correction, auditing, and applicable Trust or fraud investigation.
+
+A Raw Discovery Event should not automatically become an authoritative financial record, and Billing should not independently recreate the QOV qualification decision owned by Discovery Analytics.
 
 ---
 
@@ -1894,6 +2019,7 @@ Examples may include:
 - `discovery_session_id`;
 - `discovery_result_id`;
 - `discovery_event_id`;
+- `qov_id`;
 - `buyer_feedback_id`;
 - `buyer_review_id`;
 - `buyer_rating_id`;
