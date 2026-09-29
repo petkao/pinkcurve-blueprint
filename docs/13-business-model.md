@@ -5,9 +5,9 @@
 | Field                  | Value                                                                                                                    |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | **Status**             | Draft                                                                                                                    |
-| **Version**            | 0.3                                                                                                                      |
+| **Version**            | 0.4                                                                                                                      |
 | **Owner**              | PinkCurve Product Team                                                                                                   |
-| **Last Reviewed**      | 2026-08-20                                                                                                               |
+| **Last Reviewed**      | 2026-09-27                                                                                                               |
 | **Related Components** | Discovery Engine, Discovery Analytics, Learning Engine, Seller Intelligence, Creative Studio, Security Privacy and Trust |
 
 ---
@@ -33,15 +33,15 @@ The economic model is therefore built around a simple principle:
 ```text
 Sellers / Organizations
         ↓
-Provide Offerings
+Provide Offerings / Brand Recognition Content
         ↓
 PinkCurve Discovery
         ↓
-Relevant Buyer Exposure
+Relevant Buyer Discovery
         ↓
-Meaningful Discovery
+Intentional Buyer Action
         ↓
-Qualified Visits / Brand Recognition / Insights
+Qualified Offering Visit / Quality Brand Exposure
         ↓
 Seller Value
         ↓
@@ -78,11 +78,10 @@ The business model must preserve the integrity of discovery.
 
 PinkCurve should therefore distinguish between:
 
-* Organic discovery
-* Paid discovery programs
-* Brand Recognition programs
+* Offering Discovery
+* Brand Recognition
 * Seller platform services
-* Premium intelligence and creative capabilities
+* Future premium capabilities
 
 Organic discovery should continue to prioritize factors such as:
 
@@ -95,9 +94,19 @@ Organic discovery should continue to prioritize factors such as:
 * Buyer preferences
 * Discovery diversity
 
-Seller spending should not secretly override these principles.
+Seller spending SHALL NOT override these principles.
 
-Where Sellers pay for additional exposure or promotional capabilities, PinkCurve should clearly define the service and appropriately identify sponsored or paid discovery when necessary.
+PinkCurve does not sell preferential organic Discovery ranking. A Seller cannot pay PinkCurve to prioritize one Offering over another or to cause an Offering to rank more highly merely because the Seller is willing to spend more.
+
+Seller spending controls the maximum financial exposure the Seller authorizes for an applicable PinkCurve Service. It does not control organic Discovery ranking.
+
+PinkCurve monetization should instead be tied to clearly defined qualified Buyer actions produced through an authorized PinkCurve Service.
+
+For Offering Discovery, the applicable qualified action is a Qualified Offering Visit (QOV).
+
+For Brand Recognition, the applicable qualified action is a Quality Brand Exposure.
+
+In both cases, passive exposure alone is not billable.
 
 The objective is not to maximize advertising inventory.
 
@@ -112,6 +121,16 @@ The objective is to create a sustainable discovery ecosystem in which:
 ## For Buyers
 
 PinkCurve should remain free for Buyers.
+
+For MVP, PinkCurve Discovery is designed for registered human Buyers.
+
+External autonomous AI agents, bots, and other non-human actors SHALL NOT participate as Buyers or independently consume PinkCurve Discovery on behalf of Buyers.
+
+This boundary helps preserve the meaning and integrity of Buyer interactions, Discovery signals, Qualified Offering Visits, Quality Brand Exposures, Seller value, and the resulting business model.
+
+AI may power PinkCurve capabilities internally, but the Buyer-facing economic model is based on qualified actions performed by registered human Buyers.
+
+> **AI powers PinkCurve. Humans consume PinkCurve Discovery.**
 
 Buyer value includes:
 
@@ -155,10 +174,10 @@ Seller value may include:
 | Qualified discovery          | Reach Buyers with relevant intent or interests          |
 | Qualified Offering Visits    | Deliver qualified outbound visit opportunities to       |
 |                              | approved Seller destinations                            |
-| Brand Recognition            | Build awareness among relevant audiences over time      |
+| Brand Recognition            | Enable relevant Buyers to explore approved brands       |
 | Offering intelligence        | Understand how Buyers respond to Offerings              |
 | Discovery intelligence       | Understand where and why discovery succeeds or fails    |
-| Creative capabilities        | Produce and improve visual storytelling                 |
+| Creative capabilities        | Help Sellers plan, evaluate, improve discovery content  |
 | Audience intelligence        | Understand which audiences engage                       |
 | Geographic intelligence      | Understand where discovery occurs                       |
 | Optimization recommendations | Receive actionable suggestions from Seller Intelligence |
@@ -167,6 +186,14 @@ Seller value may include:
 | Direct relationship          | Buyer transactions remain on Seller destinations        |
 
 PinkCurve should help Sellers understand not merely how many times an Offering appeared, but whether PinkCurve created meaningful business value.
+
+Seller value should be created through useful Buyer discovery rather than purchased Discovery priority.
+
+For Offering Discovery, measurable Seller value may include Qualified Offering Visits created when registered human Buyers intentionally choose to continue toward an approved Offering destination.
+
+For Brand Recognition, measurable Seller value may include Quality Brand Exposures created when registered human Buyers intentionally choose to view or explore approved Brand Recognition Content.
+
+These services are independent. A Quality Brand Exposure does not require an Offering, Seller website, external destination, transaction, or Qualified Offering Visit.
 
 ---
 
@@ -209,28 +236,81 @@ More Quality Offerings
 
 This compounding discovery loop is central to PinkCurve's long-term business value.
 
+PinkCurve's monetization should benefit from this discovery loop without controlling it.
+
+Discovery capabilities determine what is relevant and appropriate for Buyers. Billing determines the financial treatment of qualified Buyer actions after those actions occur.
+
+Conceptually:
+
+```text
+Buyer Relevance + Discovery Integrity
+        ↓
+PinkCurve Discovery
+        ↓
+Intentional Buyer Action
+        ↓
+Qualification
+        ↓
+Seller Value
+        ↓
+Billing
+        ↓
+PinkCurve Revenue
+```
+
 ---
 
 # Revenue Model
 
-PinkCurve should support multiple revenue mechanisms rather than depending entirely on one metric.
+PinkCurve's MVP revenue model is based primarily on qualified Buyer actions generated through Seller-authorized PinkCurve Services.
 
-Potential revenue categories include:
+The initial billable services are:
 
-1. Qualified Offering Visits
-2. Brand Recognition Programs
-3. Seller Subscriptions
-4. Premium Creative and Intelligence Services
-5. Enterprise and Integration Services
-6. Community and Public-Service Economics
+1. **Offering Discovery**
+   - Billing unit: Qualified Offering Visit (QOV)
 
-The exact combination should be validated through actual Seller and Buyer behavior.
+2. **Brand Recognition**
+   - Billing unit: Quality Brand Exposure
+
+Conceptually:
+
+```text
+PinkCurve Service
+        ↓
+Registered Human Buyer
+        ↓
+Intentional Buyer Action
+        ↓
+Service-Specific Qualification
+        ↓
+Qualified Billing Unit
+        ↓
+Applicable Unit Price
+        ↓
+Free USD Allowance
+        ↓
+Paid Usage
+        ↓
+Seller Charge
+```
+
+PinkCurve does not charge Buyers.
+
+For Sellers, PinkCurve does not charge for passive impressions, ordinary media views, scrolling, likes, saves, shares, ratings, Adaptive Metadata Navigation selections, or other ordinary in-PinkCurve engagement unless a future explicitly defined service establishes a different approved billing model.
+
+The MVP business model does not require Seller subscription fees, account fees, setup fees, service activation fees, prepaid balances, minimum monthly charges, or transaction commissions.
+
+Seller Intelligence and applicable discovery insights may initially be provided without a separate charge.
+
+Future revenue opportunities may include additional Seller services, premium capabilities, enterprise or integration services, or other approved PinkCurve Services. Such future opportunities are not part of the initial MVP revenue model and require separate business-model definition and Seller authorization before becoming billable.
+
+> **PinkCurve charges Sellers for qualified value created through intentional Buyer action, not merely for Buyer exposure.**
 
 ---
 
 # 1. Qualified Offering Visits
 
-A **Qualified Offering Visit (QOV)** represents a qualified outbound visit opportunity delivered by PinkCurve to an approved Seller destination.
+A **Qualified Offering Visit (QOV)** represents an independently qualified intentional action by a registered human Buyer to continue from PinkCurve toward an approved Seller destination associated with an Offering.
 
 Conceptually:
 
@@ -254,11 +334,11 @@ A QOV should not simply mean that a link was clicked.
 
 ## QOV Observable Boundary
 
-For baseline PinkCurve measurement, a Qualified Offering Visit represents a qualified outbound visit opportunity delivered by PinkCurve to an approved Seller destination.
+For baseline PinkCurve measurement, a Qualified Offering Visit represents an independently qualified intentional action by a registered human Buyer to continue from PinkCurve toward an approved Seller destination associated with an Offering.
 
 PinkCurve can determine that:
 
-* the Buyer expressed intent to continue to the Seller destination;
+* a registered human Buyer intentionally chose to continue toward the approved Seller destination associated with the Offering;
 * the applicable Seller, Offering, and destination URL satisfied the current redirect eligibility and security requirements;
 * PinkCurve authorized the outbound transition; and
 * the originating discovery activity satisfied the applicable QOV qualification requirements.
@@ -277,6 +357,17 @@ Where authorized Seller-side or integration evidence is available, PinkCurve may
 
 Such evidence may support enhanced measurement or future qualification models but is not required for the baseline QOV definition unless an applicable future pricing or participation program explicitly requires it.
 
+A QOV is therefore a qualified Discovery outcome, not a transaction outcome.
+
+PinkCurve's responsibility is to create and qualify the Buyer transition from PinkCurve toward the approved Seller destination. The Seller remains responsible for the subsequent Seller-side experience, including pricing, availability, checkout, fulfillment, service delivery, and transaction completion.
+
+A purchase, conversion, or other Seller-side outcome is not required for a valid QOV to be billable.
+
+A QOV is therefore a qualified Discovery outcome, not a transaction outcome.
+
+PinkCurve's responsibility is to create and qualify the Buyer transition from PinkCurve toward the approved Seller destination. The Seller remains responsible for the subsequent Seller-side experience, including pricing, availability, checkout, fulfillment, service delivery, and transaction completion.
+
+A purchase, conversion, or other Seller-side outcome is not required for a valid QOV to be billable.
 
 A Buyer click or redirect attempt does not by itself create a Qualified Offering Visit.
 
@@ -286,12 +377,13 @@ A redirect that is blocked, restricted, security-failed, fraudulent, or otherwis
 
 QOV qualification may evaluate applicable evidence and qualification factors such as:
 
-* Valid Buyer or session
-* Not identified as bot traffic
-* Not identified as click fraud
-* Appropriate deduplication
-* Minimum qualification criteria
-* Other integrity requirements
+* Valid registered human Buyer
+* Valid Buyer session
+* Not identified as bot or automated traffic
+* Not identified as fraudulent activity
+* Intentional Buyer action
+* Applicable Trust and Security eligibility
+* Other integrity and qualification requirements
 
 QOV definitions should be understandable to Sellers.
 
@@ -318,7 +410,7 @@ Discovery Event
 Discovery Analytics
 → Traffic validation
 → Applicable bot and fraud evidence evaluation
-→ Deduplication
+→ Intentional-action validation
 → QOV qualification rules
         ↓
 Qualified Offering Visit
@@ -340,6 +432,283 @@ A QOV and a Billable Event are therefore related but distinct.
 A discovery event may fail QOV qualification. A QOV may also fail billing qualification and therefore produce no Billable Event.
 
 This separation allows PinkCurve to maintain independent security, discovery measurement, and billing responsibilities while preserving event traceability and auditability.
+
+### QOV-to-Billable-Event Relationship
+
+A Qualified Offering Visit and a Billable Event are separate PinkCurve entities with different responsibilities.
+
+A QOV represents qualified discovery activity. A Billable Event represents the financial determination that an applicable underlying activity is chargeable according to an authorized pricing policy.
+
+For QOV-based billing, one QOV may produce **zero or one QOV-derived Billable Event**.
+
+Conceptually:
+
+```text
+Discovery Event
+      ↓
+QOV Qualification
+      ↓
+Qualified Offering Visit
+(qov_id)
+      ↓
+Billing Qualification
+      ↓
+ ┌───────────────┐
+ │               │
+Billable      Not Billable
+ │               │
+ ↓               ↓
+One              No
+Billable Event   Billable Event
+```
+
+A single QOV SHALL NOT produce multiple QOV-derived Billable Events.
+
+Conceptually:
+
+```text
+qov_id
+  │
+  └── 0..1 billable_event_id
+```
+
+Billing Qualification should determine the applicable authorized pricing treatment before creating the Billable Event.
+
+For QOV-based billing, Billing should use the preserved QOV lineage, applicable Offering Discovery Service authorization, `qov_id`, pricing policy, and other required identifiers to determine the authorized billing treatment.
+
+```text
+Qualified Offering Visit
+        ↓
+qov_id
+        ↓
+Offering Discovery Service
+Authorization
+        ↓
+Applicable Authorized
+Pricing Policy
+        ↓
+Billing Qualification
+        ↓
+0..1 QOV-Derived
+Billable Event
+```
+
+The existence of multiple potentially applicable pricing concepts SHALL NOT cause PinkCurve to create multiple Billable Events for the same QOV.
+
+Brand Recognition is a separate PinkCurve Service with its own qualified billing unit, the Quality Brand Exposure. Brand Recognition billing therefore follows its own qualification and Billable Event path independently from QOV-based Offering Discovery billing.
+
+PinkCurve should preserve sufficient billing lineage to identify the underlying activity, applicable pricing policy, resulting Billable Event, and Seller charge.
+
+This relationship helps prevent duplicate or unintended overlapping charges while preserving traceability for Seller explanation, invoice reconciliation, dispute handling, and auditing.
+
+
+### Billable Event and Invoice Responsibility
+
+A Billable Event is the authoritative, traceable record that an underlying PinkCurve activity qualified for a particular charge under the pricing policy applicable at the time of Billing Qualification.
+
+The Billable Event should preserve sufficient information to explain why the charge exists and how it was determined.
+
+Conceptually:
+
+```text id="cpx07k"
+Underlying Activity
+        ↓
+Billing Qualification
+        ↓
+Applicable Pricing Policy
+        ↓
+Billable Event
+        ↓
+Seller Invoice
+```
+
+A Billable Event may preserve applicable information such as:
+
+* `billable_event_id`
+* `seller_id`
+* underlying activity type
+* underlying activity identifier, such as `qov_id` or another applicable activity identifier
+* applicable pricing policy identifier
+* pricing policy version
+* applicable unit price
+* quantity, where applicable
+* resulting charge amount
+* currency
+* Billing Qualification time
+* applicable billing status
+* other required financial lineage and provenance
+
+The detailed Billable Event data model should be defined by the applicable Data Architecture and Billing design.
+
+For QOV-based billing:
+
+```text id="tyl6mx"
+Discovery Event
+      ↓
+Qualified Offering Visit
+(qov_id)
+      ↓
+Billing Qualification
+      ↓
+Billable Event
+(billable_event_id)
+      ↓
+Seller Invoice
+```
+
+The Seller Invoice aggregates applicable Billable Events for presentation, settlement, accounting, and Seller billing.
+
+The Invoice SHALL NOT independently determine whether the underlying Discovery activity, QOV, Campaign activity, or other service qualified as billable.
+
+Conceptually:
+
+```text id="zglkxu"
+Billable Event B100 ─┐
+Billable Event B101 ─┤
+Billable Event B102 ─┼──→ Seller Invoice
+Billable Event B103 ─┤
+Billable Event B104 ─┘
+```
+
+The creation, regeneration, correction, dispute, crediting, or replacement of an Invoice should not silently rewrite the historical evidence establishing why the original underlying activity qualified for Billing.
+
+Where a financial correction is required, PinkCurve should preserve the original Billable Event and represent the applicable correction, adjustment, credit, reversal, or other governed financial action through traceable financial records rather than silently modifying historical billing evidence.
+
+This separation allows PinkCurve to answer independently:
+
+```text id="r03ds4"
+What happened?
+      ↓
+Underlying Activity
+
+Did it qualify for a charge?
+      ↓
+Billable Event
+
+How was the Seller billed?
+      ↓
+Seller Invoice
+
+Was the charge later corrected?
+      ↓
+Adjustment / Credit / Reversal
+```
+
+Billable Events and their relationship to pricing policy, underlying activity, Invoice records, and subsequent financial adjustments should remain sufficiently traceable to support Seller explanation, reconciliation, dispute resolution, accounting, and auditing.
+
+### Billing Adjustments and Financial Corrections
+
+Financial corrections should preserve the historical Billable Event rather than silently modifying or deleting the original billing evidence.
+
+When a valid correction, refund, credit, reversal, dispute resolution, or other financial adjustment is required, PinkCurve should create a separate traceable Billing Adjustment linked to the affected Billable Event and, where applicable, the Seller Invoice.
+
+Conceptually:
+
+```text id="ud0c9p"
+Underlying Activity
+        ↓
+Billable Event
+        ↓
+Seller Invoice
+        ↓
+Dispute / Correction
+        ↓
+Billing Adjustment
+        ↓
+Adjusted Financial Result
+```
+
+A Billing Adjustment may represent a full or partial financial correction.
+
+For example:
+
+```text id="s6s3a5"
+Original Billable Event     $1.00
+        ↓
+Partial Billing Adjustment -$0.25
+        ↓
+Net Financial Effect        $0.75
+```
+
+The original Billable Event should continue to represent the billing determination made at the time the underlying activity was qualified.
+
+The Billing Adjustment should preserve sufficient lineage to identify the affected Billable Event, applicable Invoice, reason for the adjustment, adjustment amount, authorization, time, and other required financial provenance.
+
+Conceptually:
+
+```text id="fpkf8s"
+billable_event_id
+        ↓
+billing_adjustment_id
+        ↓
+Reason / Authorization
+        ↓
+Financial Effect
+```
+
+PinkCurve SHALL NOT resolve a billing correction by silently rewriting historical billing evidence.
+
+The detailed Billing Adjustment data model, payment processing, settlement behavior, accounting treatment, and financial lifecycle should be defined by the applicable Data Architecture and Billing design.
+
+This separation supports Seller explanation, reconciliation, dispute resolution, financial integrity, and auditing.
+
+### Billable Event Finalization
+
+A Billable Event should be created only after the applicable Billing Qualification has been completed using the authoritative evidence and pricing policy available at that time.
+
+Conceptually:
+
+```text id="iwnbbq"
+Qualified Underlying Activity
+        ↓
+Billing Qualification
+        ↓
+Required Evidence Available?
+        ↓
+ ┌──────────────┐
+ │              │
+Yes             No
+ │              │
+ ↓              ↓
+Complete        Await Required
+Qualification   Evidence
+ │
+ ↓
+Billable Event
+```
+
+Where Billing Qualification depends on evidence that may arrive asynchronously, PinkCurve may use an appropriately defined qualification window before creating the Billable Event.
+
+The qualification window should exist only where necessary to establish the applicable billing determination and should not create indefinite or unexplained billing uncertainty for Sellers.
+
+Once Billing Qualification is completed and the Billable Event is created, the Billable Event becomes historical financial evidence of the billing determination made using the authoritative evidence and applicable pricing policy available at that time.
+
+Conceptually:
+
+```text id="ffnlyy"
+Billing Qualification
+        ↓
+Billable Event Created
+        ↓
+Historical Billing Evidence
+        ↓
+Later Material Evidence?
+      ↙           ↘
+    No             Yes
+    ↓               ↓
+Remain Valid     Billing Adjustment
+                 / Credit / Reversal
+```
+
+Later evidence SHALL NOT silently rewrite or delete the historical Billable Event.
+
+Where later fraud evidence, reconciliation evidence, Seller dispute resolution, system correction, or other material information changes the appropriate financial result, PinkCurve should use the governed Billing Adjustment process.
+
+This establishes the boundary:
+
+> **Qualification before Billable Event creation; governed adjustment after Billable Event creation.**
+
+The detailed qualification windows, evidence requirements, fraud-review timing, settlement timing, and accounting treatment should be defined by the applicable Billing, Trust and Security, and Data Architecture designs.
 
 ---
 
@@ -402,7 +771,7 @@ Billable Event and Seller Charge
 
 The responsibilities are separated as follows:
 
-* **Business / Product responsibility** defines and approves QOV pricing policy, including applicable rates, pricing structures, Seller plans, category rules, geographic rules, volume rules, promotional pricing, and other business pricing decisions.
+* **Business / Product responsibility** defines and approves QOV pricing policy, including the standard QOV price and the rules governing any approved Seller-specific pricing, promotional pricing, or future volume pricing.
 * **Discovery Analytics** determines whether discovery activity satisfies the applicable QOV qualification requirements. QOV qualification should remain independent of the monetary value of the resulting QOV.
 * **Billing** applies the approved and applicable pricing policy to eligible QOVs and creates the resulting financial records.
 
@@ -416,7 +785,7 @@ This separation allows PinkCurve to change and experiment with pricing without r
 
 ---
 
-# 2. Brand Recognition Programs
+# 2. Brand Recognition
 
 Not every valuable discovery results in an immediate Qualified Offering Visit (QOV).
 
@@ -439,13 +808,173 @@ Examples include:
 * Events
 * New products
 
-PinkCurve's Daily Discovery experience creates an opportunity for Sellers to build recognition through relevant repeated exposure.
+Not every valuable Buyer discovery action is directed toward an Offering.
+
+A Buyer may also intentionally choose to explore a Seller, organization, brand, message, announcement, promotion, or other approved Brand Recognition Content.
+
+PinkCurve supports this through the **Brand Recognition Service**.
+
+The qualified billing unit for Brand Recognition is a **Quality Brand Exposure**.
+
+A Quality Brand Exposure is created when a registered human Buyer intentionally selects approved Brand Recognition Content to view or explore it and the interaction satisfies PinkCurve's applicable quality and integrity requirements.
+
+Conceptually:
+
+```text
+Approved Brand Recognition Content
+        ↓
+Relevant Buyer Discovery
+        ↓
+Registered Human Buyer
+        ↓
+Intentional Selection
+        ↓
+Quality / Integrity Validation
+        ↓
+Quality Brand Exposure
+
+## Brand Recognition Campaign Commercial Boundary
+
+A Brand Recognition Campaign allows a Seller to participate in PinkCurve's controlled paid-discovery mechanism.
+
+The Seller is not purchasing guaranteed human recognition, Buyer behavior, Qualified Offering Visits, conversions, transactions, revenue, or other Seller-side outcomes.
+
+Conceptually:
+
+```text id="e6l4wg"
+Seller Campaign
+      ↓
+Seller-Authorized Campaign Budget
+      ↓
+Eligible Paid Discovery Opportunities
+      ↓
+PinkCurve Discovery Engine
+      ↓
+Buyer Relevance + Context
+      +
+Campaign Configuration
+      +
+Buyer Experience
+      +
+Trust / Security
+      +
+Discovery Integrity
+      ↓
+Controlled Paid Discovery Delivery
+      ↓
+Observable Discovery Evidence
+```
+
+Seller spending may increase the Campaign's opportunity to participate in eligible paid discovery, subject to the Campaign's approved configuration and applicable PinkCurve controls.
+
+Seller spending SHALL NOT guarantee that a Campaign will receive a particular amount of Buyer exposure or that Buyers will respond in a particular way unless an applicable future pricing program explicitly defines and supports such a delivery commitment.
+
+PinkCurve should therefore distinguish between:
+
+```text id="trr2hl"
+What the Seller Authorizes and Purchases
+        ↓
+Participation in an applicable
+paid-discovery service
+
+What PinkCurve Controls
+        ↓
+Eligibility, relevance, context,
+delivery, frequency, Buyer Experience,
+Trust, Security, and Discovery integrity
+
+What PinkCurve Measures
+        ↓
+Observable Campaign delivery
+and Discovery evidence
+
+What PinkCurve Does Not Guarantee
+        ↓
+Recognition, QOVs, conversions,
+transactions, revenue, or other
+Seller-side outcomes
+```
+
+The applicable Campaign charging mechanism may vary according to the approved pricing program and should be established through market validation.
+
+Possible future charging mechanisms should not change the fundamental principle that PinkCurve monetization must preserve Buyer relevance, Buyer choice, Trust, Security, and Discovery integrity.
+
+PinkCurve SHALL NOT represent estimated Brand Recognition as guaranteed recognition merely because the Seller purchased Campaign participation.
+
+### Campaign Budget as Maximum Authorized Spend
+
+A Seller-authorized Campaign budget represents the **maximum amount the Seller authorizes PinkCurve to spend for the Campaign**. It does not represent an amount that PinkCurve is required or entitled to consume.
+
+Conceptually:
+
+```text
+Seller Campaign Budget
+        ↓
+Maximum Authorized Spend
+        ↓
+Eligible Paid Discovery Opportunities
+        ↓
+Actual Qualified Campaign Activity
+        ↓
+Actual Applicable Charges
+```
+
+Therefore:
+
+```text
+Maximum Authorized Spend
+        ≠
+Required Spend
+```
+
+PinkCurve SHALL NOT increase inappropriate Campaign delivery, weaken Buyer relevance, reduce discovery quality, bypass eligibility requirements, or otherwise alter Discovery behavior merely to consume the remaining Campaign budget.
+
+For example:
+
+```text
+Seller Campaign Budget = $500
+        ↓
+Appropriate Campaign Opportunity
+during Campaign period = $180
+        ↓
+Applicable Campaign Charges = $180
+        ↓
+Unused Authorized Budget = $320
+```
+
+The remaining authorized budget should not be consumed solely because it was available.
+
+Campaign spending remains subject to applicable:
+
+- Buyer relevance and context,
+- Campaign eligibility,
+- Buyer Experience protections,
+- frequency and repetition controls,
+- Trust and Security requirements,
+- Discovery integrity,
+- Campaign configuration,
+- pricing policy, and
+- applicable billing qualification.
+
+A larger Campaign budget may increase a Campaign's opportunity to participate in eligible paid discovery when appropriate opportunities exist, but the budget SHALL NOT create an obligation for PinkCurve to manufacture additional discovery opportunities.
+
+This principle protects both Buyers and Sellers.
+
+For Buyers, it prevents commercial spending pressure from overriding the quality and relevance of the Discovery experience.
+
+For Sellers, it prevents PinkCurve from consuming authorized Campaign funds through low-quality or inappropriate delivery merely to exhaust the available budget.
+
+> **Campaign budget is a spending ceiling, not a spending target.**
+
+Detailed budget reservation, pacing, balance management, payment authorization, settlement, and unused-fund handling should be defined by the applicable Campaign, Billing, and financial-system designs.
 
 ## Brand Recognition Campaign Entity
 
 A Brand Recognition Campaign is a separate PinkCurve business object identified by `campaign_id`.
 
-A Brand Recognition Campaign is **not itself an Offering**.
+A Brand Recognition Campaign is **not an Offering and does not reference or depend on an Offering**.
+
+Offering and Campaign are independent Seller-created discovery objects with different purposes, identities, content, discovery paths, measurement, and applicable monetization.
 
 Conceptually:
 
@@ -454,21 +983,114 @@ Seller
  │
  ├── Offering
  │     └── offering_id
+ │           │
+ │           ├── Offering information
+ │           ├── Offering visual assets
+ │           ├── Seller Offering destination
+ │           └── Offering Discovery
  │
  └── Brand Recognition Campaign
        └── campaign_id
              │
              ├── Campaign configuration
-             ├── Campaign creative/content
+             ├── Campaign Creative(s)
+             │      └── creative_id
+             ├── Campaign destination
              ├── Budget
              ├── Targeting
              ├── Schedule
-             └── Referenced Offering(s), where applicable
+             └── Campaign Discovery
 ```
 
-A Brand Recognition Campaign may promote the Seller or brand itself and does not necessarily require a specific Offering.
+An Offering represents something the Seller makes available for Buyers to discover.
 
-Where appropriate, a campaign may reference one or more Offerings without changing those Offerings into campaign entities.
+A Brand Recognition Campaign represents a Seller-authorized paid discovery activity intended to communicate a brand, message, identity, announcement, promotion, or other approved Campaign purpose through PinkCurve.
+
+The two objects may belong to the same Seller, but that common Seller ownership does not create a relationship between them.
+
+Conceptually:
+
+```text
+Seller
+  │
+  ├── Offering
+  │
+  └── Campaign
+
+Offering ← no dependency → Campaign
+```
+
+A Campaign SHALL NOT require an `offering_id`.
+
+A Campaign SHALL NOT reference an Offering as Campaign content.
+
+An Offering SHALL NOT become Campaign content merely because the Seller creates a Campaign.
+
+Campaign Discovery SHALL NOT change the identity, lifecycle, approval status, discovery eligibility, or organic Discovery behavior of any Offering belonging to the Seller.
+
+Similarly, Offering Discovery SHALL NOT change the identity, lifecycle, approval status, or delivery eligibility of a Campaign.
+
+### Campaign Creative Requirement
+
+Every Campaign that participates in paid Campaign Discovery must have at least one currently approved and eligible Campaign Creative.
+
+A Campaign Creative is a Campaign-specific visual asset identified by `creative_id`.
+
+Campaign Creative formats may initially include:
+
+- Campaign image or poster,
+- Campaign video, and
+- other future PinkCurve-approved visual Campaign formats.
+
+Conceptually:
+
+```text
+Campaign
+    ↓
+campaign_id
+    ↓
+1..N Approved Campaign Creatives
+    ↓
+creative_id
+    ↓
+Campaign Discovery
+```
+
+Campaign Creative assets are separate from Offering visual assets.
+
+An Offering image or video SHALL NOT be treated as the Campaign Creative for an Offering belonging to the same Seller.
+
+Likewise, a Campaign Creative SHALL NOT become an Offering visual asset.
+
+This separation allows Campaign content to be created, approved, delivered, measured, changed, suspended, or retired independently from the Seller's Offerings.
+
+A Campaign may exist in a Draft or configuration state without an approved Campaign Creative, but it SHALL NOT become eligible for paid Campaign delivery until at least one applicable Campaign Creative has satisfied the required approval, Trust, Security, content, and delivery-eligibility requirements.
+
+This establishes the fundamental PinkCurve business boundary:
+
+```text
+Offering
+    ↓
+Offering Visual
+    ↓
+Offering Discovery
+    ↓
+Qualified Offering Visit
+    when applicable
+
+Campaign
+    ↓
+Campaign Creative
+    ↓
+Campaign Discovery
+    ↓
+Campaign Measurement
+    ↓
+Campaign Billing
+    when applicable
+```
+
+Offering and Campaign may use common PinkCurve capabilities such as Discovery, Analytics, Trust and Security, Seller Intelligence, and Billing, but their business identities and direct discovery lineage remain separate.
 
 ---
 
@@ -476,31 +1098,36 @@ Where appropriate, a campaign may reference one or more Offerings without changi
 
 Campaign Configuration defines the Seller's objectives, content, constraints, and authorized parameters for a Brand Recognition Campaign.
 
-The purpose of Campaign Configuration is to give PinkCurve sufficient information to identify appropriate discovery opportunities while preserving Buyer relevance, Buyer choice, Trust, Security, and the integrity of the Discovery Engine.
+The purpose of Campaign Configuration is to give PinkCurve sufficient information to identify appropriate Campaign Discovery opportunities while preserving Buyer relevance, Buyer choice, Trust, Security, and the integrity of the Discovery Engine.
+
+Campaign Configuration applies only to the Campaign. It does not configure, reference, or modify any Offering belonging to the Seller.
 
 A Campaign Configuration may include:
 
-* Campaign objective
-* Seller and brand identity
-* Referenced Offerings, where applicable
-* Approved Creatives
-* Applicable destination
-* Relevant categories and metadata context
-* Geographic constraints
-* Campaign schedule
-* Budget and spending limits
-* Frequency and exposure controls
-* Applicable pricing plan or campaign program
-* Campaign status
-* Other approved discovery constraints
-* Configuration version
+- Campaign objective
+- Seller and brand identity
+- Approved Campaign Creatives
+- Applicable Campaign destination
+- Relevant categories and metadata context
+- Geographic constraints
+- Campaign schedule
+- Budget and spending limits
+- Frequency and exposure controls
+- Applicable pricing plan or Campaign program
+- Campaign status
+- Other approved Campaign Discovery constraints
+- Configuration version
 
 Conceptually:
 
-```text
+```text id="yd2q3b"
 Seller Campaign Configuration
         ↓
 Campaign Intent + Constraints
+        +
+Approved Campaign Creative(s)
+        +
+Campaign Destination
         +
 Buyer Intelligence
         +
@@ -512,29 +1139,41 @@ Buyer Experience / Diversity Rules
         ↓
 Discovery Engine
         ↓
-Appropriate Discovery Opportunity
+Appropriate Campaign Discovery Opportunity
         ↓
 Campaign Creative Presented
         ↓
-Observable Discovery Results
+Campaign Discovery Event
+        ↓
+Observable Campaign Results
 ```
 
-Campaign Configuration defines the Seller's campaign intent and permitted delivery boundaries. It does not give the Seller direct control over which individual Buyers receive campaign content.
+Campaign Configuration defines the Seller's Campaign intent and permitted delivery boundaries. It does not give the Seller direct control over which individual Buyers receive Campaign content.
 
-The Discovery Engine remains responsible for determining whether an eligible Campaign is appropriate for a particular discovery opportunity according to applicable Buyer relevance, context, preferences, discovery quality, diversity, Trust, Security, and Buyer Experience rules.
+The Discovery Engine remains responsible for determining whether an eligible Campaign is appropriate for a particular Campaign Discovery opportunity according to applicable Buyer relevance, context, preferences, discovery quality, diversity, Trust, Security, and Buyer Experience rules.
 
-A larger campaign budget may increase the amount of eligible paid discovery opportunity available to a Campaign, but budget alone SHALL NOT override Buyer relevance, eligibility, Trust, Security, or Discovery integrity.
+Campaign Configuration SHALL NOT alter the discovery eligibility, ranking, lifecycle, approval status, or other behavior of any Offering belonging to the Seller.
 
-PinkCurve should use observable Campaign results to help Sellers understand campaign effectiveness and, through Seller Intelligence and other applicable capabilities, improve future Campaign decisions.
+Likewise, Offering activity SHALL NOT automatically modify Campaign Configuration or Campaign delivery.
+
+A larger Campaign budget may increase the amount of eligible paid discovery opportunity available to a Campaign, but budget alone SHALL NOT override Buyer relevance, eligibility, Trust, Security, Buyer Experience, or Discovery integrity.
+
+The Campaign Creative presented to the Buyer must be an approved and currently eligible Campaign Creative associated with the applicable `campaign_id`.
+
+The applicable `creative_id` should be preserved with the resulting Campaign Discovery Event so PinkCurve can determine which Campaign Creative was actually presented.
+
+The Campaign destination should be governed as part of the Campaign rather than inherited from an Offering. Applicable destination eligibility, verification, Trust, Security, and redirect requirements should therefore be evaluated independently for Campaign delivery.
+
+PinkCurve should use observable Campaign results to help Sellers understand Campaign effectiveness and, through Seller Intelligence and other applicable capabilities, improve future Campaign decisions.
 
 Conceptually:
 
-```text
+```text id="b2zue9"
 Campaign Configuration
         ↓
 Campaign Delivery
         ↓
-Discovery Events
+Campaign Discovery Events
         ↓
 Discovery Analytics
         ↓
@@ -547,7 +1186,11 @@ Seller Insights / Recommendations
 Improved Future Campaign Configuration
 ```
 
-PinkCurve should distinguish observable Campaign results from inferred or estimated outcomes and should not guarantee Buyer response, Seller conversion, revenue, or other Seller-side results that PinkCurve cannot directly establish.
+Campaign measurement should preserve the distinction between directly observable Campaign activity and inferred or estimated outcomes.
+
+PinkCurve should not guarantee Buyer response, Brand Recognition, conversion, revenue, or other Seller-side outcomes that PinkCurve cannot directly establish.
+
+Campaign Configuration, Campaign Creative, Campaign Discovery, Campaign measurement, and applicable Campaign Billing should remain independent from Offering Configuration, Offering Discovery, QOV qualification, and QOV-based Billing.
 
 ---
 
@@ -633,14 +1276,16 @@ The detailed rules defining which configuration changes are material, which requ
 
 ### Campaign Objective
 
-Each Brand Recognition Campaign should have a defined `campaign_objective` representing the primary discovery outcome the Seller intends the Campaign to support.
+Each Brand Recognition Campaign should have a defined `campaign_objective` representing the primary Campaign outcome the Seller intends the Campaign to support.
 
-The Campaign Objective helps PinkCurve recommend Campaign Configuration, evaluate applicable Discovery results, provide Seller Intelligence, and determine whether Campaign changes appear to improve the intended outcome.
+The Campaign Objective helps PinkCurve recommend Campaign Configuration, evaluate applicable Campaign Discovery results, provide Seller Intelligence, and determine whether Campaign changes appear to improve the intended outcome.
+
+A Campaign Objective applies only to the Campaign. It does not identify, reference, promote, or modify an Offering or another PinkCurve discovery object.
 
 Conceptually:
 
 ```text
-Seller Intent
+Seller Campaign Intent
         ↓
 Campaign Objective
         ↓
@@ -650,34 +1295,77 @@ Seller Approval
         ↓
 Campaign Delivery
         ↓
-Discovery Results
+Campaign Discovery Results
         ↓
 Discovery Analytics
         ↓
 Seller Intelligence
         ↓
-Progress Toward Intended Objective
+Progress Toward Intended
+Campaign Objective
 ```
 
 PinkCurve should initially support a small, controlled set of Campaign Objectives rather than an unrestricted collection of Seller-defined objectives.
 
 Initial Campaign Objectives may include:
 
-* **Brand Awareness** — help relevant Buyers discover or become more familiar with the Seller or brand.
-* **Offering Discovery** — help relevant Buyers discover a particular Offering or group of Offerings.
-* **New Offering Introduction** — introduce a newly available Offering to relevant Buyers.
-* **Geographic Discovery** — increase relevant discovery within an applicable geographic context.
-* **Campaign Exploration** — learn which eligible Creatives, contexts, or Campaign Configurations produce useful Buyer discovery signals.
+- **Brand Awareness** — help relevant Buyers discover or become more familiar with the Seller or brand.
+- **Brand Message** — communicate an approved Seller or brand message to relevant Buyers.
+- **Promotion Awareness** — make relevant Buyers aware of an approved Seller promotion while keeping the Campaign independent from any Offering.
+- **Geographic Awareness** — increase relevant awareness of the Seller or brand within an applicable geographic context.
+- **Campaign Exploration** — learn which eligible Campaign Creatives, contexts, or Campaign Configurations produce useful Buyer Discovery signals.
 
 Additional Campaign Objectives may be introduced as PinkCurve gains sufficient operational experience, measurement capability, and Seller evidence.
 
-The Campaign Objective should guide Campaign Configuration, recommendations, measurement, and Seller Intelligence. It SHALL NOT override Buyer relevance, Buyer preferences, eligibility, Trust, Security, diversity, Buyer Experience protections, or Discovery integrity.
+Campaign Objectives should describe what the Seller intends the **Campaign** to accomplish rather than identify an Offering or another discovery object the Seller wants PinkCurve to promote.
 
-A Seller selecting an objective such as increasing discovery or Brand Awareness does not gain direct control over Discovery ranking or which individual Buyers receive Campaign content.
+Campaign should not become a general-purpose container for other PinkCurve discovery types.
 
-The Discovery Engine remains responsible for determining appropriate Campaign discovery opportunities within the Seller-authorized Campaign Configuration and applicable PinkCurve rules.
+Future discovery objects such as Public Announcements, Community Notices, Public Services, Events, or other approved discovery types should remain independently identifiable where PinkCurve determines that they require their own business meaning, lifecycle, governance, or discovery behavior.
 
-Campaign results should be evaluated according to measurements appropriate to the Campaign Objective. PinkCurve should distinguish observable Discovery results from inferred or estimated outcomes and should not represent an inferred outcome as directly observed evidence.
+Conceptually:
+
+```text
+PinkCurve Discovery
+        │
+        ├── Offering Discovery
+        │      └── Offering
+        │
+        ├── Campaign Discovery
+        │      └── Campaign
+        │
+        └── Future Discovery Types
+               ├── Public Announcement
+               ├── Community Notice
+               ├── Public Service
+               ├── Event
+               └── Other approved types
+```
+
+These discovery types may share PinkCurve capabilities, but sharing infrastructure or Discovery capabilities does not require them to share the same business object.
+
+The Campaign Objective should guide Campaign Configuration, recommendations, measurement, and Seller Intelligence.
+
+It SHALL NOT override:
+
+- Buyer relevance,
+- Buyer preferences,
+- eligibility,
+- Trust,
+- Security,
+- diversity,
+- Buyer Experience protections, or
+- Discovery integrity.
+
+A Seller selecting an objective such as Brand Awareness, Promotion Awareness, or Geographic Awareness does not gain direct control over Discovery ranking or which individual Buyers receive Campaign content.
+
+The Discovery Engine remains responsible for determining appropriate Campaign Discovery opportunities within the Seller-authorized Campaign Configuration and applicable PinkCurve rules.
+
+Campaign results should be evaluated using measurements appropriate to the applicable Campaign Objective.
+
+PinkCurve should distinguish observable Campaign Discovery results from inferred or estimated outcomes and SHALL NOT represent an inferred outcome as directly observed evidence.
+
+Selection of a Campaign Objective SHALL NOT create a relationship between the Campaign and an Offering or another PinkCurve discovery object.
 
 ---
 
@@ -1150,49 +1838,275 @@ Campaign status changes SHALL NOT automatically change the independent lifecycle
 
 ### Campaign Discovery Event Lineage
 
-Discovery activity originating from a Brand Recognition Campaign should preserve the identities of the Campaign, Creative, and applicable Offering rather than combining them into a single identity.
+Campaign Discovery and Offering Discovery are separate PinkCurve discovery paths.
 
-For campaign-originated Discovery Events, the applicable lineage may include:
+A Campaign SHALL NOT depend on, reference, or inherit identity from an Offering.
 
-```text
+Every Campaign has its own `campaign_id`, and every Campaign must have at least one approved Campaign Creative identified by `creative_id`.
+
+Conceptually:
+
+```text id="7r12uw"
+Campaign
+    ↓
 campaign_id
+    ↓
+Campaign Creative
     ↓
 creative_id
     ↓
-offering_id (when applicable)
+Campaign Discovery Event
     ↓
 discovery_event_id
 ```
 
-The `campaign_id` identifies the Brand Recognition Campaign responsible for the paid campaign context.
+The Campaign Creative is the visual content presented to the Buyer for that Campaign.
 
-The `creative_id` identifies the specific Creative presented to the Buyer.
+Supported Campaign Creative formats may include:
 
-The `offering_id` identifies the applicable Offering when the campaign activity relates to a specific Offering. Because a Brand Recognition Campaign may promote the Seller or brand without referencing an Offering, `offering_id` is optional for campaign-originated activity where no Offering applies.
+- Campaign image or poster,
+- Campaign video, and
+- future PinkCurve-approved visual Campaign formats.
 
-The `discovery_event_id` identifies the resulting Discovery Event recorded by PinkCurve.
+Campaign Creative assets are separate from Offering visual assets.
 
-If campaign-originated activity later results in a Qualified Offering Visit, the lineage should remain traceable:
+An Offering image or video SHALL NOT become a Campaign Creative merely because the Offering and Campaign belong to the same Seller.
 
-```text
+Similarly, a Campaign Creative SHALL NOT be treated as an Offering asset.
+
+This separation establishes two independent discovery paths:
+
+```text id="u5gt87"
+Offering Discovery
+
+offering_id
+    ↓
+Offering Visual
+    ↓
+discovery_event_id
+    ↓
+QOV Qualification
+    ↓
+qov_id
+    ↓
+Billing Qualification
+    ↓
+billable_event_id
+    when applicable
+```
+
+and:
+
+```text id="75xbrv"
+Campaign Discovery
+
 campaign_id
     ↓
 creative_id
     ↓
-offering_id (when applicable)
+discovery_event_id
+    ↓
+Campaign Measurement
+    ↓
+Campaign Billing
+    when applicable
+```
+
+Campaign Discovery Events should preserve sufficient lineage to identify:
+
+- the Campaign that caused the direct discovery activity,
+- the Campaign Creative actually delivered,
+- the Discovery Event generated by that delivery, and
+- applicable measurement and billing evidence.
+
+The presence of a `campaign_id` or `creative_id` identifies Campaign lineage. It does not by itself establish attribution, Campaign effectiveness, Brand Recognition, or billability.
+
+Campaign, Campaign Creative, Discovery Event, Campaign measurement evidence, and Billable Event remain separate business records with separate responsibilities.
+
+### Discovery Source Identification
+
+Every Discovery Event should explicitly identify the type of discovery activity that directly produced the event.
+
+PinkCurve SHALL NOT infer the discovery source solely from the presence or absence of an `offering_id`, `campaign_id`, or `creative_id`.
+
+The Discovery Event should therefore include a `discovery_source_type`.
+
+Initial source types should include:
+
+- `ORGANIC_OFFERING`
+- `PAID_CAMPAIGN`
+
+Additional discovery source types may be introduced in the future as PinkCurve adds new discovery mechanisms.
+
+Offering Discovery and Campaign Discovery are separate discovery paths.
+
+#### Offering Discovery
+
+An Offering Discovery Event originates from an Offering and preserves the applicable `offering_id`.
+
+Conceptually:
+
+```text
+discovery_source_type = ORGANIC_OFFERING
+offering_id = O100
+campaign_id = NULL
+creative_id = NULL
+```
+
+The lineage is:
+
+```text
+Offering
+    ↓
+offering_id
+    ↓
+Offering Visual
+    ↓
+Discovery Event
+    ↓
+discovery_event_id
+```
+
+Where the Buyer subsequently attempts to visit the approved Seller destination and the activity satisfies QOV qualification requirements:
+
+```text
+offering_id
     ↓
 discovery_event_id
     ↓
 qov_id
     ↓
-billable_event_id (when separately billable)
+billable_event_id
+    when applicable
 ```
 
-Campaign, Creative, Offering, Discovery Event, QOV, and Billable Event remain separate entities with separate responsibilities.
+#### Campaign Discovery
 
-Discovery Analytics should preserve the applicable identifiers and relationships necessary to support campaign measurement, Creative performance analysis, Seller Intelligence, QOV attribution, Billing explanation, reconciliation, and auditing.
+A Campaign Discovery Event originates from a Campaign and preserves the applicable `campaign_id` and the `creative_id` of the Campaign Creative actually delivered.
 
-The presence of `campaign_id` or `creative_id` SHALL NOT by itself establish that an activity qualifies as a QOV or is financially billable. QOV Qualification and Billing Qualification remain separate decisions owned by their respective capabilities.
+Conceptually:
+
+```text
+discovery_source_type = PAID_CAMPAIGN
+campaign_id = C200
+creative_id = CR300
+offering_id = NULL
+```
+
+The lineage is:
+
+```text
+Campaign
+    ↓
+campaign_id
+    ↓
+Campaign Creative
+    ↓
+creative_id
+    ↓
+Discovery Event
+    ↓
+discovery_event_id
+```
+
+A Campaign does not reference, contain, depend on, or inherit identity from an Offering.
+
+Similarly, an Offering does not become part of a Campaign merely because both belong to the same Seller.
+
+Campaign Creative assets and Offering visual assets remain separate PinkCurve objects.
+
+#### Source Independence
+
+PinkCurve SHALL preserve the direct discovery source throughout downstream processing.
+
+Conceptually:
+
+```text
+Discovery Event
+      ↓
+discovery_source_type
+      ↓
+┌─────────────────────┬─────────────────────┐
+│                     │
+ORGANIC_OFFERING      PAID_CAMPAIGN
+│                     │
+offering_id            campaign_id
+│                     │
+                      creative_id
+```
+
+An Offering Discovery Event SHALL NOT be classified as Campaign Discovery because the Seller also operates one or more Campaigns.
+
+A Campaign Discovery Event SHALL NOT be classified as Offering Discovery because the Seller also has one or more Offerings.
+
+The two discovery paths remain independently identifiable even when they belong to the same Seller.
+
+#### Downstream Preservation
+
+The discovery source should remain available to downstream capabilities that require it, including:
+
+- Discovery Analytics,
+- Seller Intelligence,
+- Campaign measurement,
+- QOV qualification where applicable,
+- Billing,
+- reconciliation, and
+- audit.
+
+For Offering Discovery:
+
+```text
+ORGANIC_OFFERING
+      ↓
+offering_id
+      ↓
+discovery_event_id
+      ↓
+QOV Qualification
+      ↓
+qov_id
+      ↓
+Billing Qualification
+      ↓
+billable_event_id
+      when applicable
+```
+
+For Campaign Discovery:
+
+```text
+PAID_CAMPAIGN
+      ↓
+campaign_id
+      ↓
+creative_id
+      ↓
+discovery_event_id
+      ↓
+Campaign Measurement
+      ↓
+Campaign Billing
+      when applicable
+```
+
+`discovery_source_type` identifies the **direct origin of the Discovery Event**.
+
+It does not by itself establish:
+
+- attribution,
+- Campaign effectiveness,
+- Brand Recognition,
+- QOV qualification,
+- billing qualification, or
+- Seller-side outcomes.
+
+Those determinations remain the responsibility of their respective PinkCurve capabilities.
+
+This separation ensures that PinkCurve can always answer the fundamental question:
+
+> **Did this discovery activity originate from an Offering or from a Campaign?**
+
+without attempting to infer the answer later from incomplete or overlapping identifiers.
 
 ### Campaign Attribution Boundary
 
