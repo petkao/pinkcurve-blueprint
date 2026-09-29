@@ -398,7 +398,7 @@ Discovery Events are the evidence foundation for:
 - Learning Engine
 - Buyer Discovery Profiles
 - Seller Intelligence
-- QOV
+- Qualified positive Buyer actions, including Qualified Offering Visits where applicable
 - Brand Recognition measurement
 - Fraud detection
 - Trust
@@ -659,11 +659,13 @@ Product
 
 ---
 
-## PD-003: Free Tier Limits
+## PD-003: Free Seller Tier Limits
 
 **Status:** Open
 
-**Question:** What should Sellers receive through PinkCurve's free tier?
+**Question:** What limits should apply to PinkCurve's free Seller tier,
+including the number of Offerings and qualified Buyer actions or
+discoveries available before the Seller must upgrade or pause?
 
 **Why This Matters:**
 
@@ -671,20 +673,30 @@ The free tier must provide enough value for Sellers to understand PinkCurve with
 
 **Considerations:**
 
-- Number of Offerings
-- Creative generation limits
-- Analytics
-- Discovery exposure
-- AI costs
+- Number of Offerings permitted in the free tier
+- Number of qualified Buyer actions or discoveries included
+- How free-tier usage is counted and tracked
+- Seller notification as limits are approached
+- Seller options when a limit is reached
+- Pause behavior when the free-tier limit is reached
+- Upgrade path to a paid tier
+- Creative generation limits where applicable
+- Seller analytics and insights available in the free tier
+- AI and infrastructure costs
 - Support costs
-- Upgrade incentives
+- Abuse-prevention controls
 
 **Work Required:**
 
-- Determine actual operating cost
-- Study early Seller behavior
-- Test willingness to pay
-- Compare competitive alternatives
+- Determine sustainable free-tier limits
+- Measure actual operating costs
+- Study early Seller usage and behavior
+- Determine appropriate Offering limits
+- Determine appropriate qualified Buyer action or discovery limits
+- Define free-tier usage tracking
+- Define Seller notifications and limit enforcement
+- Test the upgrade and pause experience
+- Measure Seller conversion from free to paid tiers
 
 **Decision Needed By:**
 
@@ -704,7 +716,7 @@ Product / Business
 
 ## PD-004: Pre-Registration Buyer Discovery Experience
 
-**Status:** Tentative
+**Status:** Decided
 
 **Question:** What should prospective Buyers be able to experience before registering for PinkCurve?
 
@@ -714,11 +726,11 @@ A new Buyer may want to understand PinkCurve's value before creating an account.
 
 At the same time, the full discovery experience benefits from Buyer identity, preferences, continuity, trust, and learning.
 
-**Tentative Direction:**
+**Final Direction:**
 
-Allow a limited visual discovery experience before registration that demonstrates how PinkCurve works.
+Buyer registration is required before a Buyer may participate in PinkCurve Discovery during MVP.
 
-Require registration for the full personalized and persistent discovery experience.
+PinkCurve may provide public informational or demonstration content before registration, but this does not constitute participation in the Buyer Discovery experience.
 
 **Work Required:**
 
@@ -751,9 +763,17 @@ Product / Buyer Experience
 - 15-product-roadmap.md
 - 20-buyer-experience.md
 
-**Final Decision:** TBD
+**Final Decision:**
 
-**Decision Rationale:** TBD
+Buyer registration is required before participation in PinkCurve Discovery during MVP.
+
+Public informational or demonstration content may be available before registration, but it does not constitute participation in the Buyer Discovery experience.
+
+**Decision Rationale:**
+
+Requiring registration establishes a known Buyer identity before Discovery participation and supports Buyer continuity, personalization, trust, learning, fraud prevention, and abuse prevention.
+
+Public informational or demonstration content may still communicate PinkCurve's value without allowing unregistered participation in Discovery.
 
 **Validation Result:** TBD
 
@@ -796,7 +816,9 @@ However, registration should not unnecessarily burden Buyers or require informat
 
 Require Buyer registration for the full PinkCurve discovery experience while keeping initial registration simple.
 
-Allow limited discovery before registration where useful for demonstrating PinkCurve's value.
+Buyer registration is required before participation in PinkCurve Discovery during MVP.
+
+Public informational or demonstration content may be available before registration, but it does not constitute participation in the Buyer Discovery experience.
 
 Build the Buyer Discovery Profile progressively through:
 
@@ -817,7 +839,7 @@ Buyers should be able to view, modify, or reset appropriate discovery preference
 - Define progressive profiling strategy
 - Define privacy and consent requirements
 - Define Buyer verification requirements
-- Define pre-registration discovery experience
+- Define pre-registration public informational or demonstration experience
 - Design registration UX
 - Design Buyer Discovery Profile controls
 - Determine what information the Discovery Engine may use
@@ -902,6 +924,7 @@ The first implementation must be useful enough to test the fundamental hypothesi
 - Define AI role in generating navigation choices
 - Define Buyer control
 - Define interaction design
+- Define how AMN supports PinkCurve's visual-first discovery experience
 - Define mobile presentation
 - Define Discovery Events generated by AMN
 - Define fallback behavior
@@ -957,12 +980,12 @@ Approval should not be considered permanent.
 
 - Define Seller approval checklist
 - Define Offering approval checklist
-- Define destination website checks
+- Define destination URL legitimacy, integrity, redirect, change-detection, and reverification checks
 - Define mobile destination quality requirements
 - Define AI-assisted review
-- Define human approval responsibilities
+- Define risk-proportional human review and approval responsibilities
 - Define reverification triggers
-- Define periodic review
+- Define continuous monitoring and risk-based reapproval triggers for Sellers, Offerings, and destination URLs
 - Define suspension and appeal process
 
 **Evidence Required:**
@@ -998,7 +1021,7 @@ Trust / Product / Operations
 
 ---
 
-## PD-007: Buyer Minimum Age and Teen Experience
+## PD-008: Buyer Minimum Age and Teen Experience
 
 **Status:** Tentative
 
@@ -1110,7 +1133,7 @@ TBD
 
 ---
 
-## PD-008: Adult-Only and Age-Restricted Offering Policy
+## PD-009: Adult-Only and Age-Restricted Offering Policy
 
 **Status:** Tentative
 
@@ -1172,8 +1195,8 @@ for human review.
 
 Approval is not permanent.
 
-PinkCurve should periodically reevaluate approved Offerings and
-Seller destinations to identify:
+PinkCurve should continuously monitor and risk-assess approved Offerings
+and Seller destinations, with reevaluation triggered when appropriate, to identify:
 
 - Offering changes
 - Category changes
@@ -1207,7 +1230,7 @@ Product / Trust / Legal / Seller Operations
 
 **Related Open Decisions:**
 
-- PD-007: Buyer Minimum Age and Teen Experience
+- PD-008: Buyer Minimum Age and Teen Experience
 - CL-001: U.S. Privacy and Regulatory Compliance
 
 **Final Decision:**
@@ -1228,39 +1251,52 @@ TBD
 
 # Business Decisions
 
-## BD-001: QOV Pricing Validation
+## BD-001: Qualified Buyer Action Pricing Validation
 
 **Status:** Open
 
-**Question:** What is the appropriate price for Qualified Offering Visits?
+**Question:** What pricing and packaging should PinkCurve apply to
+qualified positive Buyer actions within its paid Seller tiers?
 
 **Why This Matters:**
 
-QOV pricing must create measurable value for Sellers while generating sustainable revenue for PinkCurve.
+Pricing for qualified positive Buyer actions must create measurable value
+for Sellers while generating sustainable revenue for PinkCurve.
+
+Different qualified actions may create different levels of Seller value.
+PinkCurve should therefore validate pricing and packaging using actual
+Seller outcomes, Buyer behavior, and operating costs rather than assuming
+that every qualified action has the same economic value.
 
 **Variables:**
 
-- Per-QOV rate
-- Volume tiers
+- Type of qualified positive Buyer action
+- Subscription tier
+- Included action volume
+- Optional per-action pricing
+- Volume
 - Category
 - Geography
 - Seller size
-- QOV quality
+- Action quality
 - PinkCurve operating cost
 
 **Work Required:**
 
 - Interview early Sellers
-- Measure Seller value
-- Estimate conversion economics
-- Compare alternative acquisition costs
+- Measure Seller value from qualified positive Buyer actions
+- Estimate conversion and Seller-value economics
+- Compare alternative Seller acquisition and discovery costs
+- Test subscription tiers and included action volumes
+- Test optional per-action pricing where appropriate
+- Validate the 24-hour qualified-action billing rule
 - Test pricing during Beta
 
 **Evidence Required:**
 
-- Seller willingness to pay
+- Seller-perceived value of Brand Recognition
 - Seller retention
-- Estimated ROD
+- Estimated QOD
 - PinkCurve gross margin
 - Competitive acquisition costs
 
@@ -1312,13 +1348,12 @@ Business
 
 ## BD-003: Payment Processing and Seller Billing
 
-**Status:** Tentative
+**Status:** Decided
 
 **Question:**
 
-Which payment processor and billing architecture should PinkCurve use
-for Seller payments, and what minimum billing capability must be
-implemented and validated during Alpha?
+What minimum Seller billing capability and Stripe integration must
+PinkCurve implement and validate during Alpha?
 
 **Why This Matters:**
 
@@ -1330,51 +1365,60 @@ Meaningful Discovery works, PinkCurve should also validate that the
 economic path from discovery activity to Seller billing is technically
 workable.
 
-Billing may eventually include:
+MVP Seller billing includes:
 
-- Seller subscriptions
-- Qualified Offering Visit (QOV) charges
-- Brand Recognition programs
-- Campaign charges
+- Paid Seller tiers based on qualified positive Buyer actions
+- Qualified action accounting by Buyer, Offering, action type, and time
+- Enforcement of the rolling 24-hour billing rule
+- Free-tier usage and limits tracked separately from paid usage
+- Seller notification when applicable usage limits are reached
+- Seller upgrade or pause behavior when applicable limits are reached
+- Optional per-action pricing where applicable
+- Seller-controlled spending limits where applicable
 - Credits
 - Adjustments
 - Refunds
-- Free-tier allowances
-- Promotional credits
+- Taxes
 - Invoices
-- Payment history
+- Payment records and history
 
-The payment processor should therefore be evaluated as part of a larger
-Seller billing architecture rather than as an isolated payment API.
+Stripe integration should therefore be implemented and validated as part
+of PinkCurve's larger Seller billing architecture rather than treated as
+an isolated payment API.
 
 **Current State:**
 
 Stripe has previously been configured but is not actively used.
 
-**Tentative Direction:**
+**Final Direction:**
 
-Evaluate Stripe as the initial payment-processing solution because
-PinkCurve already has some experience with it.
+PinkCurve will use Stripe as the MVP payment processor.
 
-The final decision should depend on PinkCurve's billing requirements
-rather than prior configuration alone.
+PinkCurve retains responsibility for its Seller billing model, including
+qualified positive Buyer action accounting, pricing and subscription-tier
+application, free-tier usage and limits, spending controls where applicable,
+invoice calculation, billing records, adjustments, credits, refunds,
+and billing auditability.
+
+Stripe provides the external payment-processing capability, including
+payment-method handling, payment execution, processor-side retry behavior,
+and refund execution.
 
 **Work Required:**
 
 - Define Alpha Seller billing requirements
 - Define Seller billing-account model
 - Define invoice data model
-- Define QOV accounting requirements
-- Define subscription requirements if applicable
-- Define free-tier and promotional-credit handling
-- Define Brand Recognition billing requirements
+- Define qualified positive Buyer action accounting requirements
+- Define rolling 24-hour billing-window accounting requirements
+- Define free-tier usage, limit, and upgrade handling
+- Define promotional-credit handling where applicable
 - Define credits, adjustments, and refund handling
 - Define payment-failure handling
 - Define billing audit trail
 - Define Seller billing UI requirements
-- Evaluate Stripe against these requirements
-- Evaluate alternatives if significant requirements are not met
-- Implement payment processor in test/sandbox mode
+- Validate Stripe integration against PinkCurve's MVP billing requirements
+- Implement Stripe in test/sandbox mode
 - Implement basic Seller billing workflow
 - Test end-to-end billing
 - Define Beta production-payment requirements
@@ -1383,10 +1427,12 @@ rather than prior configuration alone.
 **Evidence Required:**
 
 - Successful end-to-end Alpha billing tests
-- Accurate QOV accounting where applicable
+- Accurate qualified positive Buyer action accounting
+- Correct application of the rolling 24-hour billing rule
+- Accurate free-tier usage and limit accounting
 - Accurate invoice generation
 - Correct credits and adjustments
-- Successful test payment processing
+- Successful test payment processing through Stripe
 - Seller billing usability feedback
 - Billing auditability
 - Cost assessment
@@ -1394,8 +1440,8 @@ rather than prior configuration alone.
 
 **Decision Needed By:**
 
-Payment processor and initial Seller billing architecture must be
-decided before Alpha billing implementation.
+The initial Seller billing architecture and Stripe integration requirements
+must be defined before Alpha billing implementation.
 
 A minimum end-to-end billing workflow should be implemented and tested
 during Alpha.
@@ -1421,9 +1467,11 @@ Business / Finance / Engineering
 
 - Seller accounts
 - Seller billing accounts
-- QOV accounting
+- Qualified positive Buyer action accounting
+- Rolling 24-hour billing-window accounting
+- Free-tier usage and limit accounting
 - Invoice generation
-- Payment processor integration
+- Stripe payment-processing integration
 - Credits and adjustments
 - Seller billing history
 - Financial reporting
@@ -1433,11 +1481,13 @@ Business / Finance / Engineering
 
 **Final Decision:**
 
-TBD
+PinkCurve will use Stripe as the MVP payment processor.
+
+PinkCurve owns the Seller billing model and financial records. Stripe provides payment-processing capabilities and handles sensitive payment-method information and payment execution.
 
 **Decision Rationale:**
 
-TBD
+Stripe has already been configured and represents an existing investment. It is a widely-used and well-supported platform for payment processing, which reduces operational risk. While PinkCurve will implement its own Seller billing model and financial logic, offloading the complexity of payment-method handling, payment execution, and processor-side retry behavior to Stripe is a sensible architectural choice for MVP.
 
 **Validation Result:**
 
@@ -1445,17 +1495,29 @@ TBD
 
 ---
 
-## BD-004: Brand Recognition Business Model
+## BD-004: Brand Recognition Billing
 
-**Status:** Open
+**Status:** Decided
 
-**Question:** How should PinkCurve price and measure Seller Brand Recognition programs?
+**Question:** Should Brand Recognition and Quality Brand Exposures be
+billable Seller actions?
+
+**Final Direction:**
+
+Brand Recognition and Quality Brand Exposures are not billable Seller
+actions.
+
+PinkCurve may measure Brand Recognition and Quality Brand Exposures for
+analytics, Seller Intelligence, discovery evaluation, and evidence of
+Seller value, but these measurements do not create billing events.
 
 **Why This Matters:**
 
-Brand Recognition may not be tied directly to a specific Offering or immediate QOV.
+Brand Recognition may create value for Sellers even when it is not tied
+directly to a specific Offering or an immediate qualified positive Buyer
+action.
 
-Sellers may want to build awareness among relevant Buyers based on:
+PinkCurve may help Sellers build awareness among relevant Buyers based on:
 
 - Geography
 - Category
@@ -1463,18 +1525,23 @@ Sellers may want to build awareness among relevant Buyers based on:
 - Timing
 - Other appropriate discovery contexts
 
-Brand Recognition therefore requires its own value model and metrics.
+However, Brand Recognition value is less directly attributable than a
+qualified positive Buyer action.
+
+PinkCurve will therefore measure Brand Recognition where useful for
+analytics, Seller Intelligence, discovery evaluation, and Seller value
+evidence without treating Brand Recognition or Quality Brand Exposures
+as billable events.
 
 **Work Required:**
 
-- Define Brand Recognition Offering structure
-- Define targeting options
-- Define geographic options
-- Define Seller controls
-- Define Buyer relevance safeguards
-- Define metrics
-- Define pricing models
-- Test Seller demand
+- Define how Brand Recognition and Quality Brand Exposures are measured
+- Define the evidence required for a valid Quality Brand Exposure
+- Measure Seller value associated with Brand Recognition
+- Evaluate PinkCurve's cost of delivering and measuring Brand Recognition
+- Determine how Brand Recognition evidence is presented through Seller Intelligence
+- Monitor whether Brand Recognition contributes to later qualified positive Buyer actions
+- Validate Brand Recognition measurement during Beta
 
 **Evidence Required:**
 
@@ -1486,7 +1553,10 @@ Brand Recognition therefore requires its own value model and metrics.
 
 **Decision Needed By:**
 
-Before Brand Recognition becomes a paid Seller capability.
+Decided for the current PinkCurve business model.
+
+The decision may be formally revisited in the future if PinkCurve develops
+new evidence that supports a different Brand Recognition business model.
 
 **Decision Owner:**
 
@@ -1500,9 +1570,26 @@ Business / Product
 - 13-business-model.md
 - 14-success-metrics.md
 
-**Final Decision:** TBD
+**Final Decision:**
 
-**Decision Rationale:** TBD
+Brand Recognition and Quality Brand Exposures will not be directly
+billable Seller actions under the current PinkCurve business model.
+
+They may still be measured and used as evidence for Seller Intelligence,
+discovery evaluation, and Seller value analysis.
+
+**Decision Rationale:**
+
+PinkCurve's billing model is based on qualified positive Buyer actions
+that provide clearer evidence of Buyer interest and Seller value.
+
+Brand Recognition and Quality Brand Exposures may provide useful evidence
+of awareness and discovery value, but that value is less directly
+attributable to a specific Buyer action.
+
+Keeping Brand Recognition non-billable simplifies the initial Seller
+billing model while allowing PinkCurve to measure its value and learn
+from actual Seller and Buyer behavior.
 
 **Validation Result:** TBD
 
@@ -1526,7 +1613,7 @@ Awareness of PinkCurve itself must also be created.
 
 **Work Required:**
 
-- Define initial geography
+- Define initial U.S. launch geography and geographic concentration
 - Define initial Offering categories
 - Identify early Seller segments
 - Define Seller recruitment strategy
@@ -1544,7 +1631,7 @@ Awareness of PinkCurve itself must also be created.
 - Seller activation
 - Offering density
 - Discovery quality
-- QOV volume
+- Qualified positive Buyer action volume, including Qualified Offering Visits where applicable
 - Retention
 
 **Decision Needed By:**
@@ -1578,7 +1665,7 @@ Business / Product
 
 **Status:** Open
 
-**Question:** What exact capabilities, Buyers, Sellers, Offering categories, and geographic scope should be included in PinkCurve Alpha?
+**Question:** What exact capabilities, Buyers, Sellers, Offering categories, and initial U.S. geographic concentration should be included in PinkCurve Alpha?
 
 **Guiding Purpose:**
 
@@ -1589,10 +1676,13 @@ Alpha should therefore remain focused enough to produce understandable evidence.
 **Work Required:**
 
 - Define Alpha Buyer population
+- Define representative discovery scenarios required to validate Meaningful Discovery
 - Define Alpha Seller population
 - Define Offering categories
-- Define geographic scope
+- Define minimum visual-first Buyer discovery experience
+- Define initial U.S. geographic concentration
 - Define required AI capabilities
+- Define minimum visual-first Buyer discovery experience
 - Define AMN scope
 - Define trust controls
 - Define instrumentation
@@ -1622,7 +1712,8 @@ Product
 
 **Potential Measures:**
 
-- Buyers discover worthwhile Offerings
+- Buyers discover worthwhile Offerings relevant to their interests, needs, intent, or context
+- Qualified positive Buyer actions, including Qualified Offering Visits where applicable
 - Buyers can navigate without excessive confusion
 - Buyers return
 - AMN improves discovery
@@ -1643,7 +1734,7 @@ A Buyer who quickly discovers one worthwhile Offering may represent a better out
 - Define qualitative feedback
 - Define minimum sample sizes
 - Define test duration
-- Define failure criteria
+- Define criteria for success, significant modification, reconsideration, or inconclusive results
 - Define Beta readiness criteria
 
 **Decision Needed By:**
@@ -1683,9 +1774,12 @@ Discovery quality cannot be evaluated without representative Offering and Buyer 
 - Define synthetic test data
 - Define real Seller Offering data
 - Define Buyer test profiles
+- Define representative purposeful and exploratory discovery scenarios
 - Define expected discovery outcomes
+- Define unsuccessful, irrelevant, ambiguous, and no-suitable-Offering discovery outcomes
 - Define fraud and trust test cases
 - Define AMN test cases
+- Define representative visual Offering assets and visual-quality test cases
 - Define AI evaluation datasets
 - Define privacy protections
 
@@ -1774,13 +1868,131 @@ Discovering that an assumption is incorrect before PinkCurve invests heavily in 
 
 ---
 
+## H-000: Meaningful Discovery Validity
+
+**Status:** Not Yet Validated
+
+**Hypothesis:**
+
+PinkCurve can help Buyers discover worthwhile Offerings that are relevant
+to their interests, needs, intent, or context through a simple, visual,
+and trustworthy discovery experience.
+
+**Why This Matters:**
+
+Meaningful Discovery is the fundamental value PinkCurve intends to create.
+
+Individual capabilities such as Adaptive Metadata Navigation, Offering
+Knowledge, Buyer Discovery Profiles, AI matching, ranking, and the
+Learning Engine are mechanisms intended to support that objective.
+
+Those capabilities may function technically without demonstrating that
+PinkCurve itself creates meaningful value for Buyers.
+
+Alpha should therefore test the broader question:
+
+> Does PinkCurve help Buyers discover worthwhile Offerings they might
+> reasonably want to explore or act upon?
+
+Success should not be measured primarily by the number of Offerings
+shown, impressions generated, navigation steps completed, or time spent
+on the platform.
+
+A Buyer who quickly discovers a worthwhile Offering may represent a
+better discovery outcome than a Buyer who views many irrelevant
+Offerings.
+
+**Validation Approach:**
+
+Evaluate whether representative Buyers can use PinkCurve to discover
+Offerings they consider worthwhile across representative discovery
+scenarios.
+
+Evaluate both:
+
+- Purposeful discovery where the Buyer has an identifiable need or intent
+- Exploratory discovery where the Buyer may not initially know exactly
+  what they want
+
+Observe the contribution of supporting capabilities including:
+
+- Offering Knowledge
+- Adaptive Metadata Navigation
+- Buyer Discovery Profile
+- AI matching and ranking
+- Visual discovery experience
+- Buyer feedback
+- Learning Engine where sufficient interaction data exists
+
+**Evidence Required:**
+
+- Successful discovery outcomes
+- Buyer feedback
+- Buyer satisfaction
+- Qualified positive Buyer actions
+- Qualified Offering Visits where applicable
+- Buyer return behavior
+- Discovery relevance
+- Discovery abandonment
+- Trust indicators
+- Evidence from representative discovery scenarios
+- Evidence that Buyers discover Offerings they consider worthwhile
+
+**Validation Needed By:**
+
+Meaningful Discovery must be a primary Alpha validation objective.
+
+Alpha should produce sufficient evidence to determine whether PinkCurve's
+fundamental discovery approach is promising enough to proceed to Beta,
+requires significant modification, or requires reconsideration.
+
+Validation should continue during Beta and production as PinkCurve
+expands to additional Buyers, Sellers, Offering types, and discovery
+contexts.
+
+**Validation Owner:**
+
+Product / Discovery Engine / Buyer Experience / Discovery Analytics
+
+**Affected Chapters:**
+
+- 01-vision-and-mission.md
+- 02-design-principles.md
+- 03-product-architecture.md
+- 04-offering-knowledge.md
+- 06-discovery-engine.md
+- 07-discovery-analytics.md
+- 08-learning-engine.md
+- 10-ai-platform.md
+- 14-success-metrics.md
+- 15-product-roadmap.md
+- 20-buyer-experience.md
+
+**Related Open Decisions:**
+
+- PD-001: Offering Knowledge Completeness and Discovery Readiness
+- PD-005: Buyer Registration Model
+- PD-006: Adaptive Metadata Navigation Initial Design
+- AV-001: Alpha Scope
+- AV-002: Alpha Success Criteria
+
+**Validation Result:**
+
+TBD
+
+**Outcome:**
+
+TBD — Supported / Partially Supported / Not Supported / Inconclusive / Continue Testing
+
+---
+
 ## H-001: Discovery Score Validity
 
 **Status:** Not Yet Validated
 
 **Hypothesis:**
 
-Discovery Score can provide a meaningful high-level measure of discovery effectiveness and may correlate with Buyer and Seller value.
+Discovery Score can provide a meaningful high-level measure of Meaningful Discovery and discovery effectiveness and may correlate with Buyer and Seller value.
 
 **Why This Matters:**
 
@@ -1798,7 +2010,7 @@ Discovery Score should therefore not become an important platform KPI until its 
 
 Compare Discovery Score with independent indicators of discovery value, including:
 
-- Qualified Offering Visits
+- Qualified positive Buyer actions, including Qualified Offering Visits where applicable
 - Buyer satisfaction
 - Buyer feedback
 - Buyer return behavior
@@ -1812,7 +2024,7 @@ Test whether changes in Discovery Score correspond to actual improvements in Buy
 **Evidence Required:**
 
 - Discovery Event data
-- QOV data
+- Qualified positive Buyer action data, including Qualified Offering Visit data where applicable
 - Buyer feedback
 - Buyer return behavior
 - Seller feedback
@@ -1850,19 +2062,19 @@ TBD — Supported / Partially Supported / Not Supported / Inconclusive / Continu
 
 ---
 
-## H-002: AI Creative Performance
+## H-002: Creative Studio Effectiveness
 
 **Status:** Not Yet Validated
 
 **Hypothesis:**
 
-AI-assisted creative can produce sufficiently effective visual storytelling and creative assets for PinkCurve discovery.
+AI-assisted creative guidance, evaluation, and recommendations can help Sellers produce more effective visual storytelling and discovery media for PinkCurve.
 
 **Why This Matters:**
 
 Creative presentation affects whether Buyers understand and become interested in Offerings.
 
-PinkCurve's Creative Studio may help Sellers create useful discovery content, but AI-generated creative should not be assumed to perform well simply because it can be generated quickly or inexpensively.
+PinkCurve's Creative Studio may help Sellers improve discovery content through AI-assisted guidance, evaluation, and recommendations, but those capabilities should not be assumed to improve discovery effectiveness until validated through Buyer and Seller evidence.
 
 The objective is not to maximize AI-generated content.
 
@@ -1874,11 +2086,11 @@ Compare different creative approaches using controlled discovery experiments whe
 
 Possible comparisons include:
 
-- AI-assisted creative
-- Seller-provided creative
-- Professionally produced creative
-- Different AI-generated variants
-- Different storytelling formats
+- Seller discovery media before and after Creative Studio guidance
+- Seller-produced media using PinkCurve recommendations
+- Externally produced media using PinkCurve recommendations
+- Media that receives different Creative Studio recommendations
+- Different storytelling approaches recommended by Creative Studio
 
 Evaluate both quantitative performance and qualitative Buyer response.
 
@@ -1886,21 +2098,21 @@ Evaluate both quantitative performance and qualitative Buyer response.
 
 - Offering views
 - Buyer engagement
-- QOV
+- Qualified positive Buyer actions, including Qualified Offering Visits where applicable
 - Buyer feedback
 - Seller feedback
 - Creative-quality review
 - Discovery effectiveness
-- Cost of creative generation
-- Time required to create usable content
+- Cost of using Creative Studio guidance and evaluation
+- Time required for Sellers to improve discovery media using Creative Studio recommendations
 
 **Validation Needed By:**
 
 Initial validation should occur during Alpha where sufficient creative content exists.
 
-Stronger validation should occur during Beta before PinkCurve treats AI Creative Studio performance as a proven Seller value proposition.
+Stronger validation should occur during Beta before PinkCurve treats Creative Studio guidance, evaluation, and recommendations as a proven Seller value proposition.
 
-AI creative performance should continue to be evaluated as models and creative technologies improve.
+Creative Studio effectiveness should continue to be evaluated as AI models, creative technologies, and Seller needs evolve.
 
 **Validation Owner:**
 
@@ -1973,7 +2185,7 @@ Where practical:
 - Baseline discovery measurements
 - Model or ranking versions
 - Buyer feedback
-- QOV
+- Qualified positive Buyer actions, including Qualified Offering Visits where applicable
 - Buyer return behavior
 - Seller outcomes
 - Before/after or controlled comparison results
@@ -2028,7 +2240,7 @@ It supports:
 - AI understanding
 - Discovery matching
 - Adaptive Metadata Navigation
-- Creative generation
+- Creative guidance and evaluation
 - Ranking
 - Seller Intelligence
 - Learning
@@ -2049,7 +2261,7 @@ Evaluate whether Offerings with stronger Offering Knowledge demonstrate improvem
 - AMN usefulness
 - Buyer understanding
 - Buyer engagement
-- QOV
+- Qualified positive Buyer actions, including Qualified Offering Visits where applicable
 - Buyer satisfaction
 - Seller value
 
@@ -2061,7 +2273,7 @@ Test individual knowledge dimensions where possible rather than relying only on 
 - Offering Knowledge quality measures
 - Offering-type information
 - Discovery Event data
-- QOV
+-- Qualified positive Buyer actions, including Qualified Offering Visits where applicable
 - Buyer feedback
 - Discovery relevance measurements
 - Seller feedback
@@ -2143,7 +2355,7 @@ Where practical, compare AMN with conventional approaches such as:
 - Category navigation
 - Conventional browsing
 
-Evaluate both purposeful discovery and relaxed browsing where Buyers may not initially know exactly what they want.
+Evaluate both purposeful discovery and exploratory discovery where Buyers may not initially know exactly what they want.
 
 **Evidence Required:**
 
@@ -2156,7 +2368,7 @@ Evaluate both purposeful discovery and relaxed browsing where Buyers may not ini
 - Buyer return behavior
 - Discovery quality
 - AMN interaction events
-- QOV
+- Qualified positive Buyer actions, including Qualified Offering Visits where applicable
 - Comparison with conventional navigation where appropriate
 - Mobile usability results
 
@@ -2252,7 +2464,7 @@ Also measure whether additional profile requirements create:
 - Buyer profile completeness
 - Discovery relevance
 - Successful discovery rate
-- QOV
+- Qualified positive Buyer actions, including Qualified Offering Visits where applicable
 - Buyer feedback
 - Buyer trust indicators
 - Buyer return behavior
@@ -2335,14 +2547,25 @@ The primary purpose of Alpha is:
 
 Therefore, Alpha should place particular emphasis on validating hypotheses directly related to Meaningful Discovery.
 
-The initial priority should be:
+The overarching Alpha hypothesis is:
+
+**H-000 — Meaningful Discovery Validity**
+
+H-000 evaluates whether PinkCurve's fundamental discovery approach
+creates meaningful value for Buyers.
+
+The remaining hypotheses evaluate important mechanisms, supporting
+capabilities, and measurements that may contribute to Meaningful
+Discovery.
+
+The initial supporting-hypothesis priority should be:
 
 1. **H-005 — Adaptive Metadata Navigation Effectiveness**
 2. **H-004 — Offering Knowledge Correlation**
 3. **H-006 — Buyer Discovery Profile Improves Discovery**
 4. **H-001 — Discovery Score Validity**
 5. **H-003 — Learning Engine Impact**
-6. **H-002 — AI Creative Performance**
+6. **H-002 — Creative Studio Effectiveness**
 
 This ordering does not mean lower-priority hypotheses are unimportant.
 
@@ -2368,19 +2591,21 @@ PinkCurve will collect and process information relating to Buyers,
 Sellers, Offerings, Discovery Events, Buyer Discovery Profiles,
 payments, trust, fraud prevention, and platform operations.
 
-Compliance cannot be postponed until Beta or production.
+Compliance requirements applicable to real Buyers, Sellers, and their
+data must be addressed before external Alpha participation begins.
 
 Privacy, security, consent, data handling, and applicable consumer
 rights should be incorporated into PinkCurve's architecture and
 Buyer/Seller experiences before external Alpha users begin using
 the platform.
 
-PinkCurve currently expects to operate only in the United States
-for the foreseeable future.
+PinkCurve MVP is limited to eligible Buyers and Sellers located in
+the United States.
 
-Therefore, the initial compliance program should focus on applicable
-U.S. federal and state requirements rather than international
-requirements such as GDPR.
+Therefore, the MVP compliance program should focus on applicable
+U.S. federal and state requirements. International requirements
+should be evaluated before PinkCurve expands participation beyond
+the United States.
 
 **Initial Areas to Evaluate:**
 
@@ -2527,6 +2752,13 @@ requirements and PinkCurve's privacy principles.
 
 **Key Principle:**
 
+Tracking and analytics data should not become general-purpose data
+available throughout PinkCurve.
+
+Access and use should be limited to the capabilities that require the
+information for an approved purpose, consistent with PinkCurve's
+purpose-limitation and capability-based data-access principles.
+
 > Collect and retain only information PinkCurve has a legitimate
 > reason to use, explain its purpose clearly, protect it appropriately,
 > and provide required Buyer controls.
@@ -2626,6 +2858,16 @@ Risks identified in the Blueprint should not be forgotten after planning.
 
 Risk management must become part of PinkCurve's operating discipline.
 
+Risk evaluation should be continuous.
+
+PinkCurve should identify new risks and reassess existing risks as the
+platform, technology, market, regulatory environment, threat landscape,
+and organization change.
+
+Regular Risk Register reviews provide a formal review point, but they
+should not replace continuous identification, monitoring, escalation,
+and mitigation of significant risks.
+
 **Work Required:**
 
 - Define Risk Register format
@@ -2657,6 +2899,19 @@ Operations / Leadership
 **Status:** Open
 
 **Question:** Which PinkCurve decisions and operations must require human review rather than fully automated AI action?
+
+**Key Principle:**
+
+AI may assist with analysis, recommendations, prioritization, detection,
+and routine operations, but authority for consequential decisions should
+depend on the risk and reversibility of the action.
+
+PinkCurve should require human review or approval when an automated
+decision could create significant financial, security, trust, legal,
+Seller, or Buyer consequences.
+
+Human review requirements should be proportional to risk rather than
+applied uniformly to every AI-assisted action.
 
 **Potential Areas:**
 
@@ -2703,6 +2958,19 @@ Operations / Product / Security
 **Why This Matters:**
 
 PinkCurve should not depend solely on personal trust as the organization grows.
+
+During PinkCurve's initial solo-operation stage, traditional separation
+of duties may not always be possible.
+
+Where one person must perform multiple responsibilities, PinkCurve should
+use compensating controls such as explicit authorization boundaries,
+audit logging, change history, backups, security controls, and documented
+review procedures.
+
+As additional personnel receive authority, PinkCurve should progressively
+separate incompatible responsibilities so that no individual has
+unnecessary end-to-end control over sensitive financial, administrative,
+security, production, or intellectual-property operations.
 
 Appropriate governance should protect:
 
@@ -2774,8 +3042,8 @@ The decision must eventually be reflected in implementation and, where appropria
 
 Resolved, implemented, and validated decisions should remain traceable.
 
-| ID | Decision | Outcome | Date | Permanent Record |
-|----|----------|---------|------|------------------|
+| ID | Decision | Outcome | Status / Date | Permanent Record |
+|----|----------|---------|---------------|------------------|
 | TD-000 | Separate Blueprint repository | Separate repository adopted | Completed | [ADR-0001](../decisions/ADR-0001-separate-blueprint-repository.md) |
 
 Additional decisions should be added as they are completed.
