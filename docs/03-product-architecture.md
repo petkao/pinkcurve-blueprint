@@ -219,19 +219,31 @@ Future Approved Participant
                     ↓
          Eligibility / Trust Checks
                     ↓
-             Discovery Engine
+        PinkCurve Discovery Services
+                    │
+        ┌───────────┴───────────┐
+        │                       │
+        ▼                       ▼
+ Human Discovery          Agent Discovery
+        │                       │
+        ▼                       ▼
+ Buyer Experience       PinkCurve Agent Interface
+ Visual-First UI                 │
+        │                        ▼
+        │               Authorized Personal Agent
+        │                        │
+        └───────────┬────────────┘
+                    ▼
+             Registered Buyer
                     ↓
-             Buyer Experience
+        Buyer Interaction,
+        Intent & Feedback
                     ↓
-                  Buyer
+           Discovery Analytics
                     ↓
-       Buyer Interaction & Feedback
+             Learning Engine
                     ↓
-          Discovery Analytics
-                    ↓
-            Learning Engine
-                    ↓
-       Purpose-Specific Intelligence
+        Purpose-Specific Intelligence
                     ↓
  Improved Knowledge, Content, Discovery,
        Intelligence, and Experience
@@ -312,7 +324,7 @@ Conceptually:
 
 ```text id="x3t4ga"
  ┌──────────────────────────────────────────────┐
- │ Seller / Organization / Approved Participant│
+ │ Seller / Organization / Approved Participant │
  └──────────────────────┬───────────────────────┘
                         │
                         ▼
@@ -348,57 +360,72 @@ Conceptually:
                 └────────┬─────────┘
                          │
                          ▼
+              ┌─────────────────────────┐
+              │ PinkCurve Discovery     │
+              │ Services                │
+              │                         │
+              │ • Discovery Engine      │
+              │ • Buyer Intelligence    │
+              │ • AMN / Discovery       │
+              │   Refinement            │
+              └────────────┬────────────┘
+                           │
+               ┌───────────┴───────────┐
+               │                       │
+               ▼                       ▼
+       ┌──────────────────┐    ┌───────────────────┐
+       │ Human Discovery  │    │ Agent Discovery   │
+       └────────┬─────────┘    └─────────┬─────────┘
+                │                        │
+                ▼                        ▼
+       ┌──────────────────┐    ┌───────────────────┐
+       │ Buyer Experience │    │ PinkCurve Agent   │
+       │ Visual-First UI  │    │ Interface         │
+       └────────┬─────────┘    └─────────┬─────────┘
+                │                        │
+                │                        ▼
+                │              ┌───────────────────┐
+                │              │ Authorized        │
+                │              │ Personal Agent    │
+                │              └─────────┬─────────┘
+                │                        │
+                └───────────┬────────────┘
+                            │
+                            ▼
+                    ┌───────────────┐
+                    │ Registered    │
+                    │ Buyer         │
+                    └───────┬───────┘
+                            │
+                            ▼
                 ┌──────────────────────┐
-                │   Discovery Engine   │◀──────────────┐
-                └──────────┬───────────┘               │
-                           ▲                           │
-                           │                           │
-                ┌──────────┴───────────┐               │
-                │ Buyer Intent &       │               │
-                │ Buyer Intelligence   │               │
-                └──────────────────────┘               │
-                           │                           │
-                           ▼                           │
-                ┌──────────────────────┐               │
-                │   Buyer Experience   │               │
-                │   Visual Discovery   │               │
-                └──────────┬───────────┘               │
-                           │                           │
-                           ▼                           │
-                ┌──────────────────────┐               │
-                │ Adaptive Metadata    │               │
-                │ Navigation / Buyer   │───────────────┘
-                │ Refinement           │
+                │ Buyer Interaction,   │
+                │ Intent & Feedback    │
                 └──────────┬───────────┘
                            │
-                           ▼
-                       ┌───────┐
-                       │ Buyer │
-                       └───┬───┘
-                           │
-                           ▼
-                ┌──────────────────────┐
-                │ Buyer Interaction &  │
-                │ Feedback             │
-                └──────────┬───────────┘
-                           │
-                           ▼
-                ┌──────────────────────┐
-                │ Discovery Analytics  │
-                └──────────┬───────────┘
-                           │
-              ┌────────────┴──────────────┐
-              │                           │
-              ▼                           ▼
-   ┌──────────────────────┐    ┌──────────────────────┐
-   │   Learning Engine    │    │ Billing & Commercial │
-   │                      │    │ Integrity             │
-   └──────────┬───────────┘    └──────────┬───────────┘
-              │                           │
-              ▼                           ▼
-   ┌──────────────────────┐    Applicable Billable
-   │ Purpose-Specific     │    Events / Adjustments /
-   │ Intelligence         │    Seller Invoices
+               ┌───────────┴────────────┐
+               │                        │
+               ▼                        ▼
+     ┌──────────────────────┐   ┌──────────────────────┐
+     │ Discovery Analytics  │   │ PinkCurve Discovery  │
+     └──────────┬───────────┘   │ Services             │
+                │               └──────────┬───────────┘
+                │                          │
+                │                          └────────────↺
+                │
+                ▼
+              ┌─────────────────────────────┐
+              │                             │
+              ▼                             ▼
+   ┌──────────────────────┐      ┌──────────────────────┐
+   │   Learning Engine    │      │ Billing & Commercial │
+   │                      │      │ Integrity             │
+   └──────────┬───────────┘      └──────────┬───────────┘
+              │                             │
+              ▼                             ▼
+   ┌──────────────────────┐       Applicable Billable
+   │ Purpose-Specific     │       Events / Adjustments /
+   │ Intelligence         │       Seller Invoices
    └──────────┬───────────┘
               │
     ┌─────────┼───────────────┐
@@ -431,6 +458,16 @@ The Discovery Engine provides a shared discovery capability across eligible disc
 Buyer Intent, Buyer Intelligence, metadata signals, context, eligibility, Trust, Security, and other applicable signals may help determine what discovery content is appropriate for a Buyer.
 
 The Buyer Experience may present different discovery-object types within a coherent visual discovery environment while preserving enough source identity for PinkCurve to apply the correct interaction, governance, analytics, and economic rules.
+
+PinkCurve Discovery may reach a registered Buyer through more than one authorized Discovery channel.
+
+Human Discovery uses the PinkCurve Buyer Experience as the primary visual-first Discovery surface.
+
+Future Agent Discovery may use the PinkCurve Agent Interface to provide structured and multimodal Discovery capabilities to an authorized Personal Agent acting on behalf of the registered Buyer.
+
+These channels SHALL use the applicable shared PinkCurve Discovery capabilities rather than creating separate Discovery Engines.
+
+The Discovery channel SHALL remain identifiable so PinkCurve can apply appropriate interaction, authorization, Analytics, Trust, Security, Buyer-control, and economic rules.
 
 Discovery Analytics records and interprets activity according to the applicable discovery source and object type.
 
@@ -483,6 +520,66 @@ Billing and Commercial capabilities SHALL NOT control Discovery relevance, ranki
 Trust, safety, security, privacy, verification, fraud prevention, and content integrity operate across the entire architecture rather than as a single isolated component.
 
 Shared platform capabilities SHALL NOT erase the identity, lifecycle, governance, measurement, qualification, lineage, or economic boundaries among Offering, Campaign, Public Announcement, and future discovery-object types.
+
+---
+
+## Discovery Channels
+
+PinkCurve Discovery should support multiple authorized channels through which a registered Buyer may receive and interact with discovery.
+
+The initial and primary channel is **Human Discovery** through the PinkCurve Buyer Experience.
+
+PinkCurve should also support a future **Agent Discovery** channel in which an authorized Personal Agent accesses PinkCurve Discovery on behalf of a registered Buyer.
+
+Conceptually:
+
+```text
+                         Registered Buyer
+                               │
+                  ┌────────────┴────────────┐
+                  │                         │
+                  ▼                         ▼
+          Human Discovery            Agent Discovery
+                  │                         │
+                  ▼                         ▼
+        PinkCurve Buyer             Authorized
+           Experience              Personal Agent
+        Visual-First UI                   │
+                  │                       ▼
+                  │              PinkCurve Agent Interface
+                  │                       │
+                  │              ┌────────┴────────┐
+                  │              │                 │
+                  │              ▼                 ▼
+                  │        Authentication     Authorization /
+                  │                           Permissions /
+                  │                           Buyer Controls
+                  │              │                 │
+                  │              └────────┬────────┘
+                  │                       │
+                  └──────────────┬────────┘
+                                 ▼
+                       PinkCurve Discovery
+                           Services
+                                 │
+             ┌───────────────────┼───────────────────┐
+             │                   │                   │
+             ▼                   ▼                   ▼
+      Discovery Engine     Buyer Intelligence    AMN /
+                                             Discovery Refinement
+             │                   │                   │
+             └───────────────────┼───────────────────┘
+                                 │
+                                 ▼
+                    Eligible Discovery Objects
+                                 │
+             ┌───────────────────┼───────────────────┐
+             │                   │                   │
+             ▼                   ▼                   ▼
+          Offering           Campaign        Public Announcement
+                                                     │
+                                             Future Discovery
+                                                  Types
 
 ---
 
@@ -812,8 +909,23 @@ Future Discovery Candidates ───────────┤
                               Trust / Security
                               Eligibility Rules
                                        ↓
-                               Buyer Experience
+                                Discovery Results
+                                        │
+                                        ▼
+                                Authorized Discovery
+                                        Channels
+                                        │
+                                ┌───────┴───────┐
+                                │               │
+                                ▼               ▼
+                        Human Discovery      Agent Discovery
 ```
+
+The Discovery Engine does not determine how a qualified Discovery result is ultimately presented to the registered Buyer.
+
+Discovery results may be delivered through an authorized Discovery channel, including the Human Discovery channel through the Buyer Experience and, in the future, the Agent Discovery channel through the PinkCurve Agent Interface.
+
+Channel-specific presentation, interaction, authorization, measurement, and economic rules are applied outside the core Discovery Engine as appropriate.
 
 The purpose of the Discovery Engine is not simply to maximize clicks, views, or engagement.
 
@@ -928,7 +1040,7 @@ Any later analytical relationship among separate discovery events should be trea
 
 ### Buyer Control
 
-The Discovery Engine supplies discovery content to the Buyer Experience but does not control the Buyer.
+The Discovery Engine supplies qualified discovery results to authorized Discovery channels but does not control how the registered Buyer ultimately receives, explores, or acts on those results.
 
 Buyers should have mechanisms to redirect, refine, suppress, or otherwise influence their discovery experience where appropriate.
 
@@ -942,7 +1054,11 @@ See: [Discovery Engine](06-discovery-engine.md)
 
 ## 5. Buyer Experience
 
-The Buyer Experience is the primary discovery surface of PinkCurve.
+The Buyer Experience is the primary human discovery surface of PinkCurve.
+
+It provides the visual-first interface through which registered Buyers directly discover, explore, refine, and interact with Discovery Objects.
+
+Future Agent Discovery may provide an additional authorized discovery channel through the PinkCurve Agent Interface without replacing the Buyer Experience or creating a separate Discovery Engine.
 
 PinkCurve is designed as a **visual-first, mobile-first discovery environment** in which Buyers may discover multiple independently identifiable types of content through a coherent experience.
 

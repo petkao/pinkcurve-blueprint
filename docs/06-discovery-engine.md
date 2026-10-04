@@ -2,19 +2,20 @@
 
 ## Document Status
 
-| Field                  | Value                                                                                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| **Status**             | Draft                                                                                                                                 |
-| **Version**            | 0.3                                                                                                                                   |
-| **Owner**              | PinkCurve Product Team                                                                                                                |
-| **Last Reviewed**      | 2026-08-18                                                                                                                            |
-| **Related Components** | Offering Knowledge, Buyer Experience, Adaptive Metadata Navigation, Discovery Analytics, Learning Engine, Trust & Safety, AI Platform |
-
+| Field                  | Value                                                                                                      |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **Status**             | Draft                                                                                                      |
+| **Version**            | 0.3                                                                                                        |
+| **Owner**              | PinkCurve Product Team                                                                                     |
+| **Last Reviewed**      | 2026-09-30                                                                                                 |
+| **Related Components** | Offering Knowledge, Buyer Experience, Adaptive Metadata Navigation, Discovery Analytics, Learning Engine,  |
+|                        | Trust & Safety, AI Platform, Creative Studio.                                                              |
 ---
 
 ## Overview
 
-The Discovery Engine is PinkCurve's intelligent system for connecting buyers with offerings that may be relevant, useful, interesting, timely, or worth exploring.
+The Discovery Engine is PinkCurve's intelligent system for connecting buyers with offerings that may be relevant, useful, interesting,
+ timely, or worth exploring.
 
 Unlike traditional advertising systems that frequently prioritize advertiser spend, PinkCurve's Discovery Engine prioritizes **discovery quality**.
 
@@ -41,6 +42,20 @@ The Discovery Engine combines:
 * Learning
 
 to continuously produce meaningful discovery opportunities.
+
+The Discovery Engine also supports **Real-Time Discovery** for
+time-sensitive Offerings whose usefulness depends on being discovered
+while they are still valid and available.
+
+For these Offerings, relevance alone is insufficient. The Discovery
+Engine must consider current validity, availability, freshness,
+location where applicable, quantity or capacity where relevant, and
+other Discovery-readiness conditions before presenting an Offering to
+a Buyer.
+
+Real-Time Discovery follows the same buyer-first discovery principles
+as other PinkCurve discovery, but places additional importance on
+speed, truth, locality, relevance, and freshness.
 
 ---
 
@@ -209,7 +224,7 @@ Buyer controls may include:
 * Positive feedback
 * Negative feedback
 * Hide offering
-* Hide participant
+* Hide seller
 * Show similar offerings
 * Reset or broaden discovery
 * Explore another path
@@ -326,8 +341,23 @@ The feed may surface:
 * Community bulletins
 * Public resources
 * Previously unexplored categories
+* Real-Time and time-sensitive Offerings
 
 The goal is to provide **fresh discovery**, not endless engagement.
+
+Real-Time and time-sensitive discovery may appear in the Daily Discovery
+Feed when it is relevant to the Buyer and remains Discovery Ready.
+
+The feed should consider current availability, validity, freshness,
+location where applicable, and remaining useful availability when
+selecting such content.
+
+Real-Time content should not receive automatic priority merely because
+it is urgent or expires soon. It must still provide sufficient relevance
+and potential value to the Buyer.
+
+Buyer Experience may visually identify or organize Real-Time content so
+that Buyers can quickly understand that the discovery is time-sensitive.
 
 ---
 
@@ -380,6 +410,31 @@ This is particularly useful when the buyer knows roughly what they want but does
 PinkCurve proactively surfaces potentially useful offerings through the Daily Discovery Feed.
 
 The buyer does not need to initiate a search.
+
+---
+
+## Real-Time Discovery
+
+Real-Time Discovery surfaces time-sensitive Offerings while they remain
+useful, valid, and available.
+
+It may operate through multiple Buyer experiences, including:
+
+* Daily Discovery Feed
+* Location-aware discovery
+* Search
+* Browse
+* Intent-driven discovery
+* Metadata-guided discovery
+
+Real-Time Discovery is therefore not a separate discovery surface. It
+is a Discovery Engine capability that can operate across applicable
+surfaces.
+
+Candidate selection should emphasize current Discovery readiness,
+Buyer relevance, freshness, applicable location, and remaining useful
+availability rather than simply whether an Offering was recently
+published.
 
 ---
 
@@ -444,6 +499,8 @@ Possible dimensions include:
 * Audience compatibility
 * Location relevance
 * Availability
+* Freshness
+* Remaining useful availability where applicable
 * Price compatibility
 * Temporal relevance
 * Trust
@@ -453,6 +510,20 @@ Possible dimensions include:
 Offering Fit is not a permanent property of the offering.
 
 The same offering may be highly relevant to one buyer and irrelevant to another—or relevant to the same buyer at a different time.
+
+Offering Fit is evaluated only after applicable Discovery-readiness
+requirements are satisfied.
+
+For time-sensitive Offerings, remaining useful availability may affect
+fit. An Offering that is still eligible but has limited time, quantity,
+or capacity remaining may have different relevance depending on Buyer
+location, context, and ability to act while the Offering remains
+available.
+
+However, urgency alone should not make an Offering relevant. A
+time-sensitive Offering should still satisfy the same buyer-first
+principle that Discovery exists to surface Offerings that may matter to
+the Buyer.
 
 ---
 
@@ -473,7 +544,7 @@ Metadata and Discovery Signals serve different purposes.
 | Underlying Information          | Possible Discovery Signal     |
 | ------------------------------- | ----------------------------- |
 | Geographic distance             | 📍 Nearby — 0.8 miles         |
-| Verified provider               | ✓ Verified Provider           |
+| Verified seller                 | ✓ Verified Provider           |
 | Meaningful local trend          | 🔥 Popular Nearby             |
 | Active promotion                | Limited-Time Offer            |
 | Recently added offering         | New                           |
@@ -489,8 +560,21 @@ Signals should be:
 * Visually lightweight
 * Relevant to the buyer
 * Supported by underlying data
+* Available Now
+* Ending Soon
+* Limited Availability
 
 PinkCurve should generally display only a small number of high-value signals at one time.
+
+Time-sensitive Discovery Signals should communicate useful current
+context without creating artificial urgency.
+
+Signals such as **Available Now**, **Ending Soon**, or **Limited
+Availability** should be shown only when supported by current Offering
+Knowledge and applicable Discovery-readiness information.
+
+These signals are explanatory presentation information. They should not
+independently make an Offering eligible or relevant.
 
 ---
 
@@ -507,8 +591,20 @@ Examples include:
 * Available nearby
 * Trending this week
 * Sponsored discovery
+* Available near you now
+* Available for a limited time
+* Currently available based on your location
+* Matches your interests and is available now
 
 This improves transparency without exposing internal ranking algorithms or technical scores.
+
+For time-sensitive Discovery, explanations may include current context
+such as availability, location, or validity period when that information
+materially contributes to why the discovery is being shown.
+
+Explanations should describe genuine Discovery reasoning and current
+Offering information rather than create promotional pressure or
+artificial urgency.
 
 ---
 
@@ -547,16 +643,34 @@ Before ranking, PinkCurve determines which offerings are eligible for discovery.
 Eligibility may consider:
 
 * Offering status
-* Seller or provider status
+* Seller status
 * Trust verification
 * Policy compliance
-* Availability
-* Promotion expiration
+* Required approval status
+* Required Offering Knowledge
+* Validity period
+* Current availability
+* Quantity or capacity where applicable
+* Expiration conditions
+* Freshness of time-sensitive knowledge
 * Geographic eligibility
 * Campaign status
-* Required Offering Knowledge
+* Destination URL validity where applicable
+* Other Offering-type-specific Discovery-readiness requirements
 
 An offering that is ineligible should not enter normal discovery ranking.
+
+Eligibility is evaluated from current **Discovery readiness**, not only
+from whether the Offering exists or has previously been approved.
+
+An Offering may therefore transition from Discovery Ready to Not
+Discovery Ready without changing its descriptive Offering Knowledge.
+For example, it may expire, become unavailable, exhaust applicable
+quantity or capacity, be ended early by the Seller, require URL
+reverification, or become restricted by a trust or policy condition.
+
+These conditions should remove the Offering from active Discovery
+before ranking rather than merely reducing its ranking score.
 
 ---
 
@@ -593,6 +707,18 @@ flowchart LR
 
 Candidate retrieval should preserve enough diversity so ranking can consider useful alternatives rather than only near-duplicates.
 
+Candidate retrieval should operate on the current eligible Offering
+population.
+
+For time-sensitive and Real-Time Discovery, retrieval should use current
+validity, availability, location, freshness, and other applicable
+operational information rather than relying only on static Offering
+attributes or the state that existed when the Offering was published.
+
+Retrieval optimizations may reduce the candidate population efficiently,
+but they must not reintroduce Offerings that have already failed
+Discovery-readiness requirements.
+
 ---
 
 # Phase 3: Feature and Context Construction
@@ -609,6 +735,17 @@ Possible features include:
 * Positive feedback
 * Negative feedback
 * Historical preferences where permitted
+* Validity status
+* Quantity or capacity where applicable
+
+For time-sensitive Offerings, operational signals should reflect the
+current Offering state rather than only the state that existed when the
+Offering was originally published.
+
+These signals may affect ranking only after the Offering has passed
+applicable Discovery-readiness requirements. A failed readiness
+requirement should be handled by Eligibility rather than compensated for
+by a ranking score.
 
 ### Offering Signals
 
@@ -688,11 +825,38 @@ Is the offering likely to provide meaningful value to the buyer?
 
 ### Trust
 
-Is the participant and offering sufficiently trustworthy?
+Is the seller and offering sufficiently trustworthy?
 
-### Freshness
+### Discovery Novelty
 
 Would showing something new improve discovery?
+
+### Operational Freshness
+
+Operational Freshness represents whether time-sensitive Offering
+Knowledge remains current enough to support Discovery.
+
+It may include the freshness of:
+
+* Availability
+* Quantity or capacity
+* Price or discount information
+* Validity period
+* Location-specific information
+* Other time-sensitive Offering facts
+
+Operational Freshness may act as an eligibility requirement where stale
+information would make Discovery unreliable.
+
+When an Offering remains eligible, freshness may also be used as a
+ranking signal where more current information improves the usefulness
+or reliability of Discovery.
+
+Operational Freshness is therefore different from Discovery Novelty.
+
+**Discovery Novelty asks whether showing something new improves the
+Buyer experience. Operational Freshness asks whether the information
+being used for Discovery is still current enough to trust.**
 
 ### Diversity
 
@@ -770,6 +934,102 @@ The Buyer Experience determines how these elements appear visually.
 
 The Discovery Engine should avoid sending unnecessary technical complexity to the interface.
 
+### Discovery Classification
+
+Each discovery media should have one primary **Discovery Classification**.
+
+The classification identifies the primary purpose and discovery behavior
+of that media and is established when the Seller creates or submits the
+media to PinkCurve.
+
+Examples may include:
+
+* Real-Time Discovery
+* Regular Offering
+* Discount
+* Promotion
+* Brand Recognition
+* Public Service
+* Community Bulletin
+* Other supported discovery types
+
+The Seller may select the intended classification during submission, but
+PinkCurve should verify that the classification is consistent with the
+media, Offering Knowledge, Seller information, and applicable policies.
+
+The Discovery Classification belongs to the discovery media rather than
+representing every characteristic of the underlying Offering.
+
+For example, a Real-Time restaurant discovery may describe a discounted
+meal, limited quantity, local availability, and an expiration time while
+still having one primary Discovery Classification:
+
+**Real-Time Discovery**
+
+The other characteristics remain part of Offering Knowledge, promotion
+information, metadata, or operational Discovery state as appropriate.
+
+A single primary classification avoids ambiguous treatment of the same
+discovery media and provides a consistent basis for:
+
+* Discovery behavior
+* Discovery media selection and presentation
+* Buyer Experience organization and labeling
+* Discovery Analytics
+* Learning
+* Applicable pricing and billing policy
+
+The same Offering may have different discovery media with different
+classifications. For example, a Seller may have a regular Offering video,
+a Real-Time availability poster, and a separate discount promotion. Each
+media asset is classified according to its own primary discovery purpose.
+
+Discovery Classification may determine which pricing or billing policy
+applies to the discovery media, but pricing must not determine organic
+Discovery eligibility, relevance, or ranking.
+
+**One discovery media → one primary Discovery Classification → one
+applicable discovery and pricing policy.**
+---
+
+### Discovery Media Selection
+
+After an Offering has been selected for Discovery, the Discovery Engine
+should select the most appropriate **approved discovery media** for the
+current discovery context.
+
+Media selection may consider:
+
+* Offering type
+* Discovery mode
+* Real-Time versus longer-lived Discovery
+* Buyer context
+* Device and presentation surface
+* Current Offering Knowledge
+* Media freshness
+* Available approved creative assets
+* Trust and provenance requirements
+
+The Discovery Engine does not create the creative asset. Creative Studio
+creates or manages the available creative assets, while the Discovery
+Engine determines which approved asset is most appropriate to present
+for a particular Discovery opportunity.
+
+For example, a longer-lived Offering may use a richer image, video, or
+story-oriented creative, while a Real-Time Offering may use a current
+Seller-supplied photo, PinkCurve-generated poster, or feed card that
+better represents its present availability.
+
+The same Offering may therefore use different discovery media in
+different contexts.
+
+For time-sensitive Discovery, current factual representation should take
+priority over richer creative that may no longer accurately represent
+the Offering's present state.
+
+**Offering selection determines what to show. Media selection determines
+how to show it.**
+
 ---
 
 # Continuous Re-Ranking
@@ -790,6 +1050,34 @@ The system may update ranking when the buyer:
 * Resets discovery
 
 This creates responsive discovery within the session.
+
+### Operational State Changes
+
+Continuous Discovery updates should also respond to changes in the
+operational state of Offerings.
+
+Relevant changes may include:
+
+* Availability changes
+* Quantity or capacity changes
+* Validity-period changes
+* Expiration
+* Seller early termination
+* Freshness changes
+* Trust or verification changes
+* Destination validity changes
+* Other Discovery-readiness changes
+
+When an operational change makes an Offering no longer Discovery Ready,
+the Offering should be removed from active Discovery rather than waiting
+for the next Buyer interaction or normal ranking cycle.
+
+When the Offering remains eligible but its operational state changes,
+the Discovery Engine may reevaluate its ranking and presentation using
+the updated information.
+
+This is especially important for Real-Time Discovery, where the
+usefulness of an Offering may change quickly.
 
 ---
 
@@ -998,8 +1286,26 @@ The engine should account for:
 * Event timing
 * Recency
 * Seasonal relevance
+* Current availability
+* Quantity or capacity where applicable
+* Seller early termination
+* Hard real-world availability deadlines
+* Freshness of time-sensitive Offering Knowledge
 
 Expired promotions and events should not continue to appear as active discoveries.
+
+For Real-Time Discovery, temporal relevance may determine eligibility
+rather than merely ranking priority.
+
+An Offering should stop participating in active Discovery when its
+applicable validity period ends, it becomes unavailable, applicable
+quantity or capacity is exhausted, the Seller ends it early, or another
+time-sensitive Discovery-readiness condition is no longer satisfied.
+
+The Discovery Engine should therefore reevaluate time-sensitive
+eligibility as operational Offering state changes rather than assuming
+that eligibility established at publication remains valid for the
+Offering's lifetime.
 
 ---
 
@@ -1184,6 +1490,7 @@ flowchart TB
         RT[Retrieval]
         RK[Ranking]
         DV[Diversity / Quality]
+        DC[Discovery Classification]
         PS[Presentation Selection]
     end
 
@@ -1212,7 +1519,8 @@ flowchart TB
     CT --> RK
 
     RK --> DV
-    DV --> PS
+    DV --> DC
+    DC --> PS
 
     PS --> CR
     PS --> MD
@@ -1226,6 +1534,35 @@ flowchart TB
     LE --> RT
     LE --> RK
 ```
+
+Discovery Classification and Presentation Selection are separate
+responsibilities within the Discovery Engine.
+
+Each approved discovery media has one primary Discovery Classification
+established during submission and verified by PinkCurve. The
+classification identifies the primary discovery purpose of that media,
+such as Real-Time Discovery, Regular Offering, Discount, Brand
+Recognition, Public Service, or Community Bulletin.
+
+Presentation Selection uses the verified Discovery Classification
+together with Buyer context, Offering state, available approved media,
+and the presentation surface to determine how the selected discovery
+should be presented.
+
+This preserves clear ownership:
+
+* **Creative Studio** creates and manages discovery media.
+* **Discovery Classification** identifies the primary discovery purpose
+  of each media asset.
+* **Discovery Engine** determines eligibility, retrieval, ranking,
+  classification-aware presentation selection, and which approved media
+  to present.
+* **Buyer Experience** organizes and renders discoveries for Buyers.
+* **Business Model and billing capabilities** use the verified Discovery
+  Classification to determine the applicable pricing or billing policy.
+
+Pricing and billing policy must not influence organic Discovery
+eligibility, relevance, or ranking.
 
 ---
 
@@ -1273,6 +1610,25 @@ Learning must be evaluated carefully because incorrect optimization can degrade 
 For example, optimizing purely for watch time could reward sensational creative rather than useful discovery.
 
 See: [Learning Engine](08-learning-engine.md)
+
+### Human and Automated Discovery Signals
+
+Discovery learning signals should distinguish verified human Buyer
+activity from automated or non-human traffic.
+
+Traffic identified as bots, crawlers, unauthorized automation, or other
+non-human activity should not be treated as normal Buyer behavior for
+personalization, ranking, intent learning, popularity, trending, or
+other human-oriented learning models.
+
+If PinkCurve later supports authorized delegated Buyer agents, their
+activity should be identified separately from direct human Buyer
+activity so that PinkCurve can determine explicitly which agent signals
+are appropriate for each learning purpose.
+
+The Discovery Engine and Learning Engine should therefore preserve actor
+type and trust context with discovery events rather than assuming that
+every interaction represents human Buyer preference.
 
 ---
 
@@ -1354,6 +1710,13 @@ The Discovery Score is not an industry standard and should not be treated as pro
 * Trust eligibility integration
 * Learning-based ranking
 * Discovery explanation signals
+* Real-Time Discovery
+* Dynamic Discovery-readiness evaluation
+* Operational freshness and validity handling
+* Operational state-triggered withdrawal and re-ranking
+* Discovery Classification
+* Classification-aware Presentation Selection
+* Real-Time and time-sensitive discovery media selection
 
 ---
 
@@ -1382,6 +1745,28 @@ This allows PinkCurve to collect real discovery data before training sophisticat
 As data grows, learned ranking can gradually replace or augment heuristic rules.
 
 The architecture should therefore support increasing intelligence without requiring it at launch.
+
+### Real-Time Discovery in the MVP
+
+Real-Time Discovery should use the same core MVP Discovery Engine
+pipeline rather than requiring a separate discovery system.
+
+Real-Time Offerings should pass through:
+
+**Discovery Readiness → Candidate Retrieval → Feature Construction →
+Ranking → Discovery Classification and Media Selection → Presentation**
+
+The primary differences are the stronger dependence on current validity,
+availability, freshness, location where applicable, quantity or capacity
+where relevant, and other time-sensitive operational state.
+
+This allows PinkCurve to support Real-Time Discovery in the MVP while
+reusing the same core discovery architecture used for longer-lived
+Offerings.
+
+More specialized Real-Time retrieval or ranking models may be introduced
+later if observed Buyer and Seller behavior demonstrates that they are
+needed.
 
 ---
 
@@ -1448,6 +1833,20 @@ Algorithmic improvement should be measured against buyer usefulness, trust, and 
 ### Keep the Surface Simple
 
 The underlying intelligence may be complex, but the Buyer Experience should remain visual and understandable.
+
+### Current Truth Before Ranking
+
+Discovery relevance cannot compensate for an Offering that is no longer
+valid, available, trustworthy, or otherwise Discovery Ready.
+
+For time-sensitive and Real-Time Discovery, PinkCurve should evaluate
+current operational truth before ranking and presentation.
+
+An Offering that fails an applicable Discovery-readiness requirement
+should leave active Discovery rather than simply receive a lower ranking
+score.
+
+**Current truth comes before relevance.**
 
 ---
 

@@ -2,13 +2,15 @@
 
 ## Document Status
 
-| Field                  | Value                                                                                                                 |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| **Status**             | Draft                                                                                                                 |
-| **Version**            | 0.3                                                                                                                   |
-| **Owner**              | PinkCurve Product Team                                                                                                |
-| **Last Reviewed**      | 2026-08-18                                                                                                            |
-| **Related Components** | Creative Studio, Discovery Engine, Adaptive Metadata Navigation, Discovery Analytics, Learning Engine, Trust & Safety |
+| Field                  | Value                                                          |
+| ---------------------- | -------------------------------------------------------------- |
+| **Status**             | Draft                                                          |
+| **Version**            | 0.3                                                            |
+| **Owner**              | PinkCurve Product Team                                         |
+| **Last Reviewed**      | 2026-09-30                                                     |
+| **Related Components** | Creative Studio, Discovery Engine,                             |
+|                        | Adaptive Metadata Navigation, Discovery                        |
+|                        |Analytics, Learning Engine, Seller Intelligence, Trust & Safety |
 
 ---
 
@@ -32,9 +34,11 @@ Offering Knowledge provides a shared knowledge foundation for discovery, Adaptiv
 
 ---
 
-# The Offering as the Fundamental Discovery Object
+# Offering as a Discovery Object
 
-An **Offering** is anything PinkCurve can present to a buyer for discovery.
+An **Offering** is a type of **Discovery Object** representing something a Seller makes available for Discovery.
+
+Not every Discovery Object must be an Offering. PinkCurve's broader Discovery architecture may support other Discovery Object types while Offering Knowledge remains responsible for the structured understanding of Offerings.
 
 Offering types may include:
 
@@ -45,9 +49,9 @@ Offering types may include:
 * Community Service
 * Public Service
 * Brand-awareness or brand-recognition offering
-* Other future discoverable items
+* Other future offering types
 
-This abstraction allows PinkCurve to use a common discovery architecture while supporting very different types of offerings.
+This abstraction allows PinkCurve to represent different types of provider-defined Offerings while allowing the broader Discovery Object architecture to support additional forms of Discovery.
 
 For example:
 
@@ -67,7 +71,7 @@ Event
 Public Service
     → Free vaccination clinic
 
-Community Resource
+Community Service
     → Local food assistance program
 
 Brand Recognition
@@ -132,7 +136,7 @@ PinkCurve should distinguish between different sources and types of knowledge.
 
 ## 1. Source Knowledge
 
-Source Knowledge contains information supplied or verified by the seller, organization, or authoritative source.
+Source Knowledge contains information supplied or verified by the Seller or another authoritative source.
 
 Examples include:
 
@@ -142,7 +146,9 @@ Examples include:
 * Features
 * Specifications
 * Location
-* Availability
+* Validity period where applicable
+* Quantity or capacity where applicable
+* Expiration conditions where applicable
 * Images
 * Videos
 * Destination URL
@@ -202,20 +208,34 @@ Common core fields may include:
 | Field                  | Description                                              |
 | ---------------------- | -------------------------------------------------------- |
 | `offering_id`          | Unique offering identifier                               |
-| `offering_type`        | Product, service, promotion, event, public service, etc. |
+| `offering_type`        | Product, Commercial Service, Promotion, Event, Community |
+|                        | Service, Public Service, Brand-awareness or Brand-       |
+|                        | recognition Offering, or other supported Offering type   |
 | `offering_name`        | Display name                                             |
 | `offering_description` | Description of the offering                              |
 | `offering_url`         | Destination page supplied by the provider                |
-| `provider_id`          | Seller or organization responsible for the offering      |
+| `seller_id`            | Seller responsible for providing the Offering            |
 | `category`             | Primary offering category                                |
 | `brand`                | Brand or organization where applicable                   |
 | `price_amount`         | Numeric price where applicable                           |
 | `currency_code`        | Currency where applicable                                |
 | `price_description`    | Price context such as "per month"                        |
 | `availability`         | Availability information                                 |
+| `availability_status`  | Current availability state where applicable              |
+| `quantity_available`   | Current quantity or capacity where applicabl             |
 | `location`             | Geographic relevance where applicable                    |
-| `valid_from`           | Beginning of time-sensitive availability                 |
-| `valid_until`          | Expiration where applicable                              |
+| `valid_from`           | Beginning of the Offering's real-world validity period   |
+|                        | where applicable                                         |
+| `valid_until`          | End of the Offering's real-world validity period where   |
+|                        | applicable                                               |
+
+Offering validity is distinct from a Discovery Media Discovery Period. Offering validity describes when the underlying Offering is valid or available, while the Discovery Period determines when particular Discovery Media may be presented through PinkCurve.
+
+For time-sensitive Offerings, validity, availability, and quantity or
+capacity may directly affect Discovery readiness. An Offering should not
+remain eligible for active Discovery when its applicable validity period
+has ended, its availability has ended, or its relevant quantity or
+capacity has been exhausted.
 
 Not all fields are required for every Offering type.
 
@@ -355,14 +375,34 @@ Offering Knowledge may therefore include:
 * Promotion start and expiration
 * Business availability
 * Seasonal relevance
+* Current availability status
+* Quantity or capacity where relevant
+* Hard real-world expiration or availability deadline
+* Seller early termination where applicable
+
+These temporal attributes describe the underlying Offering and should not be
+confused with the Discovery Period of Discovery Media. An Offering may remain
+valid while particular Discovery Media associated with it starts, expires, or
+is replaced according to its own Discovery Period.
 
 Location and time can become important discovery dimensions.
+
+For time-sensitive Offerings, time and availability also affect whether
+the Offering remains eligible for Discovery. PinkCurve should be able to
+stop presenting an Offering when it expires, becomes unavailable,
+reaches an applicable quantity or capacity limit, is ended early by the
+Seller, or otherwise becomes ineligible for Discovery.
 
 ---
 
 # Creative Assets
 
 Offering Knowledge should maintain references to the visual materials available for discovery.
+
+Creative Assets are source or generated materials associated with an Offering.
+They are distinct from **Discovery Media**, which represents the visual or other
+presentation content made eligible for presentation through PinkCurve Discovery.
+Creative Assets may be used by the Creative Studio to produce Discovery Media.
 
 These may include:
 
@@ -376,6 +416,19 @@ These may include:
 
 The Creative Studio can use these assets together with structured Offering Knowledge to create discovery content.
 
+Creative assets should maintain provenance sufficient to distinguish
+Seller-provided or otherwise authorized factual media from
+PinkCurve-generated presentation assets.
+
+For Offerings where the visual appearance of the actual item is material
+to Buyer understanding, generated presentation should not falsely depict
+the Offering as though the generated image were factual Seller-provided
+media.
+
+This distinction is especially important for Real-Time Discovery, where
+a Seller may provide a current photo and PinkCurve may rapidly create a
+poster or other visual presentation around that source material.
+
 ---
 
 # Knowledge Capture
@@ -384,9 +437,9 @@ Offering Knowledge may enter PinkCurve through several paths.
 
 ## Manual Entry
 
-Sellers or organizations directly provide structured information.
+Sellers directly provide structured Offering information.
 
-The interface should guide participants toward useful knowledge without requiring unnecessarily complicated data entry.
+The interface should guide Sellers toward useful knowledge without requiring unnecessarily complicated data entry.
 
 ---
 
@@ -394,7 +447,7 @@ The interface should guide participants toward useful knowledge without requirin
 
 A destination URL is an important source of Offering Knowledge.
 
-With seller permission, PinkCurve may analyze the supplied page to extract information such as:
+With permission from the Seller, PinkCurve may analyze the supplied page to extract information such as:
 
 * Offering name
 * Description
@@ -418,10 +471,10 @@ AI may analyze:
 * Uploaded documents
 * Images
 * Existing descriptions
-* Seller-provided materials
+* Seller-supplied materials
 * Structured feeds
 
-AI can suggest knowledge rather than requiring sellers to manually enter every field.
+AI can suggest knowledge rather than requiring Sellers to manually enter every field.
 
 ---
 
@@ -440,12 +493,12 @@ PinkCurve may support imports from:
 
 ## Learning
 
-Discovery interactions may enrich knowledge after an offering becomes active.
+Discovery interactions may enrich Offering Knowledge after an Offering becomes available for Discovery.
 
 This creates a continuous knowledge cycle:
 
 ```text
-Provider Knowledge
+Seller Knowledge
        ↓
 AI Enrichment
        ↓
@@ -469,8 +522,8 @@ PinkCurve should know where important knowledge came from.
 
 Knowledge may be labeled as:
 
-* Provider supplied
-* Provider verified
+* Seller supplied
+* Seller verified
 * AI extracted
 * AI inferred
 * Imported
@@ -499,6 +552,19 @@ Source: Discovery learning
 
 Provenance helps PinkCurve distinguish **facts, interpretations, and learned signals**.
 
+For time-sensitive knowledge, provenance should also preserve when the
+information was supplied, observed, extracted, verified, or last
+confirmed where applicable.
+
+This is especially important for information such as price,
+availability, quantity or capacity, location, validity periods, and
+expiration conditions because otherwise correct information may become
+stale.
+
+Freshness therefore should be evaluated together with provenance when
+PinkCurve determines whether time-sensitive knowledge can still be
+trusted for active Discovery.
+
 ---
 
 # Knowledge Verification and Trust
@@ -520,6 +586,19 @@ Potential controls include:
 
 Trust status may affect whether an Offering becomes eligible for discovery.
 
+Knowledge completeness and Discovery readiness are separate concepts.
+
+An Offering may contain complete descriptive knowledge while still being
+ineligible for active Discovery because required approval has not been
+completed, its validity period has not started or has ended, it is no
+longer available, its quantity or capacity has been exhausted, its
+destination URL requires reverification, or a trust, safety, or policy
+condition has suspended Discovery eligibility.
+
+Changes to these operational conditions may therefore change Discovery
+readiness without changing the Offering's descriptive Knowledge
+Completeness Score.
+
 AI-generated knowledge should not automatically be treated as verified fact.
 
 See: [Security, Privacy, and Trust](12-security-privacy-and-trust.md)
@@ -528,7 +607,13 @@ See: [Security, Privacy, and Trust](12-security-privacy-and-trust.md)
 
 # Knowledge Completeness
 
-PinkCurve may calculate a **Knowledge Completeness Score** to identify missing information.
+PinkCurve may calculate a **Knowledge Completeness Score** to identify missing
+or insufficient Offering Knowledge.
+
+The score should measure the completeness of useful knowledge for the applicable
+Offering type rather than simply counting populated fields. Information that is
+irrelevant, duplicated, unreliable, or insufficiently meaningful should not
+increase completeness merely because a field contains a value.
 
 Example:
 
@@ -549,9 +634,15 @@ Possible factors include:
 * Location information where relevant
 * Offering-type-specific fields
 
-However, completeness does **not** mean discovery quality.
+However, completeness does **not** mean Discovery quality or Discovery readiness.
 
-An offering with extensive information is not automatically more relevant or valuable than another offering.
+An Offering with extensive information is not automatically more relevant
+or valuable than another Offering, nor is it automatically eligible for
+active Discovery.
+
+Discovery readiness depends on applicable operational conditions such as
+approval, trust status, validity, availability, freshness, and other
+Offering-type-specific requirements.
 
 The completeness score should primarily help sellers and PinkCurve identify missing knowledge.
 
@@ -567,6 +658,8 @@ Knowledge Quality may consider:
 
 * Accuracy
 * Freshness
+* Current availability where applicable
+* Validity status where applicable
 * Consistency
 * Source reliability
 * Verification status
@@ -592,34 +685,31 @@ if it contains extensive but outdated or poorly verified information.
 stateDiagram-v2
     [*] --> Draft: Create
     Draft --> Review: Submit
-    Review --> Active: Approve
+    Review --> Approved: Approve
     Review --> Draft: Changes Required
-    Active --> Draft: Edit
-    Active --> Suspended: Trust / Quality Issue
-    Suspended --> Review: Re-evaluate
-    Active --> Archived: Archive
-    Archived --> Active: Restore
+    Approved --> Draft: Knowledge Edit
+    Approved --> Review: Reverification Required
+    Approved --> Archived: Archive
+    Archived --> Draft: Restore / Update
 ```
 
 ### Draft
 
-Knowledge is being entered, imported, or enriched.
+Offering Knowledge is being entered, imported, corrected, or enriched.
 
 ### Review
 
-PinkCurve or the provider is validating information before discovery.
+Offering Knowledge is being evaluated or verified before it is approved for use by PinkCurve.
 
-### Active
+### Approved
 
-The Offering is eligible for discovery.
+The applicable Offering Knowledge has been approved for use by PinkCurve.
 
-### Suspended
-
-The Offering has been temporarily removed from discovery because of trust, quality, policy, or verification concerns.
+Approved knowledge does not by itself make an Offering eligible for active Discovery. Discovery eligibility is determined separately using applicable approval, trust, validity, availability, freshness, policy, and other Discovery-readiness conditions.
 
 ### Archived
 
-The Offering is no longer actively presented but its historical knowledge may be retained where appropriate.
+The Offering Knowledge is no longer part of the current approved representation, but historical knowledge may be retained where appropriate for auditing, analytics, learning, or restoration.
 
 ---
 
@@ -629,7 +719,7 @@ Offering Knowledge changes over time.
 
 Changes may result from:
 
-* Seller edits
+* Provider edits
 * Price changes
 * Promotion changes
 * AI enrichment
@@ -642,16 +732,29 @@ PinkCurve should preserve enough version history to understand significant chang
 
 Only appropriate approved knowledge should be used for active discovery.
 
+Not every operational change requires a new full Offering Knowledge
+version.
+
+Frequently changing state such as current availability, remaining
+quantity or capacity, expiration, or Seller early termination may be
+maintained as operational Offering state while preserving appropriate
+history and audit evidence.
+
+A new Knowledge Version should be created when the underlying Offering
+Knowledge changes in a way that requires versioned history, approval,
+rollback, or other governance controls.
+
 ---
 
 # Relationships
 
 ```mermaid
 erDiagram
-    PARTICIPANT ||--o{ OFFERING : provides
+    SELLER ||--o{ OFFERING : provides
     OFFERING ||--o{ OFFERING_KNOWLEDGE : has
     OFFERING_KNOWLEDGE ||--o{ OFFERING_METADATA : contains
     OFFERING ||--o{ CREATIVE_ASSET : has
+    OFFERING ||--o{ DISCOVERY_MEDIA : represented_by
     OFFERING ||--o{ DISCOVERY_EVENT : generates
     OFFERING ||--o{ BUYER_FEEDBACK : receives
     OFFERING_KNOWLEDGE ||--o{ KNOWLEDGE_VERSION : versions
@@ -668,6 +771,9 @@ This allows PinkCurve to preserve historical knowledge while maintaining a curre
 ## Creative Studio
 
 Offering Knowledge provides the factual and contextual foundation for creative generation.
+
+Creative Studio may combine Offering Knowledge and authorized Creative Assets
+to produce Discovery Media for presentation through PinkCurve Discovery.
 
 Creative Studio may use:
 
@@ -689,6 +795,12 @@ See: [Creative Studio](05-creative-studio.md)
 
 Offering Knowledge provides the information needed to retrieve, understand, and rank offerings.
 
+Offering Knowledge primarily helps the Discovery Engine understand and evaluate
+the relevance of the underlying Offering. When an Offering has multiple eligible
+Discovery Media, the Discovery Engine may separately select the appropriate
+Discovery Media for presentation based on the Discovery context and applicable
+Discovery Media eligibility rules.
+
 Discovery may use:
 
 * Semantic meaning
@@ -696,9 +808,20 @@ Discovery may use:
 * Category
 * Location
 * Availability
+* Freshness
+* Validity period
+* Discovery readiness
 * Audience relevance
 * Learned signals
 * Trust status
+
+Offering Knowledge provides both descriptive knowledge used to understand
+and rank an Offering and operational knowledge used to determine whether
+the Offering is currently eligible for Discovery.
+
+For time-sensitive Offerings, the Discovery Engine should use current
+validity, availability, freshness, trust, and other applicable
+Discovery-readiness conditions before presenting the Offering to Buyers.
 
 See: [Discovery Engine](06-discovery-engine.md)
 
@@ -742,7 +865,12 @@ Examples include:
 * Negative signals
 * Offering relationships
 
-Learned information should maintain provenance and should not silently replace verified provider information.
+Learned information should maintain provenance and should not silently replace verified seller information.
+
+Learning Engine outputs may enrich Learned Knowledge and influence future Discovery,
+but they should not silently overwrite authoritative Source Knowledge. Where learned
+signals conflict with verified Source Knowledge, the conflict should remain identifiable
+through provenance and be handled through the appropriate verification or governance process.
 
 See: [Learning Engine](08-learning-engine.md)
 
@@ -760,6 +888,8 @@ Examples include:
 * Creative opportunities
 * Discovery opportunities
 * Knowledge freshness issues
+* Discovery-readiness issues
+* Availability or expiration issues
 
 See: [Seller Intelligence](09-seller-intelligence.md)
 
@@ -779,6 +909,17 @@ Primary logical entities may include:
 * `knowledge_versions`
 * `creative_assets`
 * `knowledge_sources`
+
+Operational Offering state may include rapidly changing information such
+as current availability, remaining quantity or capacity, validity status,
+expiration, Seller early termination, and current Discovery readiness.
+
+This operational state should remain logically associated with the
+Offering without requiring every state change to create a new full
+Offering Knowledge version.
+
+The exact persistence model and physical entities for this state are
+defined by the Data Architecture.
 
 Exact physical database design is defined in the Data Architecture rather than this document.
 
@@ -813,6 +954,12 @@ See: [Data Architecture](11-data-architecture.md)
 * Structured import
 * Learning-based enrichment
 * Trust and verification integration
+* Discovery-readiness evaluation
+* Time-sensitive Offering knowledge
+* Freshness and validity tracking
+* Operational availability and quantity or capacity tracking
+* Real-Time Offering lifecycle support
+* Creative asset provenance
 
 ---
 
@@ -822,6 +969,7 @@ See [Open Decisions](19-open-decisions.md) for decisions including:
 
 * Knowledge completeness weighting
 * Knowledge quality measurement
+* Discovery-readiness rules by Offering type
 * Multiple active knowledge versions
 * Conflict handling between provider and AI-generated knowledge
 * Metadata governance
@@ -834,9 +982,9 @@ See [Open Decisions](19-open-decisions.md) for decisions including:
 
 Offering Knowledge should follow several long-term principles.
 
-### Provider Knowledge Remains Authoritative
+### Seller Knowledge Remains Authoritative
 
-PinkCurve may enrich knowledge, but verified provider facts should not be silently changed by AI or learning systems.
+PinkCurve may enrich knowledge, but verified Seller facts should not be silently changed by AI or learning systems.
 
 ### Knowledge Must Be Explainable
 
@@ -854,13 +1002,22 @@ Behavioral signals can improve PinkCurve's understanding without redefining fact
 
 Offering Knowledge evolves as offerings, markets, buyers, and discovery patterns change.
 
+### Freshness Is Part of Knowledge
+
+For time-sensitive Offerings, knowledge must be useful at the time of
+Discovery, not merely correct when it was originally captured.
+
+Availability, validity, quantity or capacity, expiration, and other
+time-sensitive facts should therefore be evaluated for freshness when
+they affect Discovery readiness.
+
 ### Quality Matters More Than Volume
 
 More fields do not automatically create better discovery.
 
 ### Trust Applies to Knowledge
 
-AI-generated or seller-provided claims must be subject to appropriate quality and trust controls.
+AI-generated or seller-supplied claims must be subject to appropriate quality and trust controls.
 
 ---
 
@@ -869,6 +1026,7 @@ AI-generated or seller-provided claims must be subject to appropriate quality an
 * [Product Architecture](03-product-architecture.md)
 * [Creative Studio](05-creative-studio.md)
 * [Discovery Engine](06-discovery-engine.md)
+* [Adaptive Metadata Navigation](23-adaptive-metadata-navigation.md)
 * [Discovery Analytics](07-discovery-analytics.md)
 * [Learning Engine](08-learning-engine.md)
 * [Seller Intelligence](09-seller-intelligence.md)
