@@ -2,19 +2,23 @@
 
 ## Document Status
 
-| Field                  | Value                                                                                                                  |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **Status**             | Draft                                                                                                                  |
-| **Version**            | 0.3                                                                                                                    |
-| **Owner**              | PinkCurve Product Team                                                                                                 |
-| **Last Reviewed**      | 2026-08-18                                                                                                             |
-| **Related Components** | Discovery Engine, Buyer Experience, Adaptive Metadata Navigation, Learning Engine, Seller Intelligence, Trust & Safety |
+| Field                  | Value                                                                        |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| **Status**             | Draft                                                                        |
+| **Version**            | 0.3                                                                          |
+| **Owner**              | PinkCurve Product Team                                                       |
+| **Last Reviewed**      | 2026-10-10                                                                   |
+| **Related Components** | Discovery Engine, Buyer Experience, Adaptive Metadata Navigation,            |
+|                        | Learning Engine, Seller Intelligence, Trust & Safety                         |
 
 ---
 
 ## Overview
 
-Discovery Analytics measures whether PinkCurve is helping buyers discover offerings that are relevant, useful, interesting, trustworthy, or worth exploring.
+Discovery Analytics measures whether PinkCurve is helping buyers discover offerings that are relevant, useful, 
+interesting, trustworthy, or worth exploring.
+
+Discovery Analytics is PinkCurve's measurement and interpretation capability. It captures evidence of Buyer discovery activity, evaluates discovery effectiveness, and provides reliable signals to other platform capabilities. It supports continuous improvement of discovery quality while preserving the distinction between observed activity, meaningful Buyer outcomes, and qualified billable Seller activity. Billing eligibility and charging rules are governed by PinkCurve's Business Model and billing policies, not by engagement metrics alone.
 
 It captures and interprets discovery activity across the platform and provides evidence for:
 
@@ -88,7 +92,7 @@ Discovery Analytics must therefore interpret **multiple signals together**.
 
 ## For Buyers
 
-Analytics should help PinkCurve understand:
+Discovery Analytics should help PinkCurve understand whether Buyers are discovering worthwhile Offerings through the unified Buyer Discovery experience, regardless of Discovery Mode, Discovery Surface, or Discovery Classification.
 
 * Are buyers finding relevant offerings?
 * Can buyers redirect discovery easily?
@@ -103,7 +107,7 @@ Analytics should help PinkCurve understand:
 
 ## For Sellers and Organizations
 
-Analytics should help answer:
+Discovery Analytics should help Sellers understand how effectively their submitted Discovery Media reaches relevant Buyers, generates meaningful discovery outcomes, and delivers measurable value. Analytics should distinguish discovery performance from billable activity and provide evidence that Sellers can use to improve their Offerings and other Discovery services.
 
 * Are my offerings being discovered?
 * Which offerings generate meaningful interest?
@@ -112,8 +116,14 @@ Analytics should help answer:
 * Which audiences or locations respond?
 * Are buyers leaving negative feedback?
 * Are buyers visiting my destination?
+* Which qualified Buyer actions or qualified impressions are billable under the applicable Discovery Classification, and how do they relate to my spending limits and billing records?
+* Which qualified positive Buyer actions are billable, and how do they relate to my spending limits and billing records?
 * Is my brand recognition increasing?
 * What value is PinkCurve delivering?
+* Which verified Buyer-initiated positive actions are billable, including legitimate repeat actions?
+* How many qualified impressions were delivered through Brand Recognition Discovery?
+* How many unique Buyers were reached, and how frequently were they exposed to the same Brand Recognition Discovery Media?
+* How do billable actions and impressions relate to my spending limits and billing records?
 
 ---
 

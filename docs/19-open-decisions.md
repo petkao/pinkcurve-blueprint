@@ -2798,12 +2798,13 @@ TBD
 
 **Question:**
 
-What billing unit and unit price should PinkCurve use for Real-Time
-Discovery while keeping Seller pricing simple, understandable, and
-economically sustainable?
+How should PinkCurve establish and validate commercial pricing for Real-Time Discovery using Qualified Real-Time Impressions (QRIs), while keeping Seller pricing simple, understandable, and economically sustainable?
 
-PinkCurve intends to keep Real-Time Discovery pricing simple and
-understandable for Sellers.
+A **Qualified Real-Time Impression (QRI)** is the established Real-Time Discovery measurement unit, as defined in Chapter 13.
+
+The commercial use of QRIs as billable units, the applicable unit price, and the resulting financial treatment remain open under PD-012.
+
+PinkCurve SHALL NOT charge Sellers for QRIs until the commercial pricing policy has been approved and the applicable Seller Owner financial authorization requirements have been satisfied.
 
 **Tentative Direction:**
 
@@ -2824,11 +2825,11 @@ understand, reflects measurable value, supports Seller-controlled
 spending, and can remain economically sustainable as Real-Time Discovery
 usage grows.
 
-The current direction is a unit-based pricing model using a consistent
-unit price across the United States rather than different prices by
-industry, Offering type, Seller size, or geography.
+The current direction is a unit-based pricing model using Qualified Real-Time Impressions (QRIs), with a consistent unit price across the United States rather than different prices by industry, Offering type, Seller size, or geography.
 
-The specific billable unit and unit price remain to be validated.
+QRI is the established Real-Time Discovery measurement unit. Whether QRIs become commercially billable, the applicable unit price, and the financial treatment remain subject to validation and approval under PD-012.
+
+Qualified Real-Time Impressions may be measured and reported before commercial billing is enabled. QRI measurement does not itself authorize Seller charges.
 
 PinkCurve should initially evaluate pricing economics using a major
 Real-Time Discovery Buyer use case with sufficient potential Buyer demand
@@ -2862,7 +2863,7 @@ Seller or platform value to justify the added complexity.
 
 **Work Required:**
 
-- Define the candidate billable Real-Time Discovery unit.
+- Validate whether established Qualified Real-Time Impressions (QRIs) should become the commercial billing unit, and determine the conditions under which QRI-based charging may be approved.
 - Define qualification, deduplication, fraud, and invalid-traffic rules for that unit.
 - Determine an initial unit price for MVP validation.
 - Define Seller-controlled spending limits and related notifications.
@@ -2875,7 +2876,6 @@ Seller or platform value to justify the added complexity.
 **Evidence Required:**
 
 - Buyer response to representative Real-Time Discovery Offerings
-- Qualified Real-Time Discovery unit volume under candidate definitions
 - Qualified positive Buyer actions and Qualified Offering Visits where applicable
 - Seller-perceived value of Real-Time Discovery
 - Seller willingness to pay through actual or simulated pricing tests
@@ -2883,10 +2883,11 @@ Seller or platform value to justify the added complexity.
 - Seller spending behavior under defined budget limits
 - Approval and publication cost per Real-Time Offering
 - AI, infrastructure, monitoring, and operational cost attributable to Real-Time Discovery
-- Cost per candidate billable Real-Time Discovery unit
-- Revenue potential per candidate billable unit
 - Fraud, invalid-traffic, duplicate, and measurement-error rates
 - Evidence from representative Real-Time Discovery use cases sufficient to evaluate whether nationally consistent unit pricing remains practical
+- Qualified Real-Time Impression (QRI) volume under the established qualification rules
+- Cost per qualified QRI, including attributable Real-Time Discovery operating costs
+- Revenue potential per QRI under candidate commercial pricing policies, without assuming that QRI billing has been approved
 
 **Decision Needed By:**
 
@@ -2916,9 +2917,11 @@ Product / Business Model / Discovery Analytics / Seller Experience / Finance
 
 **Final Decision:**
 
-TBD — PinkCurve currently intends to use a simple unit-based pricing
-model for Real-Time Discovery, but the exact billable unit and unit price
-remain to be validated before production charging begins.
+TBD — Qualified Real-Time Impression (QRI) is the established measurement unit for Real-Time Discovery.
+
+PinkCurve's tentative commercial direction is simple, nationally consistent, unit-based pricing using QRIs. Whether QRIs become billable, the applicable unit price, and the associated financial controls remain subject to validation and approval under PD-012.
+
+QRI measurement may operate before commercial billing is enabled. No QRI-derived Seller charges are permitted until the commercial policy is approved and the applicable Seller Owner financial authorization requirements are satisfied.
 
 **Decision Rationale:**
 
@@ -2929,11 +2932,11 @@ the appropriate primary commercial model.
 A simple unit-based model is the current direction because it can make
 Seller cost easier to understand, calculate, budget, and control.
 
-However, PinkCurve does not yet have sufficient market and operating
-evidence to finalize the billable unit or unit price. Those decisions
-should be based on measured Buyer response, Seller value, willingness to
-pay, operating cost, fraud and measurement quality, and sustainable unit
-economics.
+Qualified Real-Time Impression (QRI) is already established as the Real-Time Discovery measurement unit. However, PinkCurve does not yet have sufficient market and operating evidence to approve QRI-based commercial billing or determine its unit price.
+
+Those commercial decisions should be based on measured Buyer response, Seller value, willingness to pay, operating cost, fraud and measurement quality, and sustainable unit economics.
+
+Until the commercial policy is approved and applicable Seller Owner financial authorization requirements are satisfied, QRIs may be measured and analyzed but must not generate Seller charges.
 
 **Validation Result:**
 
@@ -3263,79 +3266,53 @@ TBD
 
 **Status:** Decided
 
-**Question:** Should Brand Recognition and Quality Brand Exposures be
-billable Seller actions?
+**Question:**
 
-**Final Direction:**
+Should Brand Recognition Discovery use Qualified Brand Impressions (QBIs) as billable Seller activity?
 
-Brand Recognition and Quality Brand Exposures are not billable Seller
-actions.
+**Final Decision:**
 
-PinkCurve may measure Brand Recognition and Quality Brand Exposures for
-analytics, Seller Intelligence, discovery evaluation, and evidence of
-Seller value, but these measurements do not create billing events.
+Brand Recognition uses the **Qualified Brand Impression (QBI)** as its measurement and billing unit.
 
-**Scope Clarification:**
+A QBI represents a verified presentation of approved Brand Recognition Discovery Media to a registered human Buyer that satisfies PinkCurve's applicable visibility, quality, Trust, Security, and fraud-prevention requirements.
 
-This decision applies specifically to Brand Recognition and Quality Brand
-Exposure as awareness-oriented Seller value signals.
+A QBI does not require a Buyer click, intentional selection, Qualified Offering Visit (QOV), external Seller destination, or transaction.
 
-It does not determine whether another explicitly defined Discovery metric,
-such as a future qualified Real-Time Discovery impression, may become a
-billable usage unit.
+Each independently qualified QBI may produce zero or one QBI-derived Billable Event, subject to the applicable approved pricing policy, Seller Owner authorization, free allowance, spending controls, and Billing Qualification.
 
-A Real-Time Discovery impression, if PinkCurve later defines and validates
-one for billing, would require its own qualification, relevance,
-deduplication, fraud-prevention, measurement, and commercial rules.
+Legitimate repeated QBIs may be independently billable. Technical duplicates, automated refreshes, fraudulent impressions, and continuous visibility without a distinct qualified presentation do not create additional QBIs.
 
-Real-Time Discovery pricing remains unresolved.
+**Decision History:**
 
-**Why This Matters:**
+The previous BD-004 decision treated Brand Recognition and Quality Brand Exposures as nonbillable awareness measurements.
 
-Brand Recognition may create value for Sellers even when it is not tied
-directly to a specific Offering or an immediate qualified positive Buyer
-action.
+That decision has been superseded by the QBI-based Brand Recognition billing model established in Chapter 13.
 
-PinkCurve may help Sellers build awareness among relevant Buyers based on:
+The original concern about charging for unverified or low-quality exposure remains addressed through QBI qualification, financial authorization, and billing integrity controls.
 
-- Geography
-- Category
-- Buyer interests
-- Timing
-- Other appropriate discovery contexts
+**Decision Rationale:**
 
-However, Brand Recognition value is less directly attributable than a
-qualified positive Buyer action.
+Brand Recognition can create measurable Seller value through qualified exposure even when the Buyer does not intentionally visit an Offering.
 
-PinkCurve will therefore measure Brand Recognition where useful for
-analytics, Seller Intelligence, discovery evaluation, and Seller value
-evidence without treating Brand Recognition or Quality Brand Exposures
-as billable events.
+PinkCurve therefore distinguishes qualified Brand Recognition exposure from raw advertising impressions and technical media rendering.
 
-**Work Required:**
+The QBI model supports independently qualified measurement and Seller-authorized billing without requiring an Offering or outbound Buyer action.
 
-- Define how Brand Recognition and Quality Brand Exposures are measured
-- Define the evidence required for a valid Quality Brand Exposure
-- Measure Seller value associated with Brand Recognition
-- Evaluate PinkCurve's cost of delivering and measuring Brand Recognition
-- Determine how Brand Recognition evidence is presented through Seller Intelligence
-- Monitor whether Brand Recognition contributes to later qualified positive Buyer actions
-- Validate Brand Recognition measurement during Beta
+Brand Recognition pricing does not purchase preferential Discovery ranking.
 
-**Evidence Required:**
+**Implementation Requirements:**
 
-- Buyer response
-- Relevant audience reach
-- Recognition or recall indicators
-- Seller-perceived value of Brand Recognition
-- Buyer trust impact
+- Discovery Analytics owns QBI qualification.
+- Buyer Experience supplies presentation and visibility evidence.
+- Trust and Security supply applicable eligibility and integrity evidence.
+- Billing applies approved QBI pricing and Seller financial controls.
+- Each QBI preserves qualification and billing lineage.
+- Seller Intelligence reports qualified exposure without asserting unverified brand awareness or Seller-side outcomes.
+- QBI-based billing remains independent of QOV-based Offering Discovery billing.
 
 **Decision Needed By:**
 
-Decided for the current PinkCurve business model.
-
-The decision may be formally revisited in the future if PinkCurve develops
-new evidence that supports a different Brand Recognition business model.
+Decided for the current MVP business model. Implementation and validation remain required before paid Brand Recognition operation.
 
 **Decision Owner:**
 
@@ -3346,30 +3323,14 @@ Business / Product
 - 06-discovery-engine.md
 - 07-discovery-analytics.md
 - 09-seller-intelligence.md
+- 11-data-architecture.md
+- 12-security-privacy-and-trust.md
 - 13-business-model.md
 - 14-success-metrics.md
 
 **Final Decision:**
 
-Brand Recognition and Quality Brand Exposures will not be directly
-billable Seller actions under the current PinkCurve business model.
-
-They may still be measured and used as evidence for Seller Intelligence,
-discovery evaluation, and Seller value analysis.
-
-**Decision Rationale:**
-
-For Standard Discovery, PinkCurve's current billing direction is based on
-qualified positive Buyer actions that provide clearer evidence of Buyer
-interest and Seller value.
-
-Brand Recognition and Quality Brand Exposures are different because their
-primary purpose is awareness rather than evidence of a specific
-intentional Buyer action.
-
-Keeping Brand Recognition non-billable simplifies the initial Seller
-billing model while allowing PinkCurve to measure its value and learn
-from actual Seller and Buyer behavior.
+Brand Recognition uses independently qualified QBIs as its billing unit under the approved, Seller-authorized Brand Recognition pricing model defined in Chapter 13.
 
 **Validation Result:** TBD
 
@@ -3491,10 +3452,11 @@ The Alpha should test at minimum:
 - Trust, fraud, and audit controls
 - Seller and Buyer experience
 
-Real-Time Discovery pricing may be simulated or measured during Alpha
-without requiring production charging. The purpose is to collect evidence
-needed to validate the eventual billable unit, unit price, Seller value,
-and sustainable unit economics.
+Qualified Real-Time Impressions (QRIs) may be measured during Alpha, and potential QRI-based commercial pricing may be simulated without charging Sellers.
+
+The purpose is to collect evidence needed to determine whether QRI-based billing should be approved, evaluate potential unit prices, assess Seller value, and validate sustainable unit economics.
+
+QRI measurement does not itself authorize Seller charges. Commercial billing remains subject to PD-012 and applicable Seller Owner financial authorization requirements.
 
 > **The purpose of Alpha is to determine whether PinkCurve's approach to discovery works.**
 

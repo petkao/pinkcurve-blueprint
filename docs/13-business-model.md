@@ -7,7 +7,7 @@
 | **Status**             | Draft                                                                                                                    |
 | **Version**            | 0.4                                                                                                                      |
 | **Owner**              | PinkCurve Product Team                                                                                                   |
-| **Last Reviewed**      | 2026-09-27                                                                                                               |
+| **Last Reviewed**      | 2026-10-11                                                                                                               |
 | **Related Components** | Discovery Engine, Discovery Analytics, Learning Engine, Seller Intelligence, Creative Studio, Security Privacy and Trust |
 
 ---
@@ -16,7 +16,13 @@
 
 PinkCurve's business model aligns platform success with Buyer value and Seller success.
 
-PinkCurve does not primarily sell advertising impressions, nor does it process the transactions between Buyers and Sellers.
+PinkCurve does not sell raw advertising impressions, preferential Discovery ranking, or guaranteed Buyer attention. Instead, PinkCurve may charge Sellers for independently qualified discovery activity under approved, Seller-authorized Service billing policies.
+
+Offering Discovery uses Qualified Offering Visits (QOVs), while Brand Recognition uses Qualified Brand Impressions (QBIs). Unlike raw advertising impressions, QBIs must satisfy PinkCurve's defined visibility, quality, Trust, Security, and fraud-prevention requirements.
+
+Real-Time Discovery measures Qualified Real-Time Impressions (QRIs), but its commercial billing policy remains open under PD-012.
+
+PinkCurve does not process transactions between Buyers and Sellers. Those transactions remain on Seller destinations.
 
 Instead, PinkCurve creates economic value by helping worthwhile Offerings reach Buyers who may genuinely value them.
 
@@ -28,24 +34,56 @@ Transactions remain primarily between Buyers and Sellers on Seller destinations.
 
 The economic model is therefore built around a simple principle:
 
-**PinkCurve should earn revenue when qualified Buyer actions create measurable value for Sellers, without compromising the integrity of the Buyer discovery experience.**
+**PinkCurve should earn revenue when qualified discovery activity creates measurable value for Sellers, without compromising the integrity of the Buyer discovery experience.**
+
+For Offering Discovery, this value is measured through Qualified Offering Visits (QOVs), representing verified Buyer-initiated transitions toward approved Seller destinations.
+
+For Brand Recognition, this value is measured through Qualified Brand Impressions (QBIs), representing verified presentations of approved Brand Recognition Discovery Media that satisfy applicable visibility, quality, Trust, Security, and fraud-prevention requirements.
+
+Both billing models recognize legitimate repeated qualified activity while excluding technical duplicates, automated activity, and fraud.
 
 ```text
 Sellers / Organizations
-        ↓
-Provide Offerings / Brand Recognition Content
-        ↓
-PinkCurve Discovery
-        ↓
-Relevant Buyer Discovery
-        ↓
-Intentional Buyer Action
-        ↓
-Qualified Offering Visit / Quality Brand Exposure
-        ↓
-Seller Value
-        ↓
-PinkCurve Revenue
+          ↓
+Authorized PinkCurve Services
+          ↓
+   PinkCurve Discovery
+          ↓
+ Relevant Buyer Discovery
+          ↓
+  ┌────────────┼────────────┐
+  │            │            │
+  ▼            ▼            ▼
+Offering     Brand        Real-Time
+Discovery    Recognition  Discovery
+  │            │            │
+  ▼            ▼            ▼
+Intentional  Verified     Verified
+Buyer        Brand Media  Real-Time
+Destination  Presentation Media Presentation
+Visit          │            │
+  │            │            │
+  ▼            ▼            ▼
+ QOV          QBI          QRI
+  │            │            │
+  └────────────┼────────────┘
+               ↓
+    Service-Specific
+    Billing Qualification
+               ↓
+      ┌────────┴────────┐
+      │                 │
+      ▼                 ▼
+Billable Under      Measurement
+Applicable Policy   Only
+      │                 │
+      ▼                 ▼
+Applicable          Discovery Analytics
+Financial           and Seller Intelligence
+Treatment
+      │
+      ▼
+Seller Value / PinkCurve Revenue
 ```
 
 At the same time:
@@ -78,10 +116,13 @@ The business model must preserve the integrity of discovery.
 
 PinkCurve should therefore distinguish between:
 
-* Offering Discovery
-* Brand Recognition
-* Seller platform services
-* Future premium capabilities
+- Offering Discovery
+- Brand Recognition
+- Real-Time Discovery
+- Community Service Discovery
+- Public Announcement Discovery
+- Seller platform services
+- Future premium capabilities
 
 PinkCurve Discovery should continue to prioritize factors such as:
 
@@ -100,13 +141,29 @@ PinkCurve does not sell preferential Discovery ranking. A Seller cannot pay Pink
 
 Seller spending controls the maximum financial exposure the Seller authorizes for an applicable PinkCurve Service. It does not control Discovery ranking.
 
-PinkCurve monetization should instead be tied to clearly defined qualified Buyer actions produced through an authorized PinkCurve Service.
+PinkCurve monetization SHALL be tied to independently qualified discovery activity under an approved, Seller-authorized Service billing policy.
 
-For Offering Discovery, the applicable qualified action is a Qualified Offering Visit (QOV).
+The qualifying activity depends on the Service:
 
-For Brand Recognition, the applicable qualified action is a Quality Brand Exposure.
+- **Offering Discovery:** A Qualified Offering Visit (QOV) represents an independently qualified, intentional Buyer-initiated transition to an approved Seller destination.
+- **Brand Recognition:** A Qualified Brand Impression (QBI) represents a verified, qualified presentation of approved Brand Recognition Discovery Media to a registered Buyer. A Buyer click is not required.
+- **Real-Time Discovery:** A Qualified Real-Time Impression (QRI) represents a verified, qualified presentation of approved Real-Time Discovery Media, subject to applicable timeliness, availability, and geographic requirements. QRI is currently a measurement unit; its commercial billing policy remains open under PD-012.
 
-In both cases, passive exposure alone is not billable.
+Only qualified activity associated with an approved billable Service and valid Seller financial authorization may create a Billable Event.
+
+For Offering Discovery, the applicable qualified billing unit is a Qualified Offering Visit (QOV), representing an independently qualified, intentional Buyer-initiated transition toward an approved Seller destination.
+
+For Brand Recognition, the applicable qualified billing unit is a Qualified Brand Impression (QBI), representing a verified presentation of approved Brand Recognition Discovery Media to a registered Buyer that satisfies PinkCurve's impression qualification, visibility, Trust, Security, and fraud-prevention requirements.
+
+Legitimate repeated Qualified Brand Impressions to the same Buyer may be independently billable. Brand Recognition does not require the Buyer to click, open, or intentionally select the Discovery Media.
+
+Offering Discovery, Brand Recognition, and Real-Time Discovery use distinct service-specific qualification rules while sharing applicable Discovery Analytics, Trust, Security, and Billing infrastructure.
+
+Offering Discovery uses Qualified Offering Visits (QOVs), Brand Recognition uses Qualified Brand Impressions (QBIs), and Real-Time Discovery uses Qualified Real-Time Impressions (QRIs).
+
+QRI measurement reuses the shared qualified impression framework with additional Real-Time eligibility, availability, freshness, timeliness, and applicable geographic requirements. Real-Time commercial pricing and billable treatment remain subject to validation under PD-012.
+
+Seller spending SHALL NOT influence Discovery relevance or ranking.
 
 The objective is not to maximize advertising inventory.
 
@@ -126,9 +183,15 @@ For MVP, PinkCurve Discovery is designed for registered human Buyers.
 
 For MVP, external autonomous AI agents, bots, and other non-human actors SHALL NOT register, participate, or independently consume PinkCurve Discovery as Buyers.
 
-This boundary helps preserve the meaning and integrity of Buyer interactions, Discovery signals, Qualified Offering Visits, Quality Brand Exposures, Seller value, and the resulting business model.
+This boundary helps preserve the meaning and integrity of Buyer interactions, Discovery signals, Qualified Offering Visits (QOVs), Qualified Brand Impressions (QBIs), Qualified Real-Time Impressions (QRIs), Seller value, and the resulting business model.
 
-AI may power PinkCurve capabilities internally, but the Buyer-facing economic model is based on qualified actions performed by registered human Buyers.
+AI may power PinkCurve capabilities internally, but the MVP discovery and economic model is based on qualified discovery activity involving registered human Buyers.
+
+For Offering Discovery, a Qualified Offering Visit (QOV) requires an intentional Buyer-initiated transition toward an approved Seller destination.
+
+For Brand Recognition, a Qualified Brand Impression (QBI) requires a verified presentation of approved Discovery Media to a registered human Buyer, without requiring an intentional Buyer action.
+
+Real-Time Discovery similarly measures Qualified Real-Time Impressions (QRIs), subject to its additional qualification requirements. QRI commercial billing remains open under PD-012.
 
 > **AI powers PinkCurve. Humans consume PinkCurve Discovery.**
 
@@ -169,31 +232,46 @@ PinkCurve helps Sellers reach Buyers who may genuinely value their Offerings.
 
 Seller value may include:
 
-| Value                        | Description                                             |
-| ---------------------------- | ------------------------------------------------------- |
-| Qualified discovery          | Reach Buyers with relevant intent or interests          |
-| Qualified Offering Visits    | Receive qualified intentional Buyer visits to approved  |
-|                              | Seller destinations                                     |
-| Brand Recognition            | Enable relevant Buyers to explore approved brands       |
-| Offering intelligence        | Understand how Buyers respond to Offerings              |
-| Discovery intelligence       | Understand where and why discovery succeeds or fails    |
-| Creative capabilities        | Help Sellers plan, evaluate, improve discovery content  |
-| Audience intelligence        | Understand which audiences engage                       |
-| Geographic intelligence      | Understand where discovery occurs                       |
+| Value | Description |
+| --- | --- |
+| Qualified discovery | Reach Buyers with relevant intent or interests |
+| Qualified Offering Visits | Receive qualified intentional Buyer visits toward approved Seller destinations |
+| Brand Recognition | Present approved Brand Recognition Discovery Media to relevant Buyers and measure Qualified Brand Impressions (QBIs) |
+| Real-Time Discovery | Receive qualified Real-Time Discovery exposure measured through QRIs, including applicable timeliness, availability, freshness, and geographic relevance |
+| Offering intelligence | Understand how Buyers respond to Offerings |
+| Discovery intelligence | Understand where and why discovery succeeds or fails |
+| Creative capabilities | Help Sellers plan, evaluate, and improve Discovery Media |
+| Audience intelligence | Understand which audiences engage |
+| Geographic intelligence | Understand where discovery occurs |
 | Optimization recommendations | Receive actionable suggestions from Seller Intelligence |
-| Acquisition efficiency       | Potentially improve Seller acquisition efficiency,      |
-|                              |subject to Seller-side outcomes and measurement          |
-| Direct relationship          | Buyer transactions remain on Seller destinations        |
+| Acquisition efficiency | Potentially improve Seller acquisition efficiency, subject to Seller-side outcomes and measurement |
+| Direct relationship | Buyer transactions remain on Seller destinations |
 
-PinkCurve should help Sellers understand not merely how many times an Offering appeared, but whether PinkCurve created meaningful business value.
+PinkCurve should help Sellers understand the measurable value created by each Discovery Service using its applicable qualified measurement units and supporting evidence.
+
+Qualified Offering Visits (QOVs) measure intentional Buyer transitions toward approved Seller destinations. Qualified Brand Impressions (QBIs) measure verified Brand Recognition exposure. Qualified Real-Time Impressions (QRIs) measure verified time-sensitive Discovery exposure under applicable eligibility, freshness, availability, timeliness, and geographic requirements.
+
+PinkCurve SHALL distinguish these directly observed discovery measurements from inferred Buyer interest, brand awareness, Seller-side conversions, transactions, and other business outcomes that require additional evidence.
+
+For Offering Discovery, Seller value may be measured through Qualified Offering Visits (QOVs), representing verified Buyer-initiated transitions toward approved Seller destinations.
+
+For Brand Recognition, Seller value may be measured through Qualified Brand Impressions (QBIs), representing verified presentations of approved Brand Recognition Discovery Media.
+
+For Real-Time Discovery, Seller value may be measured through Qualified Real-Time Impressions (QRIs), together with timeliness, availability, geographic relevance, Buyer response, and other applicable evidence.
+
+A QRI represents qualified Real-Time Discovery exposure, not proof of a transaction or successful Seller outcome. Its commercial billing treatment remains subject to PD-012.
+
+Seller Intelligence should distinguish directly observed discovery activity from estimated business outcomes and should not represent impression counts alone as proof of Seller value.
 
 Seller value should be created through useful Buyer discovery rather than purchased Discovery priority.
 
 For Offering Discovery, measurable Seller value may include Qualified Offering Visits created when registered human Buyers intentionally choose to continue toward an approved Offering destination.
 
-For Brand Recognition, measurable Seller value may include Quality Brand Exposures created when registered human Buyers intentionally choose to view or explore approved Brand Recognition Content.
+For Brand Recognition, measurable Seller value may include Qualified Brand Impressions (QBIs) created when approved Brand Recognition Discovery Media is verifiably presented to registered human Buyers and satisfies the applicable visibility, quality, Trust, Security, and fraud-prevention requirements.
 
-These services are independent. A Quality Brand Exposure does not require an Offering, Seller website, external destination, transaction, or Qualified Offering Visit.
+Offering Discovery and Brand Recognition are independent services. A QBI does not require an Offering, Seller website, external destination, Buyer click, intentional selection, transaction, or Qualified Offering Visit.
+
+Legitimate repeated QBIs may contribute to Seller value and are independently eligible for billing under the applicable Brand Recognition pricing and financial authorization policies.
 
 ---
 
@@ -215,88 +293,138 @@ PinkCurve creates platform value through the combination of:
 As the ecosystem develops, these capabilities can reinforce one another.
 
 ```text
-More Quality Offerings
-        ↓
-Better Buyer Discovery
-        ↓
-More Meaningful Interactions
-        ↓
-Better Discovery Signals
-        ↓
-Better Learning
-        ↓
-Better Matching
-        ↓
-Better Seller Value
-        ↓
-More Seller Participation
-        ↓
-More Quality Offerings
+Buyer Relevance + Discovery Integrity
+                 ↓
+          PinkCurve Discovery
+                 ↓
+       Qualified Discovery Activity
+                 ↓
+       Discovery Analytics
+                 ↓
+      Service-Specific Qualification
+                 ↓
+          ┌──────┼──────┐
+          │      │      │
+          ▼      ▼      ▼
+         QOV    QBI    QRI
+          │      │      │
+          └──────┼──────┘
+                 ↓
+       Applicable Billing Policy
+                 ↓
+        Billing Qualification
+                 ↓
+         ┌───────┴───────┐
+         │               │
+         ▼               ▼
+   Billable Event    Measurement Only
+   (if eligible)     (Not Billable)
+         │               │
+         ▼               ▼
+   Seller Financial   Seller Intelligence
+   Treatment          and Analytics
+         │
+         ▼
+   PinkCurve Revenue
+   (Paid Charges)
 ```
 
 This compounding discovery loop is central to PinkCurve's long-term business value.
 
 PinkCurve's monetization should benefit from this discovery loop without controlling it.
 
-Discovery capabilities determine what is relevant and appropriate for Buyers. Billing determines the financial treatment of qualified Buyer actions after those actions occur.
+Discovery capabilities determine what is relevant and appropriate for Buyers. Billing determines the financial treatment of independently qualified discovery activity according to the applicable approved Service billing policy and Seller financial authorization.
 
-Conceptually:
+Discovery Analytics determines whether the activity satisfies the applicable qualification requirements, including Qualified Offering Visits (QOVs), Qualified Brand Impressions (QBIs), and Qualified Real-Time Impressions (QRIs).
 
-```text
-Buyer Relevance + Discovery Integrity
-        ↓
-PinkCurve Discovery
-        ↓
-Intentional Buyer Action
-        ↓
-Qualification
-        ↓
-Seller Value
-        ↓
-Billing
-        ↓
-PinkCurve Revenue
-```
+Billing SHALL create a Billable Event only when the qualified activity belongs to an approved billable Service and satisfies its applicable pricing, authorization, spending limit, and financial integrity requirements.
+
+Qualified discovery activity that is not billable SHALL remain available for authorized analytics and Seller value measurement without creating a Seller charge.
 
 ---
 
 # Revenue Model
 
-PinkCurve's MVP revenue model is based on qualified Buyer actions generated through Seller-authorized PinkCurve Services.
+PinkCurve's MVP revenue model is based on qualified discovery activity generated through Seller-authorized PinkCurve Services. The applicable billing unit depends on the Service.
 
-The initial billable services are:
+PinkCurve recognizes five Discovery classifications: Offering Discovery, Brand Recognition Discovery, Real-Time Discovery, Community Service Discovery, and Public Announcement Discovery.
+
+Recognition as a Discovery classification does not automatically establish a billable Service.
+
+For MVP, Offering Discovery and Brand Recognition have established billing models using Qualified Offering Visits (QOVs) and Qualified Brand Impressions (QBIs), respectively.
+
+Real-Time Discovery uses Qualified Real-Time Impressions (QRIs) as its measurement unit. Its commercial pricing, billing eligibility, and financial treatment remain subject to PD-012.
+
+Community Service Discovery and Public Announcement Discovery do not automatically inherit QOV, QBI, or QRI pricing. Any future commercial billing model for these classifications requires separate approval and applicable Seller authorization.
+
+All Discovery classifications remain subject to PinkCurve's relevance, quality, Trust, Security, and Buyer Experience requirements, independently of their billing status.
+
+The initial qualified discovery measurement and billing models are:
 
 1. **Offering Discovery**
-   - Billing unit: Qualified Offering Visit (QOV)
+   - Measurement and billing unit: Qualified Offering Visit (QOV).
+   - Requires an independently qualified, intentional Buyer-initiated transition toward an approved Seller destination.
+   - Legitimate repeat visits may be independently billable.
 
 2. **Brand Recognition**
-   - Billing unit: Quality Brand Exposure
+   - Measurement and billing unit: Qualified Brand Impression (QBI).
+   - Requires a verified impression of approved Brand Recognition Discovery Media that satisfies applicable visibility, quality, Trust, Security, and fraud-prevention requirements.
+   - Does not require a Buyer click or intentional selection.
+   - Legitimate repeat impressions may be independently billable.
+
+3. **Real-Time Discovery**
+   - Measurement unit: Qualified Real-Time Impression (QRI).
+   - Reuses the shared qualified impression measurement framework, with additional Real-Time eligibility, availability, freshness, timeliness, and applicable geographic requirements.
+   - Does not require a Buyer click or intentional selection.
+   - The commercial pricing policy, billable treatment, and applicable Seller financial controls remain subject to validation under PD-012.
+   - Qualified Real-Time Impressions may be measured and reported independently of whether they become billable.
 
 Conceptually:
 
 ```text
-PinkCurve Service
-        ↓
-Registered Human Buyer
-        ↓
-Intentional Buyer Action
-        ↓
-Service-Specific Qualification
-        ↓
-Qualified Billing Unit
-        ↓
-Applicable Unit Price
-        ↓
-Free USD Allowance
-        ↓
-Paid Usage
-        ↓
-Seller Charge
+Seller-Authorized PinkCurve Service
+                 ↓
+          Discovery Activity
+                 ↓
+       Service-Specific Evidence
+                 ↓
+      Discovery Analytics Qualification
+                 ↓
+       Qualified Measurement Unit
+           (QOV / QBI / QRI)
+                 ↓
+      Applicable Billing Policy
+                 ↓
+       Billing Qualification
+                 ↓
+      ┌──────────┴──────────┐
+      │                     │
+      ▼                     ▼
+ Billable Under         Measurement Only
+ Applicable Policy      (Not Billable)
+      │                     │
+      ▼                     ▼
+ Applicable Unit       Analytics and
+ Price                 Seller Reporting
+      │
+      ▼
+ Applicable Seller
+ Financial Controls
+      │
+      ▼
+ Billable Event
+ (when eligible)
+      │
+      ▼
+ Free Allowance
+ or Paid Charge
 ```
 
 PinkCurve does not charge Buyers.
 
-For Sellers, PinkCurve does not charge for passive impressions, ordinary media views, scrolling, likes, saves, shares, ratings, Adaptive Metadata Navigation selections, or other ordinary in-PinkCurve engagement unless a future explicitly defined service establishes a different approved billing model.
+For Offering Discovery, ordinary impressions, media views, scrolling, likes, saves, shares, ratings, Adaptive Metadata Navigation selections, and other in-PinkCurve engagement are not independently billable under the QOV pricing model.
+
+For Brand Recognition, qualified impressions are billable under the QBI pricing model. Mere content loading, technical rendering, invalid visibility, automated activity, or fraudulent impressions SHALL NOT qualify for billing.
 
 The MVP business model does not require Seller subscription fees, account fees, setup fees, service activation fees, prepaid balances, minimum monthly charges, or transaction commissions.
 
@@ -304,7 +432,7 @@ Seller Intelligence and applicable discovery insights may initially be provided 
 
 Future revenue opportunities may include additional Seller services, premium capabilities, enterprise or integration services, or other approved PinkCurve Services. Such future opportunities are not part of the initial MVP revenue model and require separate business-model definition and Seller authorization before becoming billable.
 
-> **PinkCurve charges Sellers for qualified value created through intentional Buyer action, not merely for Buyer exposure.**
+**PinkCurve charges Sellers for qualified discovery value according to the applicable Service and its authorized billing policy. Offering Discovery uses Qualified Offering Visits (QOVs), Brand Recognition uses Qualified Brand Impressions (QBIs), and Real-Time Discovery measures Qualified Real-Time Impressions (QRIs). QRI commercial pricing and billable treatment remain subject to validation under PD-012.**
 
 ---
 
@@ -495,7 +623,11 @@ Billable Event
 
 The existence of multiple potentially applicable pricing concepts SHALL NOT cause PinkCurve to create multiple Billable Events for the same QOV.
 
-Brand Recognition is a separate PinkCurve Service with its own qualified billing unit, the Quality Brand Exposure. Brand Recognition billing therefore follows its own qualification and Billable Event path independently from QOV-based Offering Discovery billing.
+Brand Recognition is a separate PinkCurve Service with its own qualified billing unit, the Qualified Brand Impression (QBI). Brand Recognition billing follows its own qualification and Billable Event path independently from QOV-based Offering Discovery billing.
+
+Real-Time Discovery uses Qualified Real-Time Impression (QRI) as its measurement unit, based on the shared qualified impression framework with additional Real-Time eligibility, availability, freshness, and timeliness requirements. Its commercial pricing and billing policy remain subject to validation under PD-012.
+
+Each qualified activity must retain its own Service classification, qualification evidence, and billing lineage to prevent duplicate or unintended overlapping charges.
 
 PinkCurve should preserve sufficient billing lineage to identify the underlying activity, applicable pricing policy, resulting Billable Event, and applicable financial treatment, including any free allowance applied or paid Seller charge.
 
@@ -558,7 +690,9 @@ Seller Invoice
 
 The Seller Invoice aggregates applicable Billable Events for presentation, settlement, accounting, and Seller billing.
 
-The Invoice SHALL NOT independently determine whether the underlying Discovery activity, QOV, Quality Brand Exposure, or other service activity qualified as billable.
+The Invoice SHALL NOT independently determine whether the underlying Discovery activity, Qualified Offering Visit (QOV), Qualified Brand Impression (QBI), Qualified Real-Time Impression (QRI), or other applicable Service activity qualified for billing.
+
+Discovery Analytics remains responsible for qualification of QOV, QBI, and QRI according to their respective rules. Billing determines the applicable financial treatment under the authorized Service pricing policy, and the Invoice aggregates the resulting Billable Events without independently requalifying the underlying activity.
 
 Conceptually:
 
@@ -718,9 +852,15 @@ A conceptual model for QOV-based revenue is:
 
 ```text
 QOV-Based Revenue =
-Paid QOV-Derived Billable Events
-×
-Applicable QOV Price
+Sum of Net Paid QOV-Derived Charges
+
+For each applicable QOV-derived Billable Event:
+
+Gross Charge = Applicable Authorized QOV Unit Price × Qualified Billable Quantity
+
+Net Paid Charge = Gross Charge − Free Allowance Applied − Applicable Credits and Adjustments
+
+QOV-Based Revenue is calculated from the resulting eligible net charges, excluding taxes collected on behalf of taxing authorities.
 ```
 
 The Offering Discovery pricing unit is the **valid Qualified Offering Visit (QOV)**.
@@ -790,101 +930,143 @@ This separation allows PinkCurve to change and experiment with pricing without r
 
 # 2. Brand Recognition
 
-Brand Recognition is a PinkCurve Service that allows Sellers to provide approved Brand Recognition Content for relevant Buyer discovery.
+Brand Recognition is a PinkCurve Service that allows Sellers to provide approved Brand Recognition Discovery Media to relevant Buyers.
 
-Not every valuable Buyer discovery action is directed toward an Offering. A Buyer may intentionally choose to explore a Seller, organization, brand, message, announcement, promotion, or other approved Brand Recognition Content.
+Brand Recognition creates Seller value by presenting approved brand messages to Buyers who may have an interest in the Seller, organization, brand, or related offerings.
 
-The qualified billing unit for Brand Recognition is a **Quality Brand Exposure**.
+The qualified billing unit for Brand Recognition is a **Qualified Brand Impression (QBI)**.
 
-A Quality Brand Exposure is independent of a Qualified Offering Visit. It does not require an Offering, Seller website, external destination, purchase action, transaction, or QOV.
+A QBI represents a verified presentation of approved Brand Recognition Discovery Media to a registered human Buyer that satisfies PinkCurve's applicable visibility, quality, Trust, Security, and fraud-prevention requirements.
 
-Conceptually:
+A QBI does not require the Buyer to click, select, open, or otherwise interact with the Discovery Media.
 
-```text
-Approved Brand Recognition Content
-        ↓
-Relevant Buyer Discovery
-        ↓
-Registered Human Buyer
-        ↓
-Intentional Selection
-        ↓
-Quality / Integrity Validation
-        ↓
-Quality Brand Exposure
-        ↓
-Billing Qualification
-        ↓
-Applicable Financial Treatment
-        ↓
-Billable Event
-        ↓
-Free Allowance or Paid Charge
-```
-
-Passive presentation, loading, rendering, scrolling past, or ordinary viewing of Brand Recognition Content does not by itself create a Quality Brand Exposure and is not billable.
-
-## Quality Brand Exposure
-
-A **Quality Brand Exposure** represents an independently qualified intentional action by a registered human Buyer to view or explore approved Brand Recognition Content.
-
-A Quality Brand Exposure requires:
-
-* A registered human Buyer
-* A valid Buyer session
-* An intentional Buyer selection of approved Brand Recognition Content
-* Applicable Trust and Security eligibility
-* Applicable quality and integrity validation
-* No identified bot, automated, fraudulent, or otherwise invalid activity
-
-PinkCurve may use signals such as dwell time, interaction behavior, navigation patterns, fraud evidence, and other applicable evidence when determining whether an interaction is meaningful and valid.
-
-The detailed qualification thresholds belong to Discovery Analytics, Trust and Security, and implementation design rather than the Business Model.
-
-### Repeated Brand Recognition Actions
-
-Each independently qualified intentional Buyer interaction with Brand Recognition Content may create its own Quality Brand Exposure.
-
-PinkCurve does not impose an arbitrary time-based deduplication window on legitimate repeated Brand Recognition actions.
-
-Repeated activity remains subject to normal quality, fraud, automation, abuse, and integrity validation.
-
-## Quality Brand Exposure Qualification Ownership
-
-Discovery Analytics owns Quality Brand Exposure qualification using trusted evidence from applicable PinkCurve capabilities.
+A QBI is independent of a Qualified Offering Visit (QOV). It does not require an Offering, Seller website, external destination, purchase action, transaction, or QOV.
 
 Conceptually:
 
 ```text
-Buyer Selects Brand Recognition Content
-        ↓
-Trust / Security Evidence
-        ↓
-Discovery Event
-        ↓
-Discovery Analytics
-        ↓
-Intentional-Action Validation
-        +
-Quality / Integrity Validation
-        ↓
-Quality Brand Exposure
-        ↓
-Billing
-        ↓
-Billing Qualification
-        ↓
-0..1 Brand Recognition
-Billable Event
+Approved Brand Recognition Discovery Media
+                 ↓
+         Relevant Buyer Discovery
+                 ↓
+          Registered Human Buyer
+                 ↓
+       Impression / Visibility Evidence
+                 ↓
+       Quality / Integrity Validation
+                 ↓
+        Qualified Brand Impression
+                 (QBI)
+                 ↓
+         Billing Qualification
+                 ↓
+      Applicable Financial Treatment
+                 ↓
+             Billable Event
+                 ↓
+        Free Allowance or Paid Charge
 ```
 
-The responsibility boundary is:
+A technical content load, background rendering, or impression that fails the applicable visibility or integrity requirements SHALL NOT create a QBI.
 
-* **Trust / Security** provides applicable eligibility, fraud, automation, abuse, and integrity evidence.
-* **Discovery Analytics** determines whether the Buyer interaction satisfies Quality Brand Exposure qualification.
-* **Billing** determines whether a qualified Quality Brand Exposure is financially billable under the applicable Seller authorization and pricing policy.
+Legitimate repeated qualified impressions of the same Brand Recognition Discovery Media to the same Buyer may each create a separate QBI, subject to applicable fraud, automation, abuse, and integrity controls.
 
-A Quality Brand Exposure and a Billable Event are related but distinct. One Quality Brand Exposure may produce zero or one Brand Recognition-derived Billable Event.
+## Qualified Brand Impression (QBI)
+
+A **Qualified Brand Impression (QBI)** represents one verified presentation of approved Brand Recognition Discovery Media to a registered human Buyer that satisfies PinkCurve's applicable impression qualification requirements.
+
+A QBI requires:
+
+- A registered human Buyer with a valid Buyer session.
+- Approved Brand Recognition Discovery Media that is eligible for delivery.
+- Evidence that the Discovery Media was actually visible to the Buyer, rather than merely loaded or rendered in the background.
+- Applicable Trust and Security eligibility.
+- Satisfaction of defined visibility, quality, and integrity requirements.
+- No identified bot, automated, fraudulent, or otherwise invalid activity.
+
+A Buyer click, intentional selection, or subsequent interaction is not required.
+
+### Impression Visibility Qualification
+
+PinkCurve should establish measurable visibility requirements appropriate to the Discovery Media format and Buyer Experience.
+
+Qualification may consider:
+
+- Whether the Discovery Media entered the visible viewport.
+- The proportion of the Discovery Media visible.
+- The duration of visibility.
+- Whether the application was active and the content was actually presented.
+- Applicable evidence of automated or manipulated impression activity.
+
+The detailed visibility thresholds and qualification methods belong to Discovery Analytics, Trust and Security, and implementation design rather than the Business Model.
+
+### Repeated Qualified Brand Impressions
+
+Each independently verified, qualified presentation of the same Brand Recognition Discovery Media to the same Buyer may create a separate QBI.
+
+PinkCurve SHALL NOT impose an arbitrary time-based exclusion window on legitimate repeated qualified impressions.
+
+However, continuous visibility of the same Discovery Media SHALL NOT automatically generate repeated billable impressions merely because time passes.
+
+A new QBI requires a distinct, independently qualified presentation event.
+
+Technical duplication, repeated rendering without a new legitimate presentation, automated refreshes, artificial impression generation, and fraudulent activity SHALL NOT create additional QBIs.
+
+Each QBI must remain attributable, auditable, and subject to the applicable Seller authorization, pricing policy, and spending limits.
+
+## Qualified Brand Impression (QBI) Qualification Ownership
+
+Discovery Analytics owns QBI qualification using trusted evidence produced by the applicable PinkCurve capabilities.
+
+Conceptually:
+
+```text
+Brand Recognition Discovery Media Presented
+                    ↓
+         Buyer Experience
+         → Visibility Evidence
+         → Presentation Event
+                    ↓
+         Trust / Security
+         → Eligibility Evidence
+         → Fraud / Automation Evidence
+                    ↓
+         Discovery Event
+                    ↓
+         Discovery Analytics
+         → Visibility Qualification
+         → Presentation Validation
+         → Quality / Integrity Validation
+         → QBI Qualification
+                    ↓
+         Qualified Brand Impression
+                (qbi_id)
+                    ↓
+                 Billing
+         → Billing Qualification
+         → Seller Authorization
+         → Applicable Pricing Policy
+                    ↓
+          0..1 QBI-Derived
+            Billable Event
+```
+
+The responsibility boundaries are:
+
+- **Buyer Experience** captures presentation and visibility evidence associated with Brand Recognition Discovery Media.
+- **Trust / Security** provides applicable eligibility, fraud, automation, abuse, and integrity evidence.
+- **Discovery Analytics** determines whether the presentation satisfies QBI qualification requirements and records the Qualified Brand Impression.
+- **Billing** determines whether the qualified QBI satisfies applicable Seller authorization and pricing rules and creates a Billable Event where appropriate.
+
+A QBI and a Billable Event are separate entities with distinct responsibilities.
+
+One QBI may produce zero or one QBI-derived Billable Event. A single QBI SHALL NOT generate multiple Billable Events.
+
+Each QBI must preserve sufficient evidence and lineage to support qualification, fraud investigation, Seller reporting, billing reconciliation, and auditing.
+
+Billing SHALL NOT independently determine whether an impression satisfies QBI visibility or quality requirements.
+
+Discovery Analytics SHALL NOT determine QBI qualification based on the amount PinkCurve may earn from the impression.
 
 ## Brand Recognition Content
 
@@ -892,17 +1074,21 @@ Brand Recognition Content is Seller-provided Service Content used by the Brand R
 
 It may communicate an approved:
 
-* Seller or organization identity
-* Brand message
-* Promotion
-* Announcement
-* Educational or informative message
-* Local or community-relevant Seller message
-* Other approved Brand Recognition purpose
+- Seller or organization identity
+- Brand message
+- Promotion
+- Announcement
+- Educational or informative message
+- Local or community-relevant Seller message
+- Other approved Brand Recognition purpose
 
-Brand Recognition Content is independent of an Offering.
+Brand Recognition Discovery Media is the approved visual presentation of Brand Recognition Content delivered through the PinkCurve Discovery experience.
 
-It SHALL NOT require an `offering_id`, and it SHALL NOT become Offering content merely because the Seller also has one or more Offerings.
+Brand Recognition Content and its associated Discovery Media are independent of an Offering.
+
+Brand Recognition Content SHALL NOT require an `offering_id`, and it SHALL NOT become Offering content merely because the Seller also has one or more Offerings.
+
+A Qualified Brand Impression (QBI) is measured against the eligible Brand Recognition Discovery Media presentation, rather than requiring an Offering or an external Seller destination.
 
 An Offering and Brand Recognition Content may belong to the same Seller while remaining independent Service Content with separate identities, approval states, discovery lineage, measurement, and billing.
 
@@ -915,13 +1101,15 @@ Seller
   │     ↓
   │   Offering Discovery
   │     ↓
-  │   Qualified Offering Visit
+  │   Qualified Offering Visit (QOV)
   │
   └── Brand Recognition Content
         ↓
+      Brand Recognition Discovery Media
+        ↓
       Brand Recognition
         ↓
-      Quality Brand Exposure
+      Qualified Brand Impression (QBI)
 ```
 
 Brand Recognition Content may include approved images, video, graphics, or other PinkCurve-supported visual formats.
@@ -960,21 +1148,37 @@ Material changes to Brand Recognition Content require reapproval before the chan
 
 PinkCurve may suspend Brand Recognition Content when required for Trust, Security, policy, verification, safety, content, or other platform requirements. Seller permission is not required for protective suspension.
 
-After Brand Recognition Content is suspended, no new Quality Brand Exposures or related charges may be created from delivery after the effective suspension time.
+After the effective suspension time, Brand Recognition Content SHALL NOT be eligible for new Discovery Media delivery, and no new Qualified Brand Impressions (QBIs) may arise from post-suspension delivery.
+
+Valid QBIs generated before the effective suspension time remain eligible for billing according to the applicable Seller authorization, pricing policy, and Billing Qualification requirements.
+
+Suspension SHALL NOT erase historical qualified impressions, Billable Events, invoices, or other required financial and audit records.
 
 ## Brand Recognition Pricing
 
-The Brand Recognition pricing unit is the **valid Quality Brand Exposure**.
+The Brand Recognition pricing unit is the **Qualified Brand Impression (QBI)**.
 
-PinkCurve should maintain a standard Quality Brand Exposure price as the default Brand Recognition price.
+Brand Recognition revenue is calculated from the sum of net paid QBI-derived charges, using the applicable authorized QBI unit prices and financial treatment.
 
-The actual dollar price SHALL NOT be hard-coded in this Business Model. It should be maintained through approved, versioned pricing configuration.
+Each QBI-derived Billable Event SHALL preserve its applicable pricing and financial lineage. Free allowance applications, credits, adjustments, and taxes collected on behalf of taxing authorities SHALL be accounted for appropriately when determining net revenue.
 
-Before launch, PinkCurve should research relevant market pricing models such as impression-based, click-based, sponsored-engagement, and brand-awareness pricing. Those market models are contextual evidence only; PinkCurve should normalize the analysis to its own intentional-action Quality Brand Exposure model.
+Qualified Brand Impressions covered entirely by a Seller's free allowance contribute to measured Brand Recognition activity but do not create paid Seller revenue.
 
-Approved Seller-specific pricing, promotional pricing, or future volume pricing may modify the applicable Quality Brand Exposure price under PinkCurve pricing policy.
+Each independently qualified QBI may create one billable unit, including legitimate repeated impressions of the same Brand Recognition Discovery Media to the same Buyer.
 
-Pricing SHALL NOT give Brand Recognition Content preferential relevance or ranking merely because the Seller is willing to spend more.
+PinkCurve should maintain a standard QBI price as the default Brand Recognition price.
+
+The actual QBI dollar price SHALL NOT be permanently hard-coded in this Business Model. It should be maintained through an approved, versioned pricing configuration.
+
+Before launch, PinkCurve should research relevant impression-based advertising and brand-awareness pricing models to evaluate Seller willingness to pay, market competitiveness, and economic sustainability.
+
+Approved Seller-specific pricing, promotional pricing, or future volume pricing may modify the applicable QBI price according to PinkCurve pricing policy.
+
+QBI pricing SHALL NOT affect whether Brand Recognition Discovery Media is relevant to a Buyer or give the Seller preferential Discovery ranking.
+
+Brand Recognition charges remain subject to applicable Seller Owner authorization, monthly free USD allowances, spending limits, explicitly authorized grace amounts, and Billing Qualification.
+
+A QBI represents verified qualified exposure, not proof that the Buyer remembered the brand, developed a favorable opinion, or subsequently purchased an Offering.
 
 ## Brand Recognition Free Allowance and Spending Control
 
@@ -982,22 +1186,26 @@ Each eligible Seller may receive a monthly Brand Recognition free allowance deno
 
 The actual free allowance amount is a configurable business parameter and is not permanently hard-coded in this chapter.
 
-Qualified Brand Recognition usage consumes the free USD allowance according to the applicable Quality Brand Exposure price.
+Each Qualified Brand Impression (QBI) consumes the applicable free USD allowance according to the authorized QBI unit price.
+
+Legitimate repeated QBIs are treated as separate qualified billing units and consume the allowance accordingly.
 
 After the free allowance is exhausted, additional qualified usage may become paid usage only up to the Seller Owner-authorized Brand Recognition monthly spending limit and any explicitly authorized Brand Recognition grace amount.
 
 Conceptually:
 
 ```text
-Qualified Brand Recognition Usage
-        ↓
-Free USD Allowance
-        ↓
-Paid Monthly Spending Limit
-        ↓
-Explicit USD Grace
-        ↓
-Stop Additional Billable Delivery
+Qualified Brand Impressions (QBIs)
+                ↓
+       Applicable QBI Price
+                ↓
+        Free USD Allowance
+                ↓
+     Paid Monthly Spending Limit
+                ↓
+        Explicit USD Grace
+                ↓
+   Stop Additional Billable Delivery
 ```
 
 The free allowance belongs to:
@@ -1013,6 +1221,8 @@ Unused free allowance does not roll over.
 Unused spending authorization does not roll over as credit. The configured monthly spending limit and grace remain in effect for future months until changed.
 
 A Seller may set the paid Brand Recognition spending limit to `$0`, use only the available free allowance, and stop additional paid delivery when the free allowance is exhausted.
+
+All QBI billing remains subject to qualification, fraud prevention, Seller authorization, and the applicable financial controls.
 
 ## Brand Recognition Discovery Integrity
 
@@ -1041,21 +1251,36 @@ Approved Brand Recognition Content may remain approved even when financial deliv
 
 PinkCurve should distinguish clearly between:
 
-* Content presentation or impression
-* Intentional Buyer selection
-* Qualified Quality Brand Exposure
-* Subsequent Buyer activity
-* Estimated or inferred brand effects
+- Discovery Media presentation or technical rendering
+- Qualified Brand Impression (QBI)
+- Unique Buyers reached
+- Frequency of qualified impressions per Buyer
+- Intentional Buyer interactions with Brand Recognition Discovery Media
+- Subsequent Buyer activity
+- Estimated or inferred brand effects
 
-A Quality Brand Exposure is directly measurable PinkCurve activity.
+A QBI is directly measurable PinkCurve activity supported by verified presentation and visibility evidence.
 
-Longer-term concepts such as brand awareness, brand memory, or reputation may be inferred or estimated only where PinkCurve has appropriate methodology and evidence. They should not be presented as directly observed facts merely because Quality Brand Exposures occurred.
+Discovery Analytics should measure:
 
-Seller Intelligence may use Brand Recognition evidence to provide insights and recommendations, while Discovery Analytics remains authoritative for observable measurement.
+- Total qualified Brand Recognition impressions
+- Unique registered Buyers receiving qualified impressions
+- Frequency of qualified impressions per Buyer and Discovery Media
+- Legitimate repeated qualified impressions
+- Impressions rejected during qualification
+- Buyer interactions following qualified impressions, where applicable
 
-Brand Recognition does not need to produce a QOV to create Seller value.
+Repeated QBIs may contribute to Brand Recognition value, but PinkCurve SHALL NOT assume that repeated exposure necessarily produces increased brand awareness or favorable Buyer sentiment.
+
+Longer-term concepts such as brand awareness, brand memory, or reputation may be inferred or estimated only where PinkCurve has appropriate methodology and evidence. They should not be presented as directly observed facts merely because QBIs occurred.
+
+Seller Intelligence may use QBI evidence to provide insights and recommendations, while Discovery Analytics remains authoritative for observable measurement.
+
+Brand Recognition does not need to produce a Qualified Offering Visit (QOV) to create Seller value.
 
 If a Buyer later independently discovers or selects an Offering and that action qualifies as a QOV, the QOV follows the separate Offering Discovery qualification and billing path.
+
+QBI reporting should preserve appropriate Buyer privacy protections and should not disclose individual Buyer identities to Sellers.
 
 ## Brand Recognition Lifecycle
 
@@ -1077,7 +1302,11 @@ Submitted → Approved → Active
 
 Material state changes should preserve auditable history including what changed, when, who or what initiated the change, and why when applicable.
 
-Seller withdrawal stops future delivery and future related billing but does not erase historical qualified activity or financial records.
+Seller withdrawal stops future Brand Recognition Discovery Media delivery and prevents new Qualified Brand Impressions (QBIs) from arising after the effective withdrawal time.
+
+Valid QBIs generated before withdrawal remain eligible for billing according to the applicable Seller authorization, pricing policy, and Billing Qualification requirements.
+
+Withdrawal does not erase historical qualified impressions, Billable Events, invoices, or other required financial and audit records.
 
 Reintroducing withdrawn or materially changed content requires resubmission and applicable reapproval.
 
@@ -1187,15 +1416,25 @@ Clicks
 and help Sellers understand:
 
 ```text
-Discovery
-    ↓
-Buyer Interest
-    ↓
-Qualified Engagement
-    ↓
-Qualified Offering Visits
-    ↓
-Potential Business Value
+           PinkCurve Discovery
+                    ↓
+        Service-Specific Measurement
+                    ↓
+          ┌─────────┼─────────┐
+          │         │         │
+          ▼         ▼         ▼
+        QOV        QBI       QRI
+          │         │         │
+          └─────────┼─────────┘
+                    ↓
+       Qualified Discovery Evidence
+                    ↓
+            Seller Intelligence
+                    ↓
+       Measurable Discovery Value
+                    ↓
+     Potential Seller Business Value
+     (when supported by evidence)
 ```
 
 Seller Intelligence should help answer:
@@ -1208,6 +1447,9 @@ Seller Intelligence should help answer:
 * Which creative works?
 * What should I improve?
 * What value is PinkCurve providing?
+* Is my Brand Recognition Discovery Media reaching relevant Buyers through Qualified Brand Impressions (QBIs)?
+* Is my Real-Time Discovery Media reaching relevant Buyers during its approved availability period and within its applicable geographic scope?
+* How do Qualified Offering Visits (QOVs), Qualified Brand Impressions (QBIs), and Qualified Real-Time Impressions (QRIs) contribute to my measurable discovery results, and what additional evidence is available about subsequent Buyer responses?
 
 ---
 
@@ -1238,15 +1480,17 @@ Value Evidence         Integrated Outcomes
 
 PinkCurve may directly observe and report applicable discovery evidence such as:
 
-* Offering discovery activity
-* Brand Recognition Content discovery activity
+* Offering Discovery activity, including applicable Qualified Offering Visit (QOV) evidence
+* Brand Recognition Discovery activity, including applicable Qualified Brand Impression (QBI) evidence
+* Real-Time Discovery activity, including applicable Qualified Real-Time Impression (QRI) evidence and its timeliness, availability, freshness, and geographic eligibility
 * Buyer interactions within PinkCurve
 * Buyer intent to explore
 * Qualified Offering Visits
 * Creative performance
 * Discovery context
 * Applicable AMN activity
-* Quality Brand Exposure and Brand Recognition results
+* Qualified Brand Impressions (QBIs) and associated Brand Recognition measurement
+* Qualified Real-Time Impressions (QRIs) and associated Real-Time Discovery measurement, including applicable timeliness, availability, and freshness evidence
 * Other PinkCurve-observable Discovery activity
 
 These measurements may be presented as PinkCurve-observed evidence when supported by authoritative PinkCurve records.
@@ -1321,6 +1565,8 @@ Estimated Value Created Through PinkCurve
 Seller PinkCurve Cost
 ```
 
+ROD is calculated as a ratio only when the applicable Seller PinkCurve Cost is greater than zero. When the Seller's cost is zero because qualified discovery activity is covered entirely by an applicable free allowance, the ratio is undefined and SHALL NOT be reported as zero, infinite, or a numerical return. PinkCurve may instead report the qualified discovery activity, estimated value, and applicable free allowance separately, with appropriate evidence classifications.
+
 For QOV-based activity, a Seller may estimate:
 
 ```text
@@ -1357,38 +1603,45 @@ Where authorized Seller-side evidence is available, PinkCurve may incorporate th
 
 A **PinkCurve Service** is a Seller-authorized platform service that may create defined Seller value and, where applicable, financial activity.
 
-For MVP, the initial billable Services are:
+For MVP, the initial Services with established billing models are:
 
-* Offering Discovery
-* Brand Recognition
+- **Offering Discovery:** Uses Qualified Offering Visits (QOVs) as its billing unit.
+- **Brand Recognition:** Uses Qualified Brand Impressions (QBIs) as its billing unit.
+
+Real-Time Discovery uses Qualified Real-Time Impressions (QRIs) as its measurement unit. Its commercial pricing and billing policy remain open under PD-012. Real-Time Discovery SHALL NOT become billable until the applicable pricing policy and Seller financial authorization requirements are approved.
+
+Community Service Discovery and Public Announcement Discovery are recognized Discovery classifications but do not automatically inherit the billing models of Offering Discovery, Brand Recognition, or Real-Time Discovery.
+
+Future Discovery classifications or channels require separate evaluation and approval before becoming billable.
 
 **Service Content** is Seller-provided content used by an authorized Service.
 
 For MVP:
 
 ```text
-Offering Discovery
-        ↓
-Offering
-
-Brand Recognition
-        ↓
-Brand Recognition Content
+PinkCurve Services
+       │
+       ├── Offering Discovery
+       │       ↓
+       │     Offering
+       │       ↓
+       │     Qualified Offering Visit (QOV)
+       │
+       ├── Brand Recognition
+       │       ↓
+       │     Brand Recognition Content
+       │       ↓
+       │     Qualified Brand Impression (QBI)
+       │
+       └── Real-Time Discovery
+               ↓
+             Real-Time Discovery Content
+               ↓
+             Qualified Real-Time Impression (QRI)
+               ↓
+             Billing Policy (PD-012 — Open)
 ```
 
-Service authorization and Service Content approval are separate.
-
-The governing sequence is:
-
-```text
-Seller Approved
-        ↓
-Service Authorized
-        ↓
-Service Content Approved
-        ↓
-Eligible for Discovery
-```
 
 PinkCurve should not spend operational effort reviewing Service Content for a Service that the Seller has not authorized when authorization is a prerequisite for participation.
 
@@ -1448,7 +1701,7 @@ This history should use appropriate domain records rather than forcing all busin
 
 ## Pricing and Charge Understandability
 
-PinkCurve pricing should allow Sellers to understand both the applicable price and the Buyer action that may create a charge.
+PinkCurve pricing SHALL allow Sellers to understand both the applicable price and the specific qualified discovery activity that may create a charge. For Offering Discovery, this activity is a Qualified Offering Visit (QOV). For Brand Recognition, it is a Qualified Brand Impression (QBI), which does not require a Buyer click. Real-Time Discovery uses Qualified Real-Time Impressions (QRIs) for measurement, but QRIs SHALL NOT create Seller charges unless the commercial billing policy is approved under PD-012 and the Seller has explicitly authorized the applicable pricing and financial controls.
 
 Before a paid service becomes eligible for paid usage, the verified Seller Owner should understand and approve:
 
@@ -1464,14 +1717,14 @@ PinkCurve should avoid hidden, ambiguous, overlapping, or unexpectedly duplicati
 
 ## 1. Value Alignment
 
-PinkCurve should earn revenue when it creates qualified Seller value through intentional Buyer action.
+PinkCurve should earn revenue when it creates qualified, measurable Seller value through the applicable PinkCurve Service.
 
 For MVP:
 
 ```text
 Offering Discovery
         ↓
-Valid QOV
+Qualified Offering Visit (QOV)
         ↓
 Applicable QOV Price
         ↓
@@ -1479,16 +1732,56 @@ Applicable Financial Treatment
         ↓
 Free Allowance or Paid Charge
 
+
 Brand Recognition
         ↓
-Valid Quality Brand Exposure
+Qualified Brand Impression (QBI)
         ↓
-Applicable Quality Brand Exposure Price
+Applicable QBI Price
         ↓
 Applicable Financial Treatment
         ↓
 Free Allowance or Paid Charge
+
+
+Real-Time Discovery
+        ↓
+Qualified Real-Time Impression (QRI)
+        ↓
+Real-Time Billing Policy
+(PD-012 — Open)
+        ↓
+   ┌───────────────┴───────────────┐
+   │                               │
+   ▼                               ▼
+Billable Under                Measurement Only
+Approved Policy              (Not Billable)
+   │                               │
+   ▼                               ▼
+Applicable Financial          Discovery Analytics
+Treatment                     and Seller Intelligence
+   │
+   ▼
+Free Allowance or Paid Charge
 ```
+
+Offering Discovery measures Qualified Offering Visits (QOVs), representing independently qualified, intentional Buyer-initiated transitions toward approved Seller destinations.
+
+Brand Recognition measures Qualified Brand Impressions (QBIs), representing verified presentations of approved Brand Recognition Discovery Media to registered human Buyers.
+
+Real-Time Discovery measures Qualified Real-Time Impressions (QRIs), using the shared qualified impression measurement framework with additional requirements for Real-Time eligibility, availability, freshness, timeliness, and applicable geographic relevance.
+
+Each measurement unit is independently qualified by Discovery Analytics according to its Service-specific rules. QOV and QBI have established billing models, while QRI commercial pricing and billable treatment remain open under PD-012.
+
+Discovery qualification SHALL remain independent of Seller pricing, spending limits, and potential PinkCurve revenue.
+
+Legitimate repeated Qualified Offering Visits (QOVs) and Qualified Brand Impressions (QBIs) may each qualify for billing under their respective authorized Service pricing policies.
+
+Qualified Real-Time Impressions (QRIs) are measured independently using the shared qualified impression framework and additional Real-Time eligibility requirements. Whether a QRI creates a billable unit depends on the Real-Time Discovery pricing and billing policy, which remains open under PD-012.
+
+Technical duplicates, automated activity, fraudulent activity, and other ineligible events SHALL NOT create additional qualified measurement units or billable units.
+
+Neither pricing model SHALL influence Discovery relevance, ranking, or Buyer Experience decisions.
 
 ## 2. Buyer Experience Comes First
 
@@ -1619,6 +1912,14 @@ Billing SHALL NOT determine whether an Offering or Brand Recognition Content is 
 
 The **Seller** is PinkCurve's billable entity.
 
+The Seller is financially responsible only for qualified discovery activity that satisfies the applicable Service billing policy and Seller Owner authorization.
+
+Offering Discovery uses Qualified Offering Visits (QOVs), and Brand Recognition uses Qualified Brand Impressions (QBIs) as their respective billing units.
+
+Real-Time Discovery uses Qualified Real-Time Impressions (QRIs) as its measurement unit. QRI-based charges SHALL NOT be created unless the applicable Real-Time Discovery billing policy has been approved under PD-012 and the Seller Owner has explicitly authorized the corresponding paid Service.
+
+Each Service maintains independent billing qualification, financial controls, and auditable financial records.
+
 Each approved Seller has its own:
 
 * Service authorizations
@@ -1650,7 +1951,15 @@ Material Owner financial actions should preserve `actor_identity_id`, timestamp,
 
 ## Service Authorization
 
-A Seller may participate in free usage without automatically authorizing paid usage.
+Each PinkCurve Service requires independent Seller Owner authorization.
+
+For MVP, a Seller may authorize Offering Discovery without authorizing Brand Recognition, or authorize Brand Recognition without authorizing Offering Discovery.
+
+Real-Time Discovery is a separate PinkCurve Service. Its Qualified Real-Time Impressions (QRIs) may be measured independently of whether Real-Time Discovery is billable.
+
+If paid Real-Time Discovery is introduced under an approved PD-012 billing policy, the Seller Owner must separately authorize the Service, applicable pricing, spending limits, and any grace amount before paid delivery begins.
+
+Authorization for Offering Discovery or Brand Recognition SHALL NOT automatically authorize paid Real-Time Discovery.
 
 Each billable PinkCurve Service requires explicit Seller Owner authorization before paid delivery may occur.
 
@@ -1660,7 +1969,11 @@ A Seller may authorize Offering Discovery while not authorizing Brand Recognitio
 
 ## Free USD Allowances
 
-Eligible Sellers may receive separate monthly free USD allowances for Offering Discovery and Brand Recognition.
+Eligible Sellers may receive separate monthly free USD allowances for Offering Discovery and Brand Recognition, according to their respective approved Service pricing policies.
+
+Real-Time Discovery uses Qualified Real-Time Impressions (QRIs) as its measurement unit. Whether Real-Time Discovery will provide a monthly free USD allowance, a per-campaign allowance, or another financial arrangement remains subject to the commercial pricing and billing decision under PD-012.
+
+Any approved Real-Time Discovery allowance SHALL be independently defined, attributable to the applicable Service, and subject to Seller Owner authorization and applicable financial controls. Allowances for one PinkCurve Service SHALL NOT automatically be shared with or transferred to another Service.
 
 The actual allowance amounts are configurable business parameters rather than permanent Business Model constants.
 
@@ -1697,7 +2010,21 @@ PinkCurve does not need to present promotional "savings."
 
 Each paid service has a separate Seller Owner-controlled monthly spending limit denominated in USD.
 
-QOV count and Quality Brand Exposure count are usage measures. Dollars are the financial authorization boundary.
+Qualified Offering Visits (QOVs), Qualified Brand Impressions (QBIs), and Qualified Real-Time Impressions (QRIs) are separate usage measures for their respective PinkCurve Services.
+
+Each legitimate, independently qualified QOV or QBI may represent one billable unit, including qualified repeated visits or impressions, subject to the applicable Service authorization and Billing Qualification requirements.
+
+QRIs are independently measured and recorded by Discovery Analytics. Whether a QRI becomes a billable unit depends on the approved Real-Time Discovery pricing and billing policy, which remains open under PD-012.
+
+If Real-Time Discovery becomes billable, it SHALL have its own Seller Owner-authorized financial controls, including applicable spending limits and grace amounts, independently of Offering Discovery and Brand Recognition.
+
+Monthly spending limits and explicitly authorized grace amounts are denominated in USD. These financial controls, rather than the number of qualified measurement units, establish the maximum Seller-authorized financial exposure for each billable Service.
+
+For Offering Discovery and Brand Recognition, the applicable financial controls govern charges derived from QOVs and QBIs, respectively.
+
+For Real-Time Discovery, QRIs remain measurement units until the applicable commercial billing policy is approved under PD-012. If QRI-based billing is introduced, the Seller Owner must explicitly authorize the applicable pricing and financial controls before paid Real-Time Discovery delivery begins.
+
+Seller authorization for one PinkCurve Service SHALL NOT automatically authorize paid usage of another Service.
 
 PinkCurve does not need an additional combined cross-service spending ceiling for MVP.
 
@@ -1843,7 +2170,7 @@ Historical charges SHALL NOT be recalculated using current pricing.
 
 ## Billing Lineage
 
-Every Seller charge should be traceable from the invoice back to the qualifying Buyer activity.
+Every Seller charge SHALL be traceable from the Seller Invoice through its Billable Event to the underlying qualified discovery activity, applicable Service, qualification evidence, approved pricing policy, and Seller financial authorization.
 
 For Offering Discovery:
 
@@ -1868,17 +2195,26 @@ Seller Invoice
 For Brand Recognition:
 
 ```text
-Buyer Intentional Selection
+Approved Brand Recognition Discovery Media
+        ↓
+Presentation to Registered Human Buyer
+        ↓
+Buyer Experience Visibility Evidence
+        ↓
+Trust / Security Evidence
         ↓
 Discovery Event
         ↓
-Quality Brand Exposure Qualification
+Discovery Analytics
+(QBI Qualification)
         ↓
-Quality Brand Exposure
+Qualified Brand Impression
+(qbi_id)
         ↓
 Billing Qualification
         ↓
-billable_event_id
+0..1 QBI-Derived Billable Event
+(billable_event_id)
         ↓
 Invoice Line
         ↓
@@ -2486,7 +2822,7 @@ The long-term objective should be to reduce human operational cost per unit of p
 
 ### Development Investment
 
-During early PinkCurve phases, product development, software engineering, AI/ML development, architecture, and platform construction may be treated primarily as development investment rather than allocated directly into the operating cost of each QOV, Quality Brand Exposure, or other service.
+During early PinkCurve phases, product development, software engineering, AI/ML development, architecture, and platform construction may be treated primarily as development investment rather than allocated directly into the operating cost of each Qualified Offering Visit (QOV), Qualified Brand Impression (QBI), or other applicable Service measurement unit.
 
 This prevents early unit-economics analysis from becoming distorted by large one-time or foundational development efforts.
 
@@ -3324,7 +3660,7 @@ PinkCurve should continuously evaluate business risks as the platform develops. 
 
 **Potential Impact:** Sellers may not continue Brand Recognition participation.
 
-**Mitigation:** Use trustworthy Quality Brand Exposure measurement, relevant Brand Recognition Content, evidence-based recommendations, and clear separation between observed results and inferred longer-term Brand Recognition effects.
+**Mitigation:** Use trustworthy Qualified Brand Impression (QBI) measurement, relevant and approved Brand Recognition Discovery Media, evidence-based Seller Intelligence recommendations, and clear separation between directly observed qualified impressions and inferred longer-term brand awareness, Buyer sentiment, or business outcomes.
 
 ---
 
@@ -3449,7 +3785,8 @@ For MVP:
 * The Seller is the billable entity.
 * Currency is USD.
 * Offering Discovery uses valid QOVs as its billing unit.
-* Brand Recognition uses valid Quality Brand Exposures as its billing unit.
+* Brand Recognition uses valid Qualified Brand Impressions (QBIs) as its billing unit.
+* Real-Time Discovery uses Qualified Real-Time Impressions (QRIs) as its measurement unit. QRI-based billing is not enabled unless its commercial pricing policy is approved under PD-012 and the applicable Seller Owner financial authorization requirements are satisfied.
 * Each Service may have a configurable monthly free USD allowance.
 * Paid usage requires explicit Seller Owner authorization.
 * Each Service has its own monthly USD spending limit.
@@ -3470,19 +3807,28 @@ Registered Human Buyer
         ↓
 Useful PinkCurve Discovery
         ↓
-Intentional Buyer Action
+Service-Specific Discovery Activity
         ↓
-Qualified Service-Specific Action
+Discovery Analytics Qualification
         ↓
-Seller Value
+Qualified Measurement Unit
+(QOV / QBI / QRI)
         ↓
+Applicable Approved Billing Policy
+        ↓
+Billing Qualification
+        ↓
+ ┌─────────────────────┐
+ │                     │
+ ▼                     ▼
+Billable Event     Measurement Only
+ │
+ ▼
 Free USD Allowance
-        ↓
-Seller-Authorized Paid Usage
-        ↓
-Billing
+or Seller-Authorized Paid Charge
         ↓
 Seller Invoice and Payment
+(where applicable)
 ```
 
 The MVP purpose is not to maximize the number of revenue mechanisms.
@@ -3561,10 +3907,10 @@ The business model should evolve from evidence rather than assumptions.
 
 See [Open Decisions](19-open-decisions.md) for remaining business-model questions.
 
-The architecture and policy direction are established for the initial QOV and Quality Brand Exposure billing models. Remaining launch configuration and future-model questions include:
+The architecture and policy direction are established for the initial Qualified Offering Visit (QOV) and Qualified Brand Impression (QBI) billing models. Qualified Real-Time Impression (QRI) measurement is defined, while Real-Time Discovery commercial pricing and billing eligibility remain open under PD-012. Remaining launch configuration and future-model questions include:
 
 * Actual launch QOV unit price
-* Actual launch Quality Brand Exposure unit price
+* Actual launch Qualified Brand Impression (QBI) unit price
 * Monthly free USD allowance amount for Offering Discovery
 * Monthly free USD allowance amount for Brand Recognition
 * Market evidence for Brand Recognition pricing
@@ -3611,7 +3957,9 @@ Seller value should be supported by trustworthy and understandable evidence. Dis
 
 ## Brand Recognition Can Create Seller Value
 
-Not every worthwhile discovery produces an immediate QOV. Intentional Brand Recognition interactions may create Seller value independently from QOVs. PinkCurve should distinguish directly observed Quality Brand Exposures from inferred or estimated longer-term brand effects.
+Not every worthwhile discovery produces an immediate Qualified Offering Visit (QOV). Brand Recognition may create measurable Seller value through Qualified Brand Impressions (QBIs), independently of QOVs and without requiring intentional Buyer interactions.
+
+PinkCurve SHALL distinguish directly observed Qualified Brand Impressions from inferred or estimated longer-term brand awareness, Buyer sentiment, brand recognition, and other business outcomes that require additional evidence.
 
 ## Community Value May Require Different Economics
 
