@@ -7,7 +7,7 @@
 | **Status** | Draft |
 | **Version** | 0.3 |
 | **Owner** | PinkCurve Product Team |
-| **Last Reviewed** | 2026-09-30 |
+| **Last Reviewed** | 2026-10-19 |
 | **Related Components** | All platform components |
 
 ---
@@ -2946,17 +2946,20 @@ TBD
 
 # Business Decisions
 
-## BD-001: Standard Discovery Qualified Buyer Action Pricing Validation
+## BD-001: Offering Discovery QOV Pricing Validation
 
 **Status:** Open
 
-**Question:** What should Sellers pay for qualified positive Buyer actions generated through Standard Discovery, and how should PinkCurve validate that pricing through actual Seller behavior and market evidence?
+**Question:** What should Sellers pay for Qualified Offering Visits (QOVs) generated through Offering Discovery, and how should PinkCurve validate QOV pricing through actual Seller behavior, willingness to pay, and market evidence?
 
 **Scope:**
 
-This decision applies to Standard Discovery where Seller value is measured
-through qualified positive Buyer actions, including Qualified Offering
-Visits where applicable.
+This decision applies to Offering Discovery, where the established
+measurement and billing unit is the Qualified Offering Visit (QOV).
+
+BD-001 determines how QOVs should be priced and packaged commercially.
+It does not reopen QOV qualification rules or the eligibility of
+independently qualified repeat Buyer visits.
 
 Real-Time Discovery may require a different commercial model because the
 Seller's objective may be timely qualified awareness or reach before an
@@ -2978,58 +2981,59 @@ pricing or billing model.
 
 **Why This Matters:**
 
-Pricing for qualified positive Buyer actions must create measurable value
-for Sellers while generating sustainable revenue for PinkCurve.
+QOV pricing must reflect meaningful value for Sellers while generating
+sustainable revenue for PinkCurve.
 
-Different qualified actions, Offering types, Seller businesses, and market
-contexts may create different levels of Seller value.
+Although QOV is the established Offering Discovery billing unit, the
+economic value of a qualified visit may vary across Offering categories,
+Seller businesses, and market contexts.
 
-PinkCurve should not assume that one universal price for every qualified
-positive Buyer action will be economically appropriate across all Seller
-categories.
+PinkCurve should validate whether a uniform QOV price, differentiated
+pricing, subscription packaging, or a combination provides the best
+balance of Seller value, pricing simplicity, and sustainable economics.
 
 **Variables:**
 
-- Type of qualified positive Buyer action
+- QOV unit price
 - Subscription tier
-- Included action volume
-- Optional per-action pricing
-- Volume
-- Category
+- Included QOV volume
+- Optional per-QOV pricing
+- QOV volume
+- Offering category
 - Geography
 - Seller size
-- Action quality
+- QOV quality and qualification evidence
 - PinkCurve operating cost
 
 **Work Required:**
 
 - Interview early Sellers
-- Measure Seller value from qualified positive Buyer actions
+- Measure Seller-perceived value from Qualified Offering Visits (QOVs), including legitimate repeat visits, and assess how that value varies by Offering category and Seller business
 - Estimate conversion and Seller-value economics
 - Compare alternative Seller acquisition and discovery costs
-- Test subscription tiers and included action volumes
-- Test optional per-action pricing where appropriate
-- Validate the 24-hour qualified-action billing rule
+- Test Seller subscription tiers and included QOV volumes to determine commercially viable pricing and packaging
+- Test optional per-QOV pricing where appropriate, including Seller willingness to pay, pricing simplicity, and compatibility with subscription tiers
+- Validate independent QOV qualification and billing eligibility for legitimate repeat Buyer visits, including visits within 24 hours, while excluding technical duplicates, automated activity, and fraud
 - Test pricing during Beta
-- Measure cost per billable qualified action
-- Measure revenue per billable qualified action
+- Measure PinkCurve cost per billable QOV
+- Measure PinkCurve revenue per billable QOV
 - Measure free-to-paid Seller conversion
-- Measure invalid, fraudulent, and duplicate billable actions
+- Measure invalid and fraudulent QOV attempts, technical duplicate events, and duplicate QOV-derived Billable Event attempts, while distinguishing these from legitimate independently qualified repeat visits
 - Test Seller willingness to pay using actual paid behavior where practical
 - Evaluate Seller-controlled spending and budget limits
 
 **Evidence Required:**
 
-- Seller-perceived value of qualified positive Buyer actions
-- Seller willingness to pay for qualified positive Buyer actions
+- Seller-perceived value of Qualified Offering Visits (QOVs), including legitimate repeat visits
+- Seller willingness to pay for QOVs, supported by actual paid behavior where practical
 - Actual paid usage where available
 - Seller renewal and retention
-- Qualified Offering Visit volume where applicable
+- Total independently qualified QOV volume, QOV-derived Billable Event volume, and the proportion of qualified QOVs that become billable
 - Free-to-paid Seller conversion
 - Seller acquisition or conversion outcomes where measurable
-- Invalid, fraudulent, or duplicate billable-action rate
-- PinkCurve cost per billable qualified action
-- PinkCurve revenue per billable qualified action
+- Invalid and fraudulent QOV attempt rates, technical duplicate event rates, and duplicate QOV-derived Billable Event prevention effectiveness
+- PinkCurve cost per QOV-derived Billable Event
+- PinkCurve revenue per QOV-derived Billable Event
 - PinkCurve gross margin
 - Competitive Seller acquisition and discovery costs
 
@@ -3085,29 +3089,26 @@ Business
 
 **Question:**
 
-What minimum Seller billing capability and Stripe integration must
-PinkCurve implement and validate during Alpha?
+What minimum Seller billing capability and Stripe integration must PinkCurve implement and validate during Alpha?
 
 **Why This Matters:**
 
-Seller billing is a fundamental part of PinkCurve's ability to become
-a sustainable business.
+Seller billing is a fundamental part of PinkCurve's ability to become a sustainable business.
 
-Although Alpha primarily validates whether PinkCurve's approach to
-Meaningful Discovery works, PinkCurve should also validate that the
-economic path from discovery activity to Seller billing is technically
-workable.
+Although Alpha primarily validates whether PinkCurve's approach to Meaningful Discovery works, PinkCurve should also validate that the economic path from discovery activity to Seller billing is technically workable.
 
 MVP Seller billing includes:
 
-- Paid Seller tiers for Standard Discovery based on qualified positive Buyer actions
-- Qualified action accounting by Buyer, Offering, action type, and time
-- Enforcement of the rolling 24-hour billing rule where qualified-action billing applies
+- Paid Seller tiers for Offering Discovery based on Qualified Offering Visits (QOVs), subject to approved pricing policies and Seller authorization
+- Independent QOV accounting by Buyer, Offering, and qualified visit, with a unique `qov_id` for each independently qualified QOV
+- Eligibility of legitimate repeat QOVs, including repeat visits within 24 hours, without an arbitrary time-based billing exclusion
+- Technical duplicate prevention, fraud controls, and idempotent QOV-derived Billable Event creation based on `qov_id`
+- Brand Recognition billing based on Qualified Brand Impressions (QBIs), under its separately approved billing policy
 - Ability to support additional PinkCurve billing models without requiring fundamental redesign of the billing architecture
 - Free-tier usage and limits tracked separately from paid usage
 - Seller notification when applicable usage or spending limits are approached or reached
 - Seller upgrade or pause behavior when applicable limits are reached
-- Optional per-action pricing where applicable
+- Optional per-QOV pricing for Offering Discovery where applicable
 - Seller-controlled spending limits where applicable
 - Credits
 - Adjustments
@@ -3116,20 +3117,13 @@ MVP Seller billing includes:
 - Invoices
 - Payment records and history
 
-Real-Time Discovery may eventually use a billing basis different from
-qualified positive Buyer actions.
+Real-Time Discovery may eventually use a billing basis different from Offering Discovery QOVs or Brand Recognition QBIs.
 
-The Real-Time Discovery billing unit, unit price, budget rules, duplicate
-treatment, and other commercial rules remain unresolved and should not be
-implicitly determined by the initial Standard Discovery billing
-implementation.
+Qualified Real-Time Impressions (QRIs) are a Real-Time Discovery measurement unit. The Real-Time Discovery billing unit, unit price, budget rules, duplicate treatment, and other commercial rules remain unresolved under PD-012 and SHALL NOT be implicitly determined by the initial Offering Discovery or Brand Recognition billing implementations.
 
-The Seller billing architecture should therefore separate general billing
-capabilities from the rules used by a particular Discovery billing model.
+The Seller billing architecture should therefore separate general billing capabilities from the qualification, pricing, and billability rules used by each Discovery billing model.
 
-Stripe integration should therefore be implemented and validated as part
-of PinkCurve's larger Seller billing architecture rather than treated as
-an isolated payment API.
+Stripe integration should be implemented and validated as part of PinkCurve's larger Seller billing architecture rather than treated as an isolated payment API.
 
 **Current State:**
 
@@ -3139,32 +3133,32 @@ Stripe has previously been configured but is not actively used.
 
 PinkCurve will use Stripe as the MVP payment processor.
 
-PinkCurve retains responsibility for its Seller billing model, including
-billable-usage determination, pricing and subscription-tier application,
-free-tier usage and limits, Seller-controlled spending limits where
-applicable, invoice calculation, billing records, adjustments, credits,
-refunds, and billing auditability.
+PinkCurve retains responsibility for its Seller billing model, including billable-usage determination, pricing and subscription-tier application, free-tier usage and limits, Seller-controlled spending limits where applicable, invoice calculation, billing records, adjustments, credits, refunds, and billing auditability.
 
-For Standard Discovery, this includes qualified positive Buyer action
-accounting and application of the rolling 24-hour billing rule where
-applicable.
+For Offering Discovery, this includes independent Qualified Offering Visit (QOV) accounting, with each legitimate independently qualified Buyer visit eligible for billing, including repeat visits within 24 hours.
 
-The billing architecture should allow additional Discovery billing models
-to define their own billable event or usage rules without changing
-PinkCurve's underlying payment-processing architecture.
+Each independently qualified QOV SHALL have a unique `qov_id`. QOV-derived Billable Event creation SHALL be idempotent by `qov_id`, preventing duplicate charges from retries or repeated processing of the same QOV.
 
-Stripe provides the external payment-processing capability, including
-payment-method handling, payment execution, processor-side retry behavior,
-and refund execution.
+A single QOV may produce zero or one QOV-derived Billable Event. Actual billing remains subject to applicable Seller authorization, approved pricing policies, spending limits, and billing integrity controls.
+
+Baseline QOV qualification and billing do not require confirmation that the Seller's website successfully loaded or that the Buyer engaged with Seller-side content.
+
+For Brand Recognition, Qualified Brand Impressions (QBIs) are governed by their own qualification and billing rules, as defined in Chapter 13 and BD-004.
+
+The billing architecture SHALL allow additional Discovery billing models to define their own billable event or usage rules without changing PinkCurve's underlying payment-processing architecture.
+
+Stripe provides the external payment-processing capability, including payment-method handling, payment execution, processor-side retry behavior, and refund execution.
 
 **Work Required:**
 
 - Define Alpha Seller billing requirements
 - Define Seller billing-account model
 - Define invoice data model
-- Define qualified positive Buyer action accounting requirements
-- Define rolling 24-hour billing-window accounting requirements
+- Define independent QOV accounting and qualification-to-billing requirements
+- Define unique `qov_id` assignment and idempotent QOV-derived Billable Event creation, including legitimate repeat visits and technical duplicate prevention
+- Define Brand Recognition QBI billing integration under its separately approved policy
 - Define free-tier usage, limit, and upgrade handling
+- Define optional per-QOV pricing support where applicable
 - Define promotional-credit handling where applicable
 - Define credits, adjustments, and refund handling
 - Define payment-failure handling
@@ -3176,16 +3170,20 @@ and refund execution.
 - Test end-to-end billing
 - Define Beta production-payment requirements
 - Define security and financial controls
-- Define separation between Discovery Events, billable usage, and financial records
+- Define separation between Discovery Events, qualified measurement records, Billable Events, and financial records
 - Define billing-policy interfaces so different Discovery billing models can coexist
 - Define Seller-controlled budget and spending-limit enforcement
+- Define billing-policy versioning and historical traceability
 - Define how future Real-Time Discovery billing rules can be introduced without changing the underlying payment-processing architecture
 
 **Evidence Required:**
 
 - Successful end-to-end Alpha billing tests
-- Accurate qualified positive Buyer action accounting
-- Correct application of the rolling 24-hour billing rule
+- Accurate independent QOV accounting
+- Verified billing eligibility for legitimate repeat QOVs, including visits within 24 hours
+- No duplicate QOV-derived Billable Events for the same `qov_id`
+- Correct separation between qualified QOVs and QOV-derived Billable Events
+- Accurate Brand Recognition QBI billing under its approved policy
 - Accurate free-tier usage and limit accounting
 - Accurate invoice generation
 - Correct credits and adjustments
@@ -3194,21 +3192,18 @@ and refund execution.
 - Billing auditability
 - Cost assessment
 - Operational complexity assessment
-- Correct separation of Discovery Events from billable usage
+- Correct separation of Discovery Events, qualified measurements, Billable Events, and financial records
 - Correct enforcement of Seller-controlled spending limits
 - Evidence that billing rules can change without corrupting historical billing records
 - Evidence that multiple billing models can be supported without changing the underlying payment-processing integration
 
 **Decision Needed By:**
 
-The initial Seller billing architecture and Stripe integration requirements
-must be defined before Alpha billing implementation.
+The initial Seller billing architecture and Stripe integration requirements must be defined before Alpha billing implementation.
 
-A minimum end-to-end billing workflow should be implemented and tested
-during Alpha.
+A minimum end-to-end billing workflow should be implemented and tested during Alpha.
 
-Production charging, final pricing rules, tax handling, and broader
-commercial billing capabilities must be ready before paid Beta.
+Production charging, final pricing rules, tax handling, and broader commercial billing capabilities must be ready before paid Beta.
 
 **Decision Owner:**
 
@@ -3228,8 +3223,10 @@ Business / Finance / Engineering
 
 - Seller accounts
 - Seller billing accounts
-- Qualified positive Buyer action accounting
-- Rolling 24-hour billing-window accounting
+- Independent QOV accounting and unique `qov_id` tracking
+- Idempotent QOV-derived Billable Event creation
+- Legitimate repeat QOV handling and technical duplicate prevention
+- Brand Recognition QBI billing integration
 - Free-tier usage and limit accounting
 - Invoice generation
 - Stripe payment-processing integration
@@ -3243,7 +3240,7 @@ Business / Finance / Engineering
 - Billing-policy evaluation
 - Billing-rule versioning
 - Seller spending controls
-- Separation of Discovery Events from financial billing records
+- Separation of Discovery Events, qualified measurements, Billable Events, and financial billing records
 - Support for multiple Discovery billing models
 
 **Final Decision:**
@@ -3254,7 +3251,11 @@ PinkCurve owns the Seller billing model and financial records. Stripe provides p
 
 **Decision Rationale:**
 
-Stripe has already been configured and represents an existing investment. It is a widely-used and well-supported platform for payment processing, which reduces operational risk. While PinkCurve will implement its own Seller billing model and financial logic, offloading the complexity of payment-method handling, payment execution, and processor-side retry behavior to Stripe is a sensible architectural choice for MVP.
+Stripe has already been configured and represents an existing investment. It is a widely used and well-supported platform for payment processing, which reduces operational risk.
+
+While PinkCurve will implement its own Seller billing model and financial logic, offloading the complexity of payment-method handling, payment execution, and processor-side retry behavior to Stripe is a sensible architectural choice for MVP.
+
+Separating service-specific billing policies from payment processing also allows PinkCurve to support Offering Discovery QOV billing, Brand Recognition QBI billing, and future Real-Time Discovery billing without redesigning the payment-processing architecture.
 
 **Validation Result:**
 
@@ -3268,51 +3269,163 @@ TBD
 
 **Question:**
 
-Should Brand Recognition Discovery use Qualified Brand Impressions (QBIs) as billable Seller activity?
+What measurement, qualification, and billing model should PinkCurve use for Brand Recognition Discovery, and how should independently qualified repeat impressions be treated?
 
 **Final Decision:**
 
-Brand Recognition uses the **Qualified Brand Impression (QBI)** as its measurement and billing unit.
+PinkCurve will use the **Qualified Brand Impression (QBI)** as the measurement and billing unit for Brand Recognition Discovery.
 
 A QBI represents a verified presentation of approved Brand Recognition Discovery Media to a registered human Buyer that satisfies PinkCurve's applicable visibility, quality, Trust, Security, and fraud-prevention requirements.
 
-A QBI does not require a Buyer click, intentional selection, Qualified Offering Visit (QOV), external Seller destination, or transaction.
+A QBI does not require:
 
-Each independently qualified QBI may produce zero or one QBI-derived Billable Event, subject to the applicable approved pricing policy, Seller Owner authorization, free allowance, spending controls, and Billing Qualification.
+- Buyer clicking or intentionally selecting the Discovery Media
+- A Qualified Offering Visit (QOV)
+- An external Seller destination
+- Confirmation of Seller-side activity
+- A purchase or transaction
 
-Legitimate repeated QBIs may be independently billable. Technical duplicates, automated refreshes, fraudulent impressions, and continuous visibility without a distinct qualified presentation do not create additional QBIs.
+Brand Recognition measures qualified exposure to approved Discovery Media, not verified brand awareness, brand recall, or purchase intent.
 
-**Decision History:**
+### QBI Qualification and Repeat Impressions
+
+Each independently qualified Brand Recognition presentation may generate a QBI.
+
+Legitimate repeated presentations to the same registered Buyer may qualify independently, including presentations within 24 hours.
+
+PinkCurve SHALL NOT impose an arbitrary rolling 24-hour exclusion on legitimate repeated QBIs.
+
+However, repeated technical events do not automatically establish new qualified impressions.
+
+The qualification process must distinguish between:
+
+- A genuinely new qualified presentation
+- Continuous visibility during the same presentation
+- Technical duplicate events
+- Automated refreshes
+- Invalid or fraudulent impressions
+- Unauthorized automated traffic
+
+Continuous visibility without a distinct new qualified presentation SHALL NOT create additional QBIs.
+
+Discovery Analytics owns QBI qualification using applicable presentation, visibility, quality, and integrity evidence.
+
+The detailed qualification thresholds and event-processing rules are defined by the applicable Discovery Analytics and Brand Recognition policies.
+
+### QBI Billing Integrity
+
+Each independently qualified QBI SHALL have a unique `qbi_id`.
+
+A single QBI may produce zero or one QBI-derived Billable Event.
+
+Billing SHALL use `qbi_id` as the idempotency key for QBI-derived Billable Event creation.
+
+Retries, duplicate event delivery, or repeated processing of the same QBI SHALL NOT generate additional Billable Events.
+
+Separate legitimate qualified presentations must retain distinct `qbi_id` values and remain independently eligible for billing.
+
+Actual Billable Event creation remains subject to:
+
+- Approved Brand Recognition pricing policy
+- Applicable Seller Owner authorization
+- Free allowance and free-tier rules where applicable
+- Seller-controlled spending limits
+- Billing Qualification
+- Trust, Security, and fraud-prevention controls
+- Applicable financial and billing integrity requirements
+
+QBI qualification establishes an eligible measurement unit. It does not, by itself, guarantee that a charge will be created.
+
+### Brand Recognition Pricing and Seller Authorization
+
+Brand Recognition uses a billing policy separate from Offering Discovery.
+
+Offering Discovery uses Qualified Offering Visits (QOVs), while Brand Recognition uses Qualified Brand Impressions (QBIs).
+
+A QBI does not become a QOV merely because the Buyer subsequently visits an Offering.
+
+Likewise, an Offering Discovery QOV does not automatically establish a QBI.
+
+Any applicable free Brand Recognition allowance, approved pricing, spending limits, and billing authorization must be enforced before QBI-derived charges are created.
+
+Brand Recognition pricing does not purchase preferential Discovery ranking.
+
+The Brand Recognition billing model SHALL NOT automatically determine the commercial treatment of Real-Time Discovery, Community Service Discovery, or Public Announcement Discovery.
+
+### Measurement and Seller Intelligence
+
+PinkCurve should provide Sellers with meaningful, auditable Brand Recognition measurements, including where applicable:
+
+- Qualified Brand Impression volume
+- Independently qualified repeat impression volume
+- QBI-derived Billable Event volume
+- Nonbillable QBI volume
+- Invalid or rejected impression attempts
+- Billing usage against authorized allowances and spending limits
+- Historical qualified exposure and billing records
+
+Seller Intelligence must distinguish qualified exposure from actual brand awareness, recall, consideration, or downstream commercial outcomes.
+
+PinkCurve SHALL NOT represent a QBI as proof that a Buyer remembered the brand, developed purchase intent, visited the Seller's website, or completed a transaction.
+
+Additional outcomes may be reported only when supported by appropriate authorized evidence.
+
+### Decision History
 
 The previous BD-004 decision treated Brand Recognition and Quality Brand Exposures as nonbillable awareness measurements.
 
 That decision has been superseded by the QBI-based Brand Recognition billing model established in Chapter 13.
 
-The original concern about charging for unverified or low-quality exposure remains addressed through QBI qualification, financial authorization, and billing integrity controls.
+The original concern about charging Sellers for unverified or low-quality exposure remains addressed through QBI qualification, Seller authorization, spending controls, and billing integrity requirements.
 
-**Decision Rationale:**
+### Decision Rationale
 
-Brand Recognition can create measurable Seller value through qualified exposure even when the Buyer does not intentionally visit an Offering.
+Brand Recognition can create measurable Seller value through qualified exposure even when a Buyer does not intentionally visit an Offering.
 
-PinkCurve therefore distinguishes qualified Brand Recognition exposure from raw advertising impressions and technical media rendering.
+Requiring a Buyer click or outbound visit would incorrectly make Brand Recognition dependent on the Offering Discovery billing model.
 
-The QBI model supports independently qualified measurement and Seller-authorized billing without requiring an Offering or outbound Buyer action.
+PinkCurve therefore uses a separate QBI qualification and billing model that recognizes independently qualified presentations while excluding technical duplicates, automated refreshes, and fraudulent impressions.
 
-Brand Recognition pricing does not purchase preferential Discovery ranking.
+Allowing legitimate repeat impressions preserves the value of repeated brand exposure without assuming that every technical presentation event deserves a charge.
 
-**Implementation Requirements:**
+The separation of QBI qualification from Billable Event creation protects Seller financial authorization and supports auditable billing.
+
+### Implementation Requirements
 
 - Discovery Analytics owns QBI qualification.
 - Buyer Experience supplies presentation and visibility evidence.
 - Trust and Security supply applicable eligibility and integrity evidence.
-- Billing applies approved QBI pricing and Seller financial controls.
-- Each QBI preserves qualification and billing lineage.
+- Each independently qualified QBI receives a unique `qbi_id`.
+- QBI qualification distinguishes legitimate repeat presentations from continuous visibility and technical duplicates.
+- Billing uses `qbi_id` for idempotent QBI-derived Billable Event creation.
+- Each QBI produces no more than one QBI-derived Billable Event.
+- Billing enforces approved Brand Recognition pricing, Seller authorization, free allowances, and spending controls.
+- Qualification and billing records preserve traceable lineage.
 - Seller Intelligence reports qualified exposure without asserting unverified brand awareness or Seller-side outcomes.
 - QBI-based billing remains independent of QOV-based Offering Discovery billing.
+- Real-Time Discovery billing remains governed by its separately approved commercial policy.
+
+### Validation Requirements
+
+Before paid Brand Recognition operation, PinkCurve should verify:
+
+- Correct QBI qualification using approved presentation and visibility criteria
+- Independent qualification of legitimate repeat presentations
+- Exclusion of continuous visibility and technical duplicates from additional QBI creation
+- Rejection of invalid, automated, or fraudulent impressions
+- Unique `qbi_id` assignment
+- Idempotent Billable Event creation
+- Correct enforcement of Seller authorization
+- Correct application of free allowances and spending limits
+- Accurate billing records and audit lineage
+- Consistency between Discovery Analytics, Billing, and Seller Intelligence
+- Accurate Seller-facing descriptions of qualified exposure
 
 **Decision Needed By:**
 
-Decided for the current MVP business model. Implementation and validation remain required before paid Brand Recognition operation.
+Decided for the current MVP business model.
+
+Implementation and validation must be completed before paid Brand Recognition operation.
 
 **Decision Owner:**
 
@@ -3330,9 +3443,15 @@ Business / Product
 
 **Final Decision:**
 
-Brand Recognition uses independently qualified QBIs as its billing unit under the approved, Seller-authorized Brand Recognition pricing model defined in Chapter 13.
+Brand Recognition uses independently qualified QBIs as its measurement and billing unit under the approved, Seller-authorized Brand Recognition pricing model defined in Chapter 13.
 
-**Validation Result:** TBD
+Legitimate repeat QBIs remain independently eligible for billing without a rolling 24-hour exclusion.
+
+Each QBI is uniquely identified by `qbi_id`, and QBI-derived Billable Event creation is idempotent.
+
+**Validation Result:**
+
+TBD
 
 ---
 
@@ -3372,7 +3491,7 @@ Awareness of PinkCurve itself must also be created.
 - Seller activation
 - Offering density
 - Discovery quality
-- Qualified positive Buyer action volume, including Qualified Offering Visits where applicable
+- Qualified Offering Visit (QOV) volume for Offering Discovery, Qualified Brand Impression (QBI) volume for Brand Recognition, and Qualified Real-Time Impression (QRI) volume for Real-Time Discovery, where each classification is included in Alpha
 - Retention
 
 **Decision Needed By:**
@@ -3406,32 +3525,107 @@ Business / Product
 
 **Status:** Open
 
-**Question:** What exact capabilities, Buyers, Sellers, Offering categories, and initial U.S. geographic concentration should be included in PinkCurve Alpha?
+**Question:**
+
+What exact capabilities, registered human Buyers, Sellers, Discovery classifications, Offering categories, and initial U.S. geographic concentration should be included in PinkCurve Alpha?
 
 **Guiding Purpose:**
 
+> **The purpose of Alpha is to determine whether PinkCurve's approach to Meaningful Discovery works.**
+
+Alpha should remain sufficiently constrained to produce understandable evidence while validating the core Buyer and Seller experiences, Discovery Engine, Adaptive Metadata Navigation (AMN), Discovery Analytics, and necessary Trust and Security controls.
+
+The primary Alpha objective is to test whether registered human Buyers can discover worthwhile Offerings relevant to their interests, needs, intent, or context.
+
+Alpha should not attempt to validate every possible Discovery classification, commercial model, or advanced platform capability simultaneously.
+
+**Buyer Eligibility:**
+
+Alpha is limited to registered human Buyers.
+
+Anonymous Buyers and autonomous AI agents are excluded from MVP Alpha.
+
+Buyer registration, identity integrity, and appropriate consent requirements must be implemented before qualified Buyer activity is used for validation or Seller billing simulation.
+
+**Discovery Classification Scope:**
+
+PinkCurve's Discovery classifications include:
+
+- Offering Discovery
+- Brand Recognition
+- Real-Time Discovery
+- Community Service Discovery
+- Public Announcement Discovery
+
+Alpha must explicitly identify which classifications are included in end-to-end testing and which are deferred or tested only through limited scenarios.
+
+The existence of a Discovery classification in the architecture does not automatically require its complete production implementation during Alpha.
+
+**Offering Discovery Alpha Scope:**
+
+Offering Discovery should validate the core Meaningful Discovery hypothesis through a constrained set of Sellers, Offerings, Buyers, and geographic areas.
+
+Alpha should test at minimum:
+
+- Registered Buyer onboarding and access
+- Mobile-first, visual-first Buyer Discovery experience
+- Buyer Search, Browse, Intent, and AMN interactions as included in the approved Alpha scope
+- Offering relevance and Discovery Fit
+- AMN usefulness
+- Offering Knowledge and metadata quality
+- Discovery Media presentation and navigation
+- Buyer feedback, including negative feedback where supported
+- Qualified Offering Visit (QOV) measurement
+- Legitimate repeat QOV qualification
+- Discovery Event reliability and auditability
+- Trust, fraud, and security controls
+- Seller submission and approval workflows
+- Buyer and Seller usability
+- Platform latency, reliability, and operating cost
+
+A QOV represents an independently qualified intentional outbound Buyer visit from PinkCurve to an approved Seller destination associated with an Offering.
+
+QOV qualification does not require proof of Seller-side page loading, engagement, or conversion.
+
+Legitimate repeat QOVs, including visits within 24 hours, must remain independently measurable.
+
+Technical duplicates, invalid activity, and fraud must be excluded.
+
+**Brand Recognition Alpha Scope:**
+
+If Brand Recognition is included in Alpha, testing should validate:
+
+- Approved Brand Recognition Discovery Media
+- Buyer presentation and visibility evidence
+- Qualified Brand Impression (QBI) measurement
+- Legitimate repeat QBI qualification
+- Distinction between a new qualified presentation and continuous visibility
+- Technical duplicate and invalid-impression exclusion
+- Unique QBI identification
+- QBI billing eligibility and idempotency simulation where applicable
+- Seller-facing qualified-exposure reporting
+- Trust, fraud, and operational controls
+
+Brand Recognition must not require a QOV or outbound Seller visit to establish a QBI.
+
+Qualified exposure must not be represented as proof of brand awareness, recall, or purchase intent.
+
 **Real-Time Discovery Alpha Scope:**
 
-Because Real-Time Discovery is part of PinkCurve's MVP direction, Alpha
-should include a constrained end-to-end Real-Time Discovery capability.
+Because Real-Time Discovery is part of PinkCurve's MVP direction, Alpha should include a constrained end-to-end Real-Time Discovery capability.
 
-The purpose of the Alpha Real-Time Discovery scope is not to validate
-every possible Real-Time Offering type or commercial model. It is to
-determine whether PinkCurve can reliably complete the core Real-Time
-Discovery lifecycle:
+The purpose is not to validate every possible Real-Time Offering type or commercial model. It is to determine whether PinkCurve can reliably complete the core Real-Time Discovery lifecycle:
 
-Seller submits time-sensitive Offering
-→ PinkCurve validates and reviews it
-→ required approval is completed
-→ actual Discovery start time is established
-→ Offering becomes discoverable to relevant Buyers
-→ Buyer response is measured
-→ Offering expires or is ended early
+Seller submits time-sensitive Offering  
+→ PinkCurve validates and reviews it  
+→ required approval is completed  
+→ actual Discovery start time is established  
+→ Offering becomes discoverable to relevant Buyers  
+→ Buyer response is measured  
+→ Offering expires or is ended early  
 → Discovery stops
 
-Alpha should use a limited number of Real-Time Offering scenarios,
-Sellers, Buyers, and geographic areas so that PinkCurve can understand
-the resulting evidence.
+Alpha should use a limited number of Real-Time Offering scenarios, Sellers, Buyers, and geographic areas so that PinkCurve can understand the resulting evidence.
 
 The Alpha should test at minimum:
 
@@ -3447,41 +3641,56 @@ The Alpha should test at minimum:
 - Automatic expiration
 - Seller early termination when an Offering becomes unavailable
 - Buyer response measurement
-- Qualified Offering Visit measurement where applicable
+- Qualified Real-Time Impression (QRI) measurement
+- Qualified Offering Visit (QOV) measurement where applicable as a separate Buyer response metric
 - Real-Time Discovery operating cost
 - Trust, fraud, and audit controls
 - Seller and Buyer experience
 
-Qualified Real-Time Impressions (QRIs) may be measured during Alpha, and potential QRI-based commercial pricing may be simulated without charging Sellers.
+QRIs should be measured during Alpha where Real-Time Discovery is tested.
+
+Potential QRI-based commercial pricing may be simulated without charging Sellers.
 
 The purpose is to collect evidence needed to determine whether QRI-based billing should be approved, evaluate potential unit prices, assess Seller value, and validate sustainable unit economics.
 
-QRI measurement does not itself authorize Seller charges. Commercial billing remains subject to PD-012 and applicable Seller Owner financial authorization requirements.
+QRI measurement does not itself authorize Seller charges.
 
-> **The purpose of Alpha is to determine whether PinkCurve's approach to discovery works.**
+Commercial billing remains subject to PD-012 and applicable Seller Owner financial authorization requirements.
 
-Alpha should therefore remain focused enough to produce understandable evidence.
+**Community Service and Public Announcement Scope:**
+
+If included in Alpha, Community Service Discovery and Public Announcement Discovery should use explicitly defined, limited validation scenarios.
+
+Their inclusion must not automatically imply commercial billing.
+
+Each classification should be evaluated according to its approved purpose, eligibility requirements, Discovery behavior, and applicable Trust and Security controls.
 
 **Work Required:**
 
-- Define Alpha Buyer population
-- Define representative discovery scenarios required to validate Meaningful Discovery
+- Define Alpha Buyer population, limited to registered human Buyers
 - Define Alpha Seller population
-- Define Offering categories
+- Define included Discovery classifications
+- Define Offering categories and representative scenarios
 - Define initial U.S. geographic concentration
+- Define representative purposeful and exploratory discovery scenarios
 - Define required AI capabilities
-- Define minimum visual-first Buyer discovery experience
+- Define minimum mobile-first, visual-first Buyer Discovery experience
 - Define AMN scope
-- Define trust controls
-- Define instrumentation
+- Define Seller submission and approval scope
+- Define Trust and Security controls
+- Define Discovery Analytics instrumentation
+- Define QOV measurement and repeat-visit qualification requirements
+- Define QBI measurement and repeat-impression qualification requirements where Brand Recognition is included
 - Define support process
 - Define constrained Alpha Real-Time Discovery scenarios
 - Define Real-Time Seller submission and approval scope
 - Define Real-Time Offering lifecycle and expiration testing
 - Define initial minimum usable Discovery period for Alpha
 - Define Real-Time geographic and Buyer-population scope
-- Define Real-Time instrumentation and measurement
+- Define QRI instrumentation and measurement
 - Define Real-Time pricing and billing simulation requirements
+- Define the boundary between Alpha validation and production financial charging
+- Define Alpha operating-cost and reliability requirements
 
 **Decision Needed By:**
 
@@ -3503,49 +3712,104 @@ Product
 
 **Status:** Open
 
-**Question:** What evidence will demonstrate that PinkCurve's Alpha discovery approach is working well enough to proceed to Beta?
+**Question:**
+
+What quantitative and qualitative evidence will demonstrate that PinkCurve's Alpha Discovery approach is working well enough to proceed to Beta?
+
+**Guiding Principle:**
+
+Alpha success must be based on evidence of Meaningful Discovery, not simply activity volume.
+
+A Buyer who quickly discovers one worthwhile Offering may represent a better outcome than a Buyer who views many irrelevant Offerings.
+
+Success criteria must distinguish Discovery quality, Buyer behavior, Seller value, operational reliability, and billing-measurement integrity.
 
 **Potential Measures:**
 
+**Buyer Discovery Value:**
+
 - Buyers discover worthwhile Offerings relevant to their interests, needs, intent, or context
-- Qualified positive Buyer actions, including Qualified Offering Visits where applicable
 - Buyers can navigate without excessive confusion
-- Buyers return
-- AMN improves discovery
-- AI improves relevance
-- Sellers perceive value
+- Buyers return to PinkCurve
+- AMN improves Discovery usefulness
+- AI improves relevance and Discovery Fit
+- Buyers can provide meaningful feedback
+- Mobile Buyer experience is usable and reliable
+
+**Offering Discovery Measurement:**
+
+- Qualified Offering Visit (QOV) volume
+- QOV qualification accuracy
+- Legitimate repeat QOV measurement
+- Technical duplicate and fraudulent-activity exclusion
+- QOV attribution to the appropriate Buyer and Offering
+- Reliable distinction between Discovery Events, QOVs, and QOV-derived Billable Events
+
+QOV volume alone does not establish Meaningful Discovery success.
+
+QOV evidence should be considered together with Buyer relevance, satisfaction, return behavior, and Seller value.
+
+**Brand Recognition Measurement, Where Included:**
+
+- Qualified Brand Impression (QBI) volume
+- QBI qualification accuracy
+- Legitimate repeat QBI measurement
+- Correct exclusion of continuous visibility, technical duplicates, and invalid impressions
+- Reliable distinction between QBIs and QBI-derived Billable Events
+- Seller understanding of qualified-exposure reporting
+
+QBI volume measures qualified exposure, not verified brand awareness or purchase intent.
+
+**Seller Value:**
+
+- Sellers perceive meaningful value from Discovery
+- Sellers understand the Discovery results reported to them
+- Seller submission and approval processes are manageable
+- Sellers express willingness to continue participating
+- Seller-facing metrics are understandable and auditable
+
+**Trust and Platform Reliability:**
+
 - Trust remains strong
 - Fraud is manageable
 - Discovery Events are reliable
+- Qualification records are accurate and traceable
 - Platform performance is acceptable
+- Operating costs are manageable
+- Privacy and security controls operate as intended
+
+**Real-Time Discovery:**
+
 - Real-Time Offerings reach relevant Buyers while the Offerings are still useful and available
 - Real-Time Offerings begin Discovery only after required approval and with sufficient usable Discovery time remaining
 - Real-Time Offering expiration and Seller early termination reliably stop further Discovery
+- Qualified Real-Time Impressions (QRIs) can be measured reliably
 - Buyers take meaningful actions on relevant Real-Time Offerings where appropriate
 - Time from Real-Time publication to meaningful Buyer response is measurable and useful
 - Sellers perceive sufficient value from Real-Time Discovery to consider using it again
 - Real-Time approval latency and operating cost are manageable
 - Real-Time fraud, invalid traffic, stale information, and availability errors are manageable
-- PinkCurve can reliably measure candidate Real-Time billable units without requiring production charging during Alpha
+- PinkCurve can reliably simulate candidate Real-Time billing models without requiring production charging during Alpha
 
-Success should not be based simply on the number of impressions or Offerings viewed.
+For Real-Time Discovery, success should not be measured by impression volume alone.
 
-A Buyer who quickly discovers one worthwhile Offering may represent a better outcome than a Buyer who views many irrelevant Offerings.
+A successful Real-Time Discovery occurs when PinkCurve helps a relevant Buyer discover a worthwhile time-sensitive Offering while that Offering is still valid and useful.
 
-For Real-Time Discovery, success should similarly not be measured by
-impression volume alone.
+Real-Time Discovery evaluation should therefore consider relevance, freshness, timeliness, Buyer response, Seller value, Trust, and delivery cost together rather than optimizing any single activity metric.
 
-A successful Real-Time Discovery occurs when PinkCurve helps a relevant
-Buyer discover a worthwhile time-sensitive Offering while that Offering
-is still valid and useful.
+High impression volume with low relevance, expired availability, weak Buyer response, or poor Seller value should not be interpreted as successful Real-Time Discovery.
 
-Real-Time Discovery evaluation should therefore consider relevance,
-freshness, timeliness, Buyer response, Seller value, trust, and delivery
-cost together rather than optimizing any single activity metric.
+**Billing and Measurement Validation:**
 
-High impression volume with low relevance, expired availability, weak
-Buyer response, or poor Seller value should not be interpreted as
-successful Real-Time Discovery.
+Alpha should validate that qualified measurement records can be accurately distinguished from financial Billable Events.
+
+For Offering Discovery, QOV-derived Billable Event creation must be idempotent by `qov_id`.
+
+For Brand Recognition, QBI-derived Billable Event creation must be idempotent by `qbi_id` where that classification is included.
+
+Real-Time Discovery QRI measurement must not automatically create Seller charges before the applicable commercial billing policy is approved.
+
+Billing simulation should evaluate accounting accuracy, duplicate prevention, Seller authorization, and spending-limit enforcement where applicable.
 
 **Work Required:**
 
@@ -3555,14 +3819,23 @@ successful Real-Time Discovery.
 - Define test duration
 - Define criteria for success, significant modification, reconsideration, or inconclusive results
 - Define Beta readiness criteria
+- Define Buyer relevance and Meaningful Discovery measures
+- Define Buyer return and retention measures
+- Define AMN effectiveness measures
+- Define QOV measurement and qualification criteria
+- Define QBI measurement and qualification criteria where Brand Recognition is included
+- Define Seller perceived-value measures
+- Define platform reliability and operating-cost measures
+- Define Trust, fraud, and invalid-activity measures
 - Define Real-Time Discovery Alpha success criteria
 - Define Real-Time relevance, freshness, and availability measures
 - Define approval-latency and publication-latency measures
 - Define time-to-meaningful-Buyer-response measures
 - Define Real-Time Seller repeat-use and perceived-value measures
 - Define Real-Time operating-cost and unit-economics measures
-- Define candidate billable-unit measurement for PD-012 validation
+- Define QRI measurement and candidate billable-unit evaluation for PD-012
 - Define stale, expired, unavailable, fraudulent, and invalid Real-Time Discovery measures
+- Define qualification-to-billing reconciliation and auditability measures
 
 **Decision Needed By:**
 
@@ -3575,6 +3848,7 @@ Product / Analytics
 **Affected Chapters:**
 
 - 07-discovery-analytics.md
+- 13-business-model.md
 - 14-success-metrics.md
 - 15-product-roadmap.md
 
@@ -3590,39 +3864,111 @@ Product / Analytics
 
 **Status:** Open
 
-**Question:** What data should PinkCurve use for development, offline testing, Alpha validation, and AI evaluation?
+**Question:**
+
+What data should PinkCurve use for development, offline testing, Alpha validation, Discovery Analytics, billing-measurement validation, and AI evaluation?
 
 **Why This Matters:**
 
 Discovery quality cannot be evaluated without representative Offering and Buyer scenarios.
 
+Test data must support both successful and unsuccessful Discovery outcomes, including cases where no suitable Offering exists.
+
+Test data must also support validation of classification-specific measurement, repeat activity, billing integrity, Trust, and operational state changes.
+
+**Test Data Principles:**
+
+Test data should represent:
+
+- Registered human Buyers with different interests, needs, intent, and contexts
+- Sellers and approved Discovery services
+- Representative Offering Knowledge and metadata
+- Visual Discovery Media of varying quality
+- Relevant and irrelevant Discovery results
+- Purposeful and exploratory Buyer Discovery behavior
+- Legitimate repeat Buyer activity
+- Invalid, automated, duplicate, and fraudulent activity
+- Different Discovery classifications where included in Alpha
+- Different geographic and operational contexts
+
+Synthetic test data should be used where appropriate to provide controlled, repeatable scenarios.
+
+Real Seller Offering data may be used where authorized and appropriate privacy, security, and data-quality controls are satisfied.
+
+**Offering Discovery Measurement Test Data:**
+
+Test data should allow PinkCurve to verify:
+
+- Intentional outbound Buyer visits to approved Seller destinations
+- Qualified Offering Visit (QOV) creation
+- Unique `qov_id` assignment
+- Legitimate repeat QOVs, including repeat visits within 24 hours
+- Technical duplicate prevention
+- Invalid and fraudulent visit rejection
+- Correct Buyer and Offering attribution
+- QOV qualification without requiring Seller-side page-load or conversion evidence
+- Idempotent QOV-derived Billable Event creation
+- Correct treatment of nonbillable QOVs where Seller authorization or billing policy does not permit a charge
+
+**Brand Recognition Measurement Test Data:**
+
+Where Brand Recognition is included, test data should allow PinkCurve to verify:
+
+- Qualified Brand Impression (QBI) creation
+- Presentation and visibility evidence
+- Unique `qbi_id` assignment
+- Legitimate independently qualified repeat presentations
+- Continuous visibility without an additional qualified presentation
+- Technical duplicate prevention
+- Invalid and fraudulent impression rejection
+- QBI qualification without a Buyer click or QOV
+- Idempotent QBI-derived Billable Event creation
+- Correct treatment of nonbillable QBIs
+
 **Time-Dependent Test Data Principle:**
 
-Real-Time Discovery testing requires time-dependent test data rather than
-only static Offering records.
+Real-Time Discovery testing requires time-dependent test data rather than only static Offering records.
 
-Test data should allow PinkCurve to simulate Offering lifecycle changes,
-approval delays, changing availability, expiration, Seller early
-termination, and Buyer activity at different points in the Discovery
-period.
+Test data should allow PinkCurve to simulate Offering lifecycle changes, approval delays, changing availability, expiration, Seller early termination, and Buyer activity at different points in the Discovery period.
 
-Testing should verify not only whether PinkCurve selects the correct
-Offering, but also whether PinkCurve stops selecting an Offering when it
-is no longer valid, available, approved, or eligible for Discovery.
+Testing should verify not only whether PinkCurve selects the correct Offering, but also whether PinkCurve stops selecting an Offering when it is no longer valid, available, approved, or eligible for Discovery.
+
+**Real-Time Discovery Test Data:**
+
+Test data should allow PinkCurve to verify:
+
+- Requested start time, approval time, and actual Discovery start time
+- Minimum usable Discovery-period enforcement
+- Future-start, active, expired, ended-early, unavailable, and suspended Offering states
+- Geographic relevance
+- Availability, quantity, and capacity changes where applicable
+- Stale or conflicting Offering information
+- Approval delays
+- Buyer response and no-response scenarios
+- Qualified Real-Time Impression (QRI) measurement
+- Repeat Real-Time presentation and invalid-traffic scenarios
+- Candidate Real-Time billing-unit simulation without production charging
+- Correct separation of QRI measurement from unapproved commercial billing
+- Technical duplicate, automated, and fraudulent Real-Time activity
+- Correct termination of Discovery after expiration or Seller early termination
 
 **Work Required:**
 
 - Define synthetic test data
 - Define real Seller Offering data
-- Define Buyer test profiles
-- Define representative purposeful and exploratory discovery scenarios
-- Define expected discovery outcomes
-- Define unsuccessful, irrelevant, ambiguous, and no-suitable-Offering discovery outcomes
-- Define fraud and trust test cases
+- Define registered Buyer test profiles
+- Define representative purposeful and exploratory Discovery scenarios
+- Define expected Discovery outcomes
+- Define unsuccessful, irrelevant, ambiguous, and no-suitable-Offering Discovery outcomes
+- Define fraud and Trust test cases
 - Define AMN test cases
 - Define representative visual Offering assets and visual-quality test cases
 - Define AI evaluation datasets
 - Define privacy protections
+- Define QOV qualification, repeat-visit, and billing-idempotency test cases
+- Define QBI qualification, repeat-impression, and billing-idempotency test cases where applicable
+- Define separation of Discovery Events, qualified measurement records, and Billable Events
+- Define Seller authorization and spending-limit simulation cases
 - Define representative Real-Time Offering test data
 - Define Real-Time Offering lifecycle and state-transition test cases
 - Define requested start time, approval time, actual Discovery start time, and expiration test cases
@@ -3633,8 +3979,9 @@ is no longer valid, available, approved, or eligible for Discovery.
 - Define stale or conflicting Offering-information scenarios
 - Define Real-Time approval-delay scenarios
 - Define Real-Time Buyer response and no-response scenarios
-- Define candidate Real-Time billable-unit measurement data without requiring production charging
+- Define QRI measurement and candidate Real-Time billing-unit simulation data without requiring production charging
 - Define duplicate, invalid, automated, and fraudulent Real-Time activity test cases
+- Define repeatable datasets for regression testing and comparison of Discovery Engine changes
 
 **Decision Needed By:**
 
@@ -3782,8 +4129,9 @@ Observe the contribution of supporting capabilities including:
 - Successful discovery outcomes
 - Buyer feedback
 - Buyer satisfaction
-- Qualified positive Buyer actions
-- Qualified Offering Visits where applicable
+- Qualified Offering Visits (QOVs) for Offering Discovery
+- Qualified Brand Impressions (QBIs) where Brand Recognition is included
+- Qualified Real-Time Impressions (QRIs) where Real-Time Discovery is included
 - Buyer return behavior
 - Discovery relevance
 - Discovery abandonment
@@ -3863,7 +4211,7 @@ Discovery Score should therefore not become an important platform KPI until its 
 
 Compare Discovery Score with independent indicators of discovery value, including:
 
-- Qualified positive Buyer actions, including Qualified Offering Visits where applicable
+- Qualified Offering Visits (QOVs) for Offering Discovery, with other classification-specific qualified measurements where relevant
 - Buyer satisfaction
 - Buyer feedback
 - Buyer return behavior
@@ -4418,9 +4766,10 @@ Evaluate whether PinkCurve can:
 - Usable Discovery-period data
 - Buyer relevance
 - Qualified Buyer reach
+- Qualified Real-Time Impressions (QRIs)
+- QRI qualification accuracy and invalid-impression exclusion
 - Time to first meaningful Buyer response
-- Qualified positive Buyer actions where applicable
-- Qualified Offering Visits where applicable
+- Qualified Offering Visits (QOVs) where applicable as a separate Buyer response metric
 - Expiration and early-termination accuracy
 - Stale or unavailable Offering incidents
 - Buyer feedback
@@ -4432,6 +4781,14 @@ Evaluate whether PinkCurve can:
 
 Impression volume alone should not be treated as evidence that the
 hypothesis is supported.
+
+QRI measurement supports evaluation of Real-Time Discovery reach and
+delivery quality. It does not by itself establish meaningful Buyer
+response or Seller value.
+
+QRI measurement must remain separate from commercial billing
+authorization. The Real-Time Discovery billing model remains
+unresolved under PD-012.
 
 **Validation Needed By:**
 
@@ -4620,6 +4977,9 @@ the United States.
 - Children's privacy and age requirements
 - Marketing communications
 - Payment-related requirements
+- Privacy and data-protection requirements for QOV, QBI, and QRI measurement
+- Seller billing records, billing disputes, and financial record retention
+- Data minimization and access controls for Buyer-linked billing evidence
 - Website and mobile accessibility
 - AI-assisted processing and automated decision-making requirements
 - Seller and Buyer terms of service
@@ -4644,6 +5004,10 @@ the United States.
 - Define sensitive-data handling
 - Define location-data handling, including Real-Time Discovery use where applicable
 - Define third-party data-processing requirements
+- Define permitted collection, use, retention, and access to QOV, QBI, and QRI evidence
+- Define privacy-preserving linkage between qualified measurements and Seller billing records
+- Define billing-record retention and deletion exceptions where legally required
+- Define privacy requirements for Stripe and other payment-related integrations
 - Define security safeguards
 - Define age requirements
 - Define accessibility requirements
@@ -4761,6 +5125,8 @@ purpose-limitation and capability-based data-access principles.
 
 - Inventory all cookies
 - Inventory analytics technologies
+- Inventory first-party Discovery Event instrumentation used for QOV, QBI, and QRI qualification
+- Distinguish necessary billing-integrity and security instrumentation from optional analytics and personalization tracking
 - Inventory SDKs and third-party trackers
 - Classify essential versus nonessential technologies
 - Document the purpose of each
@@ -4786,6 +5152,9 @@ purpose-limitation and capability-based data-access principles.
 - Required notices implemented
 - Required consent/choice controls implemented
 - Opt-out behavior tested where applicable
+- Consent and preference enforcement verified across Discovery Analytics, Learning Engine, and Seller Intelligence
+- Required billing-integrity records remain appropriately protected and accessible only for authorized purposes
+- Third-party tracking behavior verified against applicable Buyer choices
 - Mobile testing completed
 - Desktop testing completed
 - Analytics verified after privacy controls are applied
@@ -4871,6 +5240,10 @@ and mitigation of significant risks.
 - Define early-warning indicators
 - Define review cadence
 - Define escalation process
+- Define risk identification and reporting triggers
+- Define risk mitigation actions, deadlines, and accountable owners
+- Define how unresolved risks affect Alpha, Beta, and production readiness
+- Define how significant incidents and new fraud patterns update the Risk Register
 
 **Decision Needed By:**
 
@@ -4950,6 +5323,10 @@ receive appropriate human oversight.
 - Material Offering changes
 - Destination URL verification and reverification
 - Real-Time Offering approval
+- Seller billing disputes, refunds, and financial adjustments
+- Exceptions to Seller spending limits and financial authorization
+- Changes to billing qualification rules and commercial charging policies
+- Privacy requests requiring identity verification or exceptional handling
 
 **Work Required:**
 
@@ -5021,6 +5398,11 @@ Appropriate governance should protect:
 - Define code and production permissions
 - Define audit logging
 - Define role changes and access removal procedures
+- Define Stripe and financial-system access permissions
+- Define authorization and audit controls for Seller billing adjustments and refunds
+- Define separation between qualification measurement, Billable Event creation, and financial reconciliation
+- Define emergency administrative access and subsequent review procedures
+- Define periodic reviews of privileged access and sensitive operational changes
 
 **Decision Needed By:**
 
@@ -5077,6 +5459,21 @@ Resolved, implemented, and validated decisions should remain traceable.
 | TD-000 | Separate Blueprint repository | Separate repository adopted | Completed | [ADR-0001](../decisions/ADR-0001-separate-blueprint-repository.md) |
 
 Additional decisions should be added as they are completed.
+
+Decisions marked Decided in Chapter 19 should be recorded in the
+Decision History when their final decision and rationale are documented.
+
+The Decision History should distinguish between:
+
+- Decided: The decision has been formally approved.
+- Implemented: The decision has been reflected in the relevant system or process.
+- Validated: Implementation evidence supports the decision.
+
+A decision should not be marked Implemented or Validated solely
+because its policy has been documented.
+
+The permanent record should reference the relevant Blueprint chapter,
+Architecture Decision Record, or other authoritative specification.
 
 ---
 

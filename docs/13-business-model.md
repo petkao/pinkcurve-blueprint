@@ -7,7 +7,7 @@
 | **Status**             | Draft                                                                                                                    |
 | **Version**            | 0.4                                                                                                                      |
 | **Owner**              | PinkCurve Product Team                                                                                                   |
-| **Last Reviewed**      | 2026-10-11                                                                                                               |
+| **Last Reviewed**      | 2026-10-19                                                                                                               |
 | **Related Components** | Discovery Engine, Discovery Analytics, Learning Engine, Seller Intelligence, Creative Studio, Security Privacy and Trust |
 
 ---
@@ -364,7 +364,7 @@ The initial qualified discovery measurement and billing models are:
 1. **Offering Discovery**
    - Measurement and billing unit: Qualified Offering Visit (QOV).
    - Requires an independently qualified, intentional Buyer-initiated transition toward an approved Seller destination.
-   - Legitimate repeat visits may be independently billable.
+   - Each independently qualified QOV, including a legitimate repeat visit by the same Buyer to the same Offering within 24 hours, is eligible for billing under the applicable Seller-authorized pricing policy and financial controls.
 
 2. **Brand Recognition**
    - Measurement and billing unit: Qualified Brand Impression (QBI).
@@ -440,7 +440,7 @@ Future revenue opportunities may include additional Seller services, premium cap
 
 A **Qualified Offering Visit (QOV)** represents an independently qualified intentional action by a registered human Buyer to continue from PinkCurve toward an approved Seller destination associated with an Offering.
 
-Each independently qualified intentional visit may create its own QOV, including a later visit by the same Buyer to the same Offering. PinkCurve does not apply an arbitrary time-based deduplication window to legitimate repeated Buyer visits.
+Each independently qualified, intentional Buyer visit may create a separate QOV, including repeat visits by the same registered Buyer to the same Offering. Legitimate repeat QOVs are independently eligible for billing, even when they occur within 24 hours. PinkCurve SHALL NOT impose a rolling 24-hour billing exclusion window. Technical duplicate events, automated activity, and fraudulent visits remain ineligible.
 
 Conceptually:
 
@@ -485,11 +485,13 @@ PinkCurve should not claim Seller-side activity that it cannot independently obs
 
 Where authorized Seller-side or integration evidence is available, PinkCurve may associate additional evidence such as destination receipt, page load, or downstream engagement with the applicable `qov_id`.
 
+Seller-side or integration evidence SHALL NOT be required for baseline QOV qualification or billing. Such evidence may enrich Seller Intelligence and support additional outcome analysis, but the absence of Seller-side confirmation SHALL NOT invalidate an otherwise qualified QOV.
+
 Such evidence may support enhanced measurement or future qualification models but is not required for the baseline QOV definition unless an applicable future pricing or participation program explicitly requires it.
 
 A QOV is therefore a qualified Discovery outcome, not a transaction outcome.
 
-PinkCurve's responsibility is to create and qualify the Buyer transition from PinkCurve toward the approved Seller destination. The Seller remains responsible for the subsequent Seller-side experience, including pricing, availability, checkout, fulfillment, service delivery, and transaction completion.
+PinkCurve's responsibility is to authorize, observe, and qualify the intentional Buyer-initiated outbound transition from PinkCurve toward the approved Seller destination. A qualified transition does not establish that the Seller's website successfully loaded or that the Buyer engaged with the Seller's content. The Seller remains responsible for the subsequent Seller-side experience, including pricing, availability, checkout, fulfillment, service delivery, and transaction completion.
 
 A purchase, conversion, or other Seller-side outcome is not required for a valid QOV to be billable.
 
@@ -507,7 +509,7 @@ QOV qualification may evaluate applicable evidence and qualification factors suc
 * Not identified as fraudulent activity
 * Intentional Buyer action
 * Applicable Trust and Security eligibility
-* Other integrity and qualification requirements
+* Technical event deduplication and other integrity requirements, without excluding legitimate, independently initiated repeat Buyer visits
 
 QOV definitions should be understandable to Sellers.
 
@@ -564,6 +566,8 @@ A Qualified Offering Visit and a Billable Event are separate PinkCurve entities 
 A QOV represents qualified discovery activity. A Billable Event represents the financial treatment determined for an applicable qualified underlying activity according to the Seller's applicable authorization and pricing policy, including activity whose Seller charge is fully absorbed by an available free USD allowance.
 
 For QOV-based billing, one QOV may produce **zero or one QOV-derived Billable Event**.
+
+Each independently qualified QOV must have a distinct `qov_id`. Billing SHALL use `qov_id` as the idempotency key for QOV-derived Billable Event creation, ensuring that retries or duplicate processing do not generate multiple Billable Events for the same QOV. Separate legitimate repeat visits must retain distinct `qov_id` values and remain independently eligible for billing under the applicable Seller authorization and financial controls.
 
 Conceptually:
 
@@ -864,6 +868,8 @@ QOV-Based Revenue is calculated from the resulting eligible net charges, excludi
 ```
 
 The Offering Discovery pricing unit is the **valid Qualified Offering Visit (QOV)**.
+
+Each independently qualified QOV represents one eligible billing unit, including legitimate repeat visits by the same registered Buyer to the same Offering. No rolling 24-hour exclusion applies. Actual Billable Event creation remains subject to the applicable Seller authorization, approved pricing policy, spending limits, and billing integrity controls.
 
 PinkCurve should maintain a standard QOV price as the default Offering Discovery price.
 

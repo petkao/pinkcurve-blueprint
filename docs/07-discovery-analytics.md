@@ -7,7 +7,7 @@
 | **Status**             | Draft                                                                        |
 | **Version**            | 0.3                                                                          |
 | **Owner**              | PinkCurve Product Team                                                       |
-| **Last Reviewed**      | 2026-10-10                                                                   |
+| **Last Reviewed**      | 2026-10-19                                                                   |
 | **Related Components** | Discovery Engine, Buyer Experience, Adaptive Metadata Navigation,            |
 |                        | Learning Engine, Seller Intelligence, Trust & Safety                         |
 
@@ -109,21 +109,21 @@ Discovery Analytics should help PinkCurve understand whether Buyers are discover
 
 Discovery Analytics should help Sellers understand how effectively their submitted Discovery Media reaches relevant Buyers, generates meaningful discovery outcomes, and delivers measurable value. Analytics should distinguish discovery performance from billable activity and provide evidence that Sellers can use to improve their Offerings and other Discovery services.
 
-* Are my offerings being discovered?
-* Which offerings generate meaningful interest?
-* Which creative works best?
-* Which metadata attracts buyer exploration?
-* Which audiences or locations respond?
-* Are buyers leaving negative feedback?
-* Are buyers visiting my destination?
-* Which qualified Buyer actions or qualified impressions are billable under the applicable Discovery Classification, and how do they relate to my spending limits and billing records?
-* Which qualified positive Buyer actions are billable, and how do they relate to my spending limits and billing records?
-* Is my brand recognition increasing?
-* What value is PinkCurve delivering?
-* Which verified Buyer-initiated positive actions are billable, including legitimate repeat actions?
-* How many qualified impressions were delivered through Brand Recognition Discovery?
-* How many unique Buyers were reached, and how frequently were they exposed to the same Brand Recognition Discovery Media?
-* How do billable actions and impressions relate to my spending limits and billing records?
+- Are my Offerings and other Discovery services being discovered?
+- Which Discovery Media generates meaningful Buyer interest?
+- Which creative works best?
+- Which metadata attracts Buyer exploration?
+- Which audiences or locations respond?
+- Are Buyers providing negative feedback?
+- Are Buyers visiting my designated destination?
+- How many Qualified Offering Visits (QOV) were generated?
+- How many Qualified Real-Time Impressions (QRI) were delivered?
+- How many qualified Brand Recognition impressions were delivered?
+- How many unique Buyers were reached?
+- How frequently do Buyers view my Brand Recognition Discovery Media?
+- Which qualified actions and impressions are billable under the applicable Discovery Classification?
+- How do billable activities relate to my spending limits and billing records?
+- What measurable value is PinkCurve delivering?
 
 ---
 
@@ -174,20 +174,20 @@ Events represent what happened during the buyer's discovery journey.
 
 ## Core Event Types
 
-| Event                 | Meaning                                                 |
-| --------------------- | ------------------------------------------------------- |
-| `offering_presented`  | Offering was displayed                                  |
-| `creative_started`    | Buyer began viewing creative                            |
-| `creative_completed`  | Buyer viewed a meaningful portion or completed creative |
-| `offering_opened`     | Buyer requested more information                        |
-| `destination_clicked` | Buyer followed the provider URL                         |
-| `offering_saved`      | Buyer saved an offering                                 |
-| `offering_shared`     | Buyer shared an offering                                |
-| `positive_feedback`   | Buyer explicitly expressed positive interest            |
-| `negative_feedback`   | Buyer explicitly rejected or reduced similar discovery  |
-| `offering_hidden`     | Buyer hid the offering                                  |
-| `participant_hidden`  | Buyer hid a seller or provider                          |
-| `offering_reported`   | Buyer submitted a trust or safety report                |
+| Event                 | Meaning                                                                             |
+| --------------------- | ----------------------------------------------------------------------------------- |
+| `offering_presented`  | Offering was displayed                                                              |
+| `creative_started`    | Buyer began viewing creative                                                        |
+| `creative_completed`  | Buyer viewed a meaningful portion or completed creative                             |
+| `offering_opened`     | Buyer requested more information                                                    |
+| `destination_clicked` | Buyer initiated a click-through to the Seller's designated external destination     |
+| `offering_saved`      | Buyer saved an offering                                                             |
+| `offering_shared`     | Buyer shared an offering                                                            |
+| `positive_feedback`   | Buyer explicitly expressed positive interest                                        |
+| `negative_feedback`   | Buyer explicitly rejected or reduced similar discovery                              |
+| `offering_hidden`     | Buyer hid the offering                                                              |
+| `seller_hidden`       | Buyer hid a Seller from future Discovery results                                    |
+| `offering_reported`   | Buyer submitted a trust or safety report                                            |
 
 ---
 
@@ -230,21 +230,24 @@ Other navigation events may include:
 
 A discovery event may contain:
 
-| Field               | Description                            |
-| ------------------- | -------------------------------------- |
-| `event_id`          | Unique event identifier                |
-| `event_type`        | Type of event                          |
-| `timestamp`         | Event time                             |
-| `offering_id`       | Offering involved where applicable     |
-| `participant_id`    | Provider where applicable              |
-| `buyer_id`          | Buyer identifier where permitted       |
-| `session_id`        | Discovery session                      |
-| `surface`           | Feed, search, browse, AMN, etc.        |
-| `position`          | Presentation position where relevant   |
-| `creative_id`       | Creative shown where relevant          |
-| `metadata_context`  | Active metadata path                   |
-| `discovery_context` | Context required for interpretation    |
-| `experiment_id`     | Experiment assignment where applicable |
+| Field | Description |
+|---|---|
+| `event_id` | Unique event identifier |
+| `event_type` | Type of event |
+| `timestamp` | Event timestamp |
+| `discovery_classification` | Offering, Real-Time Discovery, Community Service, Public Announcement, or Brand Recognition |
+| `discovery_service_id` | Identifier of the associated Discovery service |
+| `offering_id` | Offering identifier, when applicable |
+| `seller_id` | Seller responsible for the Discovery service, when applicable |
+| `buyer_id` | Registered Buyer identifier |
+| `session_id` | Discovery session identifier |
+| `surface` | Discovery Surface where the event occurred |
+| `discovery_mode` | Search, Browse, Intent, or AMN |
+| `position` | Presentation position, when applicable |
+| `creative_id` | Discovery Media creative identifier, when applicable |
+| `metadata_context` | Active metadata selections, when applicable |
+| `discovery_context` | Additional context required for interpretation |
+| `experiment_id` | Experiment identifier, when applicable |
 
 Exact event schemas belong in the Data Architecture and schema definitions.
 
@@ -371,7 +374,7 @@ Examples may include:
 * Buyer follows a useful metadata path
 * Buyer saves an offering
 * Buyer shares an offering
-* Buyer visits the provider
+* Buyer follows a Seller-designated external destination
 * Buyer requests directions
 * Buyer contacts an organization
 * Buyer returns to an offering later
@@ -382,19 +385,17 @@ Meaningful Discovery is therefore a **conceptual platform outcome**, not necessa
 
 ---
 
-# Discovery Outcomes by Offering Type
+# Discovery Outcomes by Discovery Classification
 
-Different Offering types require different success measurements.
+Different Discovery Classifications require different success measurements. Discovery Analytics must evaluate outcomes according to the objectives of each classification rather than applying commercial Offering metrics universally.
 
-| Offering Type      | Possible Meaningful Outcomes                                  |
-| ------------------ | ------------------------------------------------------------- |
-| Product            | Explore, save, destination visit                              |
-| Commercial Service | Contact, destination visit, directions                        |
-| Promotion          | Explore, destination visit, redemption signal where available |
-| Event              | Save, directions, event-page visit                            |
-| Brand Recognition  | Recall, repeat exposure, later exploration                    |
-| Community Service  | Contact, directions, resource access                          |
-| Public Service     | Information access, resource follow-through                   |
+| Discovery Classification | Possible Meaningful Outcomes                                                        |
+| ------------------------ | ----------------------------------------------------------------------------------- |
+| Offering                 | Exploration, save, destination visit, contact, directions                           |
+| Real-Time Discovery      | Timely Buyer exploration, destination visit, and other evidence of useful discovery |
+| Community Service        | Resource exploration, contact, directions                                           |
+| Public Announcement      | Information access, resource follow-through                                         |
+| Brand Recognition        | Qualified impressions, unique reach, repeat exposure, later exploration             |
 
 This prevents commercial click-through behavior from becoming the universal definition of discovery success.
 
@@ -402,7 +403,13 @@ This prevents commercial click-through behavior from becoming the universal defi
 
 # Qualified Offering Visit
 
-A **Qualified Offering Visit (QOV)** is a meaningful click-through from PinkCurve to a commercial seller or provider destination.
+A **Qualified Offering Visit (QOV)** is a verified,
+Buyer-initiated click-through from PinkCurve Discovery
+Media to the Seller's designated external destination.
+
+QOV measures qualified outbound discovery activity,
+not confirmed engagement or transactions on the
+Seller's website.
 
 QOV is an important measure of commercial discovery value.
 
@@ -411,7 +418,7 @@ A QOV may require criteria such as:
 * Human traffic
 * Valid discovery session
 * Valid offering destination
-* No duplicate or fraudulent activity
+* No duplicate technical events or fraudulent activity; legitimate, independently initiated repeat visits remain eligible for qualification
 * Appropriate interaction qualification
 
 Where measurable and privacy-appropriate, additional destination-quality signals may strengthen qualification.
@@ -454,6 +461,88 @@ requires different measurement.
 
 ---
 
+## QOV Repeat Billing Policy
+
+Each valid, qualified, Buyer-initiated visit from PinkCurve Discovery Media to the Seller's designated external destination is eligible for billing under the applicable Chapter 13 policy.
+
+**Each independently qualified QOV is eligible for billing, including repeat visits by the same registered Buyer to the same Offering.**
+
+The previous rolling 24-hour QOV billing restriction is removed.
+
+### Qualification Requirements
+
+- The visit must originate from an authenticated registered Buyer.
+- The Buyer must intentionally initiate the destination visit.
+- The Discovery Media and destination must be valid.
+- Duplicate technical events must not generate additional charges.
+- Automated or fraudulent activity must be excluded.
+- Applicable Seller spending limits must be enforced.
+
+### Repeat Visits
+
+A Buyer may visit the same Offering multiple times, including within a 24-hour period.
+
+Each independently initiated QOV that satisfies the qualification requirements is eligible for billing, regardless of previous visits to the same Offering.
+
+PinkCurve must preserve the complete visit history for analytics, fraud detection, billing reconciliation, and auditing.
+
+### Billing Integrity
+
+PinkCurve should monitor abnormal repeat-visit patterns and apply fraud-prevention controls.
+
+Suspicious visits may be withheld from billing pending validation.
+
+The billing system must maintain traceability between qualified visits and Seller charges.
+
+The authoritative QOV billing policy is defined in Chapter 13 — Business Model. Discovery Analytics provides qualified event evidence but does not independently determine Seller charges.
+
+---
+
+# Qualified Real-Time Impression (QRI)
+
+A **Qualified Real-Time Impression (QRI)** is a verified presentation of Real-Time Discovery Media to an eligible registered Buyer that satisfies PinkCurve's Real-Time impression qualification criteria.
+
+QRI measures qualified Buyer exposure to time-sensitive Discovery Media.
+
+Unlike QOV, QRI does not require the Buyer to click through to the Seller's destination.
+
+## QRI Qualification
+
+A QRI should satisfy criteria such as:
+
+- Eligible registered Buyer
+- Valid Discovery session
+- Approved and active Real-Time Discovery Media
+- Valid presentation meeting minimum visibility requirements
+- No fraudulent or automated activity
+- Appropriate impression deduplication and frequency controls
+
+The exact visibility threshold and qualification rules must be defined and validated before production billing.
+
+## QRI and Billing
+
+QRI is an analytics measurement and does not automatically establish a billable impression.
+
+Real-Time Discovery may use qualified impression-based billing under the applicable Business Model policy.
+
+The relationship between QRI, billable impressions, pricing units, Seller spending limits, and billing records must be explicitly defined in Chapter 13.
+
+## QRI and Learning
+
+QRI provides evidence of qualified exposure but does not independently demonstrate Buyer interest or successful discovery.
+
+The Learning Engine should evaluate QRI alongside other signals, including:
+
+- Buyer exploration
+- Positive and negative feedback
+- Destination click-through
+- Discovery context
+- Operational freshness
+
+QRI should not automatically be interpreted as positive Buyer engagement.
+
+---
+
 # Discovery Funnel
 
 A conventional commercial discovery funnel may look like:
@@ -489,7 +578,7 @@ or:
 ```text
 Community Resource Presented
       ↓
-Offering Opened
+Community Service Explored
       ↓
 Directions Requested
 ```
@@ -844,6 +933,41 @@ Potential measures include:
 Longer-term measurement may attempt to determine whether buyers who saw a brand-recognition creative later explore the seller's offerings.
 
 PinkCurve should avoid claiming causal brand lift without sufficient evidence.
+
+---
+
+## Brand Recognition Measurement and Billing
+
+Brand Recognition Discovery uses **qualified impression-based billing**.
+
+A qualified Brand Recognition impression represents a verified presentation of approved Brand Recognition Discovery Media to an eligible registered Buyer that satisfies the applicable impression qualification requirements.
+
+### Repeat Impression Billing
+
+Legitimate repeat viewing by the same registered Buyer is permitted and billable when each viewing independently satisfies the qualification requirements.
+
+- Each qualified impression may generate a billable event.
+- Repeat impressions from the same Buyer are eligible for billing.
+- Legitimate qualified repeat impressions are billable without a fixed 24-hour exclusion window.
+- Duplicate technical events, fraudulent impressions, and automated activity must be excluded.
+- Seller spending limits and applicable billing controls must be enforced.
+
+### Analytics and Billing Separation
+
+Discovery Analytics must distinguish:
+
+- Total impressions
+- Qualified impressions
+- Unique Buyers reached
+- Qualified repeat impressions
+- Billable impressions
+- Subsequent Buyer exploration and feedback
+
+Qualified Brand Recognition impressions must remain distinguishable from Qualified Real-Time Impressions (QRI), since the two Discovery Classifications may have different qualification and billing policies.
+
+The detailed qualification, pricing, and billing rules are governed by Chapter 13.
+
+The Learning Engine may use Brand Recognition exposure and repeat-viewing patterns to improve discovery relevance and creative effectiveness. However, repeat exposure alone must not automatically be interpreted as positive Buyer interest.
 
 ---
 
@@ -1315,11 +1439,28 @@ Identity should be separated from analytical data where practical.
 
 ---
 
-# Anonymous or Unidentified Sessions
+# Buyer Registration and Discovery Sessions
 
-If PinkCurve supports any unidentified browsing states, analytics should minimize persistent tracking and avoid unnecessary cross-session profiling.
+PinkCurve MVP requires Buyers to register and authenticate before participating in the Buyer Discovery experience.
 
-The exact account and buyer-verification policy is defined elsewhere in the Blueprint.
+Discovery Analytics must associate Buyer discovery activity with a valid registered Buyer identity and Discovery session, subject to applicable privacy and security controls.
+
+## MVP Requirements
+
+- Buyer registration and authentication are required.
+- Each Discovery session must have a valid session identifier.
+- Discovery events must be attributable to the appropriate registered Buyer.
+- Buyer identity must be protected through appropriate access controls and data minimization.
+- Automated agents acting as Buyers are not supported in the MVP.
+- Anonymous or unidentified Buyer Discovery sessions are outside the MVP scope.
+
+## Future Considerations
+
+Anonymous discovery and authorized AI-agent participation may be evaluated in future platform versions.
+
+Any future support must define appropriate identity, permissions, attribution, fraud prevention, and billing-integrity requirements before implementation.
+
+The authoritative identity and access policies are defined in Chapter 12 — Security, Privacy, and Trust.
 
 ---
 
@@ -1344,19 +1485,49 @@ Retention requirements should be documented in the Data Architecture and privacy
 
 # Analytics and Billing
 
-If PinkCurve eventually bills sellers based on measurable discovery activity such as QOV, billing measurements require stronger integrity controls than ordinary analytics.
+PinkCurve Discovery Analytics provides verified measurement evidence that supports Seller billing. However, Discovery Analytics does not independently determine pricing or execute billing transactions.
 
-Billing-related events may require:
+Billing eligibility, pricing, spending limits, and charging rules are governed by the Business Model defined in Chapter 13.
 
-* Immutable records
-* Deduplication
-* Bot exclusion
-* Auditability
-* Reconciliation
-* Seller-visible explanations
-* Dispute support
+## Billing Measurements by Discovery Classification
 
-Analytics and billable events may originate from the same event system but should not be assumed to have identical verification requirements.
+| Discovery Classification| Billing Measurement                                                                        |
+|-------------------------|--------------------------------------------------------------------------------------------|
+| Offering                | Qualified positive Buyer actions, including eligible Qualified Offering Visits (QOV)       |
+| Real-Time Discovery     | Qualified impressions under the applicable Real-Time billing policy                        |
+| Brand Recognition       | Qualified Brand Recognition impressions, including legitimate qualified repeat impressions |
+| Community Service       | Governed by the applicable Community Service billing policy                                |
+| Public Announcement     | Governed by the applicable Public Announcement billing policy                              |
+
+## Billing Event Integrity
+
+Billing-related events require stronger integrity controls than ordinary analytical events.
+
+These controls include:
+
+- Verified registered Buyer identity
+- Valid Discovery session
+- Event and attribution integrity
+- Technical event deduplication
+- Bot and fraud exclusion
+- Classification-specific billing qualification
+- Seller spending-limit enforcement
+- Immutable billing evidence
+- Reconciliation and auditability
+- Seller-visible billing explanations
+- Dispute support
+
+## Separation of Responsibilities
+
+Discovery Analytics records and validates observable Buyer activity.
+
+The billing system applies the applicable Business Model policies to determine which qualified activities are billable.
+
+A single Buyer interaction may therefore produce an analytical event without necessarily producing a billable event.
+
+Likewise, legitimate repeat activity may generate multiple billable events when permitted by the applicable Discovery Classification.
+
+Analytical event records and billing records must remain traceable to their underlying evidence without assuming that every analytical event is billable.
 
 ---
 
@@ -1402,57 +1573,122 @@ Analytics and billable events may originate from the same event system but shoul
 
 # Initial MVP Analytics
 
-PinkCurve does not need every metric before launching an MVP.
+PinkCurve does not need every analytical metric or advanced learning capability before launching its MVP.
 
-The first analytics implementation should focus on capturing high-quality fundamental events.
+The initial implementation should prioritize reliable event capture, meaningful Buyer feedback, Discovery Classification awareness, and billing measurement integrity.
 
-An initial MVP may measure:
+## Core Discovery Events
 
-```text
-Offering Presented
-      ↓
-Creative Viewed
-      ↓
-Offering Opened
-      ↓
-Metadata Selected
-      ↓
-Positive / Negative Feedback
-      ↓
-Destination Clicked
-```
+The MVP should capture fundamental Buyer discovery activity, including:
 
-Along with:
+- Discovery Media presented
+- Creative started or viewed
+- Offering opened or explored
+- Metadata selected or removed
+- Positive Buyer feedback
+- Negative Buyer feedback
+- Destination clicked
+- Buyer-initiated repeat viewing
 
-* Session context
-* Discovery surface
-* Offering
-* Creative
-* Active metadata path
-* Bot filtering
+These events must preserve sufficient context to reconstruct the Buyer discovery journey.
 
-These events will provide the evidence needed to improve Discovery Engine behavior.
+## Classification-Specific Measurements
 
-It is more important to capture **correct, interpretable events** than to create dozens of premature metrics.
+The MVP should support the following measurements where the corresponding Discovery Classification is enabled:
+
+| Discovery Classification | Initial Measurement |
+|---|---|
+| Offering | Qualified positive Buyer actions, including QOV |
+| Real-Time Discovery | Qualified Real-Time Impressions (QRI) |
+| Brand Recognition | Qualified impressions, including legitimate repeat impressions |
+| Community Service | Meaningful resource exploration and applicable Buyer actions |
+| Public Announcement | Information exposure and applicable Buyer actions |
+
+Billing eligibility must be determined independently according to Chapter 13.
+
+## Minimum Event Context
+
+Events should retain:
+
+- Event identifier and timestamp
+- Registered Buyer identifier
+- Discovery session identifier
+- Discovery Classification
+- Relevant Discovery service identifier
+- Seller identifier where applicable
+- Discovery surface and mode
+- Creative identifier
+- Active metadata context where applicable
+- Impression or interaction qualification status where applicable
+
+## Initial Data Quality Requirements
+
+The MVP should include:
+
+- Schema validation
+- Technical event deduplication
+- Basic bot and fraud filtering
+- Session and attribution integrity
+- Classification-specific qualification rules
+- Traceability between qualified activity and billing records
+
+## Learning Engine Readiness
+
+The MVP should preserve reliable signals for future Learning Engine improvements without requiring sophisticated machine-learning models at launch.
+
+Initial learning may rely on simple feedback-driven adjustments and validated analytical rules.
+
+The priority is to capture correct, interpretable, and trustworthy discovery evidence before introducing advanced optimization.
 
 ---
 
 # Open Questions
 
-See [Open Decisions](19-open-decisions.md) for questions including:
+See [Open Decisions](19-open-decisions.md) for unresolved questions and decisions requiring cross-chapter alignment.
 
-* Discovery Score definition
-* Meaningful Discovery definition
-* QOV qualification
-* AMN usefulness metrics
-* Seller Value Index
-* Feed usefulness measurement
-* Brand-recognition measurement
-* Attribution windows
-* Experiment methodology
-* Data retention
-* Anonymous browsing analytics
-* Billing-event qualification
+## Discovery Measurement
+
+- Discovery Score definition and validation
+- Meaningful Discovery qualification
+- QOV qualification thresholds
+- QRI visibility and qualification thresholds
+- Brand Recognition impression qualification thresholds
+- AMN usefulness metrics
+- Seller Value Index
+- Daily Discovery Feed usefulness measurement
+
+## Billing Measurement
+
+- Classification-specific impression qualification and frequency controls
+- Real-Time Discovery impression billing units and pricing
+- Brand Recognition impression pricing and spending-limit policies
+- Attribution windows for qualified Buyer actions
+- Reconciliation between analytical events and billing records
+
+## Learning and Experimentation
+
+- Learning Engine signal weighting
+- Negative-feedback interpretation
+- Discovery ranking experimentation
+- Experiment methodology and guardrails
+
+## Data Governance
+
+- Event and billing evidence retention
+- Privacy-preserving Buyer history
+- Fraud detection and event qualification
+
+## Confirmed MVP Decisions
+
+The following are established policies rather than open questions:
+
+- Buyer registration and authentication are required.
+- Anonymous Buyer Discovery is outside MVP scope.
+- Autonomous Buyer agents are outside MVP scope.
+- Brand Recognition uses qualified impression-based billing.
+- Every independently qualified QOV is eligible for billing, including legitimate repeat visits by the same registered Buyer to the same Offering. No rolling 24-hour billing restriction applies.
+- Legitimate qualified repeat Brand Recognition impressions are eligible for billing without a fixed 24-hour exclusion window.
+- Analytics measurements and billing eligibility remain separate responsibilities.
 
 ---
 
@@ -1476,7 +1712,7 @@ Adaptive navigation can only improve if PinkCurve understands which metadata hel
 
 ### Commercial Metrics Are Not Universal
 
-QOV matters greatly for sellers but should not define success for every Offering type.
+QOV is an important measure of commercial discovery value, but it should not define success across all Discovery Classifications. Real-Time Discovery, Community Service, Public Announcement, and Brand Recognition require measurements appropriate to their respective objectives.
 
 ### Avoid Single-Metric Optimization
 
