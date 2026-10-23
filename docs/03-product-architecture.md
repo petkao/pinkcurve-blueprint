@@ -167,6 +167,24 @@ Discovery Media SHALL support an extensible, structured metadata catalog. The ca
 
 Requiredness is conditional: video duration applies to video, not images; street address is optional where no physical location exists. Sellers should not be required to manually type properties that can be reliably extracted from uploaded media. AI suggestions are not automatically authoritative. The catalog SHALL permit new domain-specific attributes without redesigning the Entity Identity Model. Buyer-facing claims require provenance and validation; catalog governance and detailed schemas belong in the dedicated metadata specification and applicable domain chapters.
 
+### One Discovery Media per Service Entity (MVP)
+
+For the PinkCurve MVP, each Discovery Service entity supports a maximum of **one Discovery Media**.
+
+This rule applies consistently to Offering Discovery, Real-Time Discovery, Brand Recognition, Community Service, and Public Announcement.
+
+Sellers may create and manage multiple service entities, subject to applicable platform policies and subscription limits. Each service entity independently maintains its own Discovery Media.
+
+A service entity may temporarily have no Discovery Media during initial creation or preparation. However, active Discovery requires exactly one approved and eligible Discovery Media.
+
+Each Discovery Media has its own unique `discovery_media_id` and references its associated service entity through the appropriate service-specific identifier.
+
+When approved Discovery Media is modified, its status returns to Draft. The modified media must be reviewed and approved again before it becomes eligible for active Discovery.
+
+The Discovery Engine does not select among multiple Discovery Media for the same service entity.
+
+This architecture simplifies Seller management, approval workflows, Discovery processing, analytics, and billing while allowing Sellers to submit multiple independent service entities.
+
 **AMN consumes discoverable metadata**, including categories, attributes, promotions and eligible computed signals. A category such as Women's Fashion is not a primary Discovery Classification; a Discount is not a separate Discovery Service; and Trending is not a Seller-selected truth. All of these may guide discovery while the media retains exactly one primary classification.
 
 ### Individual Discovery Media management

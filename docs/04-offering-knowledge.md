@@ -5,9 +5,9 @@
 | Field                  | Value                                                          |
 | ---------------------- | -------------------------------------------------------------- |
 | **Status**             | Draft                                                          |
-| **Version**            | 0.3                                                            |
+| **Version**            | 0.4                                                            |
 | **Owner**              | PinkCurve Product Team                                         |
-| **Last Reviewed**      | 2026-09-30                                                     |
+| **Last Reviewed**      | 2026-10-22                                                    |
 | **Related Components** | Creative Studio, Discovery Engine,                             |
 |                        | Adaptive Metadata Navigation, Discovery                        |
 |                        |Analytics, Learning Engine, Seller Intelligence, Trust & Safety |
@@ -36,51 +36,45 @@ Offering Knowledge provides a shared knowledge foundation for discovery, Adaptiv
 
 # Offering as a Discovery Object
 
-An **Offering** is a type of **Discovery Object** representing something a Seller makes available for Discovery.
+An **Offering** is an independently identifiable product or service, paid or free, submitted and managed by an authorized Seller through PinkCurve's **Offering Discovery** service.
+
+Each Offering is identified by its unique `offering_id` and may have associated Discovery Media identified independently by `discovery_media_id`.
+
+Offering Knowledge describes the underlying Offering. It does not define the identity, lifecycle, or governance of other Discovery Services such as Real-Time Discovery, Brand Recognition, Community Service, or Public Announcement.
+
+All Discovery Services may use shared PinkCurve capabilities while retaining their own service-specific records, Discovery Media, and applicable rules.
 
 Not every Discovery Object must be an Offering. PinkCurve's broader Discovery architecture may support other Discovery Object types while Offering Knowledge remains responsible for the structured understanding of Offerings.
 
 Offering types may include:
 
-* Product
-* Commercial Service
-* Promotion
-* Event
-* Community Service
-* Public Service
-* Brand-awareness or brand-recognition offering
-* Other future offering types
+- **Product** — A physical or digital product, paid or free.
+- **Commercial Service** — A service provided to Buyers, paid or free.
+- **Other supported Offering types** — Future types explicitly defined within Offering Discovery.
 
-This abstraction allows PinkCurve to represent different types of provider-defined Offerings while allowing the broader Discovery Object architecture to support additional forms of Discovery.
-
-For example:
+Examples:
 
 ```text
-Product
-    → Running shoes
-
-Commercial Service
-    → Home cleaning service
-
-Promotion
-    → Restaurant lunch discount
-
-Event
-    → Community festival
-
-Public Service
-    → Free vaccination clinic
-
-Community Service
-    → Local food assistance program
-
-Brand Recognition
-    → Introduction to a local business
+Offering Discovery
+    │
+    ├── Product
+    │     ├── Running shoes
+    │     ├── Laptop computer
+    │     └── Free household item
+    │
+    └── Commercial Service
+          ├── Home cleaning
+          ├── Online tutoring
+          └── Free consultation
 ```
 
-Not every knowledge field applies to every offering type.
+An Offering may have promotional attributes such as a discount, limited availability, or free delivery. These attributes do not automatically create a separate Offering type or Discovery Service.
 
-The knowledge model therefore must be **extensible rather than rigid**.
+Real-Time Discovery, Brand Recognition, Community Service, and Public Announcement remain independent Discovery Services under PinkCurve's Product Architecture.
+
+Not every knowledge field applies to every Offering. The Offering Knowledge model must therefore be **extensible rather than rigid**, accommodating differences among products and services without changing their fundamental identity.
+
+This abstraction allows PinkCurve to represent different types of Seller-defined Offerings while allowing the broader Discovery Object architecture to support additional forms of Discovery.
 
 ---
 
@@ -154,7 +148,7 @@ Examples include:
 * Destination URL
 * Promotion terms
 
-Source Knowledge represents what the provider says about the offering.
+Source Knowledge represents factual information supplied or confirmed by the Seller or obtained from other authorized sources, subject to applicable verification and approval requirements.
 
 ---
 
@@ -193,11 +187,17 @@ Examples include:
 * Which creative representations perform well
 * Which discovery contexts produce useful interactions
 * Which attributes buyers reject
-* Which metadata paths frequently lead to exploration
+* Which combinations of metadata values frequently lead to meaningful Buyer exploration
 
 Learned Knowledge allows PinkCurve's understanding of an offering to improve over time.
 
 Learned Knowledge should complement—not silently overwrite—verified Source Knowledge.
+
+Learned Knowledge may improve Discovery Fit, metadata relevance, and Adaptive Metadata Navigation by identifying useful relationships among Buyer interests, Discovery Media metadata, and observed Discovery behavior.
+
+Learned signals remain distinguishable from authoritative Offering attributes and approved Discovery Media metadata. They may influence Discovery Engine decisions without automatically modifying either record.
+
+Any proposed changes to authoritative Offering Knowledge or approved Discovery Media must follow their respective governance and approval requirements.
 
 ---
 
@@ -205,29 +205,25 @@ Learned Knowledge should complement—not silently overwrite—verified Source K
 
 Common core fields may include:
 
-| Field                  | Description                                              |
-| ---------------------- | -------------------------------------------------------- |
-| `offering_id`          | Unique offering identifier                               |
-| `offering_type`        | Product, Commercial Service, Promotion, Event, Community |
-|                        | Service, Public Service, Brand-awareness or Brand-       |
-|                        | recognition Offering, or other supported Offering type   |
-| `offering_name`        | Display name                                             |
-| `offering_description` | Description of the offering                              |
-| `offering_url`         | Destination page supplied by the provider                |
-| `seller_id`            | Seller responsible for providing the Offering            |
-| `category`             | Primary offering category                                |
-| `brand`                | Brand or organization where applicable                   |
-| `price_amount`         | Numeric price where applicable                           |
-| `currency_code`        | Currency where applicable                                |
-| `price_description`    | Price context such as "per month"                        |
-| `availability`         | Availability information                                 |
-| `availability_status`  | Current availability state where applicable              |
-| `quantity_available`   | Current quantity or capacity where applicabl             |
-| `location`             | Geographic relevance where applicable                    |
-| `valid_from`           | Beginning of the Offering's real-world validity period   |
-|                        | where applicable                                         |
-| `valid_until`          | End of the Offering's real-world validity period where   |
-|                        | applicable                                               |
+| Field | Description |
+|---|---|
+| `offering_id` | Unique Offering identifier |
+| `offering_type` | Product, Commercial Service, or another explicitly supported Offering type within Offering Discovery |
+| `offering_name` | Display name |
+| `offering_description` | Description of the Offering |
+| `offering_url` | Destination page supplied or authorized by the Seller |
+| `seller_id` | Seller responsible for providing the Offering |
+| `category` | Primary Offering category |
+| `brand` | Brand or organization where applicable |
+| `price_amount` | Numeric price where applicable |
+| `currency_code` | Currency where applicable |
+| `price_description` | Price context such as "per month" |
+| `availability` | Availability information |
+| `availability_status` | Current availability state where applicable |
+| `quantity_available` | Current quantity or capacity where applicable |
+| `location` | Geographic relevance where applicable |
+| `valid_from` | Beginning of the Offering's real-world validity period where applicable |
+| `valid_until` | End of the Offering's real-world validity period where applicable |
 
 Offering validity is distinct from a Discovery Media Discovery Period. Offering validity describes when the underlying Offering is valid or available, while the Discovery Period determines when particular Discovery Media may be presented through PinkCurve.
 
@@ -239,7 +235,7 @@ capacity has been exhausted.
 
 Not all fields are required for every Offering type.
 
-For example, a public service may have no price, while an online commercial product may have no meaningful physical location.
+For example, a free product or free commercial service may have no price, while a digital product or online commercial service may have no meaningful physical location.
 
 ---
 
@@ -247,28 +243,32 @@ For example, a public service may have no price, while an online commercial prod
 
 Rich Offering Knowledge may include:
 
-| Field                   | Description                                    |
-| ----------------------- | ---------------------------------------------- |
-| `key_features`          | Important characteristics                      |
-| `key_benefits`          | Potential benefits                             |
-| `target_audiences`      | Relevant audience descriptions                 |
-| `use_cases`             | Situations in which the offering may be useful |
-| `needs_addressed`       | Needs or interests the offering may address    |
-| `unique_selling_points` | Important differentiators                      |
-| `differentiators`       | Differences from similar offerings             |
-| `brand_voice`           | Tone and communication guidelines              |
-| `faqs`                  | Common questions and answers                   |
-| `specifications`        | Structured specifications                      |
-| `keywords`              | Search and discovery terms                     |
-| `categories`            | Classification hierarchy                       |
-| `metadata`              | Structured discovery dimensions                |
-| `creative_assets`       | Images, videos, and related assets             |
+| Field                   | Description                                                                     |
+| ----------------------- | ------------------------------------------------------------------------------- |
+| `key_features`          | Important characteristics                                                       |
+| `key_benefits`          | Potential benefits                                                              |
+| `target_audiences`      | Relevant audience descriptions                                                  |
+| `use_cases`             | Situations in which the offering may be useful                                  |
+| `needs_addressed`       | Needs or interests the offering may address                                     |
+| `unique_selling_points` | Important differentiators                                                       |
+| `differentiators`       | Differences from similar offerings                                              |
+| `brand_voice`           | Tone and communication guidelines                                               |
+| `faqs`                  | Common questions and answers                                                    |
+| `specifications`        | Structured specifications                                                       |
+| `keywords`              | Search and discovery terms                                                      |
+| `categories`            | Offering categories and classifications used to organize and support discovery  |
+| `metadata`              | Structured Offering attributes and metadata maintained as part of authoritative |
+|                         | Offering Knowledge; discovery-oriented metadata used by AMN belongs to          |
+|                         | Discovery Media                                                                 |
+| `creative_assets`       | Images, videos, and related assets                                              |
 
 ---
 
 # Offering Metadata
 
-Metadata is a particularly important part of Offering Knowledge because it connects the knowledge system to **Adaptive Metadata Navigation**.
+Offering Knowledge maintains structured Offering attributes and metadata that provide an authoritative factual foundation for discovery.
+
+Discovery Media metadata uses or references relevant Offering information, together with approved discovery-oriented enrichment, to support Discovery Fit and Adaptive Metadata Navigation.
 
 Metadata describes characteristics buyers may use to understand and refine discovery.
 
@@ -316,15 +316,16 @@ The metadata useful for discovery may change depending on:
 * Buyer selections
 * Discovery context
 
-For example, after a buyer selects:
+For example, a Buyer exploring running shoes may select multiple metadata values in any order:
 
 ```text
-Shoes
-    ↓
-Running
-    ↓
-Trail Running
+Selected Metadata:
+  Activity: Trail Running
+  Feature: Waterproof
+  Price Range: Under $100
 ```
+
+The Buyer may add, remove, or change any selection without following a predefined category path.
 
 PinkCurve may determine that the most useful next metadata dimensions are:
 
@@ -337,25 +338,130 @@ Brand
 Availability Nearby
 ```
 
-The metadata presented to the buyer therefore does not have to be a fixed global taxonomy.
+Adaptive Metadata Navigation does not require Buyers to follow a fixed category hierarchy or predefined sequence of metadata selections.
 
-Offering Knowledge provides the metadata foundation from which Adaptive Metadata Navigation operates.
+PinkCurve dynamically organizes and presents relevant metadata dimensions and values based on the available Discovery Media, Buyer selections, and Discovery context.
+
+Buyers may combine metadata values freely, allowing AMN to surface matching Discovery Media without requiring sequential browsing through unrelated results.
+
+Discovery Media metadata provides the discovery-oriented dimensions and values used by Adaptive Metadata Navigation.
+
+Offering Knowledge supplies authoritative Offering attributes that may be referenced by Discovery Media metadata, ensuring that Buyer-facing discovery remains consistent with verified Offering information.
+
+---
+
+## Offering Attributes and Discovery Media Metadata
+
+PinkCurve distinguishes between **Offering attributes** and **Discovery Media metadata**.
+
+### Offering Attributes
+
+Offering attributes are maintained as part of Offering Knowledge or the associated operational Offering state.
+
+They describe the underlying product or service and provide the authoritative information needed to understand, manage, and validate the Offering.
+
+Examples include:
+
+- Offering type
+- Name and description
+- Price and currency
+- Brand
+- Product or service specifications
+- Features and characteristics
+- Location or service area
+- Availability and quantity or capacity
+- Validity and expiration conditions
+- Destination URL
+
+Each Offering is identified by its unique `offering_id`.
+
+### Offering Attribute Sources and Capture
+
+Offering attributes may originate from several sources:
+
+- **Seller manual entry:** The Seller directly enters or updates Offering information through PinkCurve's web browser Seller interface.
+- **Seller-provided URL:** PinkCurve extracts proposed Offering attributes from the destination page supplied and authorized by the Seller.
+- **Seller-uploaded materials:** PinkCurve extracts proposed attributes from authorized documents, images, descriptions, catalogs, or other supporting materials.
+- **Structured import:** Offering attributes are imported from Seller-authorized product feeds, e-commerce systems, APIs, or structured files.
+- **PinkCurve AI assistance:** AI may extract, organize, normalize, or suggest Offering attributes based on authorized source materials.
+
+### Attribute Verification and Authority
+
+Seller-entered attributes are Seller-provided claims and remain subject to applicable validation and approval requirements.
+
+Attributes extracted or imported from external sources are treated as proposed Source Knowledge until appropriately confirmed.
+
+AI-inferred attributes must be distinguished from extracted facts and must not automatically become authoritative Offering facts.
+
+The Seller is responsible for confirming material Offering information. PinkCurve applies its applicable verification, trust, safety, and approval controls before the information becomes approved Offering Knowledge.
+
+Each significant attribute should retain sufficient provenance to identify its source, confirmation status, and relevant timestamps.
+
+Approved Offering Knowledge provides the authoritative factual attributes used by Discovery Media, Creative Studio, and the Discovery Engine.
+
+Changes to authoritative descriptive Offering attributes follow the Offering Knowledge Draft → Review → Approved lifecycle.
+
+Frequently changing operational attributes, such as availability, remaining quantity or capacity, and expiration status, may be maintained separately under applicable operational validation and Discovery eligibility rules.
+
+### Discovery Media Metadata
+
+Discovery Media metadata describes the characteristics and discovery context of the associated Discovery Media.
+
+For the PinkCurve MVP, each Offering supports a maximum of one Discovery Media, identified independently by `discovery_media_id`.
+
+Discovery Media metadata may include:
+
+- Categories and discovery topics
+- Relevant Buyer needs and interests
+- Features and benefits useful for discovery
+- Use cases
+- Geographic relevance
+- Discovery keywords and semantic concepts
+- Metadata dimensions used by Adaptive Metadata Navigation
+- Other approved discovery-oriented attributes
+
+Discovery Media metadata may originate from:
+
+- Seller-entered or Seller-confirmed metadata
+- PinkCurve AI extraction from authorized source materials
+- PinkCurve AI inference
+- Approved enrichment and learning processes
+
+### Attribute and Metadata Consistency
+
+Offering Knowledge remains the authoritative source for factual Offering attributes.
+
+When Discovery Media metadata represents an Offering fact, it must reference or derive from the corresponding authoritative Offering attribute rather than establish an independent conflicting fact.
+
+AI-generated or inferred metadata must retain appropriate provenance and must not be represented as a verified Seller claim without confirmation.
+
+Discovery Media metadata may be enriched to improve Discovery Fit and Adaptive Metadata Navigation, subject to applicable approval, quality, and trust rules.
+
+Metadata enrichment does not automatically modify authoritative Offering Knowledge. Changes to authoritative Offering Knowledge follow its established Draft → Review → Approved lifecycle.
+
+Operational Offering state may change independently, subject to applicable validation and Discovery eligibility rules.
+
+### Relationship to Other Discovery Services
+
+This section defines the relationship between Offering Knowledge and Discovery Media metadata specifically for Offering Discovery.
+
+Other Discovery Services, including Real-Time Discovery, Brand Recognition, Community Service, and Public Announcement, maintain their own service-specific attributes while following the common Discovery Media metadata principles defined by PinkCurve's Product Architecture.
 
 ---
 
 # Location and Time Knowledge
 
-Some offerings have geographic or temporal relevance.
+Some Offerings have geographic or temporal relevance.
 
 Examples include:
 
-* Local services
-* Restaurants
-* Events
-* Promotions
-* Community resources
-* Public services
-* Local inventory
+- Local commercial services
+- Restaurant products and services
+- Products with limited-time discounts
+- Products available at specific locations
+- Services with scheduled availability
+- Products with limited inventory
+- Seasonal products and services
 
 Offering Knowledge may therefore include:
 
@@ -371,7 +477,7 @@ Offering Knowledge may therefore include:
 ### Time
 
 * Availability periods
-* Event dates
+* Scheduled product or service availability
 * Promotion start and expiration
 * Business availability
 * Seasonal relevance
@@ -380,10 +486,11 @@ Offering Knowledge may therefore include:
 * Hard real-world expiration or availability deadline
 * Seller early termination where applicable
 
-These temporal attributes describe the underlying Offering and should not be
-confused with the Discovery Period of Discovery Media. An Offering may remain
-valid while particular Discovery Media associated with it starts, expires, or
-is replaced according to its own Discovery Period.
+These temporal attributes describe the underlying Offering and must be distinguished from the Discovery Period of its associated Discovery Media.
+
+For the PinkCurve MVP, each Offering supports a maximum of one Discovery Media. The Offering may remain valid even when its associated Discovery Media has not yet started or its Discovery Period has ended.
+
+Changes to the Discovery Media or its Discovery Period must follow the applicable Discovery Media approval and lifecycle rules. The existing `discovery_media_id` is retained when the Discovery Media is modified.
 
 Location and time can become important discovery dimensions.
 
@@ -437,9 +544,13 @@ Offering Knowledge may enter PinkCurve through several paths.
 
 ## Manual Entry
 
-Sellers directly provide structured Offering information.
+Sellers create, enter, edit, and manage Offering Knowledge through PinkCurve's **web browser Seller interface**.
 
-The interface should guide Sellers toward useful knowledge without requiring unnecessarily complicated data entry.
+The Seller interface should guide Sellers toward providing useful and accurate Offering Knowledge without requiring unnecessarily complicated data entry.
+
+PinkCurve may assist Sellers through structured forms, suggested metadata, AI-assisted extraction, and validation.
+
+The PinkCurve mobile app does not support Seller creation or maintenance of Offering Knowledge. Sellers may use the mobile app to view their own Discovery Media and participate in Buyer-style discovery, subject to applicable access permissions.
 
 ---
 
@@ -459,7 +570,15 @@ With permission from the Seller, PinkCurve may analyze the supplied page to extr
 * Brand information
 * Other useful structured knowledge
 
-Extracted information should be presented for review where appropriate.
+Information extracted from a Seller-provided URL must be treated as **proposed Source Knowledge** until it has been reviewed and confirmed through the applicable Seller verification process.
+
+PinkCurve may use AI-assisted extraction to reduce manual data entry, but extraction alone does not establish that the information is accurate, current, or authorized for use.
+
+The Seller remains responsible for confirming material Offering facts, including applicable prices, descriptions, specifications, availability, and destination information.
+
+Confirmed information may become part of the approved Offering Knowledge used by Creative Studio and Discovery Engine, subject to PinkCurve's applicable Trust, Safety, and approval requirements.
+
+Subsequent changes to the destination page do not automatically overwrite previously approved Offering Knowledge. Material changes should be evaluated through the appropriate update and reverification process.
 
 ---
 
@@ -476,6 +595,19 @@ AI may analyze:
 
 AI can suggest knowledge rather than requiring Sellers to manually enter every field.
 
+AI-assisted knowledge processing must distinguish between **extracted facts** and **inferred knowledge**.
+
+- **Extracted facts** are information identified in Seller-provided or otherwise authorized source materials, such as product specifications, stated prices, and service descriptions.
+- **Inferred knowledge** consists of interpretations or suggestions generated by AI, such as potential use cases, relevant Buyer interests, semantic relationships, and suggested metadata.
+
+Extracted facts require appropriate confirmation before becoming approved Source Knowledge. AI-inferred information must retain its inferred status and provenance and must not be represented as a verified Seller claim without appropriate confirmation.
+
+PinkCurve may use approved inferred knowledge to support Discovery Fit, Adaptive Metadata Navigation, and creative suggestions, subject to applicable quality and trust controls.
+
+Both extracted and inferred knowledge should retain sufficient source references, processing timestamps, and provenance information to support verification, correction, and appropriate quality controls.
+
+PinkCurve does not maintain separate Offering Knowledge versions. Extracted or inferred information must follow the applicable knowledge approval rules before becoming part of approved Offering Knowledge.
+
 ---
 
 ## Structured Import
@@ -489,30 +621,64 @@ PinkCurve may support imports from:
 * Structured files
 * Organization databases
 
+Information obtained through structured imports is treated as proposed Offering Knowledge until it has been appropriately validated and confirmed by the Seller.
+
+Imported attributes must retain applicable source provenance and must not automatically overwrite approved Offering Knowledge.
+
+Material changes to approved Offering Knowledge must follow the Draft → Review → Approved lifecycle.
+
+Frequently changing operational attributes may be updated through separate validated processes, subject to applicable Discovery eligibility requirements.
+
 ---
 
 ## Learning
 
-Discovery interactions may enrich Offering Knowledge after an Offering becomes available for Discovery.
+After an Offering becomes available for Discovery, Buyer interactions and other Discovery signals may generate Learned Knowledge that improves Discovery Fit, metadata relevance, and Adaptive Metadata Navigation.
+
+Learned Knowledge remains separate from authoritative Offering Knowledge and approved Discovery Media. It may influence Discovery Engine decisions without automatically modifying either approved record.
 
 This creates a continuous knowledge cycle:
 
 ```text
-Seller Knowledge
-       ↓
-AI Enrichment
-       ↓
-Offering Knowledge
-       ↓
-Discovery
-       ↓
-Buyer Interaction
-       ↓
-Learning
-       ↓
-Knowledge Enrichment
-       ↺
+Seller Information / Authorized Sources
+                  │
+                  ▼
+       Offering Knowledge Capture
+                  │
+                  ▼
+     Seller Confirmation / Approval
+                  │
+                  ▼
+      Approved Offering Knowledge
+                  │
+                  ▼
+       Discovery Media Creation
+                  │
+                  ▼
+       Discovery Media Approval
+                  │
+                  ▼
+          Discovery Engine
+                  │
+                  ▼
+         Buyer Interactions
+                  │
+                  ▼
+         Discovery Signals
+                  │
+                  ▼
+          Learning Engine
+                  │
+                  ▼
+          Learned Knowledge
+                  │
+                  ▼
+   Discovery Fit / AMN Improvement
 ```
+
+Learned Knowledge may improve Discovery Fit and Adaptive Metadata Navigation without automatically modifying approved Offering Knowledge or Discovery Media.
+
+Proposed changes to either approved record must follow its respective approval lifecycle.
 
 ---
 
@@ -540,7 +706,7 @@ Source: Seller
 Verification: Seller confirmed
 
 Category
-Source: AI generated
+Source: AI inferred
 Verification: Seller approved
 
 Metadata: "Good for hiking"
@@ -687,11 +853,26 @@ stateDiagram-v2
     Draft --> Review: Submit
     Review --> Approved: Approve
     Review --> Draft: Changes Required
-    Approved --> Draft: Knowledge Edit
-    Approved --> Review: Reverification Required
+    Approved --> Draft: Modify
     Approved --> Archived: Archive
-    Archived --> Draft: Restore / Update
+    Draft --> Archived: Cancel
+    Archived --> Draft: Restore
+
 ```
+
+### Lifecycle Rules
+
+Offering Knowledge follows a simple **Draft → Review → Approved** lifecycle.
+
+When approved Offering Knowledge is modified, its status returns to **Draft**. The modified knowledge must be submitted for review and approved again before it becomes eligible for use by the Discovery Engine.
+
+The Offering retains its existing `offering_id`. PinkCurve does not create separate Offering Knowledge versions for ordinary modifications.
+
+Only approved Offering Knowledge associated with an otherwise eligible Offering and approved Discovery Media may be used for active Discovery.
+
+Archived knowledge is not eligible for active Discovery. Restoring archived knowledge returns it to Draft and requires approval before reuse.
+
+Offering Knowledge and Discovery Media have separate approval statuses. Approval of one does not automatically approve the other.
 
 ### Draft
 
@@ -709,60 +890,65 @@ Approved knowledge does not by itself make an Offering eligible for active Disco
 
 ### Archived
 
-The Offering Knowledge is no longer part of the current approved representation, but historical knowledge may be retained where appropriate for auditing, analytics, learning, or restoration.
+Archived Offering Knowledge is inactive and is not eligible for active Discovery.
+
+Archiving preserves the current Offering Knowledge record and its associated `offering_id` without creating a separate historical version.
+
+When archived Offering Knowledge is restored, its status returns to **Draft**. It must complete the Review and approval process before becoming eligible for active Discovery.
+
+Archiving does not change the identity of the Offering or automatically approve its associated Discovery Media.
 
 ---
 
-# Knowledge Versioning
+# Knowledge Updates
 
-Offering Knowledge changes over time.
+Offering Knowledge is maintained as a single current record associated with its `offering_id`.
 
-Changes may result from:
+Sellers may update Offering Knowledge to correct factual information, change descriptions, adjust prices, modify Offering attributes, or revise other applicable information through PinkCurve's web browser Seller interface.
 
-* Provider edits
-* Price changes
-* Promotion changes
-* AI enrichment
-* Metadata changes
-* Verification
-* Learning
-* Corrections
+Discovery Media metadata is maintained separately as part of Discovery Media and follows its own governance and approval requirements.
 
-PinkCurve should preserve enough version history to understand significant changes and support auditing, rollback, analytics, and learning.
+Modifying approved Offering Knowledge returns its approval status to **Draft**. The updated knowledge must pass through **Review** and receive approval before it can be used for active Discovery.
 
-Only appropriate approved knowledge should be used for active discovery.
+PinkCurve does not maintain separate Offering Knowledge versions or a version history for rollback.
 
-Not every operational change requires a new full Offering Knowledge
-version.
+Frequently changing operational information, such as availability, remaining quantity or capacity, validity, expiration, and Seller early termination, may be updated independently of the descriptive Offering Knowledge approval workflow, subject to applicable validation and Discovery eligibility rules.
 
-Frequently changing state such as current availability, remaining
-quantity or capacity, expiration, or Seller early termination may be
-maintained as operational Offering state while preserving appropriate
-history and audit evidence.
+Operational changes that make an Offering ineligible must prevent its associated Discovery Media from being presented, even when that Discovery Media remains approved.
 
-A new Knowledge Version should be created when the underlying Offering
-Knowledge changes in a way that requires versioned history, approval,
-rollback, or other governance controls.
+Offering Knowledge and Discovery Media retain their respective unique identifiers throughout their lifecycles.
 
 ---
 
 # Relationships
 
 ```mermaid
+
+
 erDiagram
     SELLER ||--o{ OFFERING : provides
-    OFFERING ||--o{ OFFERING_KNOWLEDGE : has
+    OFFERING ||--|| OFFERING_KNOWLEDGE : has
     OFFERING_KNOWLEDGE ||--o{ OFFERING_METADATA : contains
     OFFERING ||--o{ CREATIVE_ASSET : has
-    OFFERING ||--o{ DISCOVERY_MEDIA : represented_by
+    OFFERING ||--o| DISCOVERY_MEDIA : represented_by
+    DISCOVERY_MEDIA ||--o{ DISCOVERY_MEDIA_METADATA : contains
     OFFERING ||--o{ DISCOVERY_EVENT : generates
     OFFERING ||--o{ BUYER_FEEDBACK : receives
-    OFFERING_KNOWLEDGE ||--o{ KNOWLEDGE_VERSION : versions
+
+
 ```
 
-The logical architecture separates the Offering itself from its evolving knowledge.
+The logical architecture separates the Offering entity from its associated Offering Knowledge and Discovery Media.
 
-This allows PinkCurve to preserve historical knowledge while maintaining a current active representation for discovery.
+Each Offering is identified by its unique `offering_id` and maintains one current Offering Knowledge record without knowledge versioning.
+
+For the PinkCurve MVP, each Offering supports a maximum of one Discovery Media, identified independently by `discovery_media_id`. An Offering may temporarily have no Discovery Media during preparation, but active Discovery requires one approved and eligible Discovery Media.
+
+Sellers may create multiple Offerings, each with its own Offering Knowledge and Discovery Media, subject to applicable platform policies and subscription limits.
+
+This relationship model applies specifically to Offering Discovery. Other Discovery Services maintain their own service-specific entities and identifiers, with their Discovery Media referencing those entities rather than an `offering_id`.
+
+Offering Knowledge and Discovery Media have independent approval statuses. Both must satisfy applicable approval and Discovery eligibility requirements before the Discovery Engine presents the associated Discovery Media.
 
 ---
 
@@ -770,11 +956,15 @@ This allows PinkCurve to preserve historical knowledge while maintaining a curre
 
 ## Creative Studio
 
-Offering Knowledge provides the factual and contextual foundation for creative generation.
+Offering Knowledge provides the authoritative factual and contextual information used by Creative Studio to generate Discovery Media.
 
-Creative Studio may combine Offering Knowledge and authorized Creative Assets
-to produce Discovery Media for presentation through PinkCurve Discovery.
+Creative Studio may combine approved Offering Knowledge, authorized Creative Assets, and applicable discovery-oriented metadata to produce visual presentation content for PinkCurve Discovery.
 
+AI-generated creative content must remain consistent with authoritative Offering attributes and must not introduce unsupported factual claims.
+
+For the PinkCurve MVP, each Offering supports a maximum of one associated Discovery Media. Creative Studio may create or modify that Discovery Media while preserving its `discovery_media_id`.
+
+New or modified Discovery Media must follow its Draft → Review → Approved lifecycle before becoming eligible for presentation to Buyers.
 Creative Studio may use:
 
 * Features
@@ -793,13 +983,17 @@ See: [Creative Studio](05-creative-studio.md)
 
 ## Discovery Engine
 
-Offering Knowledge provides the information needed to retrieve, understand, and rank offerings.
+Offering Knowledge provides the authoritative descriptive and operational information needed by the Discovery Engine to understand an Offering and evaluate its eligibility for Discovery.
 
-Offering Knowledge primarily helps the Discovery Engine understand and evaluate
-the relevance of the underlying Offering. When an Offering has multiple eligible
-Discovery Media, the Discovery Engine may separately select the appropriate
-Discovery Media for presentation based on the Discovery context and applicable
-Discovery Media eligibility rules.
+Each Offering is identified by `offering_id` and supports a maximum of one associated Discovery Media, independently identified by `discovery_media_id`, for the PinkCurve MVP.
+
+Discovery Media contains presentation content and discovery-oriented metadata originating from Seller input, approved Offering attributes, PinkCurve AI extraction or inference, and applicable learning processes.
+
+The Discovery Engine evaluates eligible Discovery Media using the Discovery Fit process, including relevance, ranking, diversity, and quality. Discovery Media metadata supports matching and ranking against Buyer interests, intent, and Discovery context.
+
+The Discovery Engine does not select among multiple Discovery Media for the same Offering.
+
+Only approved Discovery Media associated with approved Offering Knowledge and an otherwise eligible Offering may be presented to Buyers. Applicable operational conditions, including availability, validity, freshness, and trust status, must also be satisfied.
 
 Discovery may use:
 
@@ -827,13 +1021,19 @@ See: [Discovery Engine](06-discovery-engine.md)
 
 ---
 
-## Adaptive Metadata Navigation
+### Adaptive Metadata Navigation
 
-Offering metadata provides the dimensions buyers use to progressively refine discovery.
+Adaptive Metadata Navigation (AMN) uses Discovery Media metadata to help Buyers visually identify and discover relevant Offerings.
 
-AMN may determine which metadata is most useful based on the currently available offerings and buyer context.
+Offering Knowledge provides authoritative Offering attributes that may be referenced or represented in Discovery Media metadata.
 
-Offering Knowledge therefore acts as the primary knowledge source for Adaptive Metadata Navigation.
+AMN intelligently organizes and presents relevant metadata dimensions and values based on the available Discovery Media, Buyer interests, current selections, and Discovery context.
+
+Buyers may select one or multiple metadata values and freely add, remove, or change their selections without following a fixed category hierarchy.
+
+AMN uses these metadata combinations to rapidly surface matching Discovery Media, including relevant items that might otherwise appear far down in the Discovery results.
+
+The metadata presented to Buyers may adapt as the available Discovery Media and Buyer selections change.
 
 ---
 
@@ -854,7 +1054,11 @@ See: [Discovery Analytics](07-discovery-analytics.md)
 
 ## Learning Engine
 
-The Learning Engine can enrich Offering Knowledge using discovery signals.
+The Learning Engine analyzes Discovery signals to improve PinkCurve's understanding of Buyer interests, Offering relevance, and Discovery Media effectiveness.
+
+Learned Knowledge may support Discovery Fit, metadata enrichment, and Adaptive Metadata Navigation without automatically modifying authoritative Offering Knowledge or approved Discovery Media.
+
+Any proposed modifications to these approved records must follow their respective governance and approval requirements.
 
 Examples include:
 
@@ -903,20 +1107,29 @@ See schema:
 
 Primary logical entities may include:
 
-* `offerings`
-* `offering_knowledge`
-* `offering_metadata`
-* `knowledge_versions`
-* `creative_assets`
-* `knowledge_sources`
+- `offerings`
+- `offering_knowledge`
+- `offering_metadata`
+- `creative_assets`
+- `discovery_media`
+- `discovery_media_metadata`
+- `knowledge_sources`
+
+Each Offering maintains one current Offering Knowledge record and supports a maximum of one Discovery Media record for the PinkCurve MVP.
+
+Offering metadata and Discovery Media metadata have distinct ownership and responsibilities. `offering_metadata` belongs to Offering Knowledge and represents structured Offering characteristics, while `discovery_media_metadata` belongs to Discovery Media and supports discovery matching, ranking, and Adaptive Metadata Navigation.
+
+When Discovery Media metadata represents an authoritative Offering attribute, it must reference or derive from the corresponding Offering Knowledge or operational state rather than maintain an independently conflicting fact.
+
+Each metadata entity must preserve applicable source provenance, verification status, and governance requirements. The exact physical storage and relationships are defined by the Data Architecture.
+
+Offering Knowledge and Discovery Media retain separate approval statuses and independent lifecycles. No separate Offering Knowledge version entity is required.
 
 Operational Offering state may include rapidly changing information such
 as current availability, remaining quantity or capacity, validity status,
 expiration, Seller early termination, and current Discovery readiness.
 
-This operational state should remain logically associated with the
-Offering without requiring every state change to create a new full
-Offering Knowledge version.
+Operational state remains logically associated with the Offering and may be updated independently of the descriptive Offering Knowledge approval lifecycle, subject to applicable validation and Discovery eligibility rules.
 
 The exact persistence model and physical entities for this state are
 defined by the Data Architecture.
@@ -950,7 +1163,6 @@ See: [Data Architecture](11-data-architecture.md)
 * Adaptive metadata support
 * Knowledge provenance
 * Knowledge quality scoring
-* Knowledge versioning
 * Structured import
 * Learning-based enrichment
 * Trust and verification integration
@@ -958,7 +1170,6 @@ See: [Data Architecture](11-data-architecture.md)
 * Time-sensitive Offering knowledge
 * Freshness and validity tracking
 * Operational availability and quantity or capacity tracking
-* Real-Time Offering lifecycle support
 * Creative asset provenance
 
 ---
@@ -967,14 +1178,12 @@ See: [Data Architecture](11-data-architecture.md)
 
 See [Open Decisions](19-open-decisions.md) for decisions including:
 
-* Knowledge completeness weighting
-* Knowledge quality measurement
-* Discovery-readiness rules by Offering type
-* Multiple active knowledge versions
-* Conflict handling between provider and AI-generated knowledge
-* Metadata governance
-* Learned Knowledge approval
-* Knowledge retention and versioning
+- Knowledge completeness weighting
+- Knowledge quality measurement
+- Discovery-readiness rules by Offering type
+- Conflict handling between Seller-provided and AI-generated knowledge
+- Metadata governance
+- Learned Knowledge approval
 
 ---
 
