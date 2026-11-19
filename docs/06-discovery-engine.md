@@ -1086,6 +1086,34 @@ merely giving them less favorable Discovery Fit treatment.
 
 ---
 
+## Post-MVP AI-Agent Request Eligibility
+
+Authorized AI-agent discovery requires an additional
+request-level eligibility check.
+
+This check verifies:
+
+- Valid Buyer authorization for the requesting AI agent.
+- Applicable authorization scope and security requirements.
+- Seller opt-in to paid AI-agent discovery.
+- Available Seller AI-agent usage allowance or an already
+  admitted request permitted to complete.
+- Applicable request integrity and abuse-prevention controls.
+
+These request-level controls are separate from the
+Discovery Readiness / Eligibility of the underlying
+service item and its associated Discovery Media.
+
+Exhaustion of a Seller's AI-agent usage allowance
+restricts new AI-agent requests for that Seller.
+It does not make the Seller's Discovery Media
+ineligible for direct Human Buyer discovery.
+
+AI-agent usage allowances must not influence
+organic Discovery Fit or ranking.
+
+---
+
 # Phase 2: Feature and Context Construction
 
 After Discovery Readiness / Eligibility, the Discovery Engine constructs
@@ -1681,6 +1709,90 @@ The verified Discovery Classification may be used together with applicable
 Discovery attributes and Business Model rules to determine the appropriate
 
 discovery behavior and pricing or billing policy.
+
+---
+
+# Post-MVP: Authorized AI-Agent Discovery
+
+PinkCurve may support authorized external AI agents acting on behalf of registered Buyers. This capability is outside the initial MVP scope.
+
+AI-agent discovery uses the same approved Discovery Media, Discovery Readiness / Eligibility, Feature & Context Construction, and Discovery Fit principles as direct Human Buyer discovery.
+
+## AI-Agent Discovery Request
+
+Each authorized AI-agent discovery request constitutes one **AI-agent visit**.
+
+An AI agent must have valid Buyer authorization before PinkCurve accepts the request. Authorization must be current, revocable, and limited to its approved scope.
+
+The Discovery Engine determines which eligible Discovery Media are relevant to the Buyer's current intent and context.
+
+The Discovery Engine also determines **how many Discovery Media items to return for each request**, based on relevance, discovery quality, eligibility, diversity, and applicable operational safeguards.
+
+PinkCurve does not impose an arbitrary fixed number of Discovery Media items per visit as a business rule.
+
+## Seller AI-Agent Usage Eligibility
+
+Sellers must explicitly opt in to paid AI-agent discovery.
+
+PinkCurve maintains one shared Seller-wide AI-agent usage allowance across applicable Discovery services.
+
+The Seller may configure the allowance for a daily, monthly, or campaign-based period and adjust it during the active period.
+
+AI-agent request admission must respect the Seller's current usage allowance and applicable authorization, Trust, Security, and service eligibility requirements.
+
+Seller usage controls determine whether an AI-agent request may be admitted. They must not influence the organic relevance or ranking of otherwise eligible Discovery Media.
+
+## Completion of In-Progress Requests
+
+When a Seller's AI-agent usage allowance is exhausted:
+
+1. PinkCurve stops admitting new AI-agent discovery requests involving that Seller until the Seller increases the applicable allowance or a new allowance period begins. Previously admitted requests may complete under the rules below.
+2. All previously admitted AI-agent requests involving that Seller may complete.
+3. Qualified visual-media accesses within the Seller's remaining allowance follow applicable billing rules.
+4. Qualified visual-media accesses exceeding the allowance are complimentary and are not charged to the Seller.
+5. PinkCurve records complimentary usage separately and notifies the Seller.
+
+Each request must have a unique request identifier. Technical retries must not create additional visits or duplicate qualified impressions.
+
+The system must coordinate concurrent request admission and usage accounting to prevent unauthorized new requests after allowance exhaustion.
+
+## Discovery Results and Qualified Impressions
+
+Discovery Engine results and qualified AI-agent impressions are distinct.
+
+Metadata retrieval alone is not a billable impression.
+
+A qualified AI-agent impression requires observable, authorized visual-media access satisfying the applicable qualification rules.
+
+Repeated legitimate visual-media accesses may qualify independently. Technical duplicates, unauthorized access, and fraudulent activity must be excluded.
+
+PinkCurve does not bill for unobservable presentations made from an AI agent's own cache.
+
+Discovery Analytics owns impression qualification and measurement. Billing applies service-specific pricing, the approved platform-wide AI-agent discount, Seller usage controls, and complimentary overage treatment.
+
+## Seller Visibility
+
+PinkCurve provides Sellers with:
+
+- Real-time usage allowance consumption and remaining capacity.
+- Notifications at 80% and 100% of the configured allowance.
+- Notification of complimentary overage.
+- Daily estimated AI-agent charges.
+- Final billing reconciliation, normally monthly.
+
+Estimated charges are provisional and do not constitute a guaranteed monetary spending cap.
+
+## Architectural Boundary
+
+The Discovery Engine determines relevant Discovery Media and appropriate result-set size.
+
+Authorization and usage controls determine whether agent requests may proceed.
+
+Discovery Analytics determines which observed media accesses qualify as impressions.
+
+Billing determines applicable charges and complimentary usage.
+
+These responsibilities must remain separate so that Seller spending does not determine organic Discovery relevance or ranking.
 
 ---
 
@@ -2580,6 +2692,34 @@ Where applicable, events must carry a unique event identifier and timestamp, reg
 
 The MVP requires authenticated registered Buyers. Anonymous Buyer Discovery and autonomous Buyer agents are outside MVP scope.
 
+### Post-MVP: Authorized AI-Agent Event Attribution
+
+Authorized AI-agent discovery must preserve attribution to the registered Buyer, authorized AI agent, Seller, Discovery service, and Discovery Media.
+
+Applicable events should include:
+
+- `actor_type` — distinguishes direct Human Buyer activity from authorized AI-agent activity.
+- `buyer_id` — identifies the registered Buyer represented by the agent.
+- `agent_id` — identifies the authorized external AI agent.
+- `request_id` — uniquely identifies one AI-agent discovery request (one visit).
+- `authorization_id` — references the applicable Buyer authorization.
+- `seller_id` — identifies the Seller whose Discovery Media is accessed.
+- `discovery_service_id` and `creative_id` — identify the applicable service and Discovery Media.
+- `event_id` and timestamp — support event integrity and deduplication.
+- `access_type` — distinguishes metadata retrieval from observable visual-media access.
+
+AI-agent request admission, qualified visual-media access, usage allowance consumption, and complimentary overage must remain distinguishable events or auditable records.
+
+Metadata retrieval does not constitute a qualified visual-media impression.
+
+Discovery Analytics determines whether observed visual-media access satisfies applicable qualification requirements. Billing separately determines whether the qualified impression is chargeable or complimentary.
+
+Technical retries must preserve the original request identity and must not create duplicate billable impressions.
+
+Authorized AI-agent activity must remain distinguishable from direct Human Buyer activity for analytics, learning, fraud prevention, and billing reconciliation.
+
+Only the minimum necessary authorization and attribution information should be retained, consistent with PinkCurve privacy and security requirements.
+
 ## Measurement, Qualification, and Billing
 An observed event is not automatically qualified, and a qualified event is not automatically billable. Discovery Analytics validates and interprets activity; the billing system independently applies Chapter 13 classification-specific rules, Seller spending limits, and charging controls. Raw events, qualified measurement evidence, and billing records must remain distinguishable and traceable.
 
@@ -2649,6 +2789,35 @@ The Discovery Engine and Learning Engine should therefore preserve actor
 type and trust context with discovery events rather than assuming that
 
 every interaction represents human Buyer preference.
+
+---
+
+### Post-MVP: Learning from Authorized AI-Agent Discovery
+
+Authorized AI-agent discovery activity must be distinguished from direct Human Buyer activity.
+
+PinkCurve should preserve the identity of the requesting actor and the represented Buyer when evaluating discovery outcomes.
+
+AI-agent activity may provide useful evidence about:
+
+- Current Buyer intent expressed through authorized agent requests.
+- Discovery Media relevance and retrieval effectiveness.
+- Metadata usefulness for AI-agent discovery.
+- Qualified visual-media access patterns.
+- Repeated discovery requests and their outcomes.
+- Discovery quality and service-specific effectiveness.
+
+However, an AI-agent's retrieval or selection of Discovery Media must not automatically be interpreted as a direct expression of Human Buyer preference.
+
+Agent-generated signals should be evaluated separately before being incorporated into Buyer Intelligence, Discovery Fit, personalization, trending, or Learning Engine models.
+
+Request-scoped information supplied by external AI agents must not automatically become persistent Buyer Intelligence.
+
+Unauthorized automated traffic, technical retries, and fraudulent activity must be excluded from qualified learning signals.
+
+PinkCurve should evaluate AI-agent discovery effectiveness independently while preserving the ability to compare authorized agent-mediated discovery with direct Human Buyer discovery.
+
+The objective is to improve discovery quality without allowing automated activity to distort Human Buyer preferences, popularity, or ranking.
 
 ---
 
