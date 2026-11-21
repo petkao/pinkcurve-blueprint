@@ -164,6 +164,88 @@ The Learning Engine should use these signals carefully rather than treating all 
 
 ---
 
+# Post-MVP: Human Buyer and Authorized AI-Agent Analytics
+
+PinkCurve may support authorized external AI agents acting on behalf of registered Buyers after the MVP.
+
+Discovery Analytics must distinguish direct Human Buyer activity from authorized AI-agent activity while preserving the relationship between an agent and the Buyer it represents.
+
+## Actor Attribution
+
+Each applicable discovery event must identify the actor responsible for the activity.
+
+Supported actor types may include:
+
+- **Human Buyer** — A registered Buyer interacting directly with PinkCurve.
+- **Authorized AI Agent** — An external AI agent acting under valid authorization from a registered Buyer.
+
+For authorized AI-agent activity, applicable event attribution should include:
+
+- Registered `buyer_id`.
+- Authorized `agent_id`.
+- Unique `request_id`.
+- Applicable `authorization_id`.
+- `actor_type`.
+- Relevant `seller_id`.
+- Discovery service and Discovery Media identifiers.
+- Event identifier and timestamp.
+
+The event model must preserve sufficient evidence to distinguish who performed an action from the Buyer on whose behalf it was performed.
+
+## Distinguishing Discovery Activity
+
+Discovery Analytics must distinguish:
+
+- Discovery Media retrieved as candidates.
+- Discovery Media evaluated or selected by an AI agent, where observable.
+- Discovery Media recommended by an AI agent, where observable.
+- Actual visual-media access by an authorized AI agent.
+- Direct Human Buyer presentation and interaction.
+- Qualified impressions and independently qualified Buyer actions.
+
+These activities represent different levels of evidence and must not be treated as interchangeable.
+
+Metadata retrieval alone does not establish a qualified visual-media impression.
+
+An AI-agent recommendation does not automatically establish that the represented Human Buyer viewed, approved, or interacted with the recommended Discovery Media.
+
+## Analytics and Learning Separation
+
+Human Buyer and AI-agent measurements should be independently reportable.
+
+Authorized AI-agent discovery signals may help PinkCurve evaluate retrieval quality, recommendation effectiveness, Discovery Media relevance, and agent-mediated discovery outcomes.
+
+However, AI-agent retrieval, evaluation, or recommendation must not automatically become persistent Human Buyer preferences or positive Buyer feedback.
+
+Request-scoped Buyer Intelligence supplied by an external AI agent must not automatically become persistent Buyer Intelligence.
+
+The Learning Engine should consume agent-derived signals only when their meaning, attribution, quality, and permitted use are established.
+
+## Qualification and Trust
+
+Discovery Analytics must validate authorized AI-agent activity before using it for qualified measurements.
+
+Applicable controls include:
+
+- Authorization and request attribution integrity.
+- Technical event deduplication.
+- Fraud and abuse detection.
+- Separation of observable media access from metadata retrieval.
+- Classification-specific qualification rules.
+- Protection against artificial popularity, engagement, or trending signals.
+
+Qualified AI-agent activity may support Seller billing only under the applicable post-MVP Business Model rules.
+
+Discovery Analytics provides measurement evidence. Billing independently determines applicable charges.
+
+## MVP Boundary
+
+These AI-agent capabilities are post-MVP requirements.
+
+The initial MVP continues to require registered, authenticated Human Buyers and does not support external AI agents acting as Buyers.
+
+---
+
 # Discovery Events
 
 Discovery Analytics begins with structured events.
@@ -233,20 +315,26 @@ A discovery event may contain:
 | Field | Description |
 |---|---|
 | `event_id` | Unique event identifier |
-| `event_type` | Type of event |
+| `event_type` | Type of discovery or measurement event |
 | `timestamp` | Event timestamp |
+| `actor_type` | `human_buyer` or `authorized_ai_agent`; identifies who performed the activity |
+| `buyer_id` | Registered Buyer associated with the activity, including the Buyer represented by an authorized AI agent |
+| `agent_id` | Authorized external AI-agent identifier, when applicable (post-MVP) |
+| `request_id` | Unique AI-agent discovery request identifier, when applicable (post-MVP) |
+| `authorization_id` | Buyer authorization identifier associated with the agent request, when applicable (post-MVP) |
+| `session_id` | Human Buyer Discovery session identifier; not required for authorized AI-agent requests |
 | `discovery_classification` | Offering, Real-Time Discovery, Community Service, Public Announcement, or Brand Recognition |
 | `discovery_service_id` | Identifier of the associated Discovery service |
 | `offering_id` | Offering identifier, when applicable |
 | `seller_id` | Seller responsible for the Discovery service, when applicable |
-| `buyer_id` | Registered Buyer identifier |
-| `session_id` | Discovery session identifier |
-| `surface` | Discovery Surface where the event occurred |
-| `discovery_mode` | Search, Browse, Intent, or AMN |
-| `position` | Presentation position, when applicable |
 | `creative_id` | Discovery Media creative identifier, when applicable |
-| `metadata_context` | Active metadata selections, when applicable |
-| `discovery_context` | Additional context required for interpretation |
+| `surface` | Discovery Surface or authorized agent channel where the activity occurred |
+| `discovery_mode` | Search, Browse, Intent, AMN, or applicable agent-mediated discovery mode |
+| `position` | Presentation position, when applicable and observable |
+| `metadata_context` | Applicable metadata selections or request-scoped discovery context, subject to privacy requirements |
+| `discovery_context` | Additional permitted context required for interpretation |
+| `qualification_status` | Qualification result for an impression, visit, or other measured activity, when applicable |
+| `qualification_reason` | Applicable qualification or exclusion reason, when available |
 | `experiment_id` | Experiment identifier, when applicable |
 
 Exact event schemas belong in the Data Architecture and schema definitions.
@@ -401,6 +489,79 @@ This prevents commercial click-through behavior from becoming the universal defi
 
 ---
 
+# Qualified Offering Impression (QOI)
+
+A **Qualified Offering Impression (QOI)** is a verified presentation or authorized visual-media access involving approved Offering Discovery Media that satisfies PinkCurve's applicable impression qualification requirements.
+
+QOI measures qualified exposure to Offering Discovery Media. It does not independently establish Buyer interest, a Qualified Offering Visit (QOV), or a completed transaction.
+
+## Human Buyer QOI
+
+A Human Buyer QOI represents a verified presentation of approved Offering Discovery Media to an eligible registered Human Buyer.
+
+Qualification may consider:
+
+- Valid registered Buyer identity and Discovery session.
+- Approved and active Offering Discovery Media.
+- Actual presentation meeting applicable visibility requirements.
+- Technical event deduplication.
+- Fraud and manipulation exclusion.
+
+Human Buyer QOI is measured for Discovery Analytics and Learning Engine evaluation but is not currently billable.
+
+## Authorized AI-Agent QOI — Post-MVP
+
+An authorized AI-agent QOI represents an independently qualified visual-media access performed by an external AI agent acting under valid authorization from a registered Buyer.
+
+Qualification requires:
+
+- Valid Buyer authorization and authorized agent identity.
+- An admitted AI-agent discovery request.
+- Approved and eligible Offering Discovery Media.
+- Observable access to the actual visual Discovery Media.
+- Valid attribution to the Buyer, agent, request, Seller, and Discovery Media.
+- Technical event deduplication and fraud exclusion.
+- Applicable classification-specific qualification requirements.
+
+Metadata retrieval, candidate ranking, and metadata-only evaluation do not independently qualify as QOI.
+
+An AI agent selecting or recommending an Offering does not establish QOI unless the applicable visual-media access requirements are independently satisfied.
+
+Legitimate repeated visual-media accesses may qualify independently. Technical retries, duplicate delivery events, and fraudulent activity must not create additional qualified impressions.
+
+## QOI and Billing
+
+Human Buyer QOI remains non-billable under the current Business Model.
+
+Qualified authorized AI-agent QOI may be billable after MVP when:
+
+- The Seller has explicitly opted into paid AI-agent discovery.
+- The applicable request was admitted under the Seller's shared AI-agent usage allowance.
+- The visual-media access independently satisfies qualification requirements.
+- The applicable post-MVP Business Model authorizes charging.
+
+A qualified visual-media access may consume one unit of the Seller's shared AI-agent usage allowance even when the resulting charge is complimentary under the approved in-progress-request overage policy.
+
+Discovery Analytics must distinguish qualified QOI, allowance consumption, billable QOI, and complimentary QOI.
+
+Human Buyer QOI and authorized AI-agent QOI use a unified QOI measurement model. The `actor_type` field distinguishes direct Human Buyer presentation from authorized AI-agent visual-media access. Agent-specific attribution fields, including `agent_id`, `request_id`, and `authorization_id`, provide additional context.
+
+Qualification rules depend on the actor type. Billing eligibility is determined separately under the applicable Business Model policy.
+
+Pricing, discounts, usage allowances, and final charges are governed by Chapter 13 — Business Model.
+
+## QOI and Learning
+
+QOI establishes qualified visual-media exposure, not necessarily positive Buyer interest.
+
+Human Buyer QOI and authorized AI-agent QOI must remain distinguishable in Learning Engine inputs.
+
+Agent-generated QOI must not automatically be interpreted as a Human Buyer viewing the media or expressing a positive preference.
+
+QOI should be evaluated alongside meaningful discovery outcomes, explicit feedback, and other appropriately attributed signals.
+
+---
+
 # Qualified Offering Visit
 
 A **Qualified Offering Visit (QOV)** is a verified,
@@ -500,46 +661,126 @@ The authoritative QOV billing policy is defined in Chapter 13 — Business Model
 
 # Qualified Real-Time Impression (QRI)
 
-A **Qualified Real-Time Impression (QRI)** is a verified presentation of Real-Time Discovery Media to an eligible registered Buyer that satisfies PinkCurve's Real-Time impression qualification criteria.
+A **Qualified Real-Time Impression (QRI)** is a verified presentation or authorized visual-media access involving approved Real-Time Discovery Media that satisfies PinkCurve's applicable impression qualification requirements.
 
-QRI measures qualified Buyer exposure to time-sensitive Discovery Media.
+QRI measures qualified exposure to time-sensitive Discovery Media.
 
-Unlike QOV, QRI does not require the Buyer to click through to the Seller's destination.
+Unlike a Qualified Offering Visit (QOV), QRI does not require a Buyer or authorized AI agent to visit the Seller's external destination.
 
-## QRI Qualification
+## Human Buyer QRI
 
-A QRI should satisfy criteria such as:
+A Human Buyer QRI represents a verified presentation of approved and active Real-Time Discovery Media to an eligible registered Human Buyer.
 
-- Eligible registered Buyer
-- Valid Discovery session
-- Approved and active Real-Time Discovery Media
-- Valid presentation meeting minimum visibility requirements
-- No fraudulent or automated activity
-- Appropriate impression deduplication and frequency controls
+Qualification requires applicable controls such as:
 
-The exact visibility threshold and qualification rules must be defined and validated before production billing.
+- Valid registered Buyer identity and Discovery session.
+- Approved and active Real-Time Discovery Media.
+- Actual presentation meeting applicable visibility requirements.
+- Technical event deduplication.
+- Fraud and manipulation exclusion.
+- Applicable impression qualification and frequency controls.
+
+Each independently qualified Human Buyer QRI is eligible for billing under the applicable Chapter 13 Real-Time Discovery policy.
+
+## Authorized AI-Agent QRI — Post-MVP
+
+An authorized AI-agent QRI represents an independently qualified visual-media access performed by an external AI agent acting under valid authorization from a registered Buyer.
+
+Qualification requires:
+
+- Valid Buyer authorization and authorized agent identity.
+- An admitted AI-agent discovery request.
+- Approved, active, and eligible Real-Time Discovery Media.
+- Observable access to the actual visual Discovery Media.
+- Attribution to the represented Buyer, agent, request, Seller, and Discovery Media.
+- Technical event deduplication and fraud exclusion.
+- Applicable classification-specific qualification requirements.
+
+Metadata retrieval and metadata-only candidate evaluation do not qualify as QRI.
+
+An authorized AI agent may retrieve Real-Time Discovery Media and present it to the represented Buyer without visiting the Seller's destination.
+
+PinkCurve may not directly observe whether an external AI agent actually displayed the retrieved media to the Buyer. Therefore, independently qualified observable visual-media access may establish an agent-channel QRI without requiring proof of external Buyer-visible presentation.
+
+Where reliable and authorized, agent-reported Buyer presentation may be recorded as an additional analytics signal. It must not automatically generate another qualified impression or charge for the same underlying media access.
+
+Legitimate independently qualified repeat accesses may qualify. Technical retries, duplicate delivery events, and fraudulent activity must not generate additional qualified impressions.
+
+## Unified QRI Event Model
+
+Human Buyer and authorized AI-agent QRI use a unified measurement model.
+
+The `actor_type` field distinguishes:
+
+- `human_buyer`
+- `authorized_ai_agent`
+
+Agent-specific attribution includes `agent_id`, `request_id`, and `authorization_id`, where applicable.
+
+Qualification rules depend on actor type, while billing eligibility and final charges are determined separately.
 
 ## QRI and Billing
 
-QRI is an analytics measurement and does not automatically establish a billable impression.
+**Qualified Real-Time Impressions are the billing basis for Real-Time Discovery.**
 
-Real-Time Discovery may use qualified impression-based billing under the applicable Business Model policy.
+Human Buyer QRI is eligible for billing under the applicable Real-Time Discovery Business Model policy.
 
-The relationship between QRI, billable impressions, pricing units, Seller spending limits, and billing records must be explicitly defined in Chapter 13.
+Post-MVP authorized AI-agent QRI may be billable when the Seller has explicitly opted into paid AI-agent discovery and the applicable qualification and billing requirements are satisfied.
+
+A qualified agent-channel QRI may consume one unit of the Seller's shared AI-agent usage allowance.
+
+Qualified visual-media accesses resulting from previously admitted requests may exceed the Seller's allowance. Under the approved complimentary-overage policy, such excess qualified accesses are funded by PinkCurve and are not charged to the Seller.
+
+Discovery Analytics must distinguish:
+
+- Total Real-Time Discovery impressions.
+- Qualified Human Buyer QRI.
+- Qualified authorized AI-agent QRI.
+- Billable QRI.
+- Complimentary QRI.
+- Unique Buyer reach.
+- Legitimate repeat impressions.
+
+Pricing, discounts, usage allowances, spending limits, and final charges are governed by Chapter 13 — Business Model.
+
+## Real-Time Discovery Visits — Statistics Only
+
+A **Real-Time Discovery Visit** is a Buyer-initiated navigation from Real-Time Discovery Media to the Seller's designated external destination.
+
+PinkCurve should record these visits where observable and appropriately attributable.
+
+Visit analytics should distinguish:
+
+- Total destination-click events.
+- Qualified Human Buyer destination visits.
+- Legitimate repeat visits.
+- Authorized AI-agent destination navigation, if it occurs.
+- Technical duplicates and suspicious activity.
+
+Real-Time Discovery Visits are used for Seller statistics, discovery effectiveness evaluation, and Learning Engine analysis.
+
+**Real-Time Discovery Visits do not independently generate Seller charges.**
+
+An authorized AI agent is not required to visit the Seller's destination to generate an independently qualified agent-channel QRI.
+
+Agent-originated destination navigation must not automatically be attributed as a Human Buyer visit.
 
 ## QRI and Learning
 
-QRI provides evidence of qualified exposure but does not independently demonstrate Buyer interest or successful discovery.
+QRI provides evidence of qualified exposure, not necessarily positive Buyer interest or successful discovery.
 
-The Learning Engine should evaluate QRI alongside other signals, including:
+The Learning Engine should evaluate QRI alongside:
 
-- Buyer exploration
-- Positive and negative feedback
-- Destination click-through
-- Discovery context
-- Operational freshness
+- Buyer exploration.
+- Positive and negative feedback.
+- Destination visits.
+- Discovery context.
+- Operational freshness.
+- Relevant agent-reported presentation signals, where reliable.
 
-QRI should not automatically be interpreted as positive Buyer engagement.
+Human Buyer QRI and authorized AI-agent QRI must remain distinguishable.
+
+Agent-generated QRI must not automatically be interpreted as direct Human Buyer viewing or positive Buyer preference.
 
 ---
 
@@ -1439,28 +1680,34 @@ Identity should be separated from analytical data where practical.
 
 ---
 
-# Buyer Registration and Discovery Sessions
+## Post-MVP: Authorized AI-Agent Discovery
 
-PinkCurve MVP requires Buyers to register and authenticate before participating in the Buyer Discovery experience.
+PinkCurve plans to support external AI agents acting on behalf of registered Buyers after MVP.
 
-Discovery Analytics must associate Buyer discovery activity with a valid registered Buyer identity and Discovery session, subject to applicable privacy and security controls.
+An authorized AI agent must operate under valid, explicitly granted Buyer authorization. Authorization must be scoped, revocable, and subject to applicable expiration and security controls.
 
-## MVP Requirements
+Each authorized AI-agent discovery request must have a unique `request_id` and sufficient attribution to identify:
 
-- Buyer registration and authentication are required.
-- Each Discovery session must have a valid session identifier.
-- Discovery events must be attributable to the appropriate registered Buyer.
-- Buyer identity must be protected through appropriate access controls and data minimization.
-- Automated agents acting as Buyers are not supported in the MVP.
-- Anonymous or unidentified Buyer Discovery sessions are outside the MVP scope.
+- The registered Buyer represented by the agent (`buyer_id`).
+- The authorized external AI agent (`agent_id`).
+- The applicable Buyer authorization (`authorization_id`).
+- The request responsible for the activity (`request_id`).
+
+An authorized AI-agent discovery request is the unit of agent-mediated discovery activity. It does not require a Human Buyer Discovery session or a time-based agent session.
+
+Discovery Analytics must distinguish authorized agent activity from direct Human Buyer activity through `actor_type` and the applicable attribution fields.
+
+AI-agent discovery activity must satisfy authorization, privacy, fraud-prevention, qualification, and billing-integrity requirements before contributing to qualified measurements.
+
+Request-scoped Buyer intent supplied through an authorized AI agent must not automatically become persistent Buyer Intelligence.
+
+The authoritative identity, authorization, and access-control policies are defined in Chapter 12 — Security, Privacy, and Trust.
 
 ## Future Considerations
 
-Anonymous discovery and authorized AI-agent participation may be evaluated in future platform versions.
+Anonymous Buyer Discovery remains outside the MVP scope and may be evaluated separately in future platform versions.
 
-Any future support must define appropriate identity, permissions, attribution, fraud prevention, and billing-integrity requirements before implementation.
-
-The authoritative identity and access policies are defined in Chapter 12 — Security, Privacy, and Trust.
+Any future anonymous discovery capability must establish appropriate identity, privacy, attribution, fraud-prevention, and billing-integrity requirements before implementation.
 
 ---
 
@@ -1483,6 +1730,108 @@ Retention requirements should be documented in the Data Architecture and privacy
 
 ---
 
+# Post-MVP: AI-Agent Usage Analytics and Billing Reconciliation
+
+Discovery Analytics must support accurate measurement of qualified authorized AI-agent visual-media accesses across eligible PinkCurve Discovery services.
+
+The Seller's AI-agent usage allowance is shared across participating Discovery services. It is a count-based allowance, not a guaranteed monetary spending cap.
+
+## Shared Seller Usage Measurement
+
+For each participating Seller, PinkCurve must track:
+
+- The configured AI-agent usage allowance and applicable allowance period.
+- Changes to the allowance during the period.
+- Admitted AI-agent discovery requests.
+- Independently qualified visual-media accesses across eligible Discovery services.
+- Allowance consumption and remaining allowance.
+- Qualified complimentary overage from previously admitted requests.
+- Qualified billable and non-billable activity.
+- Estimated charges and final reconciled charges.
+
+One independently qualified authorized AI-agent visual-media access consumes one usage unit, subject to the applicable qualification and deduplication rules.
+
+Metadata-only retrieval does not consume usage units.
+
+## Request Admission and Allowance Exhaustion
+
+PinkCurve must enforce the Seller's shared allowance through concurrency-safe request admission and usage accounting.
+
+When the applicable Seller allowance is exhausted:
+
+- New AI-agent discovery requests involving that Seller must not be admitted.
+- Previously admitted requests may complete.
+- Independently qualified visual-media accesses arising from previously admitted requests may exceed the allowance.
+- Qualified overage beyond the allowance is complimentary and funded by PinkCurve.
+- Human Buyer discovery remains unaffected.
+
+Reducing an allowance must not retroactively invalidate previously admitted requests.
+
+Increasing an allowance may permit new requests to be admitted when the applicable eligibility requirements are satisfied.
+
+## Usage Attribution and Reconciliation
+
+Each qualified AI-agent visual-media access must retain sufficient evidence to support:
+
+- Seller and Discovery service attribution.
+- Represented Buyer and authorized agent attribution.
+- Request and authorization attribution.
+- Discovery Media identification.
+- Qualification and deduplication results.
+- Applicable allowance period.
+- Allowance consumption.
+- Billable or complimentary classification.
+- Traceability to billing records.
+
+Analytics must distinguish usage qualification from final billing determination.
+
+The billing system applies the applicable service-specific pricing, platform-wide AI-agent discount, allowance rules, and other Business Model policies.
+
+## Seller Reporting
+
+Seller-facing reporting should provide:
+
+- Configured allowance and current usage.
+- Remaining allowance.
+- Usage by Discovery service and classification.
+- Qualified billable accesses.
+- Complimentary overage.
+- Estimated daily charges.
+- Final reconciled monthly charges.
+- Allowance changes and their effective times.
+
+PinkCurve should notify participating Sellers when usage reaches 80% and 100% of the applicable allowance.
+
+Estimated charges must be clearly distinguished from final billing records.
+
+## Integrity and Privacy
+
+AI-agent usage analytics must support:
+
+- Idempotent event processing.
+- Concurrency-safe usage accounting.
+- Technical duplicate exclusion.
+- Fraud and abuse detection.
+- Authorization validation.
+- Auditable reconciliation.
+- Privacy-preserving Buyer and agent attribution.
+
+Qualified agent activity must not be interpreted automatically as direct Human Buyer engagement.
+
+Paid AI-agent participation must not influence organic Discovery Engine ranking in favor of Sellers with larger allowances or higher spending.
+
+## Responsibility Boundaries
+
+Discovery Analytics measures qualified activity and provides trustworthy evidence.
+
+The request-admission and usage-control mechanisms enforce applicable Seller allowances.
+
+The billing system determines final Seller charges under Chapter 13 — Business Model.
+
+These responsibilities must remain logically distinct, even when they share event and usage-accounting infrastructure.
+
+---
+
 # Analytics and Billing
 
 PinkCurve Discovery Analytics provides verified measurement evidence that supports Seller billing. However, Discovery Analytics does not independently determine pricing or execute billing transactions.
@@ -1491,13 +1840,13 @@ Billing eligibility, pricing, spending limits, and charging rules are governed b
 
 ## Billing Measurements by Discovery Classification
 
-| Discovery Classification| Billing Measurement                                                                        |
-|-------------------------|--------------------------------------------------------------------------------------------|
-| Offering                | Qualified positive Buyer actions, including eligible Qualified Offering Visits (QOV)       |
-| Real-Time Discovery     | Qualified impressions under the applicable Real-Time billing policy                        |
-| Brand Recognition       | Qualified Brand Recognition impressions, including legitimate qualified repeat impressions |
-| Community Service       | Governed by the applicable Community Service billing policy                                |
-| Public Announcement     | Governed by the applicable Public Announcement billing policy                              |
+| Discovery Classification | Human Buyer Measurement and Billing | Authorized AI-Agent Measurement and Billing (Post-MVP) |
+|---|---|---|
+| Offering | QOI is measured but not billable. Independently qualified QOV is eligible for billing, including legitimate repeat visits. | Independently qualified agent-channel QOI may be billable. Agent-originated QOV is separately measured and billable only when independently qualified under the applicable policy. |
+| Real-Time Discovery | QRI is the billing measurement. Real-Time Discovery destination visits are recorded for statistics only. | Independently qualified agent-channel QRI may be billable. Agent-originated destination navigation is statistical only. |
+| Brand Recognition | Qualified Brand Recognition impressions are eligible for billing, including legitimate qualified repeat impressions. | Independently qualified visual-media accesses may be billable under the applicable post-MVP agent-discovery policy. |
+| Community Service | Qualified discovery activity is measured; billing follows the applicable Community Service policy. | Independently qualified visual-media accesses are measured and may be billable only when the applicable post-MVP policy permits. |
+| Public Announcement | Qualified discovery activity is measured; billing follows the applicable Public Announcement policy. | Independently qualified visual-media accesses are measured and may be billable only when the applicable post-MVP policy permits. |
 
 ## Billing Event Integrity
 
@@ -1505,8 +1854,9 @@ Billing-related events require stronger integrity controls than ordinary analyti
 
 These controls include:
 
-- Verified registered Buyer identity
-- Valid Discovery session
+- Verified registered Buyer identity, including the represented Buyer for authorized AI-agent activity.
+- Valid Human Buyer Discovery session for direct Human Buyer activity.
+- Valid agent identity, Buyer authorization, and admitted discovery request for post-MVP authorized AI-agent activity.
 - Event and attribution integrity
 - Technical event deduplication
 - Bot and fraud exclusion
@@ -1598,7 +1948,7 @@ The MVP should support the following measurements where the corresponding Discov
 
 | Discovery Classification | Initial Measurement |
 |---|---|
-| Offering | Qualified positive Buyer actions, including QOV |
+|| Offering | Qualified Offering Impressions (QOI) for non-billable analytics; Qualified Offering Visits (QOV) for billing eligibility; other meaningful Buyer discovery actions |
 | Real-Time Discovery | Qualified Real-Time Impressions (QRI) |
 | Brand Recognition | Qualified impressions, including legitimate repeat impressions |
 | Community Service | Meaningful resource exploration and applicable Buyer actions |
