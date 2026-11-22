@@ -335,6 +335,120 @@ Those decisions belong to later System Design and organizational planning.
 
 ---
 
+# Post-MVP: Human Buyer and Authorized AI-Agent Learning
+
+Under AG-018, PinkCurve has approved a post-MVP architectural direction for external AI agents to perform Discovery on behalf of registered Buyers through secure, structured Discovery APIs.
+
+Actual deployment timing and remaining operational requirements will be determined through post-MVP planning and System Design.
+
+The Learning Engine must distinguish direct Human Buyer activity from authorized AI-agent activity before using discovery evidence for learning.
+
+## Actor-Aware Learning Evidence
+
+Discovery Analytics provides attribution that identifies whether an event originated from:
+
+- `human_buyer` — Direct activity performed by a registered Human Buyer.
+- `authorized_ai_agent` — Activity performed by an external AI agent under valid Buyer authorization.
+
+For authorized AI-agent activity, applicable evidence includes `buyer_id`, `agent_id`, `request_id`, and `authorization_id`.
+
+**Authorization and Evidence Integrity:**
+
+Under AG-018, authorized AI-agent discovery requires two distinct permissions:
+
+1. PinkCurve approval and registration of the external AI-agent provider.
+2. Explicit authorization by the registered Buyer for the specific agent representing them.
+
+Discovery Analytics must preserve sufficient attribution to associate agent-mediated evidence with the approved provider, authenticated agent, represented Buyer, and applicable authorization.
+
+The Learning Engine must distinguish authenticated and authorized agent activity from unauthorized automated traffic.
+
+Invalid, unauthorized, fraudulent, or improperly attributed activity must not be treated as legitimate Buyer discovery evidence.
+
+Authorization establishes permission to act on behalf of a Buyer. It does not establish that the Buyer personally performed, observed, or endorsed the agent's actions.
+
+The Learning Engine must preserve this distinction when constructing features, labels, training datasets, and evaluation results.
+
+## Different Meanings of Agent Activity
+
+Authorized AI-agent discovery may produce evidence such as:
+
+- Metadata retrieval and candidate evaluation.
+- Discovery Media selection or recommendation, where observable.
+- Actual visual-media access.
+- Qualified Offering Impressions (QOI).
+- Qualified Real-Time Impressions (QRI).
+- Agent-reported presentation to the represented Buyer, where reliable and permitted.
+
+These events do not necessarily demonstrate direct Human Buyer interest.
+
+An AI agent accessing or recommending Discovery Media does not establish that the represented Buyer viewed, liked, or approved that media.
+
+Agent activity must not automatically become positive Buyer feedback, persistent Buyer preferences, or successful-discovery labels.
+
+**Agent Discovery Evidence Interpretation:**
+
+- **Metadata retrieval:** Indicates that PinkCurve returned candidate information to an authorized agent. It does not establish visual-media access or Human Buyer interest.
+- **Media selection:** Indicates that an agent selected candidate Discovery Media for further consideration. It does not establish that the media was retrieved or presented to the Buyer.
+- **Visual-media access:** Indicates that an agent accessed actual Discovery Media. Qualified access may generate billable impressions under approved policies, but it does not prove Buyer-visible presentation.
+- **Agent recommendation:** Indicates that an agent selected media to recommend, where observable or reliably reported. It does not independently establish that the Buyer viewed or accepted the recommendation.
+- **Verified Human Buyer interaction:** Provides stronger evidence of Buyer interest when properly attributed, qualified, and validated.
+
+The Learning Engine must preserve these distinctions when constructing training features, labels, and evaluation datasets.
+
+Billing qualification and learning-signal qualification are separate decisions.
+
+## Request-Scoped Buyer Context
+
+An authorized external AI agent may provide temporary Buyer intent and contextual information within its permitted Buyer-specific authorization scope.
+
+The external AI agent is responsible for interpreting the represented Buyer's natural-language requests and converting them into structured discovery attributes.
+
+Under AG-018, PinkCurve's external AI-Agent Discovery API accepts structured discovery requests only. It does not accept free-form natural-language discovery inquiries or provide conversational LLM services to external agents.
+
+Structured discovery attributes must remain flexible and extensible, consistent with Adaptive Metadata Navigation principles.
+
+Agent-provided Buyer context is request-scoped and may guide the current discovery request.
+
+It must not automatically update persistent Buyer Intelligence or become a long-term Buyer preference.
+
+The Learning Engine must preserve the provenance of agent-provided context and distinguish it from information directly supplied or confirmed by the Human Buyer.
+
+Any broader use for learning must satisfy applicable Buyer authorization, privacy, provenance, and data-governance requirements.
+
+## Learning from Agent-Mediated Discovery
+
+The Learning Engine may use appropriately qualified agent activity to improve:
+
+- Agent-mediated candidate retrieval and ranking.
+- Discovery Media relevance.
+- Metadata usefulness.
+- Agent-channel discovery effectiveness.
+- Retrieval efficiency and result quality.
+- Fraud and manipulation detection.
+
+Learning objectives and evaluation datasets must distinguish agent-mediated outcomes from direct Human Buyer outcomes.
+
+Where reliable Buyer feedback becomes available, it may provide additional evidence, subject to proper attribution and validation.
+
+## Billing and Learning Separation
+
+Qualified impressions and billable activity are not automatically positive learning labels.
+
+Human Buyer QOI, authorized AI-agent QOI, Human Buyer QRI, and authorized AI-agent QRI may represent different forms of exposure evidence.
+
+Seller billing status, usage allowance consumption, complimentary overage, and paid AI-agent participation must not automatically increase an Offering's learned relevance or ranking priority.
+
+The Learning Engine must not reward Sellers simply because they purchase more discovery activity or configure larger AI-agent usage allowances.
+
+## MVP Boundary
+
+External authorized AI-agent discovery and its associated learning capabilities are post-MVP requirements.
+
+The MVP Learning Engine focuses on trustworthy direct Human Buyer evidence and the learning capabilities justified by available data.
+
+---
+
 # Learning Inputs
 
 The Learning Engine consumes evidence primarily from Discovery Analytics and other authorized PinkCurve products.
@@ -1271,6 +1385,24 @@ Training data should exclude or appropriately handle:
 
 Poor-quality analytical evidence creates poor-quality learning.
 
+**Post-MVP AI-Agent Training Data Governance:**
+
+Authorized AI-agent activity must not be classified as fraudulent bot traffic merely because it is automated.
+
+Training datasets must distinguish:
+
+- Direct Human Buyer activity.
+- Authorized AI-agent activity performed on behalf of a registered Buyer.
+- Unauthorized or fraudulent automated activity.
+
+Agent-mediated evidence must retain sufficient provenance to identify its origin, authorization context, and event qualification.
+
+Metadata retrieval, visual-media access, and agent recommendations must not automatically become positive Human Buyer preference labels.
+
+The Learning Engine may use qualified agent-mediated evidence for appropriate learning objectives, but training and evaluation datasets must preserve the distinction between agent behavior and verified Human Buyer behavior.
+
+Agent-mediated activity must not be allowed to artificially inflate learned Offering relevance, Seller performance, or discovery-success measures.
+
 Training datasets should eventually be:
 
 * identifiable;
@@ -1748,6 +1880,26 @@ Possible offline metrics include:
 Offline metrics provide evidence.
 
 They do not prove Buyer value.
+
+---
+
+## Post-MVP Evaluation of Agent-Mediated Learning
+
+Learning models trained or evaluated using authorized AI-agent activity must be assessed separately from models using direct Human Buyer activity.
+
+Evaluation should include:
+
+- **Attribution integrity:** Verify that agent-mediated events retain correct Buyer, agent, provider, and authorization context.
+- **Label validity:** Ensure that metadata retrieval, visual-media access, and agent recommendations are not incorrectly interpreted as verified Human Buyer interest.
+- **Discovery quality:** Evaluate relevance, diversity, and meaningful discovery outcomes for the agent-mediated channel.
+- **Cross-channel effects:** Determine whether learning from agent activity improves or degrades direct Human Buyer discovery.
+- **Bias and manipulation:** Detect artificial popularity reinforcement, automated feedback loops, and Seller exposure distortion.
+- **Privacy and authorization:** Verify that learning uses agent-provided context only within permitted purposes and authorization boundaries.
+- **Commercial independence:** Confirm that Seller billing, paid participation, and AI-agent usage allowances do not improperly influence organic ranking or learned relevance.
+
+Agent-mediated learning must not be deployed solely because it improves agent-channel engagement or impression volume.
+
+Production adoption requires evidence of improved discovery quality without unacceptable degradation of Human Buyer outcomes, Trust, privacy, fairness, or platform integrity.
 
 ---
 
