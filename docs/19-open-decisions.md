@@ -2138,6 +2138,9 @@ TBD
 
 **Status:** Tentative
 
+**Approved Architectural Constraint:** AG-018 — Structured AI-Agent
+Discovery API (Decided; Post-MVP).
+
 **Question:**
 
 Should PinkCurve eventually allow an AI agent or other automated system
@@ -2189,8 +2192,11 @@ restricted according to PinkCurve security and abuse-prevention policy.
 Crawler and indexer access, if permitted, should be explicitly governed
 by PinkCurve policy.
 
-Authorized Delegated Buyer Agents are a possible future Discovery
-channel but are outside MVP scope.
+Authorized Delegated Buyer Agents are outside MVP scope.
+
+PinkCurve has approved post-MVP support for authorized external AI agents through secure, structured Discovery APIs under AG-018.
+
+The detailed implementation, rollout timing, and remaining operational requirements will be determined during post-MVP planning and System Design.
 
 PinkCurve should preserve architectural boundaries that allow this
 future capability to be evaluated without requiring fundamental redesign
@@ -2208,21 +2214,131 @@ worthwhile Offerings.
 Allowing delegated agents in the future would not by itself change
 PinkCurve into an autonomous purchasing or transaction platform.
 
-**Potential Future Discovery Flow:**
+**Approved Architectural Decision — AG-018: Structured AI-Agent Discovery API**
+
+**Status:** Decided
+
+**Scope:** Post-MVP
+
+PinkCurve will provide secure, authenticated, structured Discovery APIs for authorized external AI agents acting on behalf of registered Buyers.
+
+**Core Principles:**
+
+- External AI agents are responsible for interpreting Human Buyer requests and converting them into structured discovery attributes.
+- PinkCurve's external AI-Agent Discovery API accepts structured discovery requests only.
+- PinkCurve will not accept free-form natural-language discovery inquiries or provide conversational LLM services through this API.
+- Structured discovery attributes must remain flexible and extensible, consistent with PinkCurve's Adaptive Metadata Navigation principles.
+- PinkCurve's Discovery Engine remains responsible for candidate retrieval, filtering, ranking, and discovery eligibility.
+- Discovery follows a two-stage approach: compact structured metadata retrieval, followed by authorized retrieval of selected visual Discovery Media.
+- Discovery Media remains visual-first: images and videos, not text-only listings.
+- Metadata-only retrieval is not billable. Qualified visual-media access may be billable according to approved AI-agent discovery policies.
+- Every request must satisfy applicable agent authentication, Buyer consent, authorization scope, Seller eligibility, Trust, privacy, and abuse-prevention requirements.
+- Agent activity must remain distinguishable from direct Human Buyer activity for analytics, learning, and billing.
+- PinkCurve will not grant external agents direct access to internal databases, Learning Engine models, or unrestricted Buyer Intelligence.
+
+**Two-Level AI-Agent Authorization:**
+
+PinkCurve requires two distinct levels of authorization before an external AI agent may perform Discovery on behalf of a registered Buyer.
+
+**Level 1 — External AI-Agent Provider Approval**
+
+- PinkCurve must approve and register each external AI-agent provider before permitting access to the AI-Agent Discovery API.
+- Provider approval establishes the provider's eligibility to integrate with PinkCurve.
+- Provider approval does not grant access to individual Buyer accounts or Buyer Discovery Profiles.
+
+**Level 2 — Buyer-Specific Agent Authorization**
+
+- Each registered Buyer must explicitly authorize each external AI agent to represent them within PinkCurve.
+- Authorization granted to an agent outside PinkCurve does not automatically establish PinkCurve authorization.
+- Authorization must identify the registered Buyer, authorized agent, permitted capabilities, and validity period.
+- Buyers may grant authorization for a fixed period or until revoked.
+- Buyers must be able to revoke authorization.
+- An agent may perform proactive Discovery without a new Buyer request only while valid authorization permits it.
+
+**Authorization Enforcement:**
+
+- Every AI-Agent API request must authenticate the agent and validate the represented Buyer's authorization.
+- An agent cannot obtain access merely by supplying a Buyer ID.
+- Each discovery request must operate within one represented Buyer's authorization context.
+- PinkCurve must prevent unauthorized access and information leakage between Buyers.
+- Authorization does not bypass Seller eligibility, Trust, security, privacy, or AI-agent usage-allowance requirements.
+
+**Core Security Principle:**
+
+Approval of an AI-agent provider and authorization to represent a particular Buyer are separate permissions. Both must be valid before PinkCurve permits delegated Discovery.
+
+**Security Rationale:**
+
+Structured APIs reduce the external attack surface by limiting requests to validated data and explicitly authorized operations.
+
+They also support deterministic validation, access control, rate limiting, request attribution, monitoring, and billing integrity.
+
+Structured requests do not eliminate security risks. PinkCurve must continue to enforce authentication, authorization, input validation, resource limits, fraud detection, and operational security controls.
+
+**Implementation Direction:**
+
+The initial implementation should use a defined structured API contract. The exact endpoints, schemas, authentication mechanisms, and protocols will be determined during System Design.
+
+An MCP-compatible interface may be evaluated later but must preserve the same authorization and security boundaries.
+
+**Affected Chapters:**
+
+- Chapter 3 — Product Architecture
+- Chapter 6 — Discovery Engine
+- Chapter 7 — Discovery Analytics
+- Chapter 8 — Learning Engine
+- Chapter 10 — AI Platform
+- Chapter 11 — Data Architecture
+- Chapter 12 — Security, Privacy, and Trust
+- Chapter 13 — Business Model
+
+**Validation Result:** Pending post-MVP implementation and testing.
+
+**Post-MVP Authorized AI-Agent Discovery Flow:**
 
 ```text
-Seller
-   ↓
-PinkCurve
-   ↓
-Authorized Delegated Buyer Agent
-   ↓
-Human Buyer
-   ↓
-Seller
+PinkCurve approves external AI-agent provider
+                    ↓
+Registered Buyer authorizes that specific agent
+                    ↓
+External AI agent acts within authorization scope
+                    ↓
+Agent constructs structured discovery attributes
+                    ↓
+PinkCurve Secure AI-Agent Discovery API
+                    ↓
+Authenticate agent and validate Buyer authorization
+                    ↓
+Discovery Engine retrieves and ranks candidates
+                    ↓
+PinkCurve returns structured candidate metadata
+                    ↓
+AI agent selects relevant candidates
+                    ↓
+Agent requests selected visual Discovery Media
+                    ↓
+PinkCurve validates Seller eligibility,
+authorization, usage allowance, and media access
+                    ↓
+PinkCurve returns authorized images / videos
+                    ↓
+AI agent may recommend media to represented Buyer
+                    ↓
+Buyer may visit Seller destination
 ```
 
-The human Buyer remains the beneficiary of Discovery.
+**Discovery Flow Principles:**
+
+- The external AI agent handles natural-language interaction with the Human Buyer.
+- PinkCurve accepts structured discovery attributes, not conversational inquiries.
+- PinkCurve controls discovery eligibility, ranking, authorization, and visual-media access.
+- Metadata retrieval and visual-media access are separate API operations.
+- Visual-media access must follow applicable Seller opt-in, usage allowance, and billing policies.
+- Agent retrieval does not establish that the Human Buyer viewed the media.
+- The Human Buyer remains the beneficiary of Discovery.
+- PinkCurve does not conduct purchases or transactions on behalf of the Buyer.
+
+Authorized agents may also initiate discovery proactively within the scope of valid Buyer authorization, without a new Buyer request for every discovery operation.
 
 **Work Required:**
 
@@ -2302,7 +2418,11 @@ Product / AI Platform / Security / Trust
 
 **Final Decision:**
 
-TBD — Delegated Buyer Agents are outside MVP scope.
+TBD — The remaining delegated-agent policies, implementation details, and rollout requirements are not yet finalized.
+
+**Approved Direction:** AG-018 establishes post-MVP support for authorized external AI agents through secure, structured Discovery APIs, subject to PinkCurve provider approval and explicit Buyer-specific authorization.
+
+Delegated Buyer Agents remain outside MVP scope.
 
 **Decision Rationale:**
 
